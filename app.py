@@ -12,10 +12,21 @@ TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./static')
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-app.config['MYSQL_HOST'] = 'remotemysql.com'
-app.config['MYSQL_USER'] = 'Au6FiBsWsm'
-app.config['MYSQL_PASSWORD'] = 'msjs6jhiWo'
-app.config['MYSQL_DB'] = 'Au6FiBsWsm'
+
+# switch database
+# 1: remotemysql
+# 2: local
+database = 1
+if database == 1:
+    app.config['MYSQL_HOST'] = 'remotemysql.com'
+    app.config['MYSQL_USER'] = 'Au6FiBsWsm'
+    app.config['MYSQL_PASSWORD'] = 'msjs6jhiWo'
+    app.config['MYSQL_DB'] = 'Au6FiBsWsm'
+else: 
+    app.config['MYSQL_HOST'] = 'localhost'
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = ''
+    app.config['MYSQL_DB'] = 'moteldb'
 
 mysql = MySQL(app)
 
