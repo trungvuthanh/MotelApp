@@ -12,24 +12,21 @@ TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./static')
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_USER'] = 'Au6FiBsWsm'
+app.config['MYSQL_PASSWORD'] = 'msjs6jhiWo'
 app.config['MYSQL_DB'] = 'Au6FiBsWsm'
 
 mysql = MySQL(app)
-
 
 @app.route("/", methods=["GET"])
 def home():
     return render_template('test.html')
 
-
 @app.route("/test", methods=["GET"])
 def getData():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM `Address` WHERE id = 1")
+    cur.execute("SELECT * FROM `address` WHERE id = 1")
     rv = cur.fetchall()
     payload = [{"status": "SUC"}]
     content = {}
@@ -38,9 +35,8 @@ def getData():
                    'district': result[2], 'ward': result[3]}
         payload.append(content)
         content = {}
-    # return app.response_class(json.dumps(payload), mimetype='application/json')
+    return app.response_class(json.dumps(payload), mimetype='application/json')
     return jsonify(payload)
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) 
