@@ -15,8 +15,35 @@
     <div id="province"></div>
     <div id="district"></div>
     <div id="ward"></div>
+    <hr>
+    <input type="file" name="inputImage" onchange="encodeImageFileAsURL(this)">
+    <div id="en">fdsfd</div>
+    <!--
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="inputImage">Input Image</label>
+            <input type="file" name="inputImage">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    -->
+    <div id="encrypt"></div>
+    <div id="t">uihoi</div>
+    <img id="abc" src="../static/image/" />
 
-    <div id="error"></div>
     <script src="../static/script/test.js"></script>
+    <script>
+        var gb_image;
+        function encodeImageFileAsURL(element) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            gb_image = reader.result;
+            reader.onloadend = function() {
+                // console.log(reader.result)
+                document.getElementById("encrypt").innerHTML = reader.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 </html>

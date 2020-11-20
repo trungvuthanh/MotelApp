@@ -6,39 +6,33 @@ import time
 import pandas as pd
 import numpy as np
 from datetime import datetime
-from flask_mysqldb import MySQL
+import mysql.connector
 
 TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./static')
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-# switch database
-# 1: remotemysql
-# 2: local
-database = 1
-if database == 1:
-    app.config['MYSQL_HOST'] = 'remotemysql.com'
-    app.config['MYSQL_USER'] = 'Au6FiBsWsm'
-    app.config['MYSQL_PASSWORD'] = 'msjs6jhiWo'
-    app.config['MYSQL_DB'] = 'Au6FiBsWsm'
-else: 
-    app.config['MYSQL_HOST'] = 'localhost'
-    app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = ''
-    app.config['MYSQL_DB'] = 'moteldb'
+mydb = mysql.connector.connect(
+    host="remotemysql.com",
+    user="Au6FiBsWsm",
+    password="msjs6jhiWo",
+    database="Au6FiBsWsm"
+)
 
-mysql = MySQL(app)
+mycursor = mydb.cursor()
+
 
 @app.route("/", methods=["GET"])
 def home():
     return render_template('test.html')
 
+
 @app.route("/test", methods=["GET"])
 def getData():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM `address` WHERE id = 1")
-    rv = cur.fetchall()
+    sql = "SELECT * FROM `address` WHERE id = 1;"
+    mycursor.execute(sql)
+    rv = mycursor.fetchall()
     payload = [{"status": "SUC"}]
     content = {}
     for result in rv:
@@ -46,8 +40,39 @@ def getData():
                    'district': result[2], 'ward': result[3]}
         payload.append(content)
         content = {}
-    return app.response_class(json.dumps(payload), mimetype='application/json')
     return jsonify(payload)
 
+
+@app.route("/getImage", methods=["POST"])
+def getImage():
+    try:
+        image = request.get_json()["image"]
+    except:
+        image = request.form['image']
+    sql = "INSERT INTO renter (username, password, imageID) VALUES(%s, %s, %s);"
+    val = ("5", "3", str(image))
+    mycursor.execute(sql, val)
+    mydb.commit()
+    payload = {"status": "SUC"}
+    return jsonify(payload)
+
+
+@app.route("/preview", methods=["GET"])
+def preview():
+    sql = "SELECT imageID FROM renter WHERE username = '5';"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+
+    for x in myresult:
+        return jsonify({"status": x})
+    # return app.response_class(json.dumps(payload), mimetype='application/json')
+
+
+@app.route("/upload", methods=["POST"])
+def upload():
+    image = request.files["inputImage"]
+    return jsonify({'status': 'SUC', 'filename': image.filename})
+
+
 if __name__ == "__main__":
-    app.run(debug=True) 
+    app.run(debug=True)

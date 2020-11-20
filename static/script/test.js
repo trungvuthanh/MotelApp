@@ -18,3 +18,43 @@ fetch("../test")
         }
     }
 )
+
+document.getElementById("en").onclick = function() {
+    fetch("./getImage", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({"image": document.getElementById("encrypt").innerHTML}),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })      
+    })
+    .then(
+        resp => {
+            if (resp.status == 200) {
+                resp.json()
+                .then(
+                    data => {
+                        alert(data.status);
+                    }
+                )
+            }
+        }
+    )
+};
+
+document.getElementById("t").onclick = function() {
+    fetch("../preview")
+    .then(
+        resp => {
+            if (resp.status == 200) {
+                resp.json()
+                .then(
+                    data => {
+                        document.getElementById("abc").src = data.status;
+                    }
+                )
+            }
+        }
+    )
+};
