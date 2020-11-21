@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #ffffff;
+    color: #312e2e;
+    /*font-family: 'Roboto', sans-serif;
+    font-size: 20px;*/
+    font-family: "Nunito", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 300;
+    letter-spacing: .012em;
+    color: #1d1d1f;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto; }
+  @media (min-width: 576px) {
+    body {
+      max-width: 540px; } }
+  @media (min-width: 768px) {
+    body {
+      max-width: 720px; } }
+  @media (min-width: 992px) {
+    body{
+      width: 960px; } }
+  @media (min-width: 1200px) {
+    body {
+      max-width: 1140px; } }
