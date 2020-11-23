@@ -1,0 +1,65 @@
+.navbar {
+    padding: 0;
+    background-color: #a5e9c4;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: transparent;
+}
+
+.navbar-brand img {
+    width: 50px;
+}
+
+#brand {
+    color: black;
+    padding-left: 15px;
+}
+
+.nav-link {
+    color: #1d1d1f !important;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #6c757d !important;
+    cursor: pointer;
+}
+
+.btn.ml-md-2 {
+    color: #000000;
+    background-color: #daf2f6;
+}
+
+.btn.ml-md-2:hover {
+    background-color: #e2e6ea;
+}
+
+/*
+Hover tên tài khoản hiện    Chỉnh sửa thông tin
+                            Đăng xuất
+*/
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    z-index: 99999999;
+    margin-left: 8px;
+    background-color: white;
+    padding: 10px 10px;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.dropdownMenu a:hover {
+    background-color: #dee2e6;
+}
+
+.account-menu:hover .dropdownMenu {
+    display: block;
+}
+
+.menu-item {
+    text-align: center;
+}
