@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name = "viewpoint" content = "width = device-width, initial-scale = 1.0" />
+    <meta http-equiv = "X-UA-compatible" content = "ie=edge" />
+    <title>File test upload ảnh</title>
+</head>
+<body>
+    <label class = "">Tải ảnh lên:</label> 
+    <input type = "file" multiple = "multiple" onchange = "previewFile(this);" />
+    <div id = "preview"></div>
+    <script>
+        function previewFile(input) {
+            const [file] = input.files 
+            const preview = document.getElementById('preview')
+            const reader = new FileReader()
+
+            reader.onload = e => {
+                const img = document.createElement('img')
+                img.src = e.target.result
+                img.width = 368
+                img.height = 207
+                img.alt = 'file'
+
+                preview.appendChild(img)
+            }
+
+            reader.readAsDataURL(file)
+        }
+        function onSelect(e) {
+            if (e.files.length > 3) {
+                alert("Only 3 files accepted.");
+                e.preventDefault();
+        }
+}
+    </script>
+</body>
+</html>

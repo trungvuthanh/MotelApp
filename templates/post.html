@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/postStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Thêm bài đăng</title>
+</head>
+<body>
+    <div class="page">
+        <div>
+            <div id = "header" class="header">
+                <h1>THÊM BÀI ĐĂNG</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <label id = "tieude" class="chimuc">Tiêu đề</label>
+            <input type="text" id="boxtieude" class="tieude">
+            <!-- <br> -->
+        </div>
+
+        <div class="row">
+            <label id ="diachi" class="chimuc">Địa chỉ</label>
+            <div class="container1">
+                <div class ="tinhthanh">
+                    <select class = "s1 selection1" name="Tỉnh, thành">
+                        <option>Tỉnh, thành</option>
+                        <option value="59cdc41a9d2a1700271c2b09">TP Hà Nội</option>
+                        <option value="59cdc41a9d2a1700271c2b0a">TP Hồ Chí Minh</option>
+                        <option value="59cdc41a9d2a1700271c2b0b">An Giang</option>
+                        <option value="59cdc41a9d2a1700271c2b0c">Bà Rịa - Vũng Tàu</option>
+                        <option value="59cdc41a9d2a1700271c2b0d">Bắc Kạn</option>
+                        <option value="59cdc41a9d2a1700271c2b0e">Bắc Giang</option>
+                        <option value="59cdc41a9d2a1700271c2b0f">Bạc Liêu</option>
+                        <option value="59cdc41a9d2a1700271c2b10">Bắc Ninh</option>
+                        <option value="59cdc41a9d2a1700271c2b11">Bến Tre</option>
+                        <option value="59cdc41a9d2a1700271c2b12">Bình Định</option>
+                        <option value="59cdc41a9d2a1700271c2b13">Bình Dương</option>
+                        <option value="59cdc41a9d2a1700271c2b14">Bình Phước</option>
+                        <option value="59cdc41b9d2a1700271c2b15">Bình Thuận</option>
+                        <option value="59cdc41b9d2a1700271c2b16">Cà Mau</option>
+                        <option value="59cdc41b9d2a1700271c2b17">TP Cần Thơ</option>
+                        <option value="59cdc41b9d2a1700271c2b18">Cao Bằng</option>
+                        <option value="59cdc41b9d2a1700271c2b19">TP Đà Nẵng</option>
+                        <option value="59cdc41b9d2a1700271c2b1a">Đắk Lắk</option>
+                        <option value="59cdc41b9d2a1700271c2b1b">Điện Biên</option>
+                        
+                    </select>
+                </div>
+                <div class="quanhuyen">
+                    <select class="s1 selection1" name="Quận, huyện">
+                        <option>Quận, huyện</option>
+                        <option>Ba Đình</option>
+                        <option>Ba Vì</option>
+                        <option>Bắc Từ Liêm</option>
+                        <option>Cầu Giấy</option>
+                        <option>Chương Mỹ</option>
+                        <option>Đan Phượng</option>
+                        <option>Đông Anh</option>
+                        <option>Đống Đa</option>
+                        <option>Gia Lâm</option>
+                        <option>Hà Đông</option>
+                        <option>Hai Bà Trưng</option>
+                        <option>Hoài Đức</option>
+                        <option>Hoàn Kiếm</option>
+                        <option>Hoàng Mai</option>
+                        <option>Long Biên</option>
+                        <option>Mê Linh</option>
+                        <option>Mỹ Đức</option>
+                        <option>Nam Từ Liêm</option>
+                        <option>Phú Xuyên</option>
+                        <option>Phúc Thọ</option>
+                        <option>Quốc Oai</option>
+                        <option>Sóc Sơn</option>
+                        <option>Sơn Tây</option>
+                        <option>Tây Hồ</option>
+                        <option>Thạch Thất</option>
+                        <option>Thanh Oai</option>
+                        <option>Thanh Trì</option>
+                        <option>Thanh Xuân</option>
+                        <option>Thường Tín</option>
+                        <option>Ứng Hòa</option>
+                    </select>
+                </div>
+                <div class="phuongxa">
+                    <select class = "s2 selection1" name="Phường, xã">
+                        <option>Phường, xã</option>
+                        <option>Cống Vị</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <label id ="hideid" class="chimuc"></label>
+            <div class="chitiet">
+                <input type="text" class="them" placeholder="Chi tiết">
+            </div>
+        </div>
+
+        <div class="row">
+            <label id = "relatelocation" class="chimuc">Lân cận</label>
+            <div class="lancan"> 
+                <textarea cols = "70" rows="4" id="hoten" class="boxlancan" placeholder=" Đại học quốc gia HN"></textarea>
+            </div>   
+        </div>
+
+        <div class="row1">
+            <label id ="loaiphong" class="chimuc">Loại phòng</label>
+            <div class="roomtype">
+                <select class = "loaiphong" name="Loại phòng">
+                    <optgroup label="Loại phòng">
+                        <option>Chung cư mini</option>
+                        <option>Chung cư nguyên căn</option>
+                        <option>Nhà nguyên căn</option>
+                        <option>Phòng trọ</option>
+                    </optgroup>
+                </select>
+            </div>
+            <label id = "sophong" class="chimuc">Số phòng</label>
+            <div class="numofroom">    
+                <input class = "sophong" type="number" placeholder="1">
+            </div>  
+        </div>
+
+        <div class="row">
+            <label id="dientich" class="chimuc">Diện tích</label>
+            <div class="dientich">  
+                <input class="area" type="number" placeholder="25m2">
+            </div>           
+            <label id="giaphong" class="chimuc">Giá phòng</label>
+            <div class="giaphong">
+                <input class="roomprice" type="number" placeholder="2.500.000đ">
+            </div>
+        </div>
+
+        <div class="row">
+            <label id = "cosovatchat" class="chimuc">Phòng tắm</label>
+            <div class="phongtam">
+                <select class ="chonphongtam" name="">
+                    <optgroup label="Phòng tắm"> 
+                        <option>Khép kín</option>
+                        <option>Dùng chung</option>
+                    </optgroup>
+                </select>
+            </div>
+            <label class="chimuc">Phòng bếp</label>
+            <div class="phongbep">
+                <select class="chonphongbep">
+                    <optgroup label="Phòng bếp">
+                        <option>Khu bếp riêng</option>
+                        <option>Khu bếp chung</option>
+                        <option>Không nấu ăn</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="chimuc">Tiện ích</label>
+            <div class="tienich">
+                <div class="flexicon">
+                    <img class ="icon" src="../static/image/water-heater-icon.png">
+                    <br>
+                </div>
+                <div class="flexicon">
+                    <img class="icon" src="../static/image/washing-machine-icon.png">
+                </div>
+                <div class="flexicon">
+                    <img class="icon" src="../static/image/wardrobe-icon.png">
+                </div>
+                <div class="flexicon">
+                    <img class="icon" src="../static/image/television-icon.png">
+                </div>
+                <div class="flexicon">
+                    <img class="icon" src="../static/image/free-wifi-icon.png">
+                </div>
+                <div class="flexicon">
+                    <img class="icon" src="../static/image/balcony-icon.png">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="s1 chimuc">Điện nước</label>
+            <div class="diennuoc">
+                <input class="nhaptien" type="text" placeholder="5k/số 30k/m3">
+            </div>                
+            <label class="s1 chimuc">Khác</label>
+            <div class="diennuoc">
+                        <input class="nhaptien" type="text" placeholder="Có tủ lạnh, bàn học,...">
+            </div>
+        </div>
+        <div class="row">
+            <label class="chimuc">Hình ảnh</label>
+            <div class ="container1">
+                <input type = "file" multiple = "multiple" onchange = "previewFile(this);" />
+                <div id = "preview"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="chimuc">Nội dung</label>
+            <textarea cols="50" rows = "4" class = "noidung"></textarea>
+        </div>
+
+        <div class="row">
+            <label class="chimuc">Liên lạc</label>
+            <div class="lienlac">
+                <b>
+                    Nguyễn Hùng Duy <br>
+                    0979134936 <br>
+                    Chủ trọ<br>
+                    hungduy2000@gmail.com
+                </b>
+            </div>    
+        </div>
+
+        <div class="row">
+            <label class="chimuc">Hạn thuê</label>
+            <div class="diennuoc">
+                <select class="nhaptien">
+                    <option>1 tuần</option>
+                    <option>1 tháng</option>
+                    <option>3 tháng</option>
+                    <option>6 tháng</option>
+                    <option>1 năm</option>
+                </select>
+            </div>
+            <label class="chimuc">Số tiền</label>
+            <div class="nhaptien">
+                <b>
+                    2.500.000
+                </b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="khoangtrang"></div>
+            <div class="gui">
+                <input type="button" value="Gửi bài viết">
+            </div>
+        </div>
+    </div>
+    <script>
+        function previewFile(input) {
+            const [file] = input.files 
+            const preview = document.getElementById('preview')
+            const reader = new FileReader()
+
+            reader.onload = e => {
+                const img = document.createElement('img')
+                img.src = e.target.result
+                img.width = 144
+                img.height = 144
+                img.alt = 'file'
+
+                preview.appendChild(img)
+            }
+
+            reader.readAsDataURL(file)
+        }
+        function onSelect(e) {
+            if (e.files.length > 3) {
+                alert("Only 3 files accepted.");
+                e.preventDefault();
+        }
+    }
+    </script>
+</body>
