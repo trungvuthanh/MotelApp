@@ -3,6 +3,13 @@
 .page-title {
     font-family: "Varta", sans-serif;
     font-size: 25px;
+    padding-top: 15px;
+}
+
+.main {
+    position: relative;
+    display: flex;
+    transition: .5s;
 }
 
 /*///////////////////////////////////////////////////////////////////////////////////////*/
@@ -16,20 +23,58 @@
     width: inherit;
 }
 
-#mainImage {
+.w3-display-bottommiddle {
+    width: 100%;
+}
+
+.mySlides {
+    display:none;
+}
+
+.main-img img {
     position: relative;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    margin: 0 auto;
 }
 
-#btnLike {
-    position: absolute;
-    right: 17px;
-    width: 30px;
-    height: 30px;
+.w3-center {
+    text-align: center;
 }
-#btnLike:hover {
-    cursor: pointer;
+
+.w3-section {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.w3-button:hover{
+    color:#000!important;
+    background-color:#ccc!important;
+}
+
+.w3-button {
+    border:none;
+    display:inline-block;
+    padding:8px 16px;
+    vertical-align:middle;
+    overflow:hidden;
+    text-decoration:none;
+    color:inherit;
+    background-color:inherit;
+    text-align:center;
+    cursor:pointer;
+    white-space:nowrap;
+    width: 100px;
+}
+
+.w3-button:focus {
+    outline: none;
+}
+
+.w3-light-grey {
+    color: #000;
+    background-color: #f1f1f1!important;
 }
 
 .sub-img {
@@ -86,7 +131,7 @@ address .row .col-sm-8 div:nth-last-child(1) {
 /*=======================================================================================*/
 
 /* Report button */
-.button {
+.button-rp {
     border-radius: 10px;
     /* background-color: #f4511e; */
     background-image: linear-gradient(90deg,#f65e38 0,#f68a39 51%,#f65e38);
@@ -94,7 +139,7 @@ address .row .col-sm-8 div:nth-last-child(1) {
     background-position-x: 0;
     background-position-y: 33.3333%;
     border: none;
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: center;
     font-size: 20px;
     padding: 10px;
@@ -105,22 +150,22 @@ address .row .col-sm-8 div:nth-last-child(1) {
     box-shadow: 0 4px 12px 0 rgba(246,116,57,.4);
 }
 
-.button:hover {
+.button-rp:hover {
     background-position: 100%;
 }
 
-.button:focus {
+.button-rp:focus {
     outline: none;
 }
 
-.button span {
+.button-rp span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: .3s;
 }
 
-.button span:after {
+.button-rp span:after {
     content: '\f06a';
     font-family: fontAwesome;
     position: absolute;
@@ -130,13 +175,171 @@ address .row .col-sm-8 div:nth-last-child(1) {
     transition: .3s;
 }
 
-.button:hover span {
+.button-rp:hover span {
     padding-right: 25px;
 }
 
-.button:hover span:after {
+.button-rp:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+/* Mờ màn hình phía sau */
+#blur.active {
+    filter: blur(10px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Dialog báo cáo */
+#popup-report {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: none;
+    border-radius: 10px;
+    /* box-shadow: 0 12px 18px rgba(0, 0, 0, 0.05); */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+    width: 550px;
+    background-color: #ffffff;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+#popup-report.active {
+    display: block;
+    top: 50%;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.rp-header {
+    padding: 0 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rp-header span {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    max-width: 100%;
+}
+
+.rp-close {
+    position: absolute;
+    display: block;
+    top: 12px;
+    right: 16px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    background-color: #e4e6eb;
+    justify-content: center;
+    align-items: center;
+}
+
+.rp-close i {
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    padding: 9px 8px 8px 9px;
+    align-items: center;
+    justify-content: center;
+}
+
+.rp-close:hover {
+    cursor: pointer;
+    background-color: #d9dbe0;
+}
+
+.rp-content {
+    display: block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.rp-check-area {
+    margin: 16px;
+    text-align: left;
+}
+
+.rp-check-area button {
+    height: 40px;
+    color: #050505;
+    background-color: #e4e6eb;
+    margin-right: 12px;
+    padding: 1px 16px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+
+.rp-check-area button:hover {
+    background-color: #d9dbe0;
+}
+
+.rp-check-area button:focus {
+    outline: none;
+}
+
+.rp-check-area button.btnChecked {
+    outline: none;
+    background-color: #1877f2;
+    color: #fff;
+}
+
+.rp-content .form-group textarea {
+    /* position: absolute;
+    display: flex; */
+    margin: 16px;
+    padding: 10px;
+    width: calc(100% - 32px);
+    height: 140px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rp-warning {
+    margin: 16px;
+}
+
+.rp-warning i {
+    color: #ff0000;
+}
+
+.rp-bottom {
+    position: relative;
+    display: block;
+    padding: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    height: 69px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#btnSendRp {
+    height: 40px;
+    color: #050505;
+    background-color: #a5e9c4;
+    padding: 1px 16px;
+    border: none;
+    border-radius: 20px;
+}
+
+#btnSendRp:focus {
+    outline: none;
 }
 /*========================================= Hết =========================================*/
 /*=======================================================================================*/
@@ -148,57 +351,183 @@ address .row .col-sm-8 div:nth-last-child(1) {
 /*--------------------------------------------------------------------------------------------------------------------------*/
 
 /*///////////////////////////////////////////////////////////////////////////////////////*/
-/*                                       Cột phải                                        */
+/*                                        Cột phải                                       */
 /*///////////////////////////////////////////////////////////////////////////////////////*/
-/* Review star */
-.rating {
-    position: relative;
-    display: flex;
-    transform: rotateY(180deg);
-}
 
-.rating input {
-    display: none;
-}
 
-.rating label {
-    display: block;
-    cursor: pointer;
-    width: 30px;
-    /* background-color: #daf2f6; */
-}
 
-.rating label:before {
-    content: '\f005';
-    font-family: fontAwesome;
-    position: relative;
-    display: block;
-    font-size: 20px;
-    margin: 0px;
-    color: #c5c5c5;
-}
-
-.rating label:after {
-    content: '\f005';
-    font-family: fontAwesome;
-    position: absolute;
-    display: block;
-    font-size: 20px;
-    margin: 0px;
-    color: yellow;
-    top: 0;
-    opacity: 0;
-    transition: .3s;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
-}
-
-.rating label:hover:after, .rating label:hover ~ label:after, .rating input:checked ~ label:after {
-    opacity: 1;
+/* Địa chỉ */
+#address {
+    margin: 8px 0;
 }
 /*========================================= Hết =========================================*/
 /*=======================================================================================*/
 
+/* Trạng thái phòng trọ */
+.room-status {
+    background-color: #d1ad77;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px 0 rgba(246,116,57,.4);
+}
+
+.room-status #statusHired {
+    margin: 8px 0;
+    text-align: center;
+    color: #fff;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
+/* Lượt xem, like */
+.view-like-section .col-md-3 span {
+    margin: 3px 5px 0 0;
+}
+
+.view-like-section .col-md-3 p {
+    display: inline;
+    margin: auto 0;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
+/* Giá điện, số nước, diện tích, giá phòng */
+.price-water-elec {
+    margin: 15px 0 0;
+}
+
+.price-room-area {
+    margin: 0 0 15px;
+}
+
+.label-price {
+    background-color: #daf2f6;
+}
+
+.price-water-elec .col-md-3 h5, .price-room-area .col-md-3 h5 {
+    margin: 8px 0;
+}
+
+.price-room-area .col-md-3:nth-last-child(1) h5 {
+    color: #ff0000;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
+/* Cơ sở vật chất */
+.utility-row-top {
+    margin: 15px 0 0;
+}
+.utility-row-middle {
+    margin: 0;
+}
+.utility-row-bottom {
+    margin: 0 0 30px;
+}
+
+.utility-row-top .col-lg-6, .utility-row-middle .col-lg-6, .utility-row-bottom .col-lg-6 {
+    padding: 5px 15px;
+}
+.utility-row-top .col-lg-6 .row, .utility-row-middle .col-lg-6 .row, .utility-row-bottom .col-lg-6 .row {
+    padding: 0 15px;
+}
+.utility-row-top .col-lg-6 .row img, .utility-row-middle .col-lg-6 .row img, .utility-row-bottom .col-lg-6 .row img {
+    width: 40px;
+    height: 40px;
+}
+.utility-row-top .col-lg-6 .row h5, .utility-row-middle .col-lg-6 .row h5, .utility-row-bottom .col-lg-6 .row h5 {
+    margin: auto 30px;
+    font-size: 18px;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
+/* Tiện ích khác */
+.utility-row-other {
+    margin: 15px 0 30px;
+    text-align: center;
+}
+.utility-row-other img {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
+/* Nội dung bài đăng */
+article {
+    margin: 15px 0;
+}
+#contentPost {
+    text-align: justify;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
+/* Phần đánh giá */
+.main .row .col-lg-7 .review-comment {
+    padding: 15px;
+    margin: 15px 0 15px 0;
+}
+
+/* Rating star */
+.rating {
+    position: relative;
+    display: flex;
+}
+
+.rating img {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+}
+
+#s1:hover, #s2:hover, #s3:hover, #s4:hover, #s5:hover {
+    cursor: pointer;
+}
+
+.review-comment .col-md-12 .row .col-md-9 .rate-status {
+    display: none;
+    padding: 0 15px;
+    margin-top: 10px;
+}
+
+.rate-point-container {
+    margin: 0 0 8px 3px;
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+}
+
 /* Bình luận */
+.comment-section .guest-comment .row .col-sm-1 img {
+    width: 35px;
+    height: 35px;
+}
+
+.info-guest {
+    padding: 0 15px;
+}
+
+.info-guest div p {
+    margin-bottom: 8px;
+}
+
+.rating-history {
+    text-align: right;
+    position: relative;
+}
+.rating-history #stars {
+    position: absolute;
+    right: 0;
+}
+.rating-history #stars img{
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
 
 /*///////////////////////////////////////////////////////////////////////////////////////*/
 /*                                      Hết Cột phải                                     */

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@900&display=swap');
+
 body {
     /* background-image: url("../static/image/login-background.jpg"); */
     height: 100vh;
@@ -8,6 +12,10 @@ body {
     background-attachment: fixed;
 }
 
+.container {
+    padding-top: 50px;
+}
+
 .login-box {
     background-color: #ffffff;
     border-color: black;
@@ -16,14 +24,16 @@ body {
 }
 
 .login-box h1 {
+    font-family: 'Varta', sans-serif;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
 #brand {
-    font-family: 'Exo 2', sans-serif;
+    /* font-family: 'Alegreya Sans SC', 'Exo 2', sans-serif; */
+    font-family: 'Montserrat Alternates', 'Exo 2', sans-serif;
     color: #fff;
-    font-size: 60px;
+    font-size: 80px;
     user-select: none;
 }
 
@@ -38,9 +48,34 @@ body {
 }
 
 .btn-link {
-    margin: auto;
+    margin: auto 0px;
 }
 
 .form-control {
     border-radius: 20px;
+}
+
+.turn-back {
+    margin: 0;
+}
+
+.turn-back:hover {
+    cursor: pointer;
+}
+
+.turn-back a:hover {
+    text-decoration: none;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+    opacity: 0.8;
+    margin: auto 0;
+}
+
+.turn-back .btn-link {
+    color: #212529;
+    margin: auto 0;
+    text-decoration: none;
 }
