@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="../static/style/menu.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-md border-bottom navbar-light" style="background-color: #a5e9c4;">
+    <nav class="navbar navbar-expand-md border-bottom navbar-light">
         <div class="container p-2">
         <a class="navbar-brand text-primary" >
-            <img src="../static/image/icon.png" style="width: 50px;">
-            <b style="color: black; padding-left: 15px;">Easy Accomod</b>
+            <img src="../static/image/icon.png">
+            <b>Easy Accomod</b>
         </a>
-        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4" style="">
+        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar4">
@@ -22,7 +22,7 @@
                 <li> <a class="nav-link">Trang chủ</a> </li>
                 <li> <a class="nav-link">Đăng ký</a> </li>
                 <li class="account-menu">
-                    <a class="btn ml-md-2" href="" id="nameAccount">Tên khách</a>
+                    <a class="btn ml-md-2" href="/dang-nhap" id="nameAccount">Tên khách</a>
                     <div class="dropdownMenu">
                         <a class="nav-link menu-item edit-account" href="chinh-sua-thong-tin">Chỉnh sửa thông tin</a>
                         <a class="nav-link menu-item logout" href="dang-xuat"> Đăng xuất</a>
@@ -32,5 +32,15 @@
         </div>
         </div>
     </nav>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('.account-menu').hover(function() {
+            $('.dropdownMenu').slideToggle(100);
+            $('.dropdownMenu').show();
+        });
+    </script>
 </body>
 </html>
