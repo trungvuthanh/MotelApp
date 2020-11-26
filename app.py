@@ -27,6 +27,17 @@ mycursor = mydb.cursor()
 def home():
     return render_template('test.html')
 
+@app.route("/post", methods=["GET"])
+def post():
+    return render_template('post.html')
+
+@app.route("/post", methods=["POST"])
+def postm():
+    return render_template('test.html')
+
+@app.route("/detail-post", methods=["GET"])
+def detailPost():
+    return render_template('detail-post.html')
 
 @app.route("/test", methods=["GET"])
 def getData():
