@@ -7,13 +7,23 @@ function previewFile(input) {
     const reader = new FileReader()
     reader.onloadend = function() {
         document.getElementById("preview").innerHTML += createImage(reader.result);
+        checkCountFileImage()
     } 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file)    
 }
 function onSelect(e) {
     if (e.files.length > 3) {
         alert("Only 3 files accepted.");
         e.preventDefault();
+    }
+}
+
+function checkCountFileImage() {
+    var numFile = document.getElementsByClassName("frame-image").length;
+    if (numFile < 3) {
+        document.getElementById("btnHinhAnh").className = "form-control-file is-invalid"
+    } else {
+        document.getElementById("btnHinhAnh").className = "form-control-file is-valid"
     }
 }
 
@@ -24,7 +34,8 @@ window.addEventListener('load', function() {
     var forms = document.getElementsByClassName('needs-validation');
     validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
+            checkCountFileImage()
+            if (form.checkValidity() === false ) {
                 event.preventDefault();
                 event.stopPropagation();
             } else {
@@ -114,8 +125,13 @@ function convertToHTML(string) {
     return res;
 }
 
+contentPost = document.getElementById("noidungbaiviet")
+contentPost.onkeyup = function() {
+    document.getElementById("contentHTML").innerHTML = convertToHTML(contentPost.value)
+}
+
 // convertToHTML(document.getElementById("noidungbaiviet").value)
 
-document.getElementById("xemtruocbaiviet").onclick = function() {
+// document.getElementById("xemtruocbaiviet").onclick = function() {
     
-}
+// }

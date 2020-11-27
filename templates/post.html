@@ -46,30 +46,33 @@
             <div class="form-row">
                 
                 <div class="col-md-4 mb-3">                    
-                    <select class="custom-select">                        
-                        <option selected>Tỉnh/thành phố</option>
-                        <option>Nhà nguyên căn</option>
-                        <option>Chung cư mini</option>
-                        <option>Chung cư nguyên căn</option>
+                    <select class="custom-select" required>                        
+                        <option value="">Tỉnh/thành phố</option>
+                        <option value="3">Nhà nguyên căn</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="1">Chung cư nguyên căn</option>
                     </select>
+                    <div class="invalid-feedback">Chọn tỉnh thành.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select">                        
-                        <option selected>Quận/huyện</option>
-                        <option>Nhà nguyên căn</option>
-                        <option>Chung cư mini</option>
-                        <option>Chung cư nguyên căn</option>
+                    <select class="custom-select" required>                        
+                        <option value="">Quận/huyện</option>
+                        <option value="1">Nhà nguyên căn</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="3">Chung cư nguyên căn</option>
                     </select>
+                    <div class="invalid-feedback">Chọn quận huyện.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select">                        
-                        <option selected>Phường/xã</option>
-                        <option>Nhà nguyên căn</option>
-                        <option>Chung cư mini</option>
-                        <option>Chung cư nguyên căn</option>
+                    <select class="custom-select" required>                        
+                        <option value="">Phường/xã</option>
+                        <option value="1">Nhà nguyên căn</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="3">Chung cư nguyên căn</option>
                     </select>
+                    <div class="invalid-feedback">Chọn phường xã.</div>
                 </div>
             </div>
             <div class="form-row"> 
@@ -186,7 +189,7 @@
             <!-- Hàng 8: Hình ảnh -->
             <div class="form-group">
                 <label for="">Hình ảnh</label>
-                <input type="file" class="form-control-file" multiple = "multiple" required onchange = "previewFile(this);"  id="">
+                <input type="file" class="form-control-file" multiple = "multiple" accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
                 <div class="invalid-feedback">Tải lên tối thiểu 3 ảnh.</div>
                 <div id = "preview"></div>
             </div>
@@ -194,51 +197,66 @@
 
             <!-- Hàng 9: Nội dung bài viết -->
             <div class="form-row">
-                <div class="col-md-12 mb-3" id="rowPostDes">
+                <div class="col-md-12" id="rowPostDes">
                     <div class="previewBtn" onclick="hienThiThemThongTin(this)"> Gợi ý <i class="fa fa-caret-down"></i></div>
-                    <label for="">Nội dung thêm</label>
-                    <textarea class="form-control" id="noidungbaiviet" rows="5" placeholder="- Chủ trọ dễ tính, nhiệt tình&#10;- An ninh tốt&#10;- Khóa cổng trước 11h&#10;- ..."></textarea>
-                    <div id="huongDan">
-                        <div class="form-row mb-3">
-                            <div class="col-md-3">Định dạng hỗ trợ</div>
-                            <div class="col-md-4">Nội dung mong muốn</div>
-                            <div class="col-md-5">Nội dung gõ</div>
-                        </div>
-                        <div class="form-row mb-3">
-                            <div class="col-md-3">1. In đậm:</div>
-                            <div class="col-md-4"><b>Nhà trọ giá rẻ</b></div>
-                            <div class="col-md-5 mahoa">**Nhà trọ giá rẻ**</div>
-                        </div>
-                        <div class="form-row mb-3">
-                            <div class="col-md-3">2. In nghiêng:</div>
-                            <div class="col-md-4"><i>Nhà trọ giá rẻ</i></div>
-                            <div class="col-md-5 mahoa">//Nhà trọ giá rẻ//</div>
-                        </div>
-                        <div class="form-row mb-3">
-                            <div class="col-md-3">3. Đoạn văn:</div>
-                            <div class="col-md-4"><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.Nhà trọ sinh viên, khép kín, không chung chủ.</div>                            </div>
-                            <div class="col-md-5 mahoa"><div class="mb-2">Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3">4. Danh sách:</div>
-                            <div class="col-md-4"><ul><li>Nội dung 1</li><li>Nội dung 2</li><li>Nội dung 3</li></ul></div>
-                            <div class="col-md-5 mahoa"><div>-- Nội dung 1</div><div>-- Nội dung 2</div><div>-- Nội dung 3</div></div>
-                        </div>
-                    </div>   
+                    <label for="">Nội dung thêm</label>  
                 </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <textarea class="form-control" id="noidungbaiviet" rows="5" placeholder="- Chủ trọ dễ tính, nhiệt tình&#10;- An ninh tốt&#10;- Khóa cổng trước 11h&#10;- ..."></textarea>
+                </div>
+                <div class="col-md-6 mb-3" id="contentHTML"></div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-12 mb-3" id="huongDan">
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">Định dạng hỗ trợ</div>
+                        <div class="col-md-4">Nội dung mong muốn</div>
+                        <div class="col-md-5">Nội dung gõ</div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">1. In đậm:</div>
+                        <div class="col-md-4"><b>Nhà trọ giá rẻ</b></div>
+                        <div class="col-md-5 mahoa">**Nhà trọ giá rẻ**</div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">2. In nghiêng:</div>
+                        <div class="col-md-4"><i>Nhà trọ giá rẻ</i></div>
+                        <div class="col-md-5 mahoa">//Nhà trọ giá rẻ//</div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">3. Đoạn văn:</div>
+                        <div class="col-md-4"><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.Nhà trọ sinh viên, khép kín, không chung chủ.</div>                            </div>
+                        <div class="col-md-5 mahoa"><div class="mb-2">Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3">4. Danh sách:</div>
+                        <div class="col-md-4"><ul><li>Nội dung 1</li><li>Nội dung 2</li><li>Nội dung 3</li></ul></div>
+                        <div class="col-md-5 mahoa"><div>-- Nội dung 1</div><div>-- Nội dung 2</div><div>-- Nội dung 3</div></div>
+                    </div>
+                </div>   
             </div>
 
 
             <!-- Hàng 10: Liên lạc -->
             <div class="form-row">
-                <div class="col-md-12 mb-3">
-                    <label for="">Liên lạc</label>
-                    <div class="thongtinlienlac">
-                        <div>Nguyễn Đức Tới</div>
-                        <div>SĐT: 0999 999 999</div>
-                        <div>Địa chỉ: Hà Nội, Hà Nội, Hà Nội</div>
-                    </div>
-                    
+                <div class="col-md-12">
+                    <label for="">Thông tin liên hệ</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Họ tên" value="Nguyễn Đức Tới" disabled required >
+                    <div class="invalid-feedback">Nhập họ tên.</div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Số điện thoại" value="0999999999" disabled required>
+                    <div class="invalid-feedback">Nhập SĐT.</div>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Địa chỉ" value="Hà Nội, Hà Nội, Hà Nội" disabled required>
+                    <div class="invalid-feedback">Nhập địa chỉ.</div>
                 </div>
             </div>
 
