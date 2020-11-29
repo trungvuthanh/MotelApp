@@ -1,0 +1,370 @@
+/* @import url(https://fonts.google.com/specimen/Noto+Sans+JP); */
+:root {
+    /* background-color: rgb(252, 250, 246); */
+    font-family: "Nunito", "Varta", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+div.page {
+    margin-left:auto;
+    margin-right:auto;
+    line-height: 1.4211;
+    font-weight: 300;
+    font-style: normal;
+    color: rgb(34, 34, 34);         
+}
+div.page h1 {
+    /* font-family: 'SFMono-Regular','Menlo,Monaco,Consolas',"Liberation Mono","Courier New",monospace; */
+    font-family: "Noto Sans JP";
+    margin-bottom: 20px;
+}
+div.page h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+div.page {max-width:35rem;}
+
+
+/* width < 360px*/
+@media screen and (max-width:359px) {
+    :root {font-size: 16px;}
+    div.page {width:100%;}
+}
+
+/* width: 360px --> 767px */
+@media screen and (min-width:360px) {
+    :root {font-size: calc(16px + 2 * ((100vw - 360px) / 408));}
+    
+}
+/* width: 768px --> 1366px */
+@media screen and (min-width:768px) {
+    :root {font-size: calc(18px + 2 * ((100vw - 768px) / 598));}
+}
+
+/* width: >= 1366px desktop */
+@media screen and (min-width:1366px) {
+    :root {font-size:20px;}
+}
+
+/* Style các phần chung */
+.row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.chimuc {
+    flex: 3;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: "Nunito", "Varta", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+/* input[type = text] {
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+} */
+input[type = text]:hover {
+    background-color: #daf2f6;
+}
+.nhappassword1 {
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+    /* font-family: 'Raleway', sans-serif; */
+}
+input[type = password]:hover {
+    background-color: #daf2f6;
+}
+input[type = date] {
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+    font-family: 'Raleway', sans-serif;
+}
+input[type = date]:hover {
+    background-color: #daf2f6;
+}
+select {
+    /* font-family: 'Raleway', sans-serif; */
+}
+.chung {
+    display: flex;
+    flex: 9;
+}
+label.HangMoi {
+    float: left; 
+    width: 120px;
+}
+span.Baoloi { 
+    color: #ff0000;}
+
+/* Loại tài khoản */
+.loaitk {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+}
+
+/* Tên đăng nhập */
+.nhapusername {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+}
+
+.nhapusername {
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+/* Mật khẩu */
+.nhappassword1 {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+    margin-right: 5px;
+}
+
+.nhappassword2 {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+/* Số điện thoại */
+.nhapsdt {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+/* Nhập email */
+.nhapemail {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+/* Họ tên */
+.nhapten {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+/* Ngày sinh */
+.nhapngay {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+}
+
+/* CMND/CCCD */
+.nhapcmt {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+/* Hình ảnh */
+.frame-image {
+    height: 200px;
+    /* position: relative; */
+    /* border: 2px solid rgba(7, 5, 5, 0.699); */
+    display: block;
+    margin: 10px;
+    
+}
+
+/* Địa chỉ */
+.container1 {
+    flex: 9;
+    display: flex;
+}
+.tinhthanh {
+    flex: 3;
+    /* margin-left: 5px; */
+    margin-right: 5px;
+}
+.quanhuyen {
+    flex: 3;
+    margin-left: auto;
+    margin-right: 5px;
+}
+.phuongxa {
+    flex: 3;
+}
+.selection1 {
+    width: 100%;
+    height: 43px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    padding: 5px;
+    font-size: 18px;
+    /* margin: 10px; */
+}
+.chitiet {
+    display: flex;
+    flex: 9;
+}
+.them {
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    border: 1.5px solid rgba(94, 92, 92, 0.15);
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+/* Đăng kí */
+.khoangtrang {
+    display: flex;
+    flex: 9;
+}
+input[type=submit] {
+    font-family: "Nunito", "Varta", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 18px;
+	padding: 10px;
+	background: #3e72aa;
+	color: white;
+	border: none;
+    cursor: pointer;
+    position: relative;
+    left: 0px;
+    font-weight: light;
+    margin: 20px 0px 20px 0px;
+    border-radius: 5px;
+}
+input[type=submit]:hover {
+    background: #2663a3;
+}
+.container {
+    display: block;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    font-weight: 100;
+    font-family: "Nunito", "Varta", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.myvalid {
+    border-color: green;
+    margin-right: 5px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+}
+  
+.myinvalid {
+    border-color: red;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 18px;
+    height: 43px;
+    padding: 5px;
+    margin-bottom: 3px ;
+}
+
+.form-text {
+    display: flex;
+    flex: 9;
+    margin-top: -12px;
+}
+.form-text1 {
+    display: flex;
+    flex: 6;
+    margin-top: -12px;
+}
+.nodisplay {
+    display:none;
+}
+
+/* Style các thông báo */
+.noti {
+    display: flex;
+    flex: 6;
+    font-size: 12px;
+}
+.baoloi {
+    display: flex;
+    flex: 3;
+    height: auto;
+    margin-bottom: 20px;
+    transition: opacity .4s ease-out;
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: -12px;
+}
+
+/* Lỗi nhập */
+.loi_repass {
+    display: flex;
+    flex: 3;
+    /* opacity: 1; */
+    height: auto;
+    margin-bottom: 20px;
+    transition: opacity .4s ease-out;
+    color: red;
+    font-size: 12px;
+    margin-top: -12px;
+    /* padding-left: 34px; */
+}
+.loi_username {
+    display: flex;
+    flex: 3;
+    height: auto;
+    margin-bottom: 20px;
+    transition: opacity .4s ease-out;
+    color: red;
+    font-size: 12px;
+    margin-top: -12px;
+}
+.loi_sdt {
+    display: flex;
+    flex: 3;
+    height: auto;
+    margin-bottom: 20px;
+    transition: opacity .4s ease-out;
+    color: red;
+    font-size: 12px;
+    margin-top: -12px;  
+}
+.preview {
+
+}
