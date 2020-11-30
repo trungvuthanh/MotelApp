@@ -83,10 +83,10 @@ html {
     padding-right: 7.5px;
 
 }
-.filter-box.area-search-box {
+.filter-box.price-search-box {
     padding: 0 7.5px;
 }
-.filter-box.price-search-box {
+.filter-box.area-search-box {
     padding-left: 7.5px;
     padding-right: 0;
 }
@@ -96,7 +96,7 @@ html {
 .filter-box .price-box {
 
 }
-select#itemType, select#price_range {
+select#itemType, select#area_range {
     background-color: #eeeeee;
     width: 100%;
     padding: 8px 12px;
@@ -109,8 +109,8 @@ select#itemType, select#price_range {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-select#itemType:focus, select#price_range:focus,
-select#itemType:hover, select#price_range:hover {
+select#itemType:focus, select#area_range:focus,
+select#itemType:hover, select#area_range:hover {
     outline: none;
     border: 1px solid #bbbbbb;
 }
