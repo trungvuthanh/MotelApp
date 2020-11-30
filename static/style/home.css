@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Banner tên web */
+.head-brand {
+    position: relative;
+    top: 15%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+#brand {
+    font-family: 'Montserrat Alternates', sans-serif;
+    color: #ffffff;
+    font-size: 80px;
+    user-select: none;
+}
+
+/* Bảng tìm kiếm */
+.search-section {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../image/home-background-5.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.search-box {
+    position: relative;
+    display: flex;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 850px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 16px 0 rgba(39,36,44,.16);
+    border-radius: 4px;
+    padding: 35px 20px;
+}
+.search-box .col-lg-12 .search-box-title {
+    color: #fff;
+    font-weight: 500;
+    font-family: 'Varta', sans-serif;
+}
+.search-box .col-lg-12 .form-row .col-md-10 input {
+    background-color: #eeeeee;
+}
+#searchBtn {
+    color: #000;
+    background-color: #73c799;
+}
+#searchBtn:hover {
+    background-color: #bbffda;
+}
+.search-filter .filter-box {
+    justify-content: center;
+    align-content: center;
+}
+.search-filter .filter-box .filter-item {
+    border-radius: 4px;
+    height: 138px;
+    background-color: #fcfcfc;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+}
+.search-item-title {
+    font-family: 'Varta', sans-serif;
+    color: #000;
+    font-size: 25px;
+}
+.filter-box.room-search-box {
+    padding-left: 0;
+    padding-right: 7.5px;
+
+}
+.filter-box.area-search-box {
+    padding: 0 7.5px;
+}
+.filter-box.price-search-box {
+    padding-left: 7.5px;
+    padding-right: 0;
+}
+.filter-box .room-box {
+
+}
+.filter-box .price-box {
+
+}
+select#itemType, select#price_range {
+    background-color: #eeeeee;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #cdd9ed;
+    border-radius: 4px;
+    cursor: pointer;
+    height: calc(100% - 40px);
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+select#itemType:focus, select#price_range:focus,
+select#itemType:hover, select#price_range:hover {
+    outline: none;
+    border: 1px solid #bbbbbb;
+}
+
+/* Thanh kéo diện tích */
+body.ui-slider-active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+.box {
+    width: 100%;
+}
+/* .box .row .col-md-5 {
+    padding-right: 0;
+    max-width: 35%;
+} */
+.box .values div {
+    display: inline-block;
+    vertical-align: top;
+}
+.box .values {
+    margin: 0;
+    font-weight: 500;
+}
+.box .values > div:first-child {
+    margin-right: 2px;
+}
+.box .values > div:last-child {
+    margin-left: 2px;
+}
+.box .slider {
+    margin-top: 10px;
+}
+.slider {
+    --line: #cdd9ed;
+    height: 23px;
+    width: 100%;
+    position: relative;
+    pointer-events: none;
+}
+.slider .ui-slider-handle {
+    --y: 0;
+    --background: #fff;
+    cursor: -webkit-grab;
+    cursor: grab;
+    -webkit-tap-highlight-color: transparent;
+    top: 0;
+    width: 23px;
+    height: 23px;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    position: absolute;
+    outline: none;
+    display: block;
+    pointer-events: auto;
+}
+.slider .ui-slider-handle div {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    -webkit-transition: background .4s ease;
+    transition: background .4s ease;
+    -webkit-transform: translateY(calc(var(--y) * 1px));
+            transform: translateY(calc(var(--y) * 1px));
+    border: 2px solid #275efe;
+    background: #fff;
+}
+.slider .ui-slider-handle:hover {
+    --background: #e9efff;
+}
+.slider .ui-slider-handle:active {
+    --background: #1e90ff;
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+.slider svg {
+    --stroke: #cdd9ed;
+    display: block;
+    height: 83px;
+}
+.slider svg path {
+    fill: none;
+    stroke: var(--stroke);
+    stroke-width: 1;
+}
+.slider .active, .slider > svg {
+    position: absolute;
+    top: -30px;
+    height: 83px;
+}
+.slider > svg {
+    left: 0;
+    width: 100%;
+}
+.slider .active {
+    position: absolute;
+    overflow: hidden;
+    left: calc(var(--l) * 1px);
+    right: calc(var(--r) * 1px);
+}
+.slider .active svg {
+    --stroke: #275efe;
+    position: relative;
+    left: calc(var(--l) * -1px);
+    right: calc(var(--r) * -1px);
+}
+.slider .active svg path {
+    stroke-width: 2;
+}
+
+/* Phần nội dung chính */
+.city-navigation {
+    width: 100%;
+}
+
+/* Địa điểm nổi bật */
+.city-box, .recommend-box {
+    padding: 70px 15px 15px;
+}
+.content-title {
+    font-family: 'Varta', sans-serif;
+}
+.content-description {
+    margin: 0 0 10px;
+}
+
+.city-box .city-list {
+    margin: 10px -25px 0;
+    justify-content: space-around;
+}
+.city-box .city-list .city-item {
+    display: flex;
+    flex-direction: column;
+    width: 247px;
+    height: 310px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.city-item:hover {
+    cursor: pointer;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, .3);
+}
+.city-item:hover img {
+    transform: scale(1.2);
+}
+.city-box .city-list .city-item img {
+    width: 247px;
+    height: 310px;
+    object-fit: cover;
+    transition: all .5s ease;
+}
+.city-name {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    font-family: 'Varta', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+}
+/* @media (min-width:768px) {
+    .city-box .city-list .city-item {
+        display: block;
+    }
+} */
+
+/* Gợi ý theo nhu cầu */
+.tabs {
+    position: relative;
+    height: auto;
+    width: 100%;
+    /* overflow: hidden; */
+}
+.tabs p {
+    margin: 0;
+}
+.tabs h6 {
+    font-family: 'Varta', sans-serif;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+/* Tab loại phòng */
+.tabs .tab-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-family: 'Varta', sans-serif;
+}
+.tabs .tab-header > div {
+    width: calc(100% / 4);
+    text-align: center;
+    color: #a5e9c4;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 20px;
+    text-transform: uppercase;
+    outline: none;
+}
+.tabs .tab-header > div.tab-active-head {
+    color: #1877f2;
+}
+
+/* Thanh trượt */
+.tabs .tab-indicator {
+    position: relative;
+    width: calc(100% / 4);
+    height: 5px;
+    background-color: #1877f2;
+    left: 0;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+}
+
+/* Nội dung gợi ý */
+.tabs .tab-body {
+    position: relative;
+    height: 450px;
+}
+.tabs .tab-body > .tab-content {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .5s ease-in-out 0s,
+                transform .5s ease-in-out 0s;
+}
+.tabs .tab-body > .tab-content.tab-active-body {
+    opacity: 1;
+}
+.tabs .tab-body > .tab-content .item-row {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    height: auto;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+}
+.tabs .tab-body > .tab-content .item-row .recommend-item {
+    margin: 20px;
+    overflow: hidden;
+    width: calc((100% - 20px)/2);
+    border-radius: 10px;
+    display: flex;
+}
+.tabs .tab-body > .tab-content .item-row .recommend-item img {
+    width: 240px;
+    height: 170px;
+    object-fit: cover;
+}
+.tabs .tab-body > .tab-content .item-row .recommend-item .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #f5f5f5;
+    width: 100%;
+}

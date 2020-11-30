@@ -9,7 +9,7 @@
 .main {
     position: relative;
     display: flex;
-    transition: .5s;
+    transition: .3s;
 }
 
 /*///////////////////////////////////////////////////////////////////////////////////////*/
@@ -196,7 +196,7 @@ address .row .col-sm-8 div:nth-last-child(1) {
     position: fixed;
     display: none;
     flex-direction: column;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     outline: none;
@@ -336,6 +336,10 @@ address .row .col-sm-8 div:nth-last-child(1) {
     padding: 1px 16px;
     border: none;
     border-radius: 20px;
+}
+
+#btnSendRp:hover {
+    background-color: #bbffda;
 }
 
 #btnSendRp:focus {
@@ -488,7 +492,7 @@ article {
 
 .review-comment .col-md-12 .row .col-md-9 .rate-status {
     display: none;
-    padding: 0 15px;
+    padding: 0 30px;
     margin-top: 10px;
 }
 
@@ -513,15 +517,19 @@ article {
     margin-bottom: 8px;
 }
 
+.info-guest + div p {
+    text-align: justify;
+}
+
 .rating-history {
     text-align: right;
     position: relative;
 }
-.rating-history #stars {
+.rating-history .stars {
     position: absolute;
     right: 0;
 }
-.rating-history #stars img{
+.rating-history .stars img {
     width: 25px;
     height: 25px;
     margin-right: 5px;

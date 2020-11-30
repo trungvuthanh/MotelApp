@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="../static/style/common.css">
     <link rel="stylesheet" href="../static/style/detail-post.css">
     <link rel="shortcut icon" href="../static/image/icon.png"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Menu -->
@@ -116,7 +113,7 @@
                         <h5>Diện tích:</h5>
                     </div>
                     <div class="col-md-3">
-                        <h5 id="area">22 m<sup>2</sup> </h5>
+                        <h5> <span id="area">22</span> m<sup>2</sup> </h5>
                     </div>
                     <div class="col-md-3 label-price">
                         <h5>Giá phòng:</h5>
@@ -202,7 +199,7 @@
                                 <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s5" src="../static/image/star-unfill.png">
                             </div>
                             <div class="col-md-9">
-                                <div class="rate-status row p-0 m-0">
+                                <div class="rate-status row">
                                     Cảm ơn bạn đã đánh giá!
                                 </div>
                             </div>
@@ -232,35 +229,58 @@
                                 </div>
                                 <div class="col-sm-11">
                                     <div class="form-group mb-1">
-                                        <input class="form-control" id="commentText" placeholder="Nhập bình luận">
+                                        <input class="form-control" id="commentText" type="text" placeholder="Nhập bình luận">
                                     </div>
                                     <div class="btn btn-primary pt-1" onclick="binhLuan()">Bình luận</div>
                                 </div>
                             </div>
                             <div class="each-comment row pt-3">
                                 <div class="col-sm-1">
-                                    <img id="renterImageID" src="../static/image/1.png">
+                                    <img class="renterImageID" src="../static/image/1.png">
                                 </div>
                                 <div class="col-sm-11">
                                     <div class="row info-guest">
                                         <div class="col-sm-6 pt-2 pl-0">
-                                            <p><b id="renterName">Nguyễn Đức Tới</b></p>
-                                            <p id="rateDate">21/11/2010</p>
+                                            <p><b>Vũ Thành Trung</b></p>
+                                            <p>21/11/2010</p>
                                         </div>
                                         <div class="col-sm-6 rating-history py-2">
-                                            <div id="stars">
+                                            <div class="stars">
+                                                <img src="../static/image/star-fill.png">
+                                                <img src="../static/image/star-fill.png">
+                                                <img src="../static/image/star-fill.png">
+                                                <img src="../static/image/star-unfill.png">
+                                                <img src="../static/image/star-unfill.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p>Nhà trọ chất lượng cao! Xứng đáng 10/10</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="each-comment row pt-3">
+                                <div class="col-sm-1">
+                                    <img class="renterImageID" src="../static/image/1.png">
+                                </div>
+                                <div class="col-sm-11">
+                                    <div class="row info-guest">
+                                        <div class="col-sm-6 pt-2 pl-0">
+                                            <p><b>Nguyễn Đức Tới</b></p>
+                                            <p>21/11/2010</p>
+                                        </div>
+                                        <div class="col-sm-6 rating-history py-2">
+                                            <div class="stars">
                                                 <img src="../static/image/star-fill.png">
                                                 <img src="../static/image/star-fill.png">
                                                 <img src="../static/image/star-fill.png">
                                                 <img src="../static/image/star-fill.png">
                                                 <img src="../static/image/star-unfill.png">
                                             </div>
-
                                         </div>
-
                                     </div>
-                                    <div class="">
-                                        <p class="">Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!</p>
+                                    <div>
+                                        <p>Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!</p>
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +322,10 @@
             </button>
         </div>
     </div>
+
+    <!-- Footer -->
     <div id="footer"></div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

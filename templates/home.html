@@ -1,6 +1,247 @@
-<!--
-    [1.8, 1.9, 2.6, 2, 3, 4.5, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.5, 3.1, 3.2, 3.3, 3.4, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4]
-    [3.3, 3.4, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5]
-    [5, 5.1, 5.5, 10, 9.3, 12, 8, 7.5, 8.3, 6.7, 6.8, 15, 20, 9, 9.5, 8.6, 8.8]
-    [5, 5.1, 5.5, 10, 9.3, 12, 8, 7.5, 8.3, 6.7, 6.8, 15, 20, 9, 9.5, 8.6, 8.8]
--->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="../static/style/common.css">
+    <link rel="stylesheet" href="../static/style/home.css">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+</head>
+<body>
+    <!-- Menu -->
+    <div id="menu"></div>
+
+    <div class="main">
+        <section class="search-section">
+            <div class="head-brand">
+                <h1 id="brand">Easy Accommodation</h1>
+            </div>
+            <div class="search-box">
+                <div class="col-lg-12">
+                    <h5 class="search-box-title mb-3">Tìm kiếm</h3>
+                    <div class="form-row">
+                        <div class="form-group col-lg-10"> <input type="text" class="form-control" id="tenTaiKhoan" placeholder="Tìm kiếm" required> </div>
+                        <div class="form-group col-lg-2"> <div class="form-control btn" id="searchBtn" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></div> </div>
+                    </div>
+                    <div class="search-filter row m-0">
+                        <div class="col-lg-3 filter-box room-search-box">
+                            <div class="room-box filter-item">
+                                <h5 class="search-item-title">Loại phòng</h5>
+                                <select id="itemType">
+                                    <option value="">Phòng trọ</option>
+                                    <option value="">Nhà nguyên căn</option>
+                                    <option value="">Chung cư mini</option>
+                                    <option value="">CC nguyên căn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 filter-box price-search-box">
+                            <div class="price-box filter-item">
+                                <h5 class="search-item-title">Diện tích</h5>
+                                <select id="price_range">
+                                    <option value="">Dưới 30 m2</option>
+                                    <option value="">30 - 80 m2</option>
+                                    <option value="">80 - 125 m2</option>
+                                    <option value="">Trên 125 m2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 filter-box area-search-box">
+                            <div class="area-box filter-item">
+                                <div class="box">
+                                    <h5 class="search-item-title">Khoảng giá</h5>
+                                    <div class="values">
+                                        <div><span id="first"></span></div> - <div><span id="second"></span> triệu/tháng</div>
+                                    </div>
+                                    <div class="slider" data-value-0="#first" data-value-1="#second" data-range="#third"></div>
+
+                                    <input type="hidden" id="min_price">
+                                    <input type="hidden" id="max_price">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="city-navigation">
+            <div class="container">
+                <div class="city-box">
+                    <h2 class="content-title">Địa điểm nổi bật</h2>
+                    <p class="content-description">Khám phá trải nghiệm mới khắp mọi miền đất nước</p>
+                    <div class="city-list row">
+                        <div class="city-item" data-aos="zoom-in" data-aos-duration="700">
+                        <!-- <div class="city-item hanoi"> -->
+                            <img src="../static/image/hochiminh.png">
+                            <h5 class="city-name">Hồ Chí Minh</h5>
+                        </div>
+                        <a href=""><div class="city-item" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="200">
+                        <!-- <div class="city-item hochiminh"> -->
+                            <img src="../static/image/hanoi.png">
+                            <h5 class="city-name">Hà Nội</h5>
+                        </div></a>
+                        <div class="city-item" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="400">
+                        <!-- <div class="city-item danang"> -->
+                            <img src="../static/image/danang.png">
+                            <h5 class="city-name">Đà Nẵng</h5>
+                        </div>
+                        <div class="city-item" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="600">
+                        <!-- <div class="city-item nhatrang"> -->
+                            <img src="../static/image/nhatrang.png">
+                            <h5 class="city-name">Nha Trang</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-box">
+                    <h2 class="content-title">Gợi ý theo nhu cầu</h2>
+                    <p class="content-description">Mỗi chuyến đi là một hành trình truyền cảm hứng, mỗi căn phòng là một khoảng trời an yên</p>
+                    <div class="tabs" data-aos="zoom-in" data-aos-duration="700">
+                        <div class="tab-header">
+                            <div class="tab-active-head">
+                                <h5>Phòng trọ</h5>
+                            </div>
+                            <div class="">
+                                <h5>Nhà nguyên căn</h5>
+                            </div>
+                            <div class="">
+                                <h5>Chung cư mini</h5>
+                            </div>
+                            <div class="">
+                                <h5>Chung cư nguyên căn</h5>
+                            </div>
+                        </div>
+                        <div class="tab-indicator"></div>
+                        <div class="tab-body">
+                            <div class="tab-content tab-active-body">
+                                <div class="item-row">
+                                    <div class="recommend-item">
+                                        <img src="https://cdn.luxstay.com/rooms/34370/large/2543737992f4e70658622ca8011421dc.png">
+                                        <div class="item-info">
+                                            <div class="first-info">
+                                                <h6><b>Chung cư nguyên căn giá tốt</b></h6>
+                                                <p>Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="second-info">
+                                                <h6>Giá phòng</h6>
+                                                <p class="price-item">4.500.000 <span>đồng/tháng</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="recommend-item">
+                                        <img src="https://cdn.luxstay.com/rooms/18567/large/room_18567_13_1546308941.jpg">
+                                        <div class="item-info">
+                                            <div class="first-info">
+                                                <h6><b>Chung cư nguyên căn giá tốt</b></h6>
+                                                <p>Bắc Từ Liêm, Hà Nội</p>
+                                            </div>
+                                            <div class="second-info">
+                                                <h6>Giá phòng</h6>
+                                                <p class="price-item">2.100.000 <span>đồng/tháng</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-row">
+                                    <div class="recommend-item">
+                                        <img src="https://cdn.luxstay.com/rooms/34370/large/2543737992f4e70658622ca8011421dc.png">
+                                        <div class="item-info">
+                                            <div class="first-info">
+                                                <h6><b>Chung cư nguyên căn giá tốt</b></h6>
+                                                <p>Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="second-info">
+                                                <h6>Giá phòng</h6>
+                                                <p class="price-item">4.500.000 <span>đồng/tháng</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="recommend-item">
+                                        <img src="https://cdn.luxstay.com/rooms/18567/large/room_18567_13_1546308941.jpg">
+                                        <div class="item-info">
+                                            <div class="first-info">
+                                                <h6><b>Chung cư nguyên căn giá tốt</b></h6>
+                                                <p>Bắc Từ Liêm, Hà Nội</p>
+                                            </div>
+                                            <div class="second-info">
+                                                <h6>Giá phòng</h6>
+                                                <p class="price-item">2.100.000 <span>đồng/tháng</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <h2>This is code section</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error neque saepe commodi blanditiis fugiat nisi aliquam ratione porro quibusdam in, eveniet accusantium cumque. Dolore officia reprehenderit perferendis quod libero omnis.</p>
+                            </div>
+                            <div class="tab-content">
+                                <h2>This is code 2 section</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error neque saepe commodi blanditiis fugiat nisi aliquam ratione porro quibusdam in, eveniet accusantium cumque. Dolore officia reprehenderit perferendis quod libero omnis.</p>
+                            </div>
+                            <div class="tab-content">
+                                <div class="item-row">
+                                    <div class="recommend-item">
+                                        <img src="https://cdn.luxstay.com/rooms/34370/large/2543737992f4e70658622ca8011421dc.png">
+                                        <div class="item-info">
+                                            <div class="first-info">
+                                                <h6><b>Chung cư nguyên căn giá tốt</b></h6>
+                                                <p>Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="second-info">
+                                                <h6>Giá phòng</h6>
+                                                <p class="price-item">4.500.000 <span>đồng/tháng</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="recommend-item">
+                                        <img src="https://cdn.luxstay.com/rooms/18567/large/room_18567_13_1546308941.jpg">
+                                        <div class="item-info">
+                                            <div class="first-info">
+                                                <h6><b>Chung cư nguyên căn giá tốt</b></h6>
+                                                <p>Bắc Từ Liêm, Hà Nội</p>
+                                            </div>
+                                            <div class="second-info">
+                                                <h6>Giá phòng</h6>
+                                                <p class="price-item">2.100.000 <span>đồng/tháng</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/home.js"></script>
+
+    <!-- Slider js lib -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+
+    <!-- Animate on scroll lib -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

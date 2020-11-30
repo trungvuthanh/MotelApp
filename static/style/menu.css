@@ -1,6 +1,9 @@
-.navbar {
+#head {
     padding: 0;
     background-color: #a5e9c4;
+    border: none;
+    font-family: 'Varta', sans-serif;
+    font-size: 20px;
 }
 
 .navbar-light .navbar-toggler {
@@ -8,7 +11,7 @@
 }
 
 .navbar-brand img {
-    width: 50px;
+    width: 40px;
 }
 
 .navbar-brand b {
@@ -16,9 +19,8 @@
     padding-left: 15px;
 }
 
-#brand {
-    color: #000000;
-    padding-left: 15px;
+.navbar-toggler.navbar-toggler-right:focus {
+    outline: none;
 }
 
 .nav-link {
@@ -48,13 +50,19 @@ Hover tên tài khoản hiện    Chỉnh sửa thông tin
     display: none;
     position: absolute;
     z-index: 99999999;
-    margin-left: 8px;
+    /* margin-left: 8px; */
     background-color: #ffffff;
     padding: 10px 10px;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+@media (min-width: 768px) {
+        .dropdownMenu {
+            margin-left: 8px;
+        }
 }
 
 .dropdownMenu a:hover {

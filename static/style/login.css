@@ -1,9 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@900&display=swap');
-
 body {
-    /* background-image: url("../static/image/login-background.jpg"); */
+    background-image: url("../image/login-background.jpg");
     height: 100vh;
     width: 100%;
     background-size: cover;
@@ -30,7 +26,6 @@ body {
 }
 
 #brand {
-    /* font-family: 'Alegreya Sans SC', 'Exo 2', sans-serif; */
     font-family: 'Montserrat Alternates', 'Exo 2', sans-serif;
     color: #fff;
     font-size: 80px;
