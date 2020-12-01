@@ -40,7 +40,28 @@ def login():
     urlController = UrlController()
     return urlController.loginController()
 
+@app.route("/dang-xuat", methods=["GET"])
+def logout():
+    """Xử lý yêu cầu đăng xuất
+    
+    Parameters
+    ----------
+    None
+    """
+    urlController = UrlController()
+    return urlController.logoutController()
 
+
+@app.route("/dang-ky", methods=["GET"])
+def signup():
+    """Routing trang đăng ký
+    
+    Parameters
+    ----------
+    None
+    """
+    urlController = UrlController()
+    return urlController.signupController()
 
 
 
@@ -68,7 +89,27 @@ def submitLogin():
     message = DataController().loginController()
     return app.response_class(json.dumps({"message": message}), mimetype='application/json')
 
+@app.route("/kiem-tra-username", methods=["POST"])
+def checkUsername():
+    """Kiểm tra username đã tồn tại trước đó hay chưa
+    
+    Parameters
+    ----------
+    None
+    """
+    message = DataController().checkUsernameController()
+    return app.response_class(json.dumps({"message": message}), mimetype='application/json')
 
+@app.route("/submit-dang-ky", methods=["POST"])
+def submitSignup():
+    """Đăng ký tài khoản mới
+    
+    Parameters
+    ----------
+    None
+    """
+    message = DataController().signupController()
+    return app.response_class(json.dumps({"message": message}), mimetype='application/json')
 
 
 
@@ -93,6 +134,15 @@ def postm():
 @app.route("/detail-post", methods=["GET"])
 def detailPost():
     return render_template('detail-post.html')
+
+# @app.route("/detail-post", methods=["GET"])
+# def detailPost():
+#     return render_template('detail-post.html')
+
+# @app.route("/test", methods=["GET"])
+# def test():
+#     return render_template('detail-post.html')
+
 
 # @app.route("/test", methods=["GET"])
 # def getData():

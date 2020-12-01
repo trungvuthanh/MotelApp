@@ -1,5 +1,5 @@
 // Load menu
-$('#menu').load('../static/page/menu.html');
+$('#menu').load('../static/page/menu-renter.html');
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 // Ảnh bài đăng

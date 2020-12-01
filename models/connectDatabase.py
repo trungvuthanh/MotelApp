@@ -9,19 +9,30 @@ class ConnectDatabase:
 
     Attributes
     ----------
-    connection : pyodbc.Connection
-        biến dùng để connect với remotemysql
+    __init__() : constructor
         
-    cursor : pyodbc.Cursor
-        biến cursor của connection vừa kết nối với remotemysql
+    close(): đóng kết nối
 
     """
-    # 2 biến static
     def __init__(self):
+        """
+        Constructor
+        
+        Parameters
+        ----------
+        None
+        """
         tt = time.time()
         self.connection = pyodbc.connect("DRIVER={MySQL ODBC 8.0 Unicode Driver};SERVER=localhost;DATABASE=motelapp;USER=root;PASSWORD=;")
         self.cursor = self.connection.cursor() 
         print(time.time() - tt, 1)   
     
     def close(self):
+        """
+        Đóng kết nối với database
+        
+        Parameters
+        ----------
+        None
+        """
         self.connection.close()  

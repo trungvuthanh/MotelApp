@@ -9,12 +9,13 @@ class User:
 
     Methods
     ----------
-    __init__(username: str, password: str): constructor
+    __init__(username="": str, password="": str): constructor
     
-    loginController(): Chuyển hướng trang đăng nhập của tất cả các loại tài khoản
-        
+    checkLogin(): str
+    
+    checkUsername(username: str): str        
     """
-    def __init__(self, username, password):
+    def __init__(self, username = "", password = ""):
         """
         Constructor
         
@@ -49,11 +50,9 @@ class User:
             SELECT * FROM user
             WHERE userName = ? AND password = ?
             """
-        tt = time.time()
         connectDatabase = ConnectDatabase()
-        print(time.time() - tt)
         rows = connectDatabase.cursor.execute(query_str, self.username, self.password)
-        count  = rows.rowcount
+        count = rows.rowcount
         if count == 1:
             row = rows.fetchone()
             if row.status != "block":
@@ -64,54 +63,35 @@ class User:
             return row.status 
         connectDatabase.close()  
         return "null"
+    
+    def checkUsername(self, username):
+        """
+        Kiểm tra username đã tồn tại trong database hay chưa
         
-        tt = time.time()
-        
-        # check admin        
-        query_str = "SELECT typeAvt FROM admin WHERE username = ? AND password = ?" 
-        rows = ConnectDatabase.cursor.execute(query_str, self.username, self.password)
-        count  = rows.rowcount
-        print(time.time() - tt)
-        tt = time.time()
-        if count == 1:
-            # tài khoản này là của admin 
-            row = rows.fetchone()
-            self.type_account = "admin"
-            self.type_avatar = row.typeAvt
-            self.fullname = "Quản trị viên"
-            return "active"           
-        
-        # check owner
-        query_str = "SELECT fullname, typeAvt, status FROM owner WHERE username = ? AND password = ?" 
-        rows = ConnectDatabase.cursor.execute(query_str, self.username, self.password)
-        count  = rows.rowcount
-        print(time.time() - tt)
-        tt = time.time()
-        if count == 1:
-            # tài khoản này là của owner 
-            row = rows.fetchone()
-            if row.status != "block":
-                # active hoặc handling
-                self.type_account = "owner"
-                self.type_avatar = row.typeAvt
-                self.fullname = row.fullname
-            return row.status
-        
-        # check renter
-        query_str = "SELECT fullname, typeAvt, status FROM renter WHERE username = ? AND password = ?" 
-        rows = ConnectDatabase.cursor.execute(query_str, self.username, self.password)
-        count  = rows.rowcount
-        if count == 1:
-            # tài khoản này là của renter 
-            row = rows.fetchone()
-            if row.status == "active":
-                self.type_account = "renter"
-                self.type_avatar = row.typeAvt
-                self.fullname = row.fullname
-            print(time.time() - tt)
-            tt = time.time()
-            return row.status
-        
-        # không tìm thấy 
-        return "null"
-        
+        Parameters
+        ----------
+        username: str (Username muốn kiểm tra)
+            
+        Returns
+        ----------
+        str: Username đã tồn tại hay chưa ("exist", "not_exist")
+        """
+        query_str = """
+            WITH user AS (
+                SELECT userName FROM admin
+                UNION SELECT userName FROM owner
+                UNION SELECT userName FROM renter
+            ) 
+            SELECT * FROM user
+            WHERE userName = ?
+            """
+        connectDatabase = ConnectDatabase()
+        rows = connectDatabase.cursor.execute(query_str, username)
+        count = rows.rowcount
+        if count == 0:
+            # chưa có tài khoản nào có tên đăng nhập trùng
+            connectDatabase.close()
+            return "not_exist"
+        # tồn tại tài khoản trùng tên đăng nhập
+        connectDatabase.close()  
+        return "exist"

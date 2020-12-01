@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, escape
+import time
 
 class UrlController:
     """
@@ -11,6 +12,8 @@ class UrlController:
     homeController(): Chuyển hướng trang home của từng loại tài khoản
     
     loginController(): Chuyển hướng trang đăng nhập của tất cả các loại tài khoản
+    
+    logoutController(): Đăng xuất của tất cả các loại tài khoản
         
     """
     
@@ -46,6 +49,35 @@ class UrlController:
             return render_template('login.html')
         else:
             return redirect(url_for('/'))
+    
+    def logoutController(self):
+        """
+        Đăng xuất của tất cả các loại tài khoản
         
+        Parameters
+        ----------
+        None
+        """
+        if 'type_account' not in session:
+            # dấu hiệu có sự phá hoại
+            time.sleep(10) 
+        else:
+            # trường hợp bình thường
+            # xóa toàn bộ session
+            session.clear()
+        # chuyển hướng sang trang đăng nhập
+        return redirect(url_for('/dang-nhap'))
+    
+    def signupController(self):
+        """
+        Chuyển hướng sang trang đăng ký tài khoản
         
-        
+        Parameters
+        ----------
+        None
+        """
+        if 'type_account' in session:
+            # dấu hiệu có sự phá hoại
+            session.clear()
+        # chuyển hướng sang trang đăng ký
+        return render_template('signup.html')
