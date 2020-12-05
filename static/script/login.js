@@ -1,6 +1,6 @@
 function submitLogin() {
-    username = document.querySelector("#form11").value 
-    password = document.querySelector("#form12").value 
+    username = document.querySelector("#form11").value
+    password = document.querySelector("#form12").value
     // alert(username + " 12 " + password)
     fetch("../submit-dang-nhap", {
         method: "POST",
@@ -9,7 +9,7 @@ function submitLogin() {
         cache: "no-cache",
         headers: new Headers({
             "content-type": "application/json"
-        })      
+        })
     })
     .then(
         resp => {

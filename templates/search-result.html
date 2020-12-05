@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="../static/style/common.css">
+    <link rel="stylesheet" href="../static/style/search-result.css">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
+</head>
+<body>
+    <!-- <div id="menu"></div> -->
+    <div class="main">
+        <div id="menu"></div>
+        <div class="head-filter container w90">
+            <div>
+                <h1 class="result-title title">Kết quả tìm kiếm <span>"cầu giấy dịch vọng"</span></h1>
+                <p>Có 69 kết quả được tìm thấy</p>
+                <div class="row">
+                    <div>
+                        <select class="form-control head-select">
+                            <option value="">Tỉnh, thành phố</option>
+                            <option value="">An Giang</option>
+                            <option value="">Hà Nội</option>
+                            <option value="">Hồ Chí Minh</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="form-control head-select">
+                            <option value="">Quận, huyện</option>
+                            <option value="">Ba Đình</option>
+                            <option value="">Cầu Giấy</option>
+                            <option value="">Thanh Xuân</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="form-control head-select">
+                            <option value="">Phường, xã</option>
+                            <option value="">Dịch Vọng</option>
+                            <option value="">Ngọc Khánh</option>
+                            <option value="">Nhân Chính</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="form-control head-select" name="order" id="order">
+                            <option value="">Sắp xếp theo</option>
+                            <option value="">Giá tăng dần</option>
+                            <option value="">Giá giảm dần</option>
+                            <option value="">Diện tích tăng dần</option>
+                            <option value="">Diện tích giảm dần</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="form-control btn btn-success" type="button" name="button" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="container w90">
+                <div class="row">
+                    <div class="left-filter col-lg-3">
+                        <div class="side-filter border">
+                            <div class="side-title">
+                                <p class="title">Khoảng giá</p>
+                            </div>
+                            <div class="col-sm-auto">
+                                <p id="price_show">3 - 10 triệu/tháng</p>
+                                <div id="price_range"></div>
+                                <input type="hidden" id="min_price">
+                                <input type="hidden" id="max_price">
+                            </div>
+                        </div>
+                        <div class="side-filter border">
+                            <div class="side-title">
+                                <p class="title">Diện tích</p>
+                            </div>
+                            <div class="col-sm-auto">
+                                <select class="form-control" onchange="filter()">
+                                    <option value="">Dưới 30 m2</option>
+                                    <option value="">30 - 60 m2</option>
+                                    <option value="">60 - 100 m2</option>
+                                    <option value="">100 - 125 m2</option>
+                                    <option value="">Trên 125 m2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="side-filter border">
+                            <div class="side-title">
+                                <p class="title">Loại phòng</p>
+                            </div>
+                            <div class="col-sm-auto">
+                                <select class="form-control" onchange="filter()">
+                                    <option value="">Phòng trọ</option>
+                                    <option value="">Nhà nguyên căn</option>
+                                    <option value="">Chung cư mini</option>
+                                    <option value="">Chung cư nguyên căn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="side-filter border">
+                            <div class="side-title">
+                                <p class="title">Hình thức ở</p>
+                            </div>
+                            <div class="col-sm-auto">
+                                <div>
+                                    <input type="radio" name="hinhThucO" id="chungChu" value="chungchu" onclick="filter()">
+                                    <label for="chungChu">Chung chủ</label> <br>
+                                    <input type="radio" name="hinhThucO" id="khongChungChu" value="khongchungchu" onclick="filter()">
+                                    <label for="khongChungChu" class="m-0">Không chung chủ</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="side-filter border">
+                            <div class="side-title">
+                                <p class="title">Địa điểm lân cận</p>
+                            </div>
+                            <div class="col-sm-auto">
+                                <div class="form-group mb-0">
+                                    <textarea class="form-control" id="relatedPlace" placeholder="Gần Đại học Quốc gia, Bến xe, bệnh viện,..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-rows col-lg-7">
+                        <div class="item-result border">
+                            <div class="item-img">
+                                <img src="../static/image/item-demo1.png">
+                                <div class="item-favourite">
+                                    <i class="fas fa-heart" onclick="saveFavourite(this)"></i>
+                                </div>
+                            </div>
+                            <a href="/detail-post"><div class="item-info">
+                                <div>
+                                    <h6><b>Chung cư nguyên căn sinh viên</b></h6>
+                                    <div class="item-star">
+                                        <div class="avg-rating text-center text-white rounded">
+                                            <span>4.0</span>
+                                        </div>
+                                        <p>50 đánh giá</p>
+                                    </div>
+                                </div>
+
+                                <p class="item-price">Giá phòng: 2.500.000 đ/tháng</p>
+                                <p>Địa chỉ: Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                <p>Diện tích: 70 m2 - 2 Phòng ngủ</p>
+                                <p>Giá nước: 60.000 đ/người - Giá điện: 4000 đ/số</p>
+                                <p></p>
+                            </div></a>
+                        </div>
+                        <div class="item-result border">
+                            <div class="item-img">
+                                <img src="../static/image/item-demo2.png">
+                                <div class="item-favourite">
+                                    <i class="fas fa-heart red" onclick="saveFavourite(this)"></i>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <div>
+                                    <h6><b>Phòng trọ giá rẻ</b></h6>
+                                    <div class="item-star">
+                                        <div class="avg-rating text-center text-white rounded">
+                                            <span>4.5</span>
+                                        </div>
+                                        <p>45 đánh giá</p>
+                                    </div>
+                                </div>
+
+                                <p class="item-price">Giá phòng: 1.800.000 đ/tháng</p>
+                                <p>Địa chỉ: Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                <p>Diện tích: 55 m2 - 2 Phòng ngủ</p>
+                                <p>Giá nước: 60.000 đ/người - Giá điện: 4000 đ/số</p>
+                                <p></p>
+                                <div>
+                                    <div class="item-favourite">
+                                        <i class="far fa-heart" onclick="saveFavourite(this)"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-center">
+                            <div class="w3-section">
+                                <button class="w3-button w3-light-grey" onclick="plusDivs(-1)">❮ Trang trước</button>
+                                <button class="w3-button w3-light-grey" onclick="plusDivs(1)">Trang sau ❯</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-advertising col-lg-2">
+                        <img src="../static/image/advertising-banner1.jpg" alt="ads">
+                        <img src="../static/image/advertising-banner2.png" alt="ads">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="footer"></div>
+
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/search-result.js"></script>
+
+    <!-- Slider css, js lib -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+</body>
+</html>

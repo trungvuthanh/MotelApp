@@ -17,7 +17,6 @@
 /*///////////////////////////////////////////////////////////////////////////////////////*/
 /* Phần ảnh post */
 .main-img {
-    /* margin: 0 15px; */
     padding: 0 15px;
     height: 300px;
     width: inherit;
@@ -76,28 +75,6 @@
     color: #000;
     background-color: #f1f1f1!important;
 }
-
-.sub-img {
-    padding: 0 15px;
-    margin: 0 0 15px;
-}
-
-.sub-img .col-sm-4 {
-    height: 150px;
-    padding: 15px;
-}
-
-.sub-img .col-sm-4 .row {
-    padding: 0;
-    height: 100%;
-    width: inherit;
-}
-
-.sub-img .col-sm-4 .row img {
-    width: inherit;
-    height: inherit;
-    object-fit: cover;
-}
 /*========================================= Hết =========================================*/
 /*=======================================================================================*/
 
@@ -133,7 +110,6 @@ address .row .col-sm-8 div:nth-last-child(1) {
 /* Report button */
 .button-rp {
     border-radius: 10px;
-    /* background-color: #f4511e; */
     background-image: linear-gradient(90deg,#f65e38 0,#f68a39 51%,#f65e38);
     background-size: 200% auto;
     background-position-x: 0;
@@ -201,7 +177,6 @@ address .row .col-sm-8 div:nth-last-child(1) {
     transform: translate(-50%, -50%);
     outline: none;
     border-radius: 10px;
-    /* box-shadow: 0 12px 18px rgba(0, 0, 0, 0.05); */
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
     width: 550px;
     background-color: #ffffff;
@@ -301,8 +276,6 @@ address .row .col-sm-8 div:nth-last-child(1) {
 }
 
 .rp-content .form-group textarea {
-    /* position: absolute;
-    display: flex; */
     margin: 16px;
     padding: 10px;
     width: calc(100% - 32px);
@@ -323,7 +296,7 @@ address .row .col-sm-8 div:nth-last-child(1) {
     display: block;
     padding: 16px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    height: 69px;
+    height: auto;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -348,6 +321,33 @@ address .row .col-sm-8 div:nth-last-child(1) {
 /*========================================= Hết =========================================*/
 /*=======================================================================================*/
 
+/* Lưu tin */
+.author-info + div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 30px;
+}
+.save-favourite {
+    font-family: 'Varta', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+.save-favourite i {
+    margin-left: 3px;
+}
+.save-favourite:hover {
+    cursor: pointer;
+}
+.save-favourite:hover i {
+    color: #f50057;
+}
+.save-favourite i.fas {
+    color: #f50057;
+}
+/*========================================= Hết =========================================*/
+/*=======================================================================================*/
+
 /*///////////////////////////////////////////////////////////////////////////////////////*/
 /*                                      Hết Cột trái                                     */
 /*///////////////////////////////////////////////////////////////////////////////////////*/
@@ -361,6 +361,7 @@ address .row .col-sm-8 div:nth-last-child(1) {
 
 
 /* Địa chỉ */
+#addressDetail,
 #address {
     margin: 8px 0;
 }
@@ -496,11 +497,14 @@ article {
     margin-top: 10px;
 }
 
-.rate-point-container {
+.average-rate .rate-point-container {
     margin: 0 0 8px 3px;
     padding: 2px;
     width: 30px;
     height: 30px;
+}
+.average-rate p {
+    margin-top: 2px;
 }
 
 /* Bình luận */
