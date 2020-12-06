@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../static/style/common.css">
     <link rel="stylesheet" href="../static/style/detail-post.css">
     <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
 </head>
 <body>
     <!-- Menu -->
@@ -20,7 +21,7 @@
         <div class="row">
 
             <!-- Cột bên trái -->
-            <div class="col-lg-5 my-5 px-0">
+            <div class="col-lg-5 my-5">
                 <!-- Ảnh chính -->
                 <div class="main-img">
                     <img class="mySlides" src="../static/image/test-post1.jpg">
@@ -57,7 +58,13 @@
                         </div>
                     </address>
                 </div>
-                <button class="button-rp"><span>Báo cáo</span></button>
+                <div>
+                    <button class="button-rp"><span>Báo cáo</span></button>
+                    <div class="save-favourite" onclick="saveFavourite()">
+                        Lưu tin
+                        <i id="saveBtn" class="far fa-heart"></i>
+                    </div>
+                </div>
             </div>
 
             <!-- Cột bên phải -->
@@ -68,7 +75,7 @@
                 <div class="row">
                     <!-- Địa chỉ -->
                     <div class="col-md-9">
-                        <h5 id="address">Bình Chánh, Bình Chánh, Hồ Chí Minh</h5>
+                        <h5 id="addressDetail">144, Xuân Thủy, Cầu Giấy</h5>
                     </div>
 
                     <!-- Trạng thái phòng trọ -->
@@ -76,7 +83,7 @@
                         <h5 id="statusHired">Chưa thuê</h5>
                     </div>
                 </div>
-
+                <h5 id="address">Bình Chánh, Bình Chánh, Hồ Chí Minh</h5>
                 <!-- Lượt xem, like -->
                 <div class="view-like-section row py-2">
                     <div class="col-md-6"></div>
@@ -94,7 +101,7 @@
                 <h5 class="page-title"><b> <b id="itemType">Phòng trọ</b> - <b id="statusItem">Không chung chủ</b> </b></h5>
 
                 <!-- Giá điện, số nước, diện tích, giá phòng -->
-                <div class="row price-water-elec">
+                <div class="row price-water-elec mx-0">
                     <div class="col-md-3 label-price">
                         <h5>Giá nước:</h5>
                     </div>
@@ -108,7 +115,7 @@
                         <h5 id="priceElectric">4.000₫/số</h5>
                     </div>
                 </div>
-                <div class="row price-room-area">
+                <div class="row price-room-area mx-0">
                     <div class="col-md-3 label-price">
                         <h5>Diện tích:</h5>
                     </div>
@@ -207,7 +214,7 @@
                     </div>
 
                     <div class="col-sm-12">
-                        <div class="row p-0">
+                        <div class="row average-rate p-0">
                             <div class="col-sm-1">
                                 <div class="rate-point-container bg-success text-white text-center rounded mr-3">
                                     <span id="avgRatingPoint">4.5</span>
@@ -218,7 +225,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <!-- Comment -->
                     <div class="comment-section col-sm-12">
@@ -236,7 +242,7 @@
                             </div>
                             <div class="each-comment row pt-3">
                                 <div class="col-sm-1">
-                                    <img class="renterImageID" src="../static/image/1.png">
+                                    <img class="renterImageID" src="../static/image/5.png">
                                 </div>
                                 <div class="col-sm-11">
                                     <div class="row info-guest">
@@ -261,7 +267,7 @@
                             </div>
                             <div class="each-comment row pt-3">
                                 <div class="col-sm-1">
-                                    <img class="renterImageID" src="../static/image/1.png">
+                                    <img class="renterImageID" src="../static/image/7.png">
                                 </div>
                                 <div class="col-sm-11">
                                     <div class="row info-guest">

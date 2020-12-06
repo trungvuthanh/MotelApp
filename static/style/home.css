@@ -13,7 +13,7 @@ html {
 /* Banner tên web */
 .head-brand {
     position: relative;
-    top: 15%;
+    top: 20%;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -32,12 +32,12 @@ html {
     background-image: url('../image/home-background-5.jpg');
     background-attachment: fixed;
     background-size: cover;
-    background-position: center;
+    background-position: top;
 }
 .search-box {
     position: relative;
     display: flex;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 850px;
@@ -57,8 +57,11 @@ html {
 #searchBtn {
     color: #000;
     background-color: #73c799;
+    border: none;
+    text-align: center;
 }
 #searchBtn:hover {
+    cursor: pointer;
     background-color: #bbffda;
 }
 .search-filter .filter-box {
@@ -69,9 +72,10 @@ html {
     border-radius: 4px;
     height: 138px;
     background-color: #fcfcfc;
-    justify-content: center;
-    align-content: center;
+    justify-content: space-between;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 .search-item-title {
     font-family: 'Varta', sans-serif;
@@ -97,13 +101,10 @@ html {
 
 }
 select#itemType, select#area_range {
-    background-color: #eeeeee;
     width: 100%;
     padding: 8px 12px;
-    border: 1px solid #cdd9ed;
-    border-radius: 4px;
     cursor: pointer;
-    height: calc(100% - 40px);
+    height: auto;
 
     appearance: none;
     -webkit-appearance: none;
@@ -115,110 +116,9 @@ select#itemType:hover, select#area_range:hover {
     border: 1px solid #bbbbbb;
 }
 
-/* Thanh kéo diện tích */
-body.ui-slider-active {
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
-}
-.box {
-    width: 100%;
-}
-/* .box .row .col-md-5 {
-    padding-right: 0;
-    max-width: 35%;
-} */
-.box .values div {
-    display: inline-block;
-    vertical-align: top;
-}
-.box .values {
-    margin: 0;
-    font-weight: 500;
-}
-.box .values > div:first-child {
-    margin-right: 2px;
-}
-.box .values > div:last-child {
-    margin-left: 2px;
-}
-.box .slider {
-    margin-top: 10px;
-}
-.slider {
-    --line: #cdd9ed;
-    height: 23px;
-    width: 100%;
-    position: relative;
-    pointer-events: none;
-}
-.slider .ui-slider-handle {
-    --y: 0;
-    --background: #fff;
-    cursor: -webkit-grab;
-    cursor: grab;
-    -webkit-tap-highlight-color: transparent;
-    top: 0;
-    width: 23px;
-    height: 23px;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-    position: absolute;
+/* Thanh kéo khoảng giá */
+#price_range span.ui-slider-handle:focus {
     outline: none;
-    display: block;
-    pointer-events: auto;
-}
-.slider .ui-slider-handle div {
-    width: 23px;
-    height: 23px;
-    border-radius: 50%;
-    -webkit-transition: background .4s ease;
-    transition: background .4s ease;
-    -webkit-transform: translateY(calc(var(--y) * 1px));
-            transform: translateY(calc(var(--y) * 1px));
-    border: 2px solid #275efe;
-    background: #fff;
-}
-.slider .ui-slider-handle:hover {
-    --background: #e9efff;
-}
-.slider .ui-slider-handle:active {
-    --background: #1e90ff;
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
-}
-.slider svg {
-    --stroke: #cdd9ed;
-    display: block;
-    height: 83px;
-}
-.slider svg path {
-    fill: none;
-    stroke: var(--stroke);
-    stroke-width: 1;
-}
-.slider .active, .slider > svg {
-    position: absolute;
-    top: -30px;
-    height: 83px;
-}
-.slider > svg {
-    left: 0;
-    width: 100%;
-}
-.slider .active {
-    position: absolute;
-    overflow: hidden;
-    left: calc(var(--l) * 1px);
-    right: calc(var(--r) * 1px);
-}
-.slider .active svg {
-    --stroke: #275efe;
-    position: relative;
-    left: calc(var(--l) * -1px);
-    right: calc(var(--r) * -1px);
-}
-.slider .active svg path {
-    stroke-width: 2;
 }
 
 /* Phần nội dung chính */
@@ -339,21 +239,31 @@ body.ui-slider-active {
 }
 .tabs .tab-body > .tab-content.tab-active-body {
     opacity: 1;
+    z-index: 1;
 }
 .tabs .tab-body > .tab-content .item-row {
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
     display: flex;
     height: auto;
     box-sizing: border-box;
     flex-wrap: nowrap;
 }
+.tabs .tab-body > .tab-content .item-row a {
+    color: inherit;
+    width: auto;
+    text-decoration: none;
+}
 .tabs .tab-body > .tab-content .item-row .recommend-item {
     margin: 20px;
     overflow: hidden;
-    width: calc((100% - 20px)/2);
+    width: auto;
     border-radius: 10px;
     display: flex;
+}
+.tabs .tab-body > .tab-content .item-row .recommend-item:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(3, 44, 71, 0.12);
 }
 .tabs .tab-body > .tab-content .item-row .recommend-item img {
     width: 240px;

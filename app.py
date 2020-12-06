@@ -44,7 +44,7 @@ def login():
 @app.route("/dang-xuat", methods=["GET"])
 def logout():
     """Xử lý yêu cầu đăng xuất
-    
+
     Parameters
     ----------
     None
@@ -64,6 +64,17 @@ def signup():
     urlController = UrlController()
     return urlController.signupController()
 
+### Test trang kết quả
+@app.route("/ket-qua", methods=["GET"])
+def result():
+    """Routing trang kết quả tìm kiếm
+    
+    Parameters
+    ----------
+    None
+    """
+    return render_template('search-result.html')
+
 
 
 
@@ -82,7 +93,7 @@ def signup():
 @app.route("/submit-dang-nhap", methods=["POST"])
 def submitLogin():
     """Kiểm tra thông tin đăng nhập
-    
+
     Parameters
     ----------
     None
@@ -93,7 +104,7 @@ def submitLogin():
 @app.route("/kiem-tra-username", methods=["POST"])
 def checkUsername():
     """Kiểm tra username đã tồn tại trước đó hay chưa
-    
+
     Parameters
     ----------
     None
@@ -104,7 +115,7 @@ def checkUsername():
 @app.route("/submit-dang-ky", methods=["POST"])
 def submitSignup():
     """Đăng ký tài khoản mới
-    
+
     Parameters
     ----------
     None
@@ -117,7 +128,7 @@ def submitSignup():
 # @app.route("/", methods=["GET"])
 # def home():
     # tt = time.time()
-    # query_str = "SELECT * FROM renter WHERE username = 'renter1';" 
+    # query_str = "SELECT * FROM renter WHERE username = 'renter1';"
     # rows  = connectDatabase.cursor.execute(query_str)
     # print(time.time() - tt)
     # for rw in rows:
@@ -185,10 +196,10 @@ def upload():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
-    
+
+
 # import mysql.connector
-    
+
 # mydb = mysql.connector.connect(
 #     host="remotemysql.com",
 #     user="Au6FiBsWsm",

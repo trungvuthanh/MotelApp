@@ -99,6 +99,50 @@ function sendRp() {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+// Lưu tin
+function saveFavourite() {
+    // API trả về idPost, trạng thái lưu/không lưu
+    var save = document.getElementById('saveBtn');
+    if (save.classList.contains('far')) {
+        save.classList.remove('far');
+        save.classList.add('fas');
+        isSaved = true;
+    }   else {
+        save.classList.remove('fas');
+        save.classList.add('far');
+        isSaved = false;
+    }
+    // isSaved = true: lưu bài đăng
+    // isSaved = false: không lưu bài đăng
+    idPost = 1;
+    fetch('/luu-bai-dang', {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({idPost: idPost, isSaved: isSaved}),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })
+    })
+    .then(
+        resp => {
+            if (resp.status == 200) {
+                resp.json()
+                .then(
+                    data => {
+                        if (data.result == "success") {
+                            alert("Thành công!")
+                        } else {
+
+                        }
+                    }
+                )
+            }
+        }
+    )
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 // Thông tin chi tiết bài đăng
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

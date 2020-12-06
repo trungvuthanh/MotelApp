@@ -1,0 +1,119 @@
+#head-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.6s;
+    padding: 15px 100px;
+    z-index: 9999;
+    font-family: 'Varta', sans-serif;
+    /* font-size: 20px; */
+}
+#head-menu.sticky {
+    padding: 5px 100px;
+    background-color: #0a0a0a;
+}
+
+#head-menu .logo {
+    position: relative;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 35px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.6s;
+}
+
+#head-menu ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#head-menu ul li {
+    position: relative;
+    list-style: none;
+}
+
+#head-menu ul li a {
+    position: relative;
+    margin: 0 10px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 500;
+    transition: 0.6s;
+}
+#head-menu.sticky ul li a
+
+.navbar-light .navbar-toggler {
+    border-color: transparent;
+}
+
+#head-menu .logo:focus,
+#head-menu .nav-link:focus,
+.navbar-toggler.navbar-toggler-right:focus {
+    outline: none;
+}
+
+#head-menu .nav-link {
+    color: #ffffff;
+}
+
+#head-menu .logo:hover,
+#head-menu .nav-link:hover {
+    color: #0a0a0a;
+    cursor: pointer;
+}
+#head-menu.sticky .logo:hover,
+#head-menu.sticky .nav-link:hover {
+    color: #ffffff;
+}
+
+#head-menu.sticky .nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: width .3s;
+    margin-top: 1px;
+}
+
+#head-menu.sticky .nav-link:hover::after {
+    width: 100%;
+}
+
+/*
+Hover tên tài khoản hiện    Chỉnh sửa thông tin
+                            Đăng xuất
+*/
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    z-index: 99999999;
+    /* margin-left: 8px; */
+    background-color: #ffffff;
+    padding: 10px 10px;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+@media (min-width: 768px) {
+        .dropdownMenu {
+            margin-left: 8px;
+        }
+}
+
+.dropdownMenu a:hover {
+    background-color: #dee2e6;
+}
+
+.menu-item {
+    text-align: center;
+}
