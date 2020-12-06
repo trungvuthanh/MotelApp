@@ -13,8 +13,8 @@
     <nav class="navbar navbar-expand-md border-bottom navbar-light" id="head">
         <div class="container p-2">
         <a class="navbar-brand text-primary" >
-            <img src="../static/image/icon.png">
-            <b>Easy Accomod</b>
+            <img src="../static/image/logo.jpg">
+            <!-- <b>Easy Accomod</b> -->
         </a>
         <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
             <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,19 @@
         <div class="collapse navbar-collapse" id="navbar4">
             <ul class="navbar-nav ml-auto">
                 <li> <a href="/" class="nav-link">Trang chủ</a> </li>
+                <li class="history-menu">
+                    <a class="nav-link" href="/dang-nhap" id="">Lịch sử</a>
+                    <div class="dropdown_history_menu">
+                        <a class="nav-link menu-item logout" href=""> Lịch sử tìm kiếm</a>
+                        <a class="nav-link menu-item logout" href=""> Lịch sử xem</a>
+                        <a class="nav-link menu-item logout" href=""> Lịch sử yêu thích</a>
+                    </div>
+                </li>
                 <li class="account-menu">
-                    <a class="btn ml-md-2" href="/dang-nhap" id="nameAccount">Tên khách</a>
+                    <a class="btn ml-md-2" href="/dang-nhap" id="nameAccount">Nguyễn Hùng Duy</a>
                     <div class="dropdownMenu">
-                        <a class="nav-link menu-item logout" href="dang-xuat"> Đăng xuất</a>
+                        <a class="nav-link menu-item edit" href=""> Chỉnh sửa thông tin</a>
+                        <a class="nav-link menu-item logout" href=""> Đăng xuất</a>
                     </div>
                 </li>
             </ul>
@@ -40,6 +49,10 @@
         $('.account-menu').hover(function() {
             $('.dropdownMenu').slideToggle(100);
             $('.dropdownMenu').show();
+        });
+        $('.history-menu').hover(function() {
+            $('.dropdown_history_menu').slideToggle(100);
+            $('.dropdown_history_menu').show();
         });
     </script>
 </body>
