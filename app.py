@@ -9,6 +9,7 @@ from datetime import datetime
 from models.connectDatabase import ConnectDatabase
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
+from models.admin import Admin
 
 # cấu hình đường dẫn và idSession
 TEMPLATE_DIR = os.path.abspath('./templates')
@@ -139,24 +140,16 @@ def detailPost():
 # def detailPost():
 #     return render_template('detail-post.html')
 
-# @app.route("/test", methods=["GET"])
-# def test():
-#     return render_template('detail-post.html')
+@app.route("/test", methods=["GET"])
+def test():
+    return render_template('test.html')
 
 
 # @app.route("/test", methods=["GET"])
 # def getData():
-#     sql = "SELECT * FROM `address` WHERE id = 1;"
-#     mycursor.execute(sql)
-#     rv = mycursor.fetchall()
-#     payload = [{"status": "SUC"}]
-#     content = {}
-#     for result in rv:
-#         content = {'id': result[0], 'province': result[1],
-#                    'district': result[2], 'ward': result[3]}
-#         payload.append(content)
-#         content = {}
-#     return jsonify(payload)
+#     result = Admin().searchAccountOwner("buivanminh1966@gmail.com")
+#     # print(result)
+#     return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
 
 
 # @app.route("/getImage", methods=["POST"])
