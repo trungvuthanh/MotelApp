@@ -164,9 +164,8 @@ def detailPost():
 #     return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
 @app.route("/test", methods=["GET"])
 def getData():
-    Post().create("titlePost", "contentPost", "addressProvince", "addressDistrict", "addressWard", "addressDetail", "locationRelate", "itemType", 1, 1, 1, "statusItem", "bathroom", "kitchen", 1, 1, "priceElectric", "priceWater", "otherUtility", "admin", "owner", 20, ["1", "2"])
-    # print(result)
-    return app.response_class(json.dumps({"r1": "ok"}), mimetype='application/json')
+    result = Post().getAllPost("admin", "admin", "active", "acceptDateASC", "viewASC")
+    return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():
