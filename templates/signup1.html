@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/signup1-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Đăng ký</title>
+</head>
+<body>
+    <div class="page">
+        <div id="header1">
+            <h2>TẠO TÀI KHOẢN</h2>
+        </div>
+        <form class="needs-validation" novalidate>
+            <!-- Hàng 1: Loại tài khoản -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="typeacc" class="chimuc">Loại tài khoản</label>
+                    <select id="typeacc" class="custom-select" required>
+                        <option value="owner">Chủ nhà trọ</option>
+                        <option value="renter">Người thuê trọ</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Hàng 2: Username -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="" class="chimuc">Tên đăng nhập</label>
+                    <input type="text" class="form-control" id="username" pattern="[a-z0-9]{5,15}" placeholder="Username" required>
+                    <div class="invalid-feedback">Nhập tên đăng nhập.</div>
+                </div>  
+            </div>
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <div class="note"><i>Tên đăng nhập phải từ 5-15 kí tự, bao gồm chữ thường và số</i></div>
+                </div>
+            </div>
+
+            <!-- Hàng 3: Mật khẩu & nhập lại mật khẩu -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="" class="chimuc">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" placeholder="Mật khẩu" required>
+                    <div class="invalid-feedback">Nhập mật khẩu.</div>
+                    
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="chimuc">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" id="repassword" placeholder="Nhập lại mật khẩu" required>
+                    <div id="loi_repass" class="invalid-feedback">Xác thực mật khẩu.</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <div class="note"><i>Mật khẩu phải từ 8-20 kí tự, ít nhất 1 chữ hoa, 1 chữ thường và 1 chữ số</i></div>
+                </div>
+            </div>
+
+            <!-- Hàng 4: Ảnh đại diện -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label for="" class="chimuc">Ảnh đại diện</label>
+                </div>
+            </div>
+            <div class="form-row tienich">
+                
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 1" ><img class="active-image" src="../static/image/1.png"> </abbr>                  
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 2"><img src="../static/image/2.png"> </abbr> 
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 3"><img src="../static/image/3.png"> </abbr>               
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 4"><img src="../static/image/4.png"> </abbr>              
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 5"><img src="../static/image/5.png"> </abbr>                   
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 6"><img src="../static/image/6.png"> </abbr> 
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 7"><img src="../static/image/7.png"> </abbr>                  
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 8"><img src="../static/image/8.png"> </abbr> 
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 9"><img src="../static/image/9.png"> </abbr>               
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 10"><img src="../static/image/10.png"> </abbr>              
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 11"><img src="../static/image/11.png"> </abbr>                   
+                </div>
+                <div class="col-md-1 mb-3 ava">
+                    <abbr title="Ảnh 12"><img src="../static/image/12.png"> </abbr> 
+                </div>
+            </div>
+
+            <!-- Hàng 5: Họ tên -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label for="" class="chimuc">Họ tên</label>
+                </div>
+            </div>
+            <div class="form-row">
+                
+                <div class="col-md-12 mb-3">                    
+                    <input type="text" class="form-control" id="name" placeholder="Nguyễn Hùng Duy" required>
+                    <div class="invalid-feedback">Nhập họ tên</div>
+                </div>
+            </div>
+
+            <!-- Hàng 6: Số điện thoại -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label for="" class="chimuc">Số điện thoại</label>
+                </div>
+            </div>
+            <div class="form-row">
+                
+                <div class="col-md-12 mb-3">                    
+                    <input type="text" class="form-control" id="phone" pattern="((09|03|07|08|05)+([0-9]{8})\b)" placeholder="0987654321" required>
+                    <div class="invalid-feedback">Nhập số điện thoại</div>
+                    <div class="note"><i>Số điện thoại phải có 10 kí tự, bắt đầu bằng 03/05/07/08/09</i></div>
+                </div>
+            </div>
+
+            <!-- Hàng 7: Email -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label for="" class="chimuc">Email</label>
+                </div>
+            </div>
+            <div class="form-row">
+                
+                <div class="col-md-12 mb-3">                    
+                    <input type="text" class="form-control" id="email" pattern="[a-z0-9]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="amazinggoodjob@gmail.com" required>
+                    <div class="invalid-feedback">Nhập email</div>
+                    <div class="note"><i>Email phải có đuôi @abc.xyz</i></div>
+                </div>
+            </div>
+
+            <!-- Hàng 8: Ngày sinh -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label for="" class="chimuc">Ngày sinh</label>
+                </div>
+            </div>
+            <div class="form-row">
+                
+                <div class="col-md-12 mb-3">                    
+                    <input type="date" class="form-control" id="date" required>
+                    <div class="invalid-feedback">Nhập ngày sinh</div>
+                </div>
+            </div>
+
+            <!-- Hàng 9: CMND/CCCD -->
+            <div class="form-row">
+                
+                <div class="col-md-6 mb-3">                   
+                    <label for="" class="chimuc">CMND/CCCD</label> 
+                    <div id="inputCMND">
+                        <input type="text" class="form-control" id="id" pattern="[0-9]{9,12}" placeholder="123456789" required>
+                    </div>
+                    <div class="invalid-feedback">Nhập CMND/CCCD</div>
+                    <div class="note"><i>CMND/CCCD phải gồm 9-12 chữ số</i></div>
+                </div>
+                <div class="col-md-6 mb-3">     
+                    <label for="">Hình ảnh</label>               
+                    <div class="form-group">
+                        <div id="inputFileCMND">
+                            <input type="file" class="form-control-file" multiple = "multiple" accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
+                        </div>
+                        <div class="invalid-feedback">Tải lên 1 ảnh.</div>
+                        <div id = "preview"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hàng 10: Địa chỉ -->
+            <div class="form-row"> 
+                <div class="col-md-8">
+                    <label for="" class="chimuc">Địa chỉ</label>
+                </div>
+            </div>      
+            <div class="form-row">
+                
+                <div class="col-md-4 mb-3">                    
+                    <select class="custom-select" id="province" required>                        
+                        <option value="">Tỉnh/thành phố</option>
+                        <option value="59cdc41a9d2a1700271c2b09">TP Hà Nội</option>
+                        <option value="59cdc41a9d2a1700271c2b0a">TP Hồ Chí Minh</option>
+                        <option value="59cdc41a9d2a1700271c2b0b">An Giang</option>
+                        <option value="59cdc41a9d2a1700271c2b0c">Bà Rịa - Vũng Tàu</option>
+                        <option value="59cdc41a9d2a1700271c2b0d">Bắc Kạn</option>
+                        <option value="59cdc41a9d2a1700271c2b0e">Bắc Giang</option>
+                        <option value="59cdc41a9d2a1700271c2b0f">Bạc Liêu</option>
+                        <option value="59cdc41a9d2a1700271c2b10">Bắc Ninh</option>
+                        <option value="59cdc41a9d2a1700271c2b11">Bến Tre</option>
+                        <option value="59cdc41a9d2a1700271c2b12">Bình Định</option>
+                        <option value="59cdc41a9d2a1700271c2b13">Bình Dương</option>
+                        <option value="59cdc41a9d2a1700271c2b14">Bình Phước</option>
+                        <option value="59cdc41b9d2a1700271c2b15">Bình Thuận</option>
+                        <option value="59cdc41b9d2a1700271c2b16">Cà Mau</option>
+                        <option value="59cdc41b9d2a1700271c2b17">TP Cần Thơ</option>
+                        <option value="59cdc41b9d2a1700271c2b18">Cao Bằng</option>
+                        <option value="59cdc41b9d2a1700271c2b19">TP Đà Nẵng</option>
+                        <option value="59cdc41b9d2a1700271c2b1a">Đắk Lắk</option>
+                        <option value="59cdc41b9d2a1700271c2b1b">Điện Biên</option>
+                    </select>
+                    <div class="invalid-feedback">Chọn tỉnh thành.</div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select" required>                        
+                        <option value="">Quận/huyện</option>
+                        <option>Ba Đình</option>
+                        <option>Ba Vì</option>
+                        <option>Bắc Từ Liêm</option>
+                        <option>Cầu Giấy</option>
+                        <option>Chương Mỹ</option>
+                        <option>Đan Phượng</option>
+                        <option>Đông Anh</option>
+                        <option>Đống Đa</option>
+                        <option>Gia Lâm</option>
+                        <option>Hà Đông</option>
+                        <option>Hai Bà Trưng</option>
+                        <option>Hoài Đức</option>
+                        <option>Hoàn Kiếm</option>
+                        <option>Hoàng Mai</option>
+                        <option>Long Biên</option>
+                        <option>Mê Linh</option>
+                        <option>Mỹ Đức</option>
+                        <option>Nam Từ Liêm</option>
+                        <option>Phú Xuyên</option>
+                        <option>Phúc Thọ</option>
+                        <option>Quốc Oai</option>
+                        <option>Sóc Sơn</option>
+                        <option>Sơn Tây</option>
+                        <option>Tây Hồ</option>
+                        <option>Thạch Thất</option>
+                        <option>Thanh Oai</option>
+                        <option>Thanh Trì</option>
+                        <option>Thanh Xuân</option>
+                        <option>Thường Tín</option>
+                        <option>Ứng Hòa</option>
+                    </select>
+                    <div class="invalid-feedback">Chọn quận huyện.</div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select" required>                        
+                        <option value="">Phường/xã</option>
+                        <option>Cống Vị</option>
+                        <option>Mỹ Đình 1</option>
+                    </select>
+                    <div class="invalid-feedback">Chọn phường xã.</div>
+                </div>
+            </div>
+            <div class="form-row"> 
+                <div class="col-md-12 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Địa chỉ chi tiết: 1 Hoàng Diệu" required>
+                    <div class="invalid-feedback">Nhập địa chỉ chi tiết</div>
+                </div>
+            </div>     
+
+            <!-- Hàng 11: Button -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Đăng ký</button>
+                </div>
+            </div>  
+        </form>
+    </div>
+    <div id="footer"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/signup1.js"></script>
+</body>
