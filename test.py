@@ -1,6 +1,13 @@
 from models.user import User
-import time
-tt = time.time()
-a = User("renter1", "451359861157721816859144758269856880991927628078543649590336210511056815577416721817936290225454308288462492178103461582459107558762385548291183669612")
-print(a.checkLogin(), time.time() - tt)
+from models.connectDatabase import ConnectDatabase
+from datetime import datetime
 
+query_str = """
+    SELECT * FROM owner LIMIT 10 OFFSET 10
+    """
+connectDatabase = ConnectDatabase()
+rows = connectDatabase.cursor.execute(query_str)
+count = rows.rowcount
+print(count)
+for x in rows:
+    print(x)
