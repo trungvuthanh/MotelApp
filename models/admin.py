@@ -1,5 +1,6 @@
 from models.user import User
 from models.connectDatabase import ConnectDatabase
+from models.notification import Notification
 from datetime import datetime
 import math
 
@@ -118,6 +119,11 @@ class Admin(User):
         connectDatabase.cursor.execute(query_str, "enable", username, fullname)
         connectDatabase.connection.commit()
         connectDatabase.close()
+        # thêm thông báo
+        icon = "icon-account.png"
+        titleNotification = "Chỉnh sửa tài khoản"
+        content = "Tài khoản của bạn vừa được quản trị viên cấp quyền chỉnh sửa. Lưu ý chỉ chỉnh sửa được 1 lần, hãy thận trọng với những thông tin được sửa đổi. Nếu phát hiện thông tin bất thường, tài khoản của bạn có thể bị khóa hoặc xóa vĩnh viễn"    
+        Notification().create(titleNotification, username, icon, content)
         
     def handlingEditAccount(self, username, status):
         # status = "deny" or status = "accept"

@@ -1,5 +1,6 @@
 from models.user import User
 from models.connectDatabase import ConnectDatabase
+from models.notification import Notification
 from datetime import datetime
 
 class Owner(User):
@@ -27,6 +28,11 @@ class Owner(User):
         connectDatabase.cursor.execute(query_str, username, password, fullname, phoneNumber, email, birthday, ID, imageID, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt, "handling", datetime.date(datetime.now()))
         connectDatabase.connection.commit()
         connectDatabase.close()
+        # thêm thông báo
+        icon = "icon-account.png"
+        titleNotification = "Đăng kí tài khoản"
+        content = "Tài khoản của bạn đang chờ admin phê duyệt. Trong khoảng thời gian này, bạn sẽ không thể đăng bài"    
+        Notification().create(titleNotification, username, icon, content)
         
     def checkEnableEditAccount(self, username):
         """
@@ -72,6 +78,11 @@ class Owner(User):
         connectDatabase.cursor.execute(query_str, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, datetime.now(), "handling", fullName, username, "enable")
         connectDatabase.connection.commit()
         connectDatabase.close()
+        # thêm thông báo
+        icon = "icon-account.png"
+        titleNotification = "Chỉnh sửa thông tin"
+        content = "Thông tin tài khoản vừa chỉnh sửa đang chờ quản trị viên phê duyệt"    
+        Notification().create(titleNotification, username, icon, content)
     
     def changePasswordAndAvatar(self, username, new_password, new_typeAvt):
         query_str = "UPDATE owner SET password = ?, typeAvt = ? WHERE username = ?"
@@ -79,4 +90,9 @@ class Owner(User):
         connectDatabase.cursor.execute(query_str, new_password, new_typeAvt, username)
         connectDatabase.connection.commit()
         connectDatabase.close()
+        # thêm thông báo
+        icon = "icon-account.png"
+        titleNotification = "Chỉnh sửa thông tin"
+        content = "Avatar và/hoặc mật khẩu vừa được thay đổi"    
+        Notification().create(titleNotification, username, icon, content)
     

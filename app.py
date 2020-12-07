@@ -10,6 +10,7 @@ from models.connectDatabase import ConnectDatabase
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
 from models.admin import Admin
+from models.post import Post
 
 # cấu hình đường dẫn và idSession
 TEMPLATE_DIR = os.path.abspath('./templates')
@@ -151,9 +152,9 @@ def detailPost():
 # def detailPost():
 #     return render_template('detail-post.html')
 
-@app.route("/test", methods=["GET"])
-def test():
-    return render_template('test.html')
+# @app.route("/test", methods=["GET"])
+# def test():
+#     return render_template('test.html')
 
 
 # @app.route("/test", methods=["GET"])
@@ -161,7 +162,11 @@ def test():
 #     result = Admin().searchAccountOwner("buivanminh1966@gmail.com")
 #     # print(result)
 #     return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
-
+@app.route("/test", methods=["GET"])
+def getData():
+    Post().create("titlePost", "contentPost", "addressProvince", "addressDistrict", "addressWard", "addressDetail", "locationRelate", "itemType", 1, 1, 1, "statusItem", "bathroom", "kitchen", 1, 1, "priceElectric", "priceWater", "otherUtility", "admin", "owner", 20, ["1", "2"])
+    # print(result)
+    return app.response_class(json.dumps({"r1": "ok"}), mimetype='application/json')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():
