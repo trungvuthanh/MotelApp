@@ -546,6 +546,22 @@ article {
     height: 25px;
     margin-right: 5px;
 }
+
+.hidden-stars {
+    display: none;
+    margin: 0 0 8px 3px;
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+}
+@media (max-width: 580px) {
+    .stars {
+        display: none;
+    }
+    .hidden-stars {
+        display: block;
+    }
+}
 /*========================================= Hết =========================================*/
 /*=======================================================================================*/
 
