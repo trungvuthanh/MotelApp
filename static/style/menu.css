@@ -29,8 +29,8 @@
     font-weight: 500;
     font-family: "Cabin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 16px;
-    padding: 5px 10px;
-    color: #363638;
+    /* padding: 5px 10px;
+    color: #363638; */
 }
 
 .nav-link:hover {
@@ -38,9 +38,11 @@
     cursor: pointer;
 }
 
-.btn.ml-md-2 {
+.account-menu .btn.ml-md-2 {
     color: #000000;
     background-color: #73C799;
+    height: 100%;
+    padding: 0.5rem 0.75rem 0;
 }
 
 .btn.ml-md-2:hover {
@@ -59,7 +61,7 @@ Hover tên tài khoản hiện    Chỉnh sửa thông tin
     background-color: #ffffff;
     padding: 10px 10px;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    /* border: 1px solid rgba(0, 0, 0, 0.15); */
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
@@ -99,7 +101,9 @@ Hover tên tài khoản hiện    Chỉnh sửa thông tin
         }
 }
 
-.dropdownMenu a:hover {
+.dropdownMenu a:hover,
+.dropdown_history_menu a:hover,
+.dropdown_statistic_menu a:hover {
     background-color: #daf2f6;
 }
 

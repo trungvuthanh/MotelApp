@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/style/home.css">
     <link rel="shortcut icon" href="../static/image/icon.png"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
 </head>
 <body>
     <!-- Menu -->
@@ -19,51 +20,41 @@
 
     <div class="main">
         <section class="search-section">
-            <div class="head-brand">
-                <h1 id="brand">Easy Accommodation</h1>
-            </div>
-            <div class="search-box">
-                <div class="col-lg-12">
-                    <h5 class="search-box-title mb-3">Địa chỉ</h3>
-                    <div class="form-row">
-                        <div class="form-group col-lg-10"> <input type="text" class="form-control" id="tenTaiKhoan" placeholder="Cầu Giấy, Dịch Vọng..." required> </div>
-                        <div class="form-group col-lg-2"> <div class="form-control" id="searchBtn" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></div> </div>
+            <div class="head-brand">Easy Accommodation</div>
+            <div class="search-box flex-column">
+                <h5 class="search-box-title mb-3 text-white">Địa chỉ</h3>
+                <div class="search-text">
+                    <input class="form-control" id="tenTaiKhoan" placeholder="Cầu Giấy, Dịch Vọng..." required>
+                    <div class="form-control" id="searchBtn" onclick="search()">Tìm kiếm <span class="fas fa-search"></span></div>
+                </div>
+                <div class="search-filter">
+                    <div class="filter-item">
+                        <h5 class="search-item-title">Loại phòng</h5>
+                        <select class="form-control" id="itemType">
+                            <option value="">Phòng trọ</option>
+                            <option value="">Nhà nguyên căn</option>
+                            <option value="">Chung cư mini</option>
+                            <option value="">Chung cư nguyên căn</option>
+                        </select>
                     </div>
-                    <div class="search-filter row m-0">
-                        <div class="col-lg-4 filter-box room-search-box">
-                            <div class="room-box filter-item">
-                                <h5 class="search-item-title">Loại phòng</h5>
-                                <select class="form-control" id="itemType">
-                                    <option value="">Phòng trọ</option>
-                                    <option value="">Nhà nguyên căn</option>
-                                    <option value="">Chung cư mini</option>
-                                    <option value="">Chung cư nguyên căn</option>
-                                </select>
-                            </div>
+                    <div class="filter-item">
+                        <div class="box">
+                            <h5 class="search-item-title">Khoảng giá</h5>
+                            <p id="price_show">3 - 10 triệu/tháng</p>
+                            <div id="price_range"></div>
+                            <input type="hidden" id="min_price">
+                            <input type="hidden" id="max_price">
                         </div>
-                        <div class="col-lg-5 filter-box price-search-box">
-                            <div class="price-box filter-item">
-                                <div class="box">
-                                    <h5 class="search-item-title">Khoảng giá</h5>
-                                    <p id="price_show">3 - 10 triệu/tháng</p>
-                                    <div id="price_range"></div>
-                                    <input type="hidden" id="min_price">
-                                    <input type="hidden" id="max_price">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 filter-box area-search-box">
-                            <div class="area-box filter-item">
-                                <h5 class="search-item-title">Diện tích</h5>
-                                <select class="form-control" id="area_range">
-                                    <option value="">Dưới 30 m2</option>
-                                    <option value="">30 - 60 m2</option>
-                                    <option value="">60 - 100 m2</option>
-                                    <option value="">100 - 125 m2</option>
-                                    <option value="">Trên 125 m2</option>
-                                </select>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="filter-item">
+                        <h5 class="search-item-title">Diện tích</h5>
+                        <select class="form-control" id="area_range">
+                            <option value="">Dưới 30 m2</option>
+                            <option value="">30 - 60 m2</option>
+                            <option value="">60 - 100 m2</option>
+                            <option value="">100 - 125 m2</option>
+                            <option value="">Trên 125 m2</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -73,7 +64,7 @@
                 <div class="city-box">
                     <h2 class="content-title">Địa điểm nổi bật</h2>
                     <p class="content-description">Khám phá trải nghiệm mới khắp mọi miền đất nước</p>
-                    <div class="city-list row">
+                    <div class="city-list row m-0">
                         <a href="/ket-qua"><div class="city-item" data-aos="zoom-in" data-aos-duration="700">
                             <img src="../static/image/hanoi.png">
                             <h5 class="city-name">Hà Nội</h5>
@@ -116,7 +107,7 @@
                             <div class="tab-content tab-active-body">
                                 <div class="item-row">
                                     <a href="/detail-post"><div class="recommend-item">
-                                        <img src="https://cdn.luxstay.com/rooms/34370/large/2543737992f4e70658622ca8011421dc.png">
+                                        <img src="../static/image/item-demo1.png">
                                         <div class="item-info">
                                             <div class="first-info">
                                                 <h6><b>Chung cư nguyên căn giá tốt</b></h6>
@@ -129,7 +120,7 @@
                                         </div>
                                     </div></a>
                                     <div class="recommend-item">
-                                        <img src="https://cdn.luxstay.com/rooms/18567/large/room_18567_13_1546308941.jpg">
+                                        <img src="../static/image/item-demo2.png">
                                         <div class="item-info">
                                             <div class="first-info">
                                                 <h6><b>Chung cư nguyên căn giá tốt</b></h6>
@@ -144,7 +135,7 @@
                                 </div>
                                 <div class="item-row">
                                     <div class="recommend-item">
-                                        <img src="https://cdn.luxstay.com/rooms/34370/large/2543737992f4e70658622ca8011421dc.png">
+                                        <img src="../static/image/item-demo1.png">
                                         <div class="item-info">
                                             <div class="first-info">
                                                 <h6><b>Chung cư nguyên căn giá tốt</b></h6>
@@ -157,7 +148,7 @@
                                         </div>
                                     </div>
                                     <div class="recommend-item">
-                                        <img src="https://cdn.luxstay.com/rooms/18567/large/room_18567_13_1546308941.jpg">
+                                        <img src="../static/image/item-demo2.png">
                                         <div class="item-info">
                                             <div class="first-info">
                                                 <h6><b>Chung cư nguyên căn giá tốt</b></h6>
@@ -182,7 +173,7 @@
                             <div class="tab-content">
                                 <div class="item-row">
                                     <div class="recommend-item">
-                                        <img src="https://cdn.luxstay.com/rooms/34370/large/2543737992f4e70658622ca8011421dc.png">
+                                        <img src="../static/image/item-demo1.png">
                                         <div class="item-info">
                                             <div class="first-info">
                                                 <h6><b>Chung cư nguyên căn giá tốt</b></h6>
@@ -195,7 +186,7 @@
                                         </div>
                                     </div>
                                     <div class="recommend-item">
-                                        <img src="https://cdn.luxstay.com/rooms/18567/large/room_18567_13_1546308941.jpg">
+                                        <img src="../static/image/item-demo2.png">
                                         <div class="item-info">
                                             <div class="first-info">
                                                 <h6><b>Chung cư nguyên căn giá tốt</b></h6>

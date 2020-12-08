@@ -12,6 +12,12 @@
     transition: .3s;
 }
 
+#menu {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
 /*///////////////////////////////////////////////////////////////////////////////////////*/
 /*                                       Cột trái                                        */
 /*///////////////////////////////////////////////////////////////////////////////////////*/
@@ -202,10 +208,12 @@ address .row .col-sm-8 div:nth-last-child(1) {
 }
 
 .rp-header span {
+    font-family: 'Varta', sans-serif;
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
     max-width: 100%;
+    margin-top: 7px;
 }
 
 .rp-close {
@@ -227,7 +235,7 @@ address .row .col-sm-8 div:nth-last-child(1) {
     text-align: center;
     width: 36px;
     height: 36px;
-    padding: 9px 8px 8px 9px;
+    padding-top: 11px;
     align-items: center;
     justify-content: center;
 }

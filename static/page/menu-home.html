@@ -37,6 +37,10 @@
             var header = document.querySelector('#head-menu');
             header.classList.toggle('sticky', window.scrollY > 0);
         });
+
+        $('#accountName').click(function() {
+            $('.account-drop').slideToggle(100);
+        });
     </script>
 </body>
 </html>

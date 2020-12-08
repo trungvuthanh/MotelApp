@@ -1,11 +1,14 @@
 $('#menu').load('../static/page/menu-home.html');
-$('#footer').load('../static/page/footer.html');
+
 
 // Menu
 window.addEventListener('scroll', function() {
-    var menu = document.querySelector('#head-menu');
-    menu.classList.toggle('sticky', window.scrollY > 0);
-})
+    if (window.scrollY > 0) {
+        document.getElementById('head-menu').className = "navbar navbar-expand-md navbar-light sticky";
+    } else {
+        document.getElementById('head-menu').className = "navbar navbar-expand-md navbar-light";
+    }
+});
 
 // Thanh trượt khoảng giá
 $(document).ready(function() {
@@ -75,3 +78,5 @@ for (let i=0; i<tabsPane.length; i++){
 		tabIndicator.style.left = `calc(calc(100% / 4) * ${i})`;
 	});
 }
+
+$('#footer').load('../static/page/footer.html');

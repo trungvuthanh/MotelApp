@@ -12,6 +12,10 @@
 .title {
     font-family: 'Varta', sans-serif;
 }
+select:hover,
+input[type="radio"]:hover {
+    cursor: pointer;
+}
 
 /* Bộ lọc phía trên */
 .head-filter .result-title {
@@ -33,8 +37,6 @@
 /* Màn hình chính */
 .main-content {
     padding-top: 15px;
-
-
 }
 .main-content > div.container > div.row {
     margin: 0 -5px;
@@ -56,7 +58,6 @@
     width: auto;
     height: auto;
     margin: 5px;
-    /* padding: 10px 10px 0; */
 }
 .side-filter .side-title {
     background-color: #daf2f6;
@@ -72,6 +73,9 @@
 .side-filter .col-sm-auto {
     padding: 20px;
 }
+#price_range span.ui-slider-handle:hover {
+    cursor: grabbing;
+}
 #price_range span.ui-slider-handle:focus {
     outline: none;
 }
@@ -80,7 +84,6 @@
 .result-rows {
     display: flex;
     flex-direction: column;
-
     padding: 0 5px;
 }
 .result-rows a,
@@ -160,9 +163,6 @@
 .item-favourite i:hover {
     cursor: pointer;
 }
-.item-favourite:hover i {
-    color: #f50057;
-}
 .item-favourite i.red {
     color: #f50057;
     opacity: 1;
@@ -209,9 +209,15 @@
     flex-direction: column;
 }
 .right-advertising img {
+    display: none;
     width: calc(100% - 10px);
     height: auto;
     object-fit: cover;
     background-position: center;
     margin: 5px;
+}
+@media (min-width: 992px) {
+    .right-advertising img {
+        display: block;
+    }
 }
