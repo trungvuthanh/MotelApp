@@ -19,6 +19,7 @@ class Owner(User):
         Returns
         ----------
         
+        
         """
         query_str = """
             INSERT INTO owner(username, password, fullname, phoneNumber, email, birthday, ID, imageID, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt, status, createDate)

@@ -129,7 +129,7 @@ select#itemType:hover, select#area_range:hover {
 }
 @media (max-width: 950px) {
     .search-section {
-        height: 110vh;
+        height: 115vh;
     }
     .head-brand {
         display: none;

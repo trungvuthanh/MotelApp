@@ -8,7 +8,7 @@ class CheckValidation:
         
     @staticmethod
     def isPhoneNumber(phoneNumber):
-        return phoneNumber.isnumeric() and len(phoneNumber) == 10
+        return phoneNumber.isnumeric() and len(phoneNumber) == 10 and phoneNumber[0] == "0"
     
     @staticmethod
     def isEmail(email):
@@ -18,5 +18,5 @@ class CheckValidation:
         return False     
     
     
-print(CheckValidation.isEmail("abc@gmail.com"))
-print(CheckValidation.isPhoneNumber("0983298920"))
+# print(CheckValidation.isEmail("abc@gmail.com"))
+# print(CheckValidation.isPhoneNumber("0983298920"))

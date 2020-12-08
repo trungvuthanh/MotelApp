@@ -164,8 +164,9 @@ def detailPost():
 #     return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
 @app.route("/test", methods=["GET"])
 def getData():
-    result = Post().getAllPost("admin", "admin", "active", "acceptDateASC", "viewASC")
-    return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
+    # Post().getMoreInformationPost(1)
+    # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
+    return app.response_class(json.dumps(Post().search("cầu giấy", "phongtro", 0, 20, 0, "area", 0)), mimetype='application/json')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():

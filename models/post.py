@@ -141,7 +141,7 @@ class Post:
                                                     "ratingDESC" (rating giảm dần)
             
             "expired" (hết hạn)     => sortDate =   "acceptDateASC" (ngày đăng tăng dần - cũ đến mới)
-                                                    "acceptDateDESC" (ngày đăng giảm dần - mới về cũ)
+            "extend" (gia hạn)                      "acceptDateDESC" (ngày đăng giảm dần - mới về cũ)
                                                     "expireDateASC" (ngày hạn tăng dần)
                                                     "expireDateDESC" (ngày hạn giảm dần)
                                     => access (KHÔNG CÓ!)
@@ -173,11 +173,11 @@ class Post:
             query_str += "addressWard = \"" + ward + "\" AND "
         
         if typeAccount == "admin":
-            if statusPost == "handling" or statusPost == "active" or statusPost == "expired" or statusPost == "block": 
-                query_str += " statusPost = \"" + statusPost + "\" ORDER BY "
-            else:
+            if statusPost == "postOfAdmin":
                 # bài đăng admin 
                 query_str += """ typeAccountAuthor = "admin" ORDER BY """
+            else: 
+                query_str += " statusPost = \"" + statusPost + "\" ORDER BY "                
         else:
             # owner quản lý bài đăng
             query_str += " statusPost = \"" + statusPost + "\", usernameAuthorPost = \"" + username + "\" ORDER BY "
@@ -234,3 +234,133 @@ class Post:
         rows = connectDatabase.cursor.execute(query_str).fetchall()
         connectDatabase.close()
         return [{"idPost": row.idPost, "titlePost": row.titlePost, "addressProvince": row.addressProvince, "addressDistrict": row.addressDistrict, "addressWard": row.addressWard, "addressDetail": row.addressDetail, "itemType": row.itemType, "priceItem": row.priceItem, "statusItem": row.statusItem, "createDate": str(row.createDate), "acceptDate": str(row.acceptDate), "expireDate": str(row.expireDate), "statusPost": row.statusPost, "statusHired": row.statusHired, "totalView": row.totalView, "totalFavorite": row.totalFavorite, "avgRating": row.avgRating} for row in rows]
+    
+    def getMoreInformationPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = """
+            SELECT idPost, contentPost, locationRelate, numOfRoom, area, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, usernameAuthorPost, typeAccountAuthor, postDuration
+            FROM post 
+            WHERE idPost = ?
+            """
+        row = connectDatabase.cursor.execute(query_str, idPost).fetchone()
+        if row.typeAccountAuthor == "admin":
+            name = "Quản trị viên"
+        else:
+            query_str = "SELECT fullname FROM owner WHERE username = ?"
+            name = connectDatabase.cursor.execute(query_str, row.usernameAuthorPost).fetchval()
+        query_str = "SELECT image FROM image_post WHERE idPost = ?"
+        rows = connectDatabase.cursor.execute(query_str, row.idPost).fetchall()
+        images = [row.image for row in rows]
+        connectDatabase.close()
+        return {"idPost": row.idPost, "contentPost": row.contentPost, "locationRelate": row.locationRelate, "numOfRoom": row.numOfRoom, "area": row.area, "bathroom": row.bathroom, "kitchen": row.kitchen, "aircondition": row.aircondition, "balcony": row.balcony, "priceElectric": row.priceElectric, "priceWater": row.priceWater, "otherUtility": row.otherUtility, "usernameAuthorPost": row.usernameAuthorPost, "typeAccountAuthor": row.typeAccountAuthor, "postDuration": row.postDuration, "name": name, "images": images}
+    
+    def getAllInfomationPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = """
+            SELECT idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, usernameAuthorPost, typeAccountAuthor, postDuration, createDate, acceptDate, expireDate, statusPost, statusHired, totalView, totalFavorite, avgRating
+            FROM post 
+            WHERE idPost = ?
+            """
+        row = connectDatabase.cursor.execute(query_str, idPost).fetchone()
+        if row.typeAccountAuthor == "admin":
+            name = "Quản trị viên"
+            query_str = """
+                SELECT phoneNumber, address
+                FROM admin 
+                LIMIT 1
+                """
+            adminInfo = connectDatabase.cursor.execute(query_str, idPost).fetchone()
+            phoneNumber = adminInfo.phoneNumber
+            address = adminInfo.address
+        else:
+            query_str = """
+                SELECT fullname, phoneNumber, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) as "address"
+                FROM owner WHERE username = ?
+                """
+            ownerInfo = connectDatabase.cursor.execute(query_str, row.usernameAuthorPost).fetchone()
+            name = ownerInfo.fullname
+            phoneNumber = ownerInfo.phoneNumber
+            address = ownerInfo.address
+        query_str = "SELECT image FROM image_post WHERE idPost = ?"
+        rows = connectDatabase.cursor.execute(query_str, row.idPost).fetchall()
+        images = [row.image for row in rows]
+        connectDatabase.close()
+        return {"idPost": row.idPost, "contentPost": row.contentPost, "locationRelate": row.locationRelate, "numOfRoom": row.numOfRoom, "area": row.area, "bathroom": row.bathroom, "kitchen": row.kitchen, "aircondition": row.aircondition, "balcony": row.balcony, "priceElectric": row.priceElectric, "priceWater": row.priceWater, "otherUtility": row.otherUtility, "typeAccountAuthor": row.typeAccountAuthor, "postDuration": row.postDuration, "name": name, "images": images, "nameAuthor": name, "phoneNumberAuthor": phoneNumber, "addressAuthor": address}
+    
+    def updateStatusHired(self, idPost, username, statusHired):
+        connectDatabase = ConnectDatabase()
+        query_str = "UPDATE post SET statusHired = ? WHERE idPost = ? AND usernameAuthorPost = ?"
+        connectDatabase.cursor.execute(query_str, statusHired, idPost, username)
+        connectDatabase.connection.commit()
+        connectDatabase.close()
+    
+    def blockPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = "UPDATE post SET statusPost = ? WHERE idPost = ?"
+        connectDatabase.cursor.execute(query_str, "block", idPost)
+        connectDatabase.connection.commit()
+        connectDatabase.close()
+        
+    def unblockPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = "SELECT statusPost FROM post WHERE idPost = ?"
+        statusPost = connectDatabase.cursor.execute(query_str, idPost).fetchval()
+        connectDatabase.close()
+    
+    def checkAuthorPost(self, idPost, username):
+        connectDatabase = ConnectDatabase()
+        query_str = "SELECT COUNT(*) FROM post WHERE idPost = ? AND usernameAuthorPost = ?"
+        count = connectDatabase.cursor.execute(query_str, idPost, username).fetchval()
+        connectDatabase.close()
+        return count == 1
+    
+    def deletePost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = "DELETE FROM post WHERE idPost = ?"
+        connectDatabase.cursor.execute(query_str, idPost)
+        connectDatabase.connection.commit()
+        connectDatabase.close()
+    
+    def search(self, stringSearch, itemType, priceItemMin, priceItemMax, area, sort, statusItem, numPage = 1):
+        # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
+        stringSearch = " ".join([x for x in (stringSearch.title().strip().split(" ")) if x != ""])
+        query_str = """
+            SELECT titlePost, priceItem, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) AS "address", area, numOfRoom, priceWater, priceElectric, MATCH(addressProvince, addressDistrict, addressWard) AGAINST (?) as score 
+            FROM post 
+            WHERE MATCH(addressProvince, addressDistrict, addressWard) AGAINST (?) > 0 
+                AND priceItem >= ? AND priceItem <= ? 
+                AND area >= ?
+           """ 
+        if itemType != "":
+            query_str += " AND itemType = \"" + str(itemType) + "\" "
+        if statusItem != 0:
+            statusItem = {1: "chungchu", 2: "khongchungchu"}[statusItem]
+            query_str += " AND statusItem = \"" + str(statusItem) + "\" "
+        query_str += "ORDER BY score DESC, "+ sort +" LIMIT 10 OFFSET ?"
+        connectDatabase = ConnectDatabase()
+        rows = connectDatabase.cursor.execute(query_str, stringSearch, stringSearch, priceItemMin, priceItemMax, area, (numPage - 1)*10).fetchall()
+        
+        query_str = """
+            SELECT COUNT(*)
+            FROM post 
+            WHERE MATCH(addressProvince, addressDistrict, addressWard) AGAINST (?) > 0 
+                AND priceItem >= ? AND priceItem <= ? 
+                AND area >= ?
+        """
+        if itemType != "":
+            query_str += " AND itemType = \"" + str(itemType) + "\" "
+        if statusItem != 0:
+            statusItem = {1: "chungchu", 2: "khongchungchu"}[statusItem]
+            query_str += " AND statusItem = \"" + str(statusItem) + "\" "        
+        count = connectDatabase.cursor.execute(query_str, stringSearch, priceItemMin, priceItemMax, area).fetchval()
+        connectDatabase.close()
+        
+        hasPrev = False if numPage == 1 else True
+        if count == 0:
+            hasNext = False
+            hasPrev = False
+        else:
+            maxPage = ((count - 1)//10*10 + 10)//10
+            hasNext = True if numPage < maxPage else False 
+        return {"hasPrev": hasPrev, "hasNext": hasNext, "listPost": [{"titlePost": row.titlePost, "priceItem": row.priceItem, "address": row.address, "area": row.area, "numOfRoom": row.numOfRoom, "priceWater": row.priceWater, "priceElectric": row.priceElectric} for row in rows]}
+

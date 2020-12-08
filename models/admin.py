@@ -202,5 +202,3 @@ class Admin(User):
             connectDatabase.cursor.execute(query_str, username)
             connectDatabase.connection.commit()
         connectDatabase.close()
-        
-    
