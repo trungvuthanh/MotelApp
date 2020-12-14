@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/signup-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Chỉnh sửa</title>
+</head>
+<body>
+    <div class="page">
+        <div id="header1">
+            <h2>Đổi mật khẩu</h2>
+        </div>
+        <form class="needs-validation" novalidate>
+
+            <!-- Hàng 2: Username -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="" class="chimuc">Tên đăng nhập</label>
+                    <input type="text" class="form-control" id="username" pattern="[a-z0-9]{5,15}" placeholder="Username" value="admin" disabled required>
+                    <div class="invalid-feedback">Nhập tên đăng nhập.</div>
+                </div>  
+            </div>
+            <!-- <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <div class="note"><i>Tên đăng nhập phải từ 5-15 kí tự, bao gồm chữ thường và số</i></div>
+                </div>
+            </div> -->
+
+            <!-- Hàng 3: Mật khẩu & nhập lại mật khẩu -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="" class="chimuc">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" placeholder="********" required>
+                    <div class="invalid-feedback">Nhập mật khẩu.</div>
+                    
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="chimuc">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" id="repassword" placeholder="********" required>
+                    <div id="loi_repass" class="invalid-feedback">Xác thực mật khẩu.</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <div class="note"><i>Mật khẩu phải từ 8-20 kí tự, ít nhất 1 chữ hoa, 1 chữ thường và 1 chữ số</i></div>
+                </div>
+            </div>
+
+            <!-- Hàng 11: Button -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Chấp nhận</button>
+                </div>
+            </div>  
+        </form>
+    </div>
+    <div id="footer"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/signup.js"></script>
+</body>
+</html>

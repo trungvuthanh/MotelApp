@@ -13,22 +13,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Đăng ký</title>
+    <title>Chỉnh sửa</title>
 </head>
 <body>
     <div class="page">
         <div id="header1">
-            <h2>TẠO TÀI KHOẢN</h2>
+            <h2>Chỉnh sửa thông tin</h2>
         </div>
         <form class="needs-validation" novalidate>
             <!-- Hàng 1: Loại tài khoản -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label for="typeacc" class="chimuc">Loại tài khoản</label>
-                    <select id="typeacc" class="custom-select" required>
-                        <option value="owner">Chủ nhà trọ</option>
-                        <option value="renter">Người thuê trọ</option>
-                    </select>
+                    <input type="text" class="form-control" value="Người thuê trọ" disabled required>
                 </div>
             </div>
 
@@ -36,15 +33,15 @@
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label for="" class="chimuc">Tên đăng nhập</label>
-                    <input type="text" class="form-control" id="username" pattern="[a-z0-9]{5,15}" placeholder="Username" required>
-                    <div class="invalid-feedback">Nhập tên đăng nhập.</div>
+                    <input type="text" class="form-control" id="username" value="nguyenhungduy" disabled required>
+                    <!-- <div class="invalid-feedback">Nhập tên đăng nhập.</div> -->
                 </div>  
             </div>
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <div class="note"><i>Tên đăng nhập phải từ 5-15 kí tự, bao gồm chữ thường và số</i></div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Hàng 3: Mật khẩu & nhập lại mật khẩu -->
             <div class="form-row">
@@ -121,8 +118,8 @@
             <div class="form-row">
                 
                 <div class="col-md-12 mb-3">                    
-                    <input type="text" class="form-control" id="name" placeholder="Nguyễn Hùng Duy" required>
-                    <div class="invalid-feedback">Nhập họ tên</div>
+                    <input type="text" class="form-control" id="name" value="Nguyễn Hùng Duy" disabled required>
+                    <!-- <div class="invalid-feedback">Nhập họ tên</div> -->
                 </div>
             </div>
 
@@ -165,23 +162,23 @@
             <div class="form-row">
                 
                 <div class="col-md-12 mb-3">                    
-                    <input type="date" class="form-control" id="date" required>
-                    <div class="invalid-feedback">Nhập ngày sinh</div>
+                    <input type="text" class="form-control" id="date" value="29/05/2000" disabled required>
+                    <!-- <div class="invalid-feedback">Nhập ngày sinh</div> -->
                 </div>
             </div>
 
             <!-- Hàng 9: CMND/CCCD -->
             <div class="form-row">
                 
-                <div class="col-md-6 mb-3">                   
+                <div class="col-md-12 mb-3">                   
                     <label for="" class="chimuc">CMND/CCCD</label> 
                     <div id="inputCMND">
-                        <input type="text" class="form-control" id="id" pattern="[0-9]{9,12}" placeholder="123456789" required>
+                        <input type="text" class="form-control" id="id" pattern="[0-9]{9,12}" placeholder="123456789" value="123456789" disabled required>
                     </div>
-                    <div class="invalid-feedback">Nhập CMND/CCCD</div>
-                    <div class="note"><i>CMND/CCCD phải gồm 9-12 chữ số</i></div>
+                    <!-- <div class="invalid-feedback">Nhập CMND/CCCD</div>
+                    <div class="note"><i>CMND/CCCD phải gồm 9-12 chữ số</i></div> -->
                 </div>
-                <div class="col-md-6 mb-3">     
+                <!-- <div class="col-md-6 mb-3">     
                     <label for="">Hình ảnh</label>               
                     <div class="form-group">
                         <div id="inputFileCMND">
@@ -190,7 +187,7 @@
                         <div class="invalid-feedback">Tải lên 1 ảnh.</div>
                         <div id = "preview"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- Hàng 10: Địa chỉ -->
@@ -283,7 +280,7 @@
             <!-- Hàng 11: Button -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Đăng ký</button>
+                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Chấp nhận</button>
                 </div>
             </div>  
         </form>
