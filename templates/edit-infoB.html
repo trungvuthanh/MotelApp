@@ -118,7 +118,7 @@
             <div class="form-row">
                 
                 <div class="col-md-12 mb-3">                    
-                    <input type="text" class="form-control" id="name" value="Nguyễn Hùng Duy" disabled required>
+                    <input type="text" class="form-control" id="name" placeholder="Nguyễn Hùng Duy" required>
                     <!-- <div class="invalid-feedback">Nhập họ tên</div> -->
                 </div>
             </div>
@@ -162,32 +162,9 @@
             <div class="form-row">
                 
                 <div class="col-md-12 mb-3">                    
-                    <input type="text" class="form-control" id="date" value="29/05/2000" disabled required>
+                    <input type="date" class="form-control" id="date" required>
                     <!-- <div class="invalid-feedback">Nhập ngày sinh</div> -->
                 </div>
-            </div>
-
-            <!-- Hàng 9: CMND/CCCD -->
-            <div class="form-row">
-                
-                <div class="col-md-12 mb-3">                   
-                    <label for="" class="chimuc">CMND/CCCD</label> 
-                    <div id="inputCMND">
-                        <input type="text" class="form-control" id="id" pattern="[0-9]{9,12}" placeholder="123456789" value="123456789" disabled required>
-                    </div>
-                    <!-- <div class="invalid-feedback">Nhập CMND/CCCD</div>
-                    <div class="note"><i>CMND/CCCD phải gồm 9-12 chữ số</i></div> -->
-                </div>
-                <!-- <div class="col-md-6 mb-3">     
-                    <label for="">Hình ảnh</label>               
-                    <div class="form-group">
-                        <div id="inputFileCMND">
-                            <input type="file" class="form-control-file" multiple = "multiple" accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
-                        </div>
-                        <div class="invalid-feedback">Tải lên 1 ảnh.</div>
-                        <div id = "preview"></div>
-                    </div>
-                </div> -->
             </div>
 
             <!-- Hàng 10: Địa chỉ -->
@@ -280,7 +257,7 @@
             <!-- Hàng 11: Button -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Chấp nhận</button>
+                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Lưu thay đổi</button>
                 </div>
             </div>  
         </form>

@@ -148,13 +148,17 @@ def postm():
 def detailPost():
     return render_template('detail-post.html')
 
+@app.route("/menu-renter", methods=["GET"])
+def menu():
+    return render_template('../static/page/menu-renter.html') 
+
 # @app.route("/detail-post", methods=["GET"])
 # def detailPost():
 #     return render_template('detail-post.html')
 
 # @app.route("/test", methods=["GET"])
 # def test():
-#     return render_template('test.html')
+#     return render_template('test.html') alo k nghe thấy gì hết luôn
 
 
 # @app.route("/test", methods=["GET"])
@@ -166,7 +170,8 @@ def detailPost():
 def getData():
     # Post().getMoreInformationPost(1)
     # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
-    return app.response_class(json.dumps(Post().search("cầu giấy", "phongtro", 0, 20, 0, "area", 0)), mimetype='application/json')
+    # return app.response_class(json.dumps(Post().search("cầu giấy", "phongtro", 0, 20, 0, "area", 0)), mimetype='application/json')
+    return render_template('historyB.html')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():
