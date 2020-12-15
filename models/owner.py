@@ -96,4 +96,27 @@ class Owner(User):
         titleNotification = "Chỉnh sửa thông tin"
         content = "Avatar và/hoặc mật khẩu vừa được thay đổi"    
         Notification().create(titleNotification, username, icon, content)
+        
+    def getInformation(self, username):
+        query_str = """
+            SELECT phoneNumber, fullname, birthday, email, ID, addressProvince, addressDistrict, addressWard, addressDetail, status, createDate, acceptDate, typeAvt, imageID 
+            FROM owner 
+            WHERE username = ?
+            """
+        connectDatabase = ConnectDatabase()
+        row = connectDatabase.cursor.execute(query_str, username).fetchone()
+        connectDatabase.close()
+        return {"phoneNumber": row.phoneNumber, "fullname": row.fullname, "birthday": str(row.birthday), "email": row.email, "ID": row.ID, "addressProvince": row.addressProvince, "addressDistrict": row.addressDistrict, "addressWard": row.addressWard, "addressDetail": row.addressDetail, "status": row.status, "createDate": str(row.createDate), "acceptDate": str(row.acceptDate), "typeAvt": row.typeAvt, "imageID": row.imageID}
+    
+    def checkPassword(self, username, test_password):
+        query_str = """
+            SELECT COUNT(*)
+            FROM owner
+            WHERE username = ? AND password = ?
+            """
+        connectDatabase = ConnectDatabase()
+        count = connectDatabase.cursor.execute(query_str, username, test_password).fetchval()
+        connectDatabase.close()
+        return count == 1
+        
     

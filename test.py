@@ -3,11 +3,12 @@ from models.connectDatabase import ConnectDatabase
 from datetime import datetime
 
 query_str = """
-    SELECT * FROM owner LIMIT 10 OFFSET 10
+    UPDATE post SET totalFavorite = (
+        SELECT COUNT(*) FROM favorite_post WHERE favorite_post.idPost = ? AND DATEDIFF(NOW(), favorite_post.time) >= 0
+    ) WHERE idPost = ?
     """
 connectDatabase = ConnectDatabase()
-rows = connectDatabase.cursor.execute(query_str)
-count = rows.rowcount
-print(count)
-for x in rows:
-    print(x)
+for i in range(1, 801):
+    connectDatabase.cursor.execute(query_str, i, i)
+    connectDatabase.connection.commit()
+connectDatabase.close()

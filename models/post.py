@@ -363,4 +363,5 @@ class Post:
             maxPage = ((count - 1)//10*10 + 10)//10
             hasNext = True if numPage < maxPage else False 
         return {"hasPrev": hasPrev, "hasNext": hasNext, "listPost": [{"titlePost": row.titlePost, "priceItem": row.priceItem, "address": row.address, "area": row.area, "numOfRoom": row.numOfRoom, "priceWater": row.priceWater, "priceElectric": row.priceElectric} for row in rows]}
-
+    
+    

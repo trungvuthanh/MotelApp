@@ -10,6 +10,9 @@ from models.connectDatabase import ConnectDatabase
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
 from models.admin import Admin
+from models.renter import Renter
+from models.owner import Owner
+from models.chat import Chat
 from models.post import Post
 
 # cấu hình đường dẫn và idSession
@@ -163,10 +166,10 @@ def detailPost():
 #     # print(result)
 #     return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
 @app.route("/test", methods=["GET"])
-def getData():
+def getData(): 
     # Post().getMoreInformationPost(1)
     # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
-    return app.response_class(json.dumps(Post().search("cầu giấy", "phongtro", 0, 20, 0, "area", 0)), mimetype='application/json')
+    return app.response_class(json.dumps(Chat().getListChatRecentsOfAdmin()), mimetype='application/json')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():

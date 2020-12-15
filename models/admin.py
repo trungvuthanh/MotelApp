@@ -79,8 +79,8 @@ class Admin(User):
     def searchAccountOwner(self, stringSearch):
         query_str = """
             WITH user AS (
-                SELECT username, 1 AS type, MATCH(fullname, email) AGAINST (?) as score FROM owner 
-                UNION SELECT username, 2 AS type, MATCH(fullname, email) AGAINST (?) as score FROM owner_profile_scratch 
+                SELECT username, 1 AS type, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM owner 
+                UNION SELECT username, 2 AS type, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM owner_profile_scratch 
             ) 
             SELECT username, type FROM user
             ORDER BY score DESC LIMIT 5
@@ -93,7 +93,7 @@ class Admin(User):
         return result
     
     def searchAccountRenter(self, stringSearch):
-        query_str = "SELECT *, MATCH(fullname, email) AGAINST (?) as score FROM renter ORDER BY score DESC LIMIT 5"
+        query_str = "SELECT *, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM renter ORDER BY score DESC LIMIT 5"
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, stringSearch)
         result = [[str(x) for x in row] for row in rows]
@@ -202,3 +202,5 @@ class Admin(User):
             connectDatabase.cursor.execute(query_str, username)
             connectDatabase.connection.commit()
         connectDatabase.close()
+        
+    
