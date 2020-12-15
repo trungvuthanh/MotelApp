@@ -151,13 +151,17 @@ def postm():
 def detailPost():
     return render_template('detail-post.html')
 
+@app.route("/menu-renter", methods=["GET"])
+def menu():
+    return render_template('../static/page/menu-renter.html') 
+
 # @app.route("/detail-post", methods=["GET"])
 # def detailPost():
 #     return render_template('detail-post.html')
 
 # @app.route("/test", methods=["GET"])
 # def test():
-#     return render_template('test.html')
+#     return render_template('test.html') alo k nghe thấy gì hết luôn
 
 
 # @app.route("/test", methods=["GET"])
