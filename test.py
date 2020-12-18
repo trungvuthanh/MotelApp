@@ -1,14 +1,62 @@
 from models.user import User
 from models.connectDatabase import ConnectDatabase
-from datetime import datetime
+from datetime import datetime, timedelta
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+import time
+import unidecode
 
-query_str = """
-    UPDATE post SET totalFavorite = (
-        SELECT COUNT(*) FROM favorite_post WHERE favorite_post.idPost = ? AND DATEDIFF(NOW(), favorite_post.time) >= 0
-    ) WHERE idPost = ?
-    """
-connectDatabase = ConnectDatabase()
-for i in range(1, 801):
-    connectDatabase.cursor.execute(query_str, i, i)
-    connectDatabase.connection.commit()
-connectDatabase.close()
+
+start = datetime.strptime("01-12-2020", "%d-%m-%Y")
+end = datetime.now()
+print(end)
+date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days + 1)]
+
+for date in date_generated:
+    print(date.strftime("%d-%m-%Y"))
+
+
+# from calendar import monthrange
+
+# def allDays(y, m):
+#     return ['{:04d}-{:02d}-{:02d}'.format(y, m, d) for d in range(1, monthrange(y, m)[1] + 1)]
+
+# print(allDays(2020, 12))
+
+# def string_no_accent(string):
+#     return unidecode.unidecode(string)
+
+# data = []
+
+# stringSearch = "hà lội".title()
+# connectDatabase = ConnectDatabase()
+
+# # find province
+# query_str = "SELECT DISTINCT(province) FROM address"
+# for row in connectDatabase.cursor.execute(query_str).fetchall():
+#     score = fuzz.token_set_ratio(stringSearch, row.province)
+#     if score > 70:
+#         data.append({"address": row.province, "score": score})
+
+# # find district
+# query_str = """SELECT DISTINCT(CONCAT(district, ", ", province)) address FROM address"""
+# for row in connectDatabase.cursor.execute(query_str).fetchall():
+#     score = fuzz.token_set_ratio(stringSearch, row.address)
+#     if score > 70:
+#         data.append({"address": row.address, "score": score})
+
+# # find ward
+# query_str = """
+#     SELECT CONCAT(ward, ", ", district, ", ", province) address, CONCAT(ward, ", ", district) address1, ward 
+#     FROM address
+#     """
+# for row in connectDatabase.cursor.execute(query_str).fetchall():
+#     score = fuzz.token_set_ratio(stringSearch, row.address)
+#     if score > 70:
+#         data.append({"address": row.address, "score": score})
+
+# if data != []:
+#     data.sort(reverse=True, key=lambda row: row["score"])
+# if len(data) > 5:
+#     data = data[:5]
+# print(data)

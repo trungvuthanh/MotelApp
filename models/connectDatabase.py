@@ -24,7 +24,8 @@ class ConnectDatabase:
         """
         self.connection = pyodbc.connect("DRIVER={MySQL ODBC 8.0 Unicode Driver};SERVER=localhost;DATABASE=motelapp;USER=root;PASSWORD=;")
         self.cursor = self.connection.cursor()  
-    
+
+        
     def close(self):
         """
         Đóng kết nối với database
