@@ -1,0 +1,83 @@
+#review {
+    /* border: 3px solid rgba(70, 69, 69, 0.226); */
+    /* width:400px; */
+    height:800px;
+    padding:20px;
+    overflow:auto;
+    border-radius: 5px;
+    /* margin: 10px 0px 10px 0px;
+    margin-right: -10px; */
+}
+
+#report {
+    /* border: 3px solid rgba(70, 69, 69, 0.226); */
+    /* width:400px; */
+    height:800px;
+    padding:20px;
+    overflow:auto;
+    border-radius: 5px;
+    /* margin: 10px 0px 10px 0px;
+    margin-left: 10px; */
+}
+
+.filter {
+    margin-bottom: 20px;
+}
+
+.review-comment {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#accept-btn b {
+
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+#accept-btn:hover {
+    cursor: pointer;
+    background-color: #d4d3d3;
+  }
+
+#deny-btn b {
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+#deny-btn:hover {
+    cursor: pointer;
+    background-color: #d4d3d3;
+  }
+
+.content {
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
+.point {
+    width: 25px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+}
+
+.title-post, .title-post:link, .title-post:active, .title-post:hover, .title-post.visited{
+    text-decoration: none;
+    color: #1877F2;
+}
+
+.hashtag {
+    color: white;
+    background-color: #030022;
+    padding: 3px 7px 3px 7px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+

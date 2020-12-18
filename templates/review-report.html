@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/style/common.css">
+    <link rel="stylesheet" href="../static/style/detail-post.css">
+    <link rel="stylesheet" href="../static/style/review-report-style.css">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
+</head>
+<body>
+    <!-- Menu -->
+    <div id="menu"></div>
+
+    <!-- Nội dung -->
+    <div class="container">
+        <div class="row">
+
+            <!-- Review -->
+
+                <div class="col-md-6 p-3 review ">
+                    <!-- Tiêu đề -->
+                    <!-- <div class="row"> -->
+                        <h5 class="page-title"><b>Đánh giá</b></h5>
+                    <!-- </div> -->
+                    
+                    <!-- Bộ lọc -->
+                    <div class="row filter ml-1">
+                        <div class="col-md-4 p-0">
+                            <select class="form-control" name="status" id="status">
+                                <option value="process">Chờ xử lý</option>
+                                <option value="deny">Đã chấp nhận</option>
+                                <option value="accept">Đã từ chối</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Các review -->
+                    <!-- Đang xử lý -->
+                    <div class="review-processing" id="review">
+                        <!-- Đang xử lý -->
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Chấp nhận</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Từ chối</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đã chấp nhận -->
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Cập nhật</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Hủy</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đã từ chối -->
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Khôi phục</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Khôi phục</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Khôi phục</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            <!-- Report -->
+
+                <div class="col-md-6 p-3 report ">
+                    <h5 class="page-title"><b>Báo cáo</b></h5>
+
+                    <!-- Bộ lọc -->
+                    <div class="row filter ml-1">
+                        <div class="col-md-4 p-0">
+                            <select class="form-control" name="status" id="status">
+                                <option value="process">Đang xử lý</option>
+                                <option value="deny">Đã chấp nhận</option>
+                                <option value="accept">Đã xóa</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="report-processing" id="report">
+                        <!-- Đang xử lý -->
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-10 "> <a class="title-post" href="#">Phòng trọ sinh viên giá rẻ</a> </div>
+                                                <div class="col-sm-2"> ID: #1</div>
+                                            </div>
+                                            <div class="row mb-2 mt-2 ">
+                                                <div class="col-sm-12">
+                                                    <span class="hashtag">#fakeInfo</span>
+                                                    <span class="hashtag">#fakePrice</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Chấp nhận</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Từ chối</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đã chấp nhận -->
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-10 "> <a class="title-post" href="#">Phòng trọ sinh viên giá rẻ</a> </div>
+                                                <div class="col-sm-2"> ID: #1</div>
+                                            </div>
+                                            <div class="row mb-2 mt-2 ">
+                                                <div class="col-sm-12">
+                                                    <span class="hashtag">#fakeInfo</span>
+                                                    <span class="hashtag">#fakePrice</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Hủy</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đã xóa -->
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-10 "> <a class="title-post" href="#">Phòng trọ sinh viên giá rẻ</a> </div>
+                                                <div class="col-sm-2"> ID: #1</div>
+                                            </div>
+                                            <div class="row mb-2 mt-2 ">
+                                                <div class="col-sm-12">
+                                                    <span class="hashtag">#fakeInfo</span>
+                                                    <span class="hashtag">#fakePrice</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Chấp nhận</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Khôi phục</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Khôi phục</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-comment row border">
+                            <!-- Comment -->
+                            <div class="comment-section col-sm-12">
+                                <div class="col-md-12 guest-comment px-0">
+                                    <div class="each-comment row pt-3">
+                                        <div class="col-sm-1">
+                                            <img class="renterImageID" src="../static/image/1.png">
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <div class="row info-guest">
+
+                                                <div class="col-sm-4 p-0"> <p><b>Nguyễn Hùng Duy</b></p> </div> 
+
+                                                <div class="col-sm-4">  <p>15/12/2020</p>  </div>
+                                                                                                                                              
+                                            </div>
+                                            <div class="row average-rate p-0">
+                                                <div class="col-sm-1">
+                                                    <div class="rate-point-container bg-success text-white text-center rounded mr-3">
+                                                        <input class="point" id="avgRatingPoint" value="4.5"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="content" rows="4">Vị trí phòng trọ đẹp, gần thiên đường mua sắm chợ xanh,  ở vào nơi trung tâm trời đất, được thế rồng cuộn hổ ngồi, chính giữa nam bắc đông tây, tiện nghi núi sông sau trước. Vùng này mặt đất rộng mà bằng phẳng, thế đất cao mà sáng sủa, dân cư không khổ thấp trũng tối tăm, muôn vật hết sức tươi tốt phồn thịnh </textarea>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="bg-success row mt-1 mr-1" id="accept-btn"><b>Khôi phục</b></div>
+                                                    <div class="bg-danger row mt-1 mr-1" id="deny-btn"><b>Xóa hẳn</b></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="../static/script/detail-post.js"></script> -->
+    <script src="../static/script/review-report.js"></script>
+</body>
+</html>

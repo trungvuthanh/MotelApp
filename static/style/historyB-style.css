@@ -118,7 +118,8 @@
           color: #333333;
           margin: 0; }
         .product .card .card-body .woocommerce-loop-product__title a:hover {
-          color: #ffa6a8;
+          color: #1877F2;
+          ;
           text-decoration: none; }
       .product .card .card-body .price {
         font-family: 'Raleway', sans-serif;
@@ -302,7 +303,7 @@
     text-decoration: none;
   }
   .info .titlepost a:hover {
-    color: #ffa6a8
+    color:#1877F2
   }
   .info .diachi {
     /* font-family: 'Raleway', sans-serif; */

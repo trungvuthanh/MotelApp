@@ -174,6 +174,7 @@ def getData():
     # Post().getMoreInformationPost(1)
     # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
     return app.response_class(json.dumps(Chat().getListChatRecentsOfAdmin()), mimetype='application/json')
+    return render_template('review-report.html')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():
