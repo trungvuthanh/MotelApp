@@ -30,6 +30,9 @@
 }
 
 /* Style phần bên trái */
+.search-result {
+  display: none;
+}
 .content-left {
   border-radius: 5px;
   /* height: 800px; */
@@ -70,11 +73,20 @@
   overflow-x: hidden;
   overflow-y: scroll;
 }
+.each-message-history:hover {
+  cursor: pointer;
+  background-color: #ededed;
+}
+.active {
+  background-color: #ededed;
+  border-radius: 5px;
+}
+.unread {
+  background-color: #c9d6f1;
+  border-radius: 5px;
+}
 
 /* Style phần bên phải */
-.send {
-  
-}
 .input-message {
   width: 100%;
   padding: 10px 5px 10px 5px;
@@ -156,4 +168,32 @@
   content: "";
   display: table;
   clear: both;
+}
+
+/* Style cho chat-owner */
+.logo {
+  height: 40px;
+}
+.linktohome:hover {
+  text-decoration: none;
+}
+.info {
+  height: 720px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.company-name {
+  text-align: center;
+}
+.location {
+  font-size: 0.75rem;
+}
+.location-icon {
+  height: 20px;
+}
+.registered {
+  height: 40px;
+}
+.contact-icon {
+  height: 20px;
 }
