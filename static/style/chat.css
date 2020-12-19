@@ -1,0 +1,159 @@
+:root {
+    font-family: "Nunito", "Varta", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+  
+@media screen and (max-width:359px) {
+  :root {font-size: 16px;}
+  div.page {width:100%;}
+}
+
+/* width: 360px --> 767px */
+@media screen and (min-width:360px) {
+  :root {font-size: calc(16px + 2 * ((100vw - 360px) / 408));}
+  
+}
+
+@media screen and (max-width:768px) {
+  #delete-all-btn {
+    display: none;
+  }
+}
+
+/* width: 768px --> 1366px */
+@media screen and (min-width:768px) {
+  :root {font-size: calc(18px + 2 * ((100vw - 768px) / 598));}
+}
+
+/* width: >= 1366px desktop */
+@media screen and (min-width:1366px) {
+  :root {font-size:20px;}
+}
+
+/* Style phần bên trái */
+.content-left {
+  border-radius: 5px;
+  /* height: 800px; */
+  /*overflow: auto; */
+}
+.content-right {
+  border-radius: 5px;
+  /* height: 800px;
+  overflow: auto; */
+}
+/* .searchOwner {
+  position: fixed;
+}
+#searchOwner {
+  position: fixed;
+} */
+
+/* Tin nhắn gần nhất */
+.avatarOwner {
+  height: 40px;
+  width: 40px;
+  vertical-align: middle;
+}
+.name {
+  text-align: left;
+  vertical-align: middle;
+}
+.content {
+  font-size: 0.75rem;
+}
+.message-left {
+  height: 720px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.message-right {
+  height: 650px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+/* Style phần bên phải */
+.send {
+  
+}
+.input-message {
+  width: 100%;
+  padding: 10px 5px 10px 5px;
+  border: none;
+}
+.input:focus {
+  border: none;
+}
+.send-message img {
+  height: 45px;
+}
+.send-message img:hover {
+  cursor: pointer;
+}
+
+.chatFromYou {
+  width: auto;
+  background-color: #ededed; 
+  padding: 5px 5px 5px 10px;
+}
+
+.youtop {
+  border-radius: 25px 15px 15px 5px;
+}
+.youmiddle {
+  border-radius: 5px 15px 15px 5px;
+}
+.youbot {
+  border-radius: 5px 15px 15px 25px;
+}
+
+
+
+.chatFromMe {
+  width: auto;
+  background-color: rgb(50, 198, 113);
+  color: white;
+  float: right; 
+  padding: 5px;
+  position: relative;
+}
+.metop {
+  border-radius: 15px 25px 5px 15px;
+}
+.memiddle {
+  border-radius: 15px 5px 5px 15px;
+}
+.mebot {
+  border-radius: 15px 5px 25px 15px;
+}
+
+/* .content-message-admin {
+    float: right;
+} */
+.status-message {
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  right: -20px;
+}
+
+.each-message {
+  position: relative;
+  width: 100%;
+}
+/* .content-message {
+  height: 565px;
+  overflow: auto;
+} */
+
+.status-message-read-recent {
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  right: -5px;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}

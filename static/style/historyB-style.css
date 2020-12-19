@@ -243,7 +243,7 @@
   .sale-product {
     margin-bottom: 40px !important; } }
 
-.card-body ..gia {
+.card-body .gia {
   color: #C9C9C9;
   font-size: 0.75rem;
   font-weight: 300;
@@ -290,10 +290,7 @@
   .info .id a:hover {
     color: black;
   }
-  .info .titlepost {
-    /* margin: 0px;
-    padding: 0px; */
-  }
+  
   .info .titlepost a {
     /* font-family: 'Raleway', sans-serif; */
     font-size: 20px;
