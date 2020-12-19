@@ -251,7 +251,73 @@ class OtherEvent:
     def allDays(self, y, m):
         return ['{:04d}-{:02d}-{:02d}'.format(y, m, d) for d in range(1, monthrange(y, m)[1] + 1)]
 
-    
+    def statisticalDateHighestView(self, username="admin"):
+        connectDatabase = ConnectDatabase()
+        if username != "admin":
+            query_str = """
+                SELECT DATE(time) day, MAX(COUNT(*)) maxView FROM history_view WHERE idPost IN (
+                    SELECT idPost FROM post WHERE usernameAuthorPost = ?
+                ) AND time <= NOW()
+                GROUP BY DATE(time)
+                """
+            row = connectDatabase.cursor.execute(query_str, username).fetchone() 
+            return {"day": row.day, "maxView": row.maxView}
+        else:
+            query_str = """
+                SELECT DATE(time) day, MAX(COUNT(*)) maxView FROM history_view WHERE time <= NOW()
+                GROUP BY DATE(time)
+                """
+            row = connectDatabase.cursor.execute(query_str).fetchone() 
+            query_str = """
+                SELECT MAX(COUNT(*)) maxView FROM history_view WHERE time <= NOW()
+                GROUP BY HOUR(time)
+                """
+            hour = connectDatabase.cursor.execute(query_str).fetchval() 
+            views = {"day": row.day, "maxView": row.maxView, "hour": hour}
+            query_str = """
+                SELECT addressSearch, COUNT(*) count FROM history_search WHERE time <= NOW()
+                GROUP BY addressSearch
+                ORDER BY count DESC
+                LIMIT 3
+                """
+            rows = connectDatabase.cursor.execute(query_str).fetchone()
+            searchs = [{"addressSeach": row.addressSearch, "count": row.count} for row in rows]
+            query_str = """
+                SELECT idPost, titlePost, SUM(totalView) totalView FROM post ORDERBY totalView DESC LIMIT 5
+                """
+            rows = connectDatabase.cursor.execute(query_str).fetchone()
+            top5TotalView = [{"idPost": row.idPost, "titlePost": row.titlePost, "totalView": row.totalView} for row in rows]
+            query_str = """
+                SELECT idPost, titlePost, SUM(totalFavorite) totalFavorite FROM post ORDERBY totalFavorite DESC LIMIT 5
+                """
+            rows = connectDatabase.cursor.execute(query_str).fetchone()
+            top5TotalFavorite = [{"idPost": row.idPost, "titlePost": row.titlePost, "totalFavorite": row.totalFavorite} for row in rows]
+            return {"views": views, "searchs": searchs, "top5TotalView": top5TotalView, "top5TotalFavorite": top5TotalFavorite}
+
+    def statisticalPost(self, username="admin"):
+        connectDatabase = ConnectDatabase()
+        if username != "admin":
+            query_str = """
+                SELECT COUNT(*) count, statusPost
+                FROM post
+                WHERE usernameAuthorPost = ? 
+                GROUP BY statusPost
+                """
+            rows = connectDatabase.cursor.execute(query_str, username).fetchall()
+            return [{"statusPost": row.statusPost, "count": row.count} for row in rows]
+        else:
+            query_str = """
+                SELECT COUNT(*) count, statusPost
+                FROM post
+                GROUP BY statusPost
+                """
+            rows = connectDatabase.cursor.execute(query_str).fetchall()
+            arr1 = [{"statusPost": row.statusPost, "count": row.count} for row in rows]
+            query_str = "SELECT COUNT(*) FROM report_post"
+            report_post = connectDatabase.cursor.execute(query_str).fetchval()
+            query_str = "SELECT COUNT(*) FROM review"
+            review = connectDatabase.cursor.execute(query_str).fetchval()
+
     def statisticalView(self, username = "admin", groupTime = "", arg1 = "", arg2 = ""):
         # groupTime in ["inDay yyyy-mm-dd", "inWeek", "inMonth yyyy mm", "dayToDay yyyy-mm-dd yyyy-mm-dd"]
         connectDatabase = ConnectDatabase()
@@ -273,35 +339,33 @@ class OtherEvent:
             # admin: thống kê trong ngày, tuần, tháng
             data = []
             if groupTime == "inDay":
-                day = datetime.date(arg1)
+                day = datetime.date(datetime.strptime(arg1, "%Y-%m-%d"))
                 query_str = "SELECT COUNT(*) FROM history_view WHERE DATE(time) = ? AND HOUR(time) = ? AND NOW() - time >= 0"
                 for x in range(24):
                     viewInHour = connectDatabase.cursor.execute(query_str, day, x).fetchval() 
                     data.append({"hour": x, "viewInHour": viewInHour})
                 return data
             elif groupTime == "inMonth":
-                year = arg1 
-                month = arg2
+                year = int(arg1)
+                month = int(arg2)
                 query_str = "SELECT COUNT(*) FROM history_view WHERE DATE(time) = ? AND NOW() - time >= 0"
-                for x in allDays(year, month):
-                    viewInDay = connectDatabase.cursor.execute(query_str, x).fetchval() 
+                for x in self.allDays(year, month):
+                    viewInDay = connectDatabase.cursor.execute(query_str, datetime.date(datetime.strptime(x, "%Y-%m-%d"))).fetchval() 
                     data.append({"day": x, "viewInDay": viewInDay})
                 return data
             else:
                 if groupTime == "inWeek":
-                    day2 = datetime.date(datetime.now())
-                    day
-                    
-        query_str = """
-            SELECT DATE(time) day, COUNT(*) FROM history_view 
-            WHERE NOW() >= time AND idPost IN (
-                SELECT idPost FROM post WHERE usernameAuthorPost = ?
-            ) 
-            GROUP BY day 
-            ORDER BY day DESC
-            LIMIT 7
-            """
-        views = connectDatabase.cursor.execute(query_str, usernameOwner).fetchval() 
+                    intervalDay = [datetime.date(datetime.now()) - timedelta(days=x) for x in range(6, -1, -1)]
+                else:
+                    # groupTime = "dayToDay"
+                    start = datetime.date(datetime.strptime(arg1, "%Y-%m-%d"))
+                    end = datetime.date(datetime.strptime(arg2, "%Y-%m-%d"))
+                    intervalDay = [start + timedelta(days=x) for x in range(0, (end-start).days + 1)]
+                query_str = "SELECT COUNT(*) FROM history_view WHERE DATE(time) = ? AND NOW() - time >= 0"
+                for x in intervalDay:
+                    viewInDay = connectDatabase.cursor.execute(query_str, x).fetchval() 
+                    data.append({"day": str(x), "viewInDay": viewInDay})
+                return data
     
     def createReview(self, usernameRenter, stars, content, idPost, typeAvt):
         query_str = """

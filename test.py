@@ -7,13 +7,13 @@ import time
 import unidecode
 
 
-start = datetime.strptime("01-12-2020", "%d-%m-%Y")
-end = datetime.now()
-print(end)
+start = datetime.date(datetime.strptime("2020-12-01", "%Y-%m-%d"))
+end = datetime.date(datetime.now())
+
+
 date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days + 1)]
 
-for date in date_generated:
-    print(date.strftime("%d-%m-%Y"))
+
 
 
 # from calendar import monthrange

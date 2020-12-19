@@ -1,20 +1,8 @@
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, escape
 import os
 import json
-import threading
-import time
-import pandas as pd
-import numpy as np
-from datetime import datetime
-from models.connectDatabase import ConnectDatabase
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
-from models.admin import Admin
-from models.renter import Renter
-from models.owner import Owner
-from models.chat import Chat
-from models.post import Post
-from models.otherEvent import OtherEvent
 
 # cấu hình đường dẫn và idSession
 TEMPLATE_DIR = os.path.abspath('./templates')
@@ -130,6 +118,32 @@ def submitSignup():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # @app.route("/", methods=["GET"])
 # def home():
     # tt = time.time()
@@ -156,68 +170,9 @@ def detailPost():
 def menu():
     return render_template('../static/page/menu-renter.html') 
 
-# @app.route("/detail-post", methods=["GET"])
-# def detailPost():
-#     return render_template('detail-post.html')
-
-# @app.route("/test", methods=["GET"])
-# def test():
-#     return render_template('test.html') alo k nghe thấy gì hết luôn
 
 
-# @app.route("/test", methods=["GET"])
-# def getData():
-#     result = Admin().searchAccountOwner("buivanminh1966@gmail.com")
-#     # print(result)
-#     return app.response_class(json.dumps({"r1": result}), mimetype='application/json')
-@app.route("/test", methods=["GET"])
-def getData(): 
-    # Post().getMoreInformationPost(1)
-    # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
-    return app.response_class(json.dumps(Post().search("cầu giấy", "", 1.8, 50, 0, "", 0, 0, numPage = 1)), mimetype='application/json')
-
-# @app.route("/getImage", methods=["POST"])
-# def getImage():
-#     try:
-#         image = request.get_json()["image"]
-#     except:
-#         image = request.form['image']
-#     sql = "INSERT INTO renter (username, password, imageID) VALUES(%s, %s, %s);"
-#     val = ("5", "3", str(image))
-#     mycursor.execute(sql, val)
-#     mydb.commit()
-#     payload = {"status": "SUC"}
-#     return jsonify(payload)
-
-
-# @app.route("/preview", methods=["GET"])
-# def preview():
-#     sql = "SELECT imageID FROM renter WHERE username = '5';"
-#     mycursor.execute(sql)
-#     myresult = mycursor.fetchall()
-
-#     for x in myresult:
-#         return jsonify({"status": x})
-    # return app.response_class(json.dumps(payload), mimetype='application/json')
-
-
-@app.route("/upload", methods=["POST"])
-def upload():
-    image = request.files["inputImage"]
-    return jsonify({'status': 'SUC', 'filename': image.filename})
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-# import mysql.connector
-
-# mydb = mysql.connector.connect(
-#     host="remotemysql.com",
-#     user="Au6FiBsWsm",
-#     password="msjs6jhiWo",
-#     database="Au6FiBsWsm"
-# )
-
-# mycursor = mydb.cursor()
