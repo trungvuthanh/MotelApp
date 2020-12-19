@@ -1,0 +1,17 @@
+
+input[type=search] {
+    outline: none;
+    color: #666;
+    background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 15px center;
+    border: solid 1px #ccc;
+    padding: 5px 5px 5px 35px;
+    width: 130px;        
+    border-radius: 10em;        
+    transition: all .5s;    
+}
+input[type=search]:focus {
+    width: 250px;
+    background-color: #fff;
+    border-color: #66CC75;
+    box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
