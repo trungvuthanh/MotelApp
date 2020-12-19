@@ -1,5 +1,5 @@
 $('#menu').load('../static/page/menu-home.html');
-
+$('#footer').load('../static/page/footer.html');
 
 // Menu
 window.addEventListener('scroll', function() {
@@ -16,7 +16,7 @@ $(document).ready(function() {
         range: true,
         min: 1.8,
         max: 20,
-        values: [3, 10],
+        values: [1.8, 20],
         step: 0.2,
         slide:function(event, ui) {
             $('#price_show').html(ui.values[0] + ' - ' + ui.values[1] + ' triệu/tháng');
@@ -30,8 +30,8 @@ $(document).ready(function() {
 
 // Tìm kiếm
 function search() {
-    keyword;
-    room_type;
+    keyword = document.getElementById('searchInput').value;
+    room_type = document.getElementById('itemType').value;
     min_price = $('#min_price').val();
     max_price = $('#max_price').val();
     area_range;
@@ -51,17 +51,72 @@ function search() {
                 .then(
                     data => {
                         if (data.result == "success") {
-                            alert("Gửi báo cáo thành công!")
+                            
                         } else {
 
                         }
                     }
                 )
-            } else alert("Gửi báo cáo thất bại.")
+            }
         }
     )
 }
 
+suggestions = [
+    'Cầu Giấy',
+    'Cầu chúa',
+    'Cầu vồng',
+    'Gầm cầu',
+    'Toàn cầu',
+    'bán cầu',
+    'hà nội'
+]
+
+// Query input
+const searchWrapper = document.querySelector('.search-input');
+const inputBox = searchWrapper.querySelector('input');
+const suggBox = searchWrapper.querySelector('.autocom-box');
+
+inputBox.onkeyup = (e) => {
+    let userData = e.target.value;
+    let emptyArray = [];
+    if (userData) {
+        emptyArray = suggestions.filter((data) => {
+            return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+        });
+        emptyArray = emptyArray.map((data) => {
+            return data = '<li>'+ data +'</li>';
+        });
+        console.log(emptyArray);
+        searchWrapper.classList.add('active');
+        showSuggestions(emptyArray);
+        let allList = suggBox.querySelectorAll('li');
+        for (let i = 0; i < allList.length; i++) {
+            allList[i].setAttribute('onclick', 'select(this)');
+        }
+    } else {
+        searchWrapper.classList.remove('active');
+    }
+}
+
+function select(elmt) {
+    let selectUserData = elmt.textContent;
+    inputBox.value = selectUserData;
+    searchWrapper.classList.remove('active');
+}
+
+function showSuggestions(list) {
+    let listData;
+    if (!list.length) {
+        userValue = inputBox.value;
+        listData = '<li>'+ userValue +'</li>'
+    } else {
+        listData = list.join('');
+    }
+    suggBox.innerHTML = listData;
+}
+
+// Chuyển giữa các tab gợi ý
 let tabHeader = document.getElementsByClassName("tab-header")[0];
 let tabIndicator = document.getElementsByClassName("tab-indicator")[0];
 let tabBody = document.getElementsByClassName("tab-body")[0];
@@ -78,5 +133,3 @@ for (let i=0; i<tabsPane.length; i++){
 		tabIndicator.style.left = `calc(calc(100% / 4) * ${i})`;
 	});
 }
-
-$('#footer').load('../static/page/footer.html');

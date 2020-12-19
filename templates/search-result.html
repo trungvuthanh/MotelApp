@@ -18,85 +18,74 @@
     <!-- <div id="menu"></div> -->
     <div class="main">
         <div id="menu"></div>
+
+        <!-- Bộ lọc phía trên -->
         <div class="head-filter container w90">
             <div>
                 <h1 class="result-title title">Kết quả tìm kiếm <span>"cầu giấy dịch vọng"</span></h1>
                 <p>Có 69 kết quả được tìm thấy</p>
                 <div class="row">
-                    <div>
-                        <select class="form-control head-select">
-                            <option value="">Tỉnh, thành phố</option>
-                            <option value="">An Giang</option>
-                            <option value="">Hà Nội</option>
-                            <option value="">Hồ Chí Minh</option>
-                        </select>
+                    <div class="title mt-auto mr-auto text-center align-items-center justify-content-center"><span>Nhập từ khóa</span></div>
+                    <div class="search-input">
+                        <input id="searchInput" autocomplete="off" type="text" class="form-control" placeholder="Ví dụ: cầu giấy hà nội">
+                        <div class="autocom-box"></div> 
                     </div>
-                    <div>
-                        <select class="form-control head-select">
-                            <option value="">Quận, huyện</option>
-                            <option value="">Ba Đình</option>
-                            <option value="">Cầu Giấy</option>
-                            <option value="">Thanh Xuân</option>
-                        </select>
-                    </div>
-                    <div>
-                        <select class="form-control head-select">
-                            <option value="">Phường, xã</option>
-                            <option value="">Dịch Vọng</option>
-                            <option value="">Ngọc Khánh</option>
-                            <option value="">Nhân Chính</option>
-                        </select>
-                    </div>
-                    <div>
-                        <select class="form-control head-select" name="order" id="order">
-                            <option value="">Sắp xếp theo</option>
-                            <option value="">Giá tăng dần</option>
-                            <option value="">Giá giảm dần</option>
-                            <option value="">Diện tích tăng dần</option>
-                            <option value="">Diện tích giảm dần</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button class="form-control btn btn-success" type="button" name="button" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></button>
-                    </div>
+                    <select class="form-control head-select" name="order" id="order">
+                        <option value="">Sắp xếp theo</option>
+                        <option value="">Giá tăng dần</option>
+                        <option value="">Giá giảm dần</option>
+                        <option value="">Diện tích tăng dần</option>
+                        <option value="">Diện tích giảm dần</option>
+                    </select>
+                    <button class="form-control btn btn-success" type="button" name="button" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></button>
                 </div>
             </div>
         </div>
+
         <div class="main-content">
             <div class="container w90">
                 <div class="row">
+
+                    <!-- Bộ lọc bên trái -->
                     <div class="left-filter col-lg-3">
+
+                        <!-- Lọc khoảng giá -->
                         <div class="side-filter border">
                             <div class="side-title">
                                 <p class="title">Khoảng giá</p>
                             </div>
                             <div class="col-sm-auto">
-                                <p id="price_show">3 - 10 triệu/tháng</p>
+                                <p id="price_show">1.8 - 20 triệu/tháng</p>
                                 <div id="price_range"></div>
                                 <input type="hidden" id="min_price">
                                 <input type="hidden" id="max_price">
                             </div>
                         </div>
+
+                        <!-- Lọc diện tích -->
                         <div class="side-filter border">
                             <div class="side-title">
                                 <p class="title">Diện tích</p>
                             </div>
                             <div class="col-sm-auto">
                                 <select class="form-control" onchange="filter()">
-                                    <option value="">Dưới 30 m2</option>
-                                    <option value="">30 - 60 m2</option>
-                                    <option value="">60 - 100 m2</option>
-                                    <option value="">100 - 125 m2</option>
+                                    <option value="">Không giới hạn</option>
+                                    <option value="">Trên 30 m2</option>
+                                    <option value="">Trên 60 m2</option>
+                                    <option value="">Trên 100 m2</option>
                                     <option value="">Trên 125 m2</option>
                                 </select>
                             </div>
                         </div>
+
+                        <!-- Lọc loại phòng -->
                         <div class="side-filter border">
                             <div class="side-title">
                                 <p class="title">Loại phòng</p>
                             </div>
                             <div class="col-sm-auto">
                                 <select class="form-control" onchange="filter()">
+                                    <option value="">Tất cả</option>
                                     <option value="">Phòng trọ</option>
                                     <option value="">Nhà nguyên căn</option>
                                     <option value="">Chung cư mini</option>
@@ -104,34 +93,28 @@
                                 </select>
                             </div>
                         </div>
+
+                        <!-- Lọc hình thức ở -->
                         <div class="side-filter border">
                             <div class="side-title">
                                 <p class="title">Hình thức ở</p>
                             </div>
                             <div class="col-sm-auto">
                                 <div>
-                                    <input type="radio" name="hinhThucO" id="chungChu" value="chungchu" onclick="filter()">
+                                    <input type="checkbox" name="hinhThucO" id="chungChu" value="1" onclick="filter()">
                                     <label for="chungChu">Chung chủ</label> <br>
-                                    <input type="radio" name="hinhThucO" id="khongChungChu" value="khongchungchu" onclick="filter()">
+                                    <input type="checkbox" name="hinhThucO" id="khongChungChu" value="2" onclick="filter()">
                                     <label for="khongChungChu" class="m-0">Không chung chủ</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="side-filter border">
-                            <div class="side-title">
-                                <p class="title">Địa điểm lân cận</p>
-                            </div>
-                            <div class="col-sm-auto">
-                                <div class="form-group mb-0">
-                                    <textarea class="form-control" id="relatedPlace" placeholder="Gần Đại học Quốc gia, Bến xe, bệnh viện,..."></textarea>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
+                    <!-- Các dòng kết quả -->
                     <div class="result-rows col-lg-7">
                         <div class="item-result border">
                             <div class="item-img">
-                                <img src="../static/image/no_image_available.jpeg">
+                                <img src="../static/image/loading.gif">
                                 <div class="item-favourite">
                                     <i class="fas fa-heart" onclick="saveFavourite(this)"></i>
                                 </div>

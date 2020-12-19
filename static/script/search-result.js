@@ -9,8 +9,8 @@ $(document).ready(function() {
         range: true,
         min: 1.8,
         max: 20,
-        values: [3, 10],
-        step: 0.2,
+        values: [1.8, 20],
+        step: 0.1,
         slide:function(event, ui) {
             $('#price_show').html(ui.values[0] + ' - ' + ui.values[1] + ' triệu/tháng');
         },

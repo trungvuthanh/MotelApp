@@ -18,11 +18,15 @@ html {
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 /* Banner tên web */
 .head-brand {
-    position: relative;
-    top: 20%;
+    /* position: relative; */
+    /* top: 20%; */
     text-align: center;
     font-family: 'Montserrat Alternates', sans-serif;
     color: #ffffff;
@@ -32,9 +36,9 @@ html {
 /* Ô tìm kiếm */
 .search-box {
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
     width: 80%;
     max-width: 850px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -46,33 +50,87 @@ html {
     .search-box {
         top: 60%; } }
 
-/* Chữ 'Địa chỉ' */
+/* Chữ 'Tìm kiếm' */
 .search-box .search-box-title {
     font-weight: 500;
     font-family: 'Varta', sans-serif;
 }
 /* Ô nhập tìm kiếm */
-.search-text {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 5fr 1fr;
+.search-input {
+    position: relative;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
     margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    /* overflow: hidden; */
 }
-@media (max-width: 940px) {
-    .search-text {
-        display: flex;
-        flex-direction: column;
-    }
-}
-#searchBtn {
-    color: #000;
-    background-color: #73c799;
+.search-input #searchInput {
+    width: 100%;
+    height: 50px;
     border: none;
+    outline: none;
+    padding: 0 60px 0 20px;
+    font-size: 17px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+    border-radius: 4px;
+    z-index: 4;
+}
+.search-input .autocom-box {
+    position: absolute;
+    max-height: 280px;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.search-input.active .autocom-box {
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+}
+.autocom-box li {
+    list-style: none;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+    display: none;
+}
+.search-input.active .autocom-box li {
+    display: block;
+}
+.autocom-box li:hover {
+    background-color: #efefef;
+}
+.search-input #searchBtn {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    border: none;
+    outline: none;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    color: #007bff;
     text-align: center;
 }
 #searchBtn:hover {
     cursor: pointer;
-    background-color: #bbffda;
+}
+@media (max-width: 940px) {
+    .search-input {
+        display: flex;
+        flex-direction: column;
+    }
+    #searchBtn {
+        margin-left: 0;
+        width: 100%;
+    }
 }
 
 /* 3 ô filter */
@@ -107,10 +165,7 @@ select#itemType, select#area_range {
     padding: 8px 12px;
     cursor: pointer;
     height: auto;
-
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
 }
 select#itemType:focus, select#area_range:focus,
 select#itemType:hover, select#area_range:hover {
@@ -147,7 +202,7 @@ select#itemType:hover, select#area_range:hover {
 }
 
 .city-box .city-list {
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .city-box .city-list .city-item {
     display: flex;
@@ -187,11 +242,13 @@ select#itemType:hover, select#area_range:hover {
 } */
 
 /* Gợi ý theo nhu cầu */
+.recommend-box {
+    margin-bottom: 40px;
+}
 .tabs {
     position: relative;
     height: auto;
     width: 100%;
-    /* overflow: hidden; */
 }
 .tabs p {
     margin: 0;
@@ -237,42 +294,25 @@ select#itemType:hover, select#area_range:hover {
 /* Nội dung gợi ý */
 .tabs .tab-body {
     position: relative;
-    height: 450px;
+    min-height: 420px;
 }
 .tabs .tab-body > .tab-content {
-    /* position: absolute; */
     display: none;
-    /* width: 100%; */
-    opacity: 0;
-    transition: opacity .5s ease-in-out 0s,
-                transform .5s ease-in-out 0s;
-    height: 0;
-    overflow: hidden;
 }
 .tabs .tab-body > .tab-content.tab-active-body {
-    opacity: 1;
-    /* z-index: 1; */
-    display: block;
-    height: auto;
-}
-.tabs .tab-body > .tab-content .item-row {
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
-    height: auto;
-    box-sizing: border-box;
-    flex-wrap: nowrap;
 }
-.tabs .tab-body > .tab-content .item-row a {
+.tabs .tab-body > .tab-content a {
     color: inherit;
     width: auto;
     text-decoration: none;
 }
 .recommend-item {
-    /* margin: 20px; */
+    margin: 20px;
     overflow: hidden;
-    width: auto;
+    width: 530px;
     border-radius: 10px;
     display: flex;
 }
@@ -293,8 +333,8 @@ select#itemType:hover, select#area_range:hover {
     background-color: #fafafa;
     width: 100%;
 }
-@media (max-width: 995px) {
+/* @media (max-width: 995px) {
     .recommend-box {
         display: none;
     }
-}
+} */

@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial !important;
+    color: rgba(0, 0, 0, .8) !important;
+}
+
+#menu {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.form-title {
+    display: flex;
+    height: calc(1.5em + .75rem + 2px);
+    flex-wrap: wrap;
+    width: auto;
+    padding: .375rem 0;
+    border: 1px solid #ffffff;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+}
+.title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 17px;
+    color: #000000;
+    margin-right: 10px;
+}
+
+.main-content.container {
+    padding: 0;
+    margin-bottom: 30px;
+    min-height: 494px;
+}
+
+.header {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.heading {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 28px;
+    color: #000000;
+}
+
+.p-15 { padding: 15px; }
+.px-15 { padding: 0 15px; }
+.py-15 { padding: 15px 0; }
+.pt-15 { padding-top: 15px; }
+.pr-15 { padding-right: 15px; }
+.pb-15 { padding-bottom: 15px; }
+.pl-15 { padding-left: 15px; }
+
+.bg-red {
+    background-color: #e6182e !important;
+}
+.bg-green {
+    background-color: #22cd49 !important;
+}
+.bg-grey {
+    background-color: #e0eef4 !important;
+}
+.bg-blue {
+    background-color: #1d40bf !important;
+}
+
+.w-auto {
+    width: auto !important;
+}
+.w-100 {
+    width: 100% !important;
+}
+
+.recommend-box {
+    margin-bottom: 40px;
+}
+.tabs {
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+
+/* Tab loại tài khoản */
+.tabs .tab-header {
+    height: 60px;
+    display: flex;
+}
+.tabs .tab-header > div {
+    width: calc(100% / 4);
+    text-align: center;
+    color: #a5e9c4;
+    font-weight: 600;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+    font-size: 20px;
+    text-transform: uppercase;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.tab-header div h5 {
+    margin: 0;
+}
+.tabs .tab-header > div.tab-active-head {
+    color: #1877f2;
+    background-color: #fafafa;
+}
+
+/* Thanh trượt */
+/* .tabs .tab-indicator {
+    position: relative;
+    width: calc(100% / 4);
+    height: 5px;
+    background-color: #1877f2;
+    left: 0;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+} */
+
+/* Phần tab body */
+.tab-body {
+    position: relative;
+    min-height: 420px;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.tab-active-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafafa;
+}
+
+/* Thanh tìm kiếm trạng thái, tên tài khoản */
+.search-bar {
+    margin: 30px;
+    width: auto;
+}
+select:hover {
+    cursor: pointer;
+}
+
+/* CSS các dòng kết quả */
+.result-rows {
+    margin: 15px 30px 30px;
+    overflow-y: auto;
+}
+
+/* CSS một dòng kết quả */
+.result-rows .item {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.result-rows .item:nth-last-child(1) {
+    margin-bottom: 0;
+}
+
+.item-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.item-img img {
+    width: 240px;
+    height: auto;
+}
+
+.result-action .button {
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+.button:hover {
+    box-shadow: 0 5px 8px rgba(0, 0, 0, .2);
+}
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #ffffff;
+    transition: .3s all;
+}
+/* Nút chỉnh sửa */
+.change-button i.no-change {
+    opacity: 0.3;
+}
+.btn-action {
+    display: flex;
+    height: 36px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #212529;
+    width: 140px;
+    justify-content: center;
+    align-items: center;
+    transition: .3s all;
+}
+.btn-action:hover {
+    cursor: pointer;
+}

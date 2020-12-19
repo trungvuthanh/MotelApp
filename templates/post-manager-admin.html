@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="../static/style/common.css">
+    <link rel="stylesheet" href="../static/style/post-manager.css">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
+</head>
+<body>
+    <div class="main">
+        <!-- Menu -->
+        <div id="menu"></div>
+
+        <div class="main-content container w90">
+            <div class="flex-row">
+                <!-- Cột trái -->
+                <div class="col-lg-8 p-0">
+                    <div class="manage">
+                        <div class="header header-manage-post"><h1 class="heading">Quản lý bài đăng</h1></div>
+
+                        <!-- Bộ lọc phía trên -->
+                        <div class="filter">
+                            <div><label class="filter-title" for="status">Loại bài đăng</label>
+                                <select class="form-control" name="status" onchange="statusChange()">
+                                    <option value="handling">Bài chờ duyệt</option>
+                                    <option value="active">Bài đã đăng</option>
+                                    <option value="expired">Bài hết hạn</option>
+                                    <option value="extend">Bài gia hạn</option>
+                                    <option value="refuse">Bài đã từ chối</option>
+                                    <option value="admin">Bài của Quản trị viên</option>
+                                </select></div>
+                            <div><label class="filter-title" for="sortDate">Sắp xếp theo</label>
+                                <select class="form-control" name="sortDate">
+                                    <option value="createDateASC">Ngày tạo mới nhất</option>
+                                    <option value="createDateDESC">Ngày tạo cũ nhất</option>
+                                    <option value="acceptDateASC">Ngày đăng mới nhất</option>
+                                    <option value="acceptDateDESC">Ngày đăng cũ nhất</option>
+                                    <option value="expireDateASC">Ngày hạn tăng dần</option>
+                                    <option value="expireDateDESC">Ngày hạn giảm dần</option>
+                                </select></div>
+                            <div><label class="filter-title" for="statistic">Chỉ số bài đăng</label>
+                                <select class="form-control" name="statistic">
+                                    <option value="viewASC">Lượt xem nhiều nhất</option>
+                                    <option value="viewDESC">Lượt xem ít nhất</option>
+                                    <option value="favoriteASC">Lượt yêu thích nhiều nhất</option>
+                                    <option value="favoriteDESC">Lượt yêu thích ít nhất</option>
+                                    <option value="ratingASC">Đánh giá nhiều nhất</option>
+                                    <option value="ratingDESC">Đánh giá ít nhất</option>
+                                </select></div>
+                            <div><label class="filter-title" for="city">Tỉnh, thành phố</label>
+                                <select class="form-control" name="city" id="">
+                                    <option value="allcity">Tất cả tỉnh, thành phố</option>
+                                    <option value="hanoi">Hà Nội</option>
+                                    <option value="hochiminh">Hồ Chí Minh</option>
+                                    <option value="">Đà Nẵng</option>
+                                    <option value="">Nha Trang</option>
+                                </select></div>
+                            <div><label class="filter-title" for="district">Quận, huyện</label>
+                                <select class="form-control" name="district" id="">
+                                    <option value="alldistrict">Tất cả quận, huyện</option>
+                                    <option value="">Ba Đình</option>
+                                    <option value="">Cầu Giấy</option>
+                                    <option value="">Thanh Xuân</option>
+                                </select></div>
+                            <div><label class="filter-title" for="ward">Xã, phường</label>
+                                <select class="form-control" name="ward" id="">
+                                    <option value="allward">Tất cả xã, phường</option>
+                                    <option value="">Dịch Vọng</option>
+                                    <option value="">Nhân Chính</option>
+                                    <option value="">Ngọc Khánh</option>
+                                </select></div>
+                        </div>
+
+                        <!-- Các hàng kết quả -->
+                        <div class="filter-result">
+                            <!-- Bài đang chờ duyệt -->
+                            <div class="post-item border">
+                                <div class="basic-info">
+                                    <div class="space-between px-15">
+                                        <!-- Thông tin bài đăng cơ bản -->
+                                        <div><div class="form-title">
+                                                <div class="title">Tiêu đề:</div>
+                                                <p>Chung cư nguyên căn sinh viên</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Địa chỉ:</div>
+                                                <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá phòng:</div>
+                                                <p>2,500,000 VNĐ/tháng</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Loại phòng:</div>
+                                                <p>Chung cư nguyên căn</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">ID:</div>
+                                                <p>#1</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Diện tích:</div>
+                                                <p>25 m2</p>
+                                            </div></div>
+                                        <!-- Trạng thái, chấp nhận/từ chối -->
+                                        <div class="result-action">
+                                            <div class="form-control status-action handling">Đang chờ duyệt</div>
+                                            <div class="justify-content-center align-items-center">
+                                                <button class="status-action form-control bg-green text-white align-items-center" onclick="accept(this)">Chấp nhận</i></button>
+                                                <button class="status-action form-control bg-red text-white align-items-center" onclick="refuse(this)">Từ chối</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border"></div>
+                                    <div class="space-between px-15">
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo:</div>
+                                            <p>08/12/2020</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Thời hạn đăng:</div>
+                                            <p>08/01/2021</p>
+                                        </div>
+                                        <div class="read-more"><i class="fas fa-caret-down"></i></div>
+                                    </div>
+                                </div>
+                                <div class="border"></div>
+                                <div class="post-content px-15">
+                                    <div class="space-between">
+                                        <div><div class="form-title">
+                                                <div class="title">Chung chủ:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Số phòng ngủ:</div>
+                                                <p>1</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Phòng tắm:</div>
+                                                <p>Khép kín - nóng lạnh</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Khu bếp</div>
+                                                <p>Riêng</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">Điều hòa:</div>
+                                                <p>Có</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Ban công:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá điện:</div>
+                                                <p>4,000 VNĐ/số</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá nước:</div>
+                                                <p>60,000 VNĐ/người</p>
+                                            </div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="text-area">
+                                        <!-- Địa điểm lân cận -->
+                                        <div class="relate-place">
+                                            <div class="form-title">
+                                                <div class="title">Địa điểm lân cận:</div>
+                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, odio. Laborum nam quibusdam adipisci ipsam, quaerat excepturi saepe repellendus! A quo vero aut quae, quaerat debitis cupiditate ex obcaecati repudiandae?</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nội dung -->
+                                        <div class="content">
+                                            <div class="form-title">
+                                                <div class="title">Nội dung:</div>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh bài đăng -->
+                                        <img src="../static/image/item-demo1.png">
+                                    </div>
+                                </div>
+                                <div class="author space-between px-15">
+                                    <!-- Thông tin người đăng -->
+                                    <div class="form-title">
+                                        <div class="title">Người đăng:</div>
+                                        <p>Nguyễn Đức Tới</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">SĐT:</div>
+                                        <p>123456789</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">Địa chỉ:</div>
+                                        <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bài đã đăng của ADMIN -->
+                            <div class="post-item border">
+                                <div class="basic-info">
+                                    <div class="space-between px-15">
+                                        <!-- Thông tin bài đăng cơ bản -->
+                                        <div><div class="form-title">
+                                                <div class="title">Tiêu đề:</div>
+                                                <p>Chung cư nguyên căn sinh viên</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Địa chỉ:</div>
+                                                <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá phòng:</div>
+                                                <p>2,500,000 VNĐ/tháng</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Loại phòng:</div>
+                                                <p>Chung cư nguyên căn</p>
+                                            </div>
+                                            <div class="space-between">
+                                                <div class="form-title">
+                                                    <div class="title">Lượt xem:</div>
+                                                    <p>20 <i class="fas fa-eye"></i></p>
+                                                </div>
+                                                <div class="form-title">
+                                                    <div class="title">Yêu thích:</div>
+                                                    <p>35 <i class="fas fa-heart"></i></p>
+                                                </div>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">ID:</div>
+                                                <p>#1</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Diện tích:</div>
+                                                <p>25 m2</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Đánh giá:</div>
+                                                <div class="avg-rating text-center text-white rounded">
+                                                    <span>4.0</span>
+                                                </div>
+                                            </div></div>
+
+                                        <!-- Trạng thái, chấp nhận/từ chối -->
+                                        <div class="result-action">
+                                            <div class="form-control status-action posted">Đã đăng</div>
+                                            <div class="flex-row align-items-center space-between w-100 border-0 hire-action mt-2">
+                                                <div class="hire-label">Chưa thuê</div>
+                                                <div class="w-auto">
+                                                    <div type="checkbox" name="hire" class="hire-status"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border"></div>
+                                    <div class="space-between px-15">
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo:</div>
+                                            <p>08/12/2020</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày đăng:</div>
+                                            <p>08/01/2021</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày hết hạn</div>
+                                            <p>08/04/2021</p>
+                                        </div>
+                                        <div class="read-more"><i class="fas fa-caret-down"></i></div>
+                                    </div>
+                                </div>
+                                <div class="border"></div>
+                                <div class="post-content px-15">
+                                    <div class="space-between">
+                                        <div><div class="form-title">
+                                                <div class="title">Chung chủ:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Số phòng ngủ:</div>
+                                                <p>1</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Phòng tắm:</div>
+                                                <p>Khép kín - nóng lạnh</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Khu bếp</div>
+                                                <p>Riêng</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">Điều hòa:</div>
+                                                <p>Có</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Ban công:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá điện:</div>
+                                                <p>4,000 VNĐ/số</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá nước:</div>
+                                                <p>60,000 VNĐ/người</p>
+                                            </div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="text-area">
+                                        <!-- Địa điểm lân cận -->
+                                        <div class="relate-place">
+                                            <div class="form-title">
+                                                <div class="title">Địa điểm lân cận:</div>
+                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, odio. Laborum nam quibusdam adipisci ipsam, quaerat excepturi saepe repellendus! A quo vero aut quae, quaerat debitis cupiditate ex obcaecati repudiandae?</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nội dung -->
+                                        <div class="content">
+                                            <div class="form-title">
+                                                <div class="title">Nội dung:</div>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh bài đăng -->
+                                        <img src="../static/image/item-demo1.png">
+                                    </div>
+                                </div>
+                                <div class="author space-between px-15">
+                                    <!-- Thông tin người đăng -->
+                                    <div class="form-title">
+                                        <div class="title">Người đăng:</div>
+                                        <p>ADMIN</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bài đã đăng của OWNER -->
+                            <div class="post-item border">
+                                <div class="basic-info">
+                                    <div class="space-between px-15">
+                                        <!-- Thông tin bài đăng cơ bản -->
+                                        <div><div class="form-title">
+                                                <div class="title">Tiêu đề:</div>
+                                                <p>Chung cư nguyên căn sinh viên</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Địa chỉ:</div>
+                                                <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá phòng:</div>
+                                                <p>2,500,000 VNĐ/tháng</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Loại phòng:</div>
+                                                <p>Chung cư nguyên căn</p>
+                                            </div>
+                                            <div class="space-between">
+                                                <div class="form-title">
+                                                    <div class="title">Lượt xem:</div>
+                                                    <p>20 <i class="fas fa-eye"></i></p>
+                                                </div>
+                                                <div class="form-title">
+                                                    <div class="title">Yêu thích:</div>
+                                                    <p>35 <i class="fas fa-heart"></i></p>
+                                                </div>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">ID:</div>
+                                                <p>#1</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Diện tích:</div>
+                                                <p>25 m2</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Đánh giá:</div>
+                                                <div class="avg-rating text-center text-white rounded">
+                                                    <span>4.0</span>
+                                                </div>
+                                            </div></div>
+
+                                        <!-- Trạng thái, chấp nhận/từ chối -->
+                                        <div class="result-action">
+                                            <div class="form-control status-action posted">Đã đăng</div>
+                                        </div>
+                                    </div>
+                                    <div class="border"></div>
+                                    <div class="space-between px-15">
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo:</div>
+                                            <p>08/12/2020</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày đăng:</div>
+                                            <p>08/01/2021</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày hết hạn</div>
+                                            <p>08/04/2021</p>
+                                        </div>
+                                        <div class="read-more"><i class="fas fa-caret-down"></i></div>
+                                    </div>
+                                </div>
+                                <div class="border"></div>
+                                <div class="post-content px-15">
+                                    <div class="space-between">
+                                        <div><div class="form-title">
+                                                <div class="title">Chung chủ:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Số phòng ngủ:</div>
+                                                <p>1</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Phòng tắm:</div>
+                                                <p>Khép kín - nóng lạnh</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Khu bếp</div>
+                                                <p>Riêng</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">Điều hòa:</div>
+                                                <p>Có</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Ban công:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá điện:</div>
+                                                <p>4,000 VNĐ/số</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá nước:</div>
+                                                <p>60,000 VNĐ/người</p>
+                                            </div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="text-area">
+                                        <!-- Địa điểm lân cận -->
+                                        <div class="relate-place">
+                                            <div class="form-title">
+                                                <div class="title">Địa điểm lân cận:</div>
+                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, odio. Laborum nam quibusdam adipisci ipsam, quaerat excepturi saepe repellendus! A quo vero aut quae, quaerat debitis cupiditate ex obcaecati repudiandae?</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nội dung -->
+                                        <div class="content">
+                                            <div class="form-title">
+                                                <div class="title">Nội dung:</div>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh bài đăng -->
+                                        <img src="../static/image/item-demo1.png">
+                                    </div>
+                                </div>
+                                <div class="author space-between px-15">
+                                    <!-- Thông tin người đăng -->
+                                    <div class="form-title">
+                                        <div class="title">Người đăng:</div>
+                                        <p>Nguyễn Đức Tới</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">SĐT:</div>
+                                        <p>123456789</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">Địa chỉ:</div>
+                                        <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bài hết hạn -->
+                            <div class="post-item border">
+                                <div class="basic-info">
+                                    <div class="space-between px-15">
+                                        <!-- Thông tin bài đăng cơ bản -->
+                                        <div><div class="form-title">
+                                                <div class="title">Tiêu đề:</div>
+                                                <p>Chung cư nguyên căn sinh viên</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Địa chỉ:</div>
+                                                <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá phòng:</div>
+                                                <p>2,500,000 VNĐ/tháng</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Loại phòng:</div>
+                                                <p>Chung cư nguyên căn</p>
+                                            </div>
+                                            <div class="space-between">
+                                                <div class="form-title">
+                                                    <div class="title">Lượt xem:</div>
+                                                    <p>20 <i class="fas fa-eye"></i></p>
+                                                </div>
+                                                <div class="form-title">
+                                                    <div class="title">Yêu thích:</div>
+                                                    <p>35 <i class="fas fa-heart"></i></p>
+                                                </div>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">ID:</div>
+                                                <p>#1</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Diện tích:</div>
+                                                <p>25 m2</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Đánh giá:</div>
+                                                <div class="avg-rating text-center text-white rounded">
+                                                    <span>4.0</span>
+                                                </div>
+                                            </div></div>
+
+                                        <!-- Trạng thái, chấp nhận/từ chối -->
+                                        <div class="result-action">
+                                            <div class="form-control status-action expired">Hết hạn</div>
+                                        </div>
+                                    </div>
+                                    <div class="border"></div>
+                                    <div class="space-between px-15">
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo:</div>
+                                            <p>08/12/2020</p>
+                                        </div>
+                                        <div class="read-more"><i class="fas fa-caret-down"></i></div>
+                                    </div>
+                                </div>
+                                <div class="border"></div>
+                                <div class="post-content px-15">
+                                    <div class="space-between">
+                                        <div><div class="form-title">
+                                                <div class="title">Chung chủ:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Số phòng ngủ:</div>
+                                                <p>1</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Phòng tắm:</div>
+                                                <p>Khép kín - nóng lạnh</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Khu bếp</div>
+                                                <p>Riêng</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">Điều hòa:</div>
+                                                <p>Có</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Ban công:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá điện:</div>
+                                                <p>4,000 VNĐ/số</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá nước:</div>
+                                                <p>60,000 VNĐ/người</p>
+                                            </div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="text-area">
+                                        <!-- Địa điểm lân cận -->
+                                        <div class="relate-place">
+                                            <div class="form-title">
+                                                <div class="title">Địa điểm lân cận:</div>
+                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, odio. Laborum nam quibusdam adipisci ipsam, quaerat excepturi saepe repellendus! A quo vero aut quae, quaerat debitis cupiditate ex obcaecati repudiandae?</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nội dung -->
+                                        <div class="content">
+                                            <div class="form-title">
+                                                <div class="title">Nội dung:</div>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh bài đăng -->
+                                        <img src="../static/image/item-demo1.png">
+                                    </div>
+                                </div>
+                                <div class="author space-between px-15">
+                                    <!-- Thông tin người đăng -->
+                                    <div class="form-title">
+                                        <div class="title">Người đăng:</div>
+                                        <p>Nguyễn Đức Tới</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">SĐT:</div>
+                                        <p>123456789</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">Địa chỉ:</div>
+                                        <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bài gia hạn -->
+                            <div class="post-item border">
+                                <div class="basic-info">
+                                    <div class="space-between px-15">
+                                        <!-- Thông tin bài đăng cơ bản -->
+                                        <div><div class="form-title">
+                                                <div class="title">Tiêu đề:</div>
+                                                <p>Chung cư nguyên căn sinh viên</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Địa chỉ:</div>
+                                                <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá phòng:</div>
+                                                <p>2,500,000 VNĐ/tháng</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Loại phòng:</div>
+                                                <p>Chung cư nguyên căn</p>
+                                            </div>
+                                            <div class="space-between">
+                                                <div class="form-title">
+                                                    <div class="title">Lượt xem:</div>
+                                                    <p>20 <i class="fas fa-eye"></i></p>
+                                                </div>
+                                                <div class="form-title">
+                                                    <div class="title">Yêu thích:</div>
+                                                    <p>35 <i class="fas fa-heart"></i></p>
+                                                </div>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">ID:</div>
+                                                <p>#1</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Diện tích:</div>
+                                                <p>25 m2</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Đánh giá:</div>
+                                                <div class="avg-rating text-center text-white rounded">
+                                                    <span>4.0</span>
+                                                </div>
+                                            </div></div>
+
+                                        <!-- Trạng thái, chấp nhận/từ chối -->
+                                        <div class="result-action">
+                                            <div class="form-control status-action extend">Gia hạn</div>
+                                        </div>
+                                    </div>
+                                    <div class="border"></div>
+                                    <div class="space-between px-15">
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo:</div>
+                                            <p>08/12/2020</p>
+                                        </div>
+                                        <div class="read-more"><i class="fas fa-caret-down"></i></div>
+                                    </div>
+                                    <div class="space-between px-15 mb-2">
+                                        <div class="form-title">
+                                            <div class="title">Gia hạn:</div>
+                                            <p>3 tháng</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Phí gia hạn:</div>
+                                            <p>500,000 VNĐ</p>
+                                        </div>
+                                        <div class="result-action">
+                                            <div class="justify-content-center align-items-center">
+                                                <button class="status-action form-control bg-green text-white align-items-center" onclick="accept(this)">Chấp nhận</i></button>
+                                                <button class="status-action form-control bg-red text-white align-items-center" onclick="refuse(this)">Từ chối</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border"></div>
+                                <div class="post-content px-15">
+                                    <div class="space-between">
+                                        <div><div class="form-title">
+                                                <div class="title">Chung chủ:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Số phòng ngủ:</div>
+                                                <p>1</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Phòng tắm:</div>
+                                                <p>Khép kín - nóng lạnh</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Khu bếp</div>
+                                                <p>Riêng</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">Điều hòa:</div>
+                                                <p>Có</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Ban công:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá điện:</div>
+                                                <p>4,000 VNĐ/số</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá nước:</div>
+                                                <p>60,000 VNĐ/người</p>
+                                            </div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="text-area">
+                                        <!-- Địa điểm lân cận -->
+                                        <div class="relate-place">
+                                            <div class="form-title">
+                                                <div class="title">Địa điểm lân cận:</div>
+                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, odio. Laborum nam quibusdam adipisci ipsam, quaerat excepturi saepe repellendus! A quo vero aut quae, quaerat debitis cupiditate ex obcaecati repudiandae?</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nội dung -->
+                                        <div class="content">
+                                            <div class="form-title">
+                                                <div class="title">Nội dung:</div>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh bài đăng -->
+                                        <img src="../static/image/item-demo1.png">
+                                    </div>
+                                </div>
+                                <div class="author space-between px-15">
+                                    <!-- Thông tin người đăng -->
+                                    <div class="form-title">
+                                        <div class="title">Người đăng:</div>
+                                        <p>Nguyễn Đức Tới</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">SĐT:</div>
+                                        <p>123456789</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">Địa chỉ:</div>
+                                        <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bài đã từ chối -->
+                            <div class="post-item border">
+                                <div class="basic-info">
+                                    <div class="space-between px-15">
+                                        <!-- Thông tin bài đăng cơ bản -->
+                                        <div><div class="form-title">
+                                                <div class="title">Tiêu đề:</div>
+                                                <p>Chung cư nguyên căn sinh viên</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Địa chỉ:</div>
+                                                <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá phòng:</div>
+                                                <p>2,500,000 VNĐ/tháng</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Loại phòng:</div>
+                                                <p>Chung cư nguyên căn</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">ID:</div>
+                                                <p>#1</p>
+                                            </div>
+                                            <div class="form-title"></div>
+                                            <div class="form-title">
+                                                <div class="title">Diện tích:</div>
+                                                <p>25 m2</p>
+                                            </div></div>
+
+                                        <!-- Trạng thái, chấp nhận/từ chối -->
+                                        <div class="result-action">
+                                            <div class="form-control status-action">Đã từ chối</div>
+                                            <div class="justify-content-center align-items-center">
+                                                <button class="status-action form-control bg-green text-white align-items-center" onclick="accept(this)">Khôi phục</i></button>
+                                                <button class="status-action form-control bg-red text-white align-items-center" onclick="remove(this)">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border"></div>
+                                    <div class="space-between px-15">
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo:</div>
+                                            <p>08/12/2020</p>
+                                        </div>
+                                        <div class="form-title">
+                                            <div class="title">Thời hạn đăng:</div>
+                                            <p>08/01/2021</p>
+                                        </div>
+                                        <div class="read-more"><i class="fas fa-caret-down"></i></div>
+                                    </div>
+                                </div>
+                                <div class="border"></div>
+                                <div class="post-content px-15">
+                                    <div class="space-between">
+                                        <div><div class="form-title">
+                                                <div class="title">Chung chủ:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Số phòng ngủ:</div>
+                                                <p>1</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Phòng tắm:</div>
+                                                <p>Khép kín - nóng lạnh</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Khu bếp</div>
+                                                <p>Riêng</p>
+                                            </div></div>
+                                        <div><div class="form-title">
+                                                <div class="title">Điều hòa:</div>
+                                                <p>Có</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Ban công:</div>
+                                                <p>Không</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá điện:</div>
+                                                <p>4,000 VNĐ/số</p>
+                                            </div>
+                                            <div class="form-title">
+                                                <div class="title">Giá nước:</div>
+                                                <p>60,000 VNĐ/người</p>
+                                            </div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="text-area">
+                                        <!-- Địa điểm lân cận -->
+                                        <div class="relate-place">
+                                            <div class="form-title">
+                                                <div class="title">Địa điểm lân cận:</div>
+                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, odio. Laborum nam quibusdam adipisci ipsam, quaerat excepturi saepe repellendus! A quo vero aut quae, quaerat debitis cupiditate ex obcaecati repudiandae?</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nội dung -->
+                                        <div class="content">
+                                            <div class="form-title">
+                                                <div class="title">Nội dung:</div>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh bài đăng -->
+                                        <img src="../static/image/item-demo1.png">
+                                    </div>
+                                </div>
+                                <div class="author space-between px-15">
+                                    <!-- Thông tin người đăng -->
+                                    <div class="form-title">
+                                        <div class="title">Người đăng:</div>
+                                        <p>Nguyễn Đức Tới</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">SĐT:</div>
+                                        <p>123456789</p>
+                                    </div>
+                                    <div class="form-title">
+                                        <div class="title">Địa chỉ:</div>
+                                        <p>Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Next item -->
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải -->
+                <div class="col-lg-4 p-0">
+                    <div class="notification">
+                        <div class="header header-notification">
+                            <h1 class="heading">Thông báo<i class="fas fa-envelop-open"></i></h1>
+                            <div class="form-control" id="btnReadAll" onclick="readAll()">
+                                <abbr title="Đọc tất cả"><i class="fas fa-envelope-open"></i></abbr>
+                            </div>
+                        </div>
+                        <div class="main-notification">
+                            <div class="noti-item-test"></div>
+                            <div class="noti-item unread" onclick="read(this)">
+                                <img class="noti-img" src="../static/image/icon-account.png">
+                                <div class="noti-content">
+                                    <h3 class="noti-title">Đăng ký tài khoản chủ trọ</h3>
+                                    <div>Họ tên: Vũ Thành Trung</div>
+                                    <h4 class="noti-time">08/12/2020</h4>
+                                </div>
+                            </div>
+                            <div class="noti-item" onclick="read(this)">
+                                <img class="noti-img" src="../static/image/icon-post.png">
+                                <div class="noti-content">
+                                    <h3 class="noti-title">Yêu cầu đăng tin</h3>
+                                    <div>Họ tên: Vũ Thành Trung</div>
+                                    <h4 class="noti-time">08/12/2020</h4>
+                                </div>
+                            </div>
+                            <div class="noti-item unread" onclick="read(this)">
+                                <img class="noti-img" src="../static/image/icon-report.png">
+                                <div class="noti-content">
+                                    <h3 class="noti-title">Báo cáo bài đăng vi phạm</h3>
+                                    <div>Họ tên: Vũ Thành Trung</div>
+                                    <h4 class="noti-time">08/12/2020</h4>
+                                </div>
+                            </div>
+                            <div class="noti-item unread" onclick="read(this)">
+                                <img class="noti-img" src="../static/image/icon-post.png">
+                                <div class="noti-content">
+                                    <h3 class="noti-title">Yêu cầu đăng tin</h3>
+                                    <div>Họ tên: Vũ Thành Trung</div>
+                                    <h4 class="noti-time">08/12/2020</h4>
+                                </div>
+                            </div>
+                            <div class="noti-item" onclick="read(this)">
+                                <img class="noti-img" src="../static/image/icon-account.png">
+                                <div class="noti-content">
+                                    <h3 class="noti-title">Đăng ký tài khoản chủ trọ</h3>
+                                    <div>Họ tên: Vũ Thành Trung</div>
+                                    <h4 class="noti-time">08/12/2020</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/post-manager-admin.js"></script>
+
+    <!-- Slider css, js lib -->
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
+</body>
+</html>

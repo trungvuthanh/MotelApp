@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="../static/style/common.css">
+    <link rel="stylesheet" href="../static/style/account-manager.css">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
+</head>
+<body>
+    <div class="main">
+        <!-- Menu -->
+        <div id="menu"></div>
+
+        <div class="main-content container w90">
+            <div class="header"><h1 class="heading">Quản lý tài khoản</h1></div>
+            <div class="recommend-box">
+                <div class="tabs">
+                    <div class="tab-header">
+                        <div class="tab-active-head">
+                            <h5>Chủ nhà trọ</h5></div>
+                        <div>
+                            <h5>Khách thuê trọ</h5></div>
+                    </div>
+                    <!-- <div class="tab-indicator"></div> -->
+                    <div class="tab-body">
+
+                        <!-- Tab chủ nhà trọ -->
+                        <div class="tab-content tab-active-body">
+                            <!-- Thanh tìm kiếm trạng thái, tên tài khoản -->
+                            <div class="search-bar flex-row">
+                                <div class="col-md-5 p-0">
+                                    <div class="flex-row align-items-center">
+                                        <label for="filter" class="title mb-0">Trạng thái tài khoản:</label>
+                                        <select name="filter" id="" class="form-control w-auto">
+                                            <option value="">Đã phê duyệt</option>
+                                            <option value="">Chờ phê duyệt</option>
+                                            <option value="">Chỉnh sửa thông tin</option>
+                                            <option value="">Đã khóa</option>
+                                        </select></div></div>
+                                <div class="col-md-7 p-0">
+                                    <div class="flex-row align-items-center">
+                                        <label for="search" class="title mb-0">Tìm kiếm tài khoản:</label>
+                                        <input type="text" name="search" class="form-control w-auto">
+                                        <button class="btn btn-primary ml-2" onclick="search()">Tìm <i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Các dòng kết quả -->
+                            <div class="result-rows">
+                                <!-- Đã duyệt -->
+                                <div class="item flex-row space-between border">
+                                    <div><div class="form-title">
+                                            <div class="title">Họ tên:</div><p>Vũ Thành Trung</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày sinh:</div><p>09/04/2000</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Địa chỉ:</div><p>Nhân Chính, Thanh Xuân, Hà Nội</p></div>
+                                        <div class="form-title">
+                                            <div class="title">CMND:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Email:</div><p>email@gmail.com</p></div></div>
+
+                                    <div><div class="form-title">
+                                            <div class="title">Username:</div><p>owner</p></div>
+                                        <div class="form-title">
+                                            <div class="title">SĐT:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Trạng thái:</div><p>đã duyệt</p></div>                                            
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo tài khoản:</div><p>15/12/2020</p></div></div>
+
+                                    <div class="item-img">
+                                        <img src="../static/image/test-id-img.jpg" alt=""></div>
+                                    
+                                    <div class="result-action flex-column justify-content-center">
+                                        <div class="button flex-row align-items-center border change-button">
+                                            <div class="icon border-right"><i class="fas fa-pen no-change"></i></div>
+                                            <div class="btn-action bg-blue text-white" onclick="edit(this)">Khóa chỉnh sửa</div></div>
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-lock"></i></div>
+                                            <div class="btn-action bg-green text-white" onclick="block(this)">Khóa</div></div>
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-trash"></i></div>
+                                            <div class="btn-action bg-red text-white" onclick="remove(this)">Xóa</div></div></div>
+                                </div>
+
+                                <!-- Chờ duyệt -->
+                                <div class="item flex-row space-between border">
+                                    <div><div class="form-title">
+                                            <div class="title">Họ tên:</div><p>Vũ Thành Trung</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày sinh:</div><p>09/04/2000</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Địa chỉ:</div><p>Nhân Chính, Thanh Xuân, Hà Nội</p></div>
+                                        <div class="form-title">
+                                            <div class="title">CMND:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Email:</div><p>email@gmail.com</p></div></div>
+
+                                    <div><div class="form-title">
+                                            <div class="title">Username:</div><p>owner</p></div>
+                                        <div class="form-title">
+                                            <div class="title">SĐT:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Trạng thái:</div><p>chờ duyệt</p></div>                                            
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo tài khoản:</div><p>15/12/2020</p></div></div>
+                                    
+                                    <div class="item-img">
+                                        <img src="../static/image/test-id-img.jpg" alt=""></div>
+
+                                    <div class="result-action flex-column justify-content-center">
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-check"></i></div>
+                                            <div class="btn-action bg-green text-white" onclick="accept(this)">Chấp nhận</div></div>
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-times"></i></div>
+                                            <div class="btn-action bg-red text-white" onclick="refuse(this)">Từ chối</div></div></div>
+                                </div>
+
+                                <!-- Chỉnh sửa thông tin -->
+                                <div class="item flex-row space-between border">
+                                    <div><div class="form-title">
+                                            <div class="title">Họ tên:</div><p>Vũ Thành Trung</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày sinh:</div><p>09/04/2000</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Địa chỉ:</div><p>Nhân Chính, Thanh Xuân, Hà Nội</p></div>
+                                        <div class="form-title">
+                                            <div class="title">CMND:</div><p class="bg-blue">123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Email:</div><p>email@gmail.com</p></div></div>
+
+                                    <div><div class="form-title">
+                                            <div class="title">Username:</div><p>owner</p></div>
+                                        <div class="form-title">
+                                            <div class="title">SĐT:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Trạng thái:</div><p>chỉnh sửa thông tin</p></div>                                            
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo tài khoản:</div><p>15/12/2020</p></div></div>
+                                    
+                                    <div class="result-action flex-column justify-content-center">
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-check"></i></div>
+                                            <div class="btn-action bg-green text-white" onclick="accept(this)">Chấp nhận</div></div>
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-times"></i></div>
+                                            <div class="btn-action bg-red text-white" onclick="refuse(this)">Từ chối</div></div></div>
+                                </div>
+
+                                <!-- Đã khóa -->
+                                <div class="item flex-row space-between border">
+                                    <div><div class="form-title">
+                                            <div class="title">Họ tên:</div><p>Vũ Thành Trung</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Ngày sinh:</div><p>09/04/2000</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Địa chỉ:</div><p>Nhân Chính, Thanh Xuân, Hà Nội</p></div>
+                                        <div class="form-title">
+                                            <div class="title">CMND:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Email:</div><p>email@gmail.com</p></div></div>
+
+                                    <div><div class="form-title">
+                                            <div class="title">Username:</div><p>owner</p></div>
+                                        <div class="form-title">
+                                            <div class="title">SĐT:</div><p>123456789</p></div>
+                                        <div class="form-title">
+                                            <div class="title">Trạng thái:</div><p>đã khóa</p></div>                                            
+                                        <div class="form-title">
+                                            <div class="title">Ngày tạo tài khoản:</div><p>15/12/2020</p></div></div>
+                                    
+                                    <div class="result-action flex-column justify-content-center">
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-lock-open"></i></div>
+                                            <div class="btn-action bg-green text-white" onclick="unblock(this)">Mở khóa</div></div>
+                                        <div class="button flex-row align-items-center border">
+                                            <div class="icon border-right"><i class="fas fa-trash"></i></div>
+                                            <div class="btn-action bg-red text-white" onclick="remove(this)">Xóa</div></div></div>
+                                </div>
+                                <!-- Next item -->
+
+                            </div>
+                            
+                        </div>
+
+                        <!-- Tab khách thuê trọ -->
+                        <div class="tab-content">
+                            <!-- Thanh tìm kiếm trạng thái, tên tài khoản -->
+                            <div class="search-bar flex-row">
+                                <div class="col-md-5 p-0">
+                                    <div class="flex-row align-items-center">
+                                        <label for="filter" class="title mb-0">Trạng thái tài khoản:</label>
+                                        <select name="filter" id="" class="form-control w-auto">
+                                            <option value="">Đã phê duyệt</option>
+                                            <option value="">Đã khóa</option>
+                                        </select></div></div>
+                                <div class="col-md-7 p-0">
+                                    <div class="flex-row align-items-center">
+                                        <label for="search" class="title mb-0">Tìm kiếm tài khoản:</label>
+                                        <input type="text" name="search" class="form-control w-auto"></div></div></div>
+
+                                    <div class="result-rows">
+                                        <!-- Đã duyệt -->
+                                        <div class="item flex-row space-between border">
+                                            <div><div class="form-title">
+                                                    <div class="title">Họ tên:</div><p>Vũ Thành Trung</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Ngày sinh:</div><p>09/04/2000</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Địa chỉ:</div><p>Nhân Chính, Thanh Xuân, Hà Nội</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">CMND:</div><p>123456789</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Email:</div><p>email@gmail.com</p></div></div>
+        
+                                            <div><div class="form-title">
+                                                    <div class="title">Username:</div><p>renter</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">SĐT:</div><p>123456789</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Trạng thái:</div><p>đã duyệt</p></div>                                            
+                                                <div class="form-title">
+                                                    <div class="title">Ngày tạo tài khoản:</div><p>15/12/2020</p></div></div>
+                                            
+                                            <div class="result-action flex-column justify-content-center">
+                                                <div class="button flex-row align-items-center border">
+                                                    <div class="icon border-right"><i class="fas fa-lock"></i></div>
+                                                    <div class="btn-action bg-green text-white" onclick="block(this)">Khóa</div></div>
+                                                <div class="button flex-row align-items-center border">
+                                                    <div class="icon border-right"><i class="fas fa-trash"></i></div>
+                                                    <div class="btn-action bg-red text-white" onclick="remove(this)">Xóa</div></div></div>
+                                        </div>
+        
+                                        <!-- Đã khóa -->
+                                        <div class="item flex-row space-between border">
+                                            <div><div class="form-title">
+                                                    <div class="title">Họ tên:</div><p>Vũ Thành Trung</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Ngày sinh:</div><p>09/04/2000</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Địa chỉ:</div><p>Nhân Chính, Thanh Xuân, Hà Nội</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">CMND:</div><p>123456789</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Email:</div><p>email@gmail.com</p></div></div>
+        
+                                            <div><div class="form-title">
+                                                    <div class="title">Username:</div><p>renter</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">SĐT:</div><p>123456789</p></div>
+                                                <div class="form-title">
+                                                    <div class="title">Trạng thái:</div><p>đã khóa</p></div>                                            
+                                                <div class="form-title">
+                                                    <div class="title">Ngày tạo tài khoản:</div><p>15/12/2020</p></div></div>
+                                            
+                                            <div class="result-action flex-column justify-content-center">
+                                                <div class="button flex-row align-items-center border">
+                                                    <div class="icon border-right"><i class="fas fa-lock-open"></i></div>
+                                                    <div class="btn-action bg-green text-white" onclick="unblock(this)">Mở khóa</div></div>
+                                                <div class="button flex-row align-items-center border">
+                                                    <div class="icon border-right"><i class="fas fa-trash"></i></div>
+                                                    <div class="btn-action bg-red text-white" onclick="remove(this)">Xóa</div></div></div>
+                                        </div>
+                                        <!-- Next item -->
+        
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/account-manager.js"></script>
+
+    <!-- Slider css, js lib -->
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
+</body>
+</html>
