@@ -14,6 +14,7 @@ from models.renter import Renter
 from models.owner import Owner
 from models.chat import Chat
 from models.post import Post
+from models.otherEvent import OtherEvent
 
 # cấu hình đường dẫn và idSession
 TEMPLATE_DIR = os.path.abspath('./templates')
@@ -173,8 +174,7 @@ def menu():
 def getData(): 
     # Post().getMoreInformationPost(1)
     # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
-    return app.response_class(json.dumps(Chat().getListChatRecentsOfAdmin()), mimetype='application/json')
-    return render_template('review-report.html')
+    return app.response_class(json.dumps(Post().search("cầu giấy", "", 1.8, 50, 0, "", 0, 0, numPage = 1)), mimetype='application/json')
 
 # @app.route("/getImage", methods=["POST"])
 # def getImage():

@@ -1,6 +1,8 @@
 from models.connectDatabase import ConnectDatabase
 from models.notification import Notification
+from models.otherEvent import OtherEvent
 from datetime import datetime, timedelta
+from calendar import monthrange
 
 class Post:
     def __init__(self):
@@ -303,9 +305,16 @@ class Post:
         
     def unblockPost(self, idPost):
         connectDatabase = ConnectDatabase()
-        query_str = "SELECT statusPost FROM post WHERE idPost = ?"
-        statusPost = connectDatabase.cursor.execute(query_str, idPost).fetchval()
-        connectDatabase.close()
+        query_str = "SELECT statusPost, DATEDIFF(NOW(), expireDate) AS time FROM post WHERE idPost = ?"
+        row = connectDatabase.cursor.execute(query_str, idPost).fetchone()
+        if row.statusPost != "block":
+            connectDatabase.close()
+        else:
+            status = "active" if row.time >= 0 else "expire"
+            query_str = "UPDATE post SET status = ? WHERE idPost = ?" 
+            connectDatabase.cursor.execute(query_str, status, idPost)
+            connectDatabase.connection.commit()                  
+            connectDatabase.close()
     
     def checkAuthorPost(self, idPost, username):
         connectDatabase = ConnectDatabase()
@@ -321,38 +330,72 @@ class Post:
         connectDatabase.connection.commit()
         connectDatabase.close()
     
-    def search(self, stringSearch, itemType, priceItemMin, priceItemMax, area, sort, statusItem, numPage = 1):
-        # default: itemType(""), area(""), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
-        stringSearch = " ".join([x for x in (stringSearch.title().strip().split(" ")) if x != ""])
+    def updateExpiredPost(self):
+        connectDatabase = ConnectDatabase()
         query_str = """
-            SELECT titlePost, priceItem, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) AS "address", area, numOfRoom, priceWater, priceElectric, MATCH(addressProvince, addressDistrict, addressWard) AGAINST (?) as score 
+            UPDATE post SET statusPost = ? 
+            WHERE statusPost = ? AND DATEDIFF(NOW(), expireDate) >= 0
+            """
+        connectDatabase.cursor.execute(query_str, "expired", "active")
+        connectDatabase.connection.commit()                  
+        connectDatabase.close()
+    
+    def search(self, stringSearch, itemType, priceItemMin, priceItemMax, area, sort, statusItem, type, usernameRenter = "", numPage = 1):        
+        # default: itemType(""), area(0), sort("", "price DESC", "price", "area DESC", "area"), statusItem(0, 1: "chungchu", 2:"khongchungchu")
+        # type=0: không click
+        # type=1: địa chỉ đã click
+        if type == 0:
+            data = OtherEvent().fuzzywuzzySearch(stringSearch)
+            if data == []:
+                return {"hasPrev": False, "hasNext": False, "listPost": []}
+            stringSearch = data[0]["address"]
+        
+        # lưu địa điểm
+        OtherEvent().saveHistorySearch(stringSearch, usernameRenter)       
+        
+        address = stringSearch.split(', ')
+        if len(address) == 1:
+            filterAddress = " addressProvince = ? "
+        else: 
+            filterAddress = " addressDistrict = ? and addressProvince = ? "
+        connectDatabase = ConnectDatabase() 
+        query_str = """
+            SELECT idPost, titlePost, priceItem, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) AS "address", area, numOfRoom, priceWater, priceElectric
             FROM post 
-            WHERE MATCH(addressProvince, addressDistrict, addressWard) AGAINST (?) > 0 
-                AND priceItem >= ? AND priceItem <= ? 
+            WHERE priceItem >= ? AND priceItem <= ? 
                 AND area >= ?
+                AND statusPost = ? AND
            """ 
+        query_str += filterAddress
         if itemType != "":
             query_str += " AND itemType = \"" + str(itemType) + "\" "
         if statusItem != 0:
             statusItem = {1: "chungchu", 2: "khongchungchu"}[statusItem]
             query_str += " AND statusItem = \"" + str(statusItem) + "\" "
-        query_str += "ORDER BY score DESC, "+ sort +" LIMIT 10 OFFSET ?"
-        connectDatabase = ConnectDatabase()
-        rows = connectDatabase.cursor.execute(query_str, stringSearch, stringSearch, priceItemMin, priceItemMax, area, (numPage - 1)*10).fetchall()
+        if sort != "":
+            query_str += "ORDER BY "+ sort 
+        query_str += " LIMIT 10 OFFSET ? "
+        if len(address) == 1:
+            rows = connectDatabase.cursor.execute(query_str, priceItemMin, priceItemMax, area, "active", address[0], (numPage - 1)*10).fetchall()
+        else:
+            rows = connectDatabase.cursor.execute(query_str, priceItemMin, priceItemMax, area, "active", address[0], address[1], (numPage - 1)*10).fetchall()
         
         query_str = """
             SELECT COUNT(*)
             FROM post 
-            WHERE MATCH(addressProvince, addressDistrict, addressWard) AGAINST (?) > 0 
-                AND priceItem >= ? AND priceItem <= ? 
-                AND area >= ?
+            WHERE priceItem >= ? AND priceItem <= ? 
+                AND area >= ? AND 
         """
+        query_str += filterAddress
         if itemType != "":
             query_str += " AND itemType = \"" + str(itemType) + "\" "
         if statusItem != 0:
             statusItem = {1: "chungchu", 2: "khongchungchu"}[statusItem]
             query_str += " AND statusItem = \"" + str(statusItem) + "\" "        
-        count = connectDatabase.cursor.execute(query_str, stringSearch, priceItemMin, priceItemMax, area).fetchval()
+        if len(address) == 1:
+            count = connectDatabase.cursor.execute(query_str, priceItemMin, priceItemMax, area, address[0]).fetchval()
+        else:
+            count = connectDatabase.cursor.execute(query_str, priceItemMin, priceItemMax, area, address[0], address[1]).fetchval()
         connectDatabase.close()
         
         hasPrev = False if numPage == 1 else True
@@ -362,6 +405,6 @@ class Post:
         else:
             maxPage = ((count - 1)//10*10 + 10)//10
             hasNext = True if numPage < maxPage else False 
-        return {"hasPrev": hasPrev, "hasNext": hasNext, "listPost": [{"titlePost": row.titlePost, "priceItem": row.priceItem, "address": row.address, "area": row.area, "numOfRoom": row.numOfRoom, "priceWater": row.priceWater, "priceElectric": row.priceElectric} for row in rows]}
+        return {"hasPrev": hasPrev, "hasNext": hasNext, "listPost": [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "address": row.address, "area": row.area, "numOfRoom": row.numOfRoom, "priceWater": row.priceWater, "priceElectric": row.priceElectric} for row in rows]}
     
     
