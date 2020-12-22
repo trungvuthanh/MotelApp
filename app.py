@@ -142,15 +142,15 @@ def typeAccount():
 # ----------------------------API trang kết quả tìm kiếm-----------------------------
 # -----------------------------------------------------------------------------------
 @app.route("/<loaibaiviet>/dia-chi/<stringSeachNoRecommend>/0/gia/<minPrice>/<maxPrice>/dien-tich-tu/<int:minArea>", methods=["GET"])
-def searchPostButNoRecommend():
+def searchPostButNoRecommend(loaibaiviet, stringSeachNoRecommend, minPrice, maxPrice, minArea):
     return render_template("search-result.html")
 
 @app.route("/<loaibaiviet>/dia-chi/<tinh>/1/gia/<minPrice>/<maxPrice>/dien-tich-tu/<int:minArea>", methods=["GET"])
-def searchPostFromProvince():
+def searchPostFromProvince(loaibaiviet, tinh, minPrice, maxPrice, minArea):
     return render_template("search-result.html")
 
 @app.route("/<loaibaiviet>/dia-chi/<tinh>/<huyen>/gia/<minPrice>/<maxPrice>/dien-tich-tu/<int:minArea>", methods=["GET"])
-def searchPostFromDistrict():
+def searchPostFromDistrict(loaibaiviet, tinh, huyen, minPrice, maxPrice, minArea):
     return render_template("search-result.html")
 
 @app.route("/<loaibaiviet>/dia-chi/<stringSeachNoRecommend>/0/gia/<minPrice>/<maxPrice>/dien-tich-tu/<int:minArea>", methods=["POST"])
