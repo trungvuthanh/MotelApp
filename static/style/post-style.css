@@ -18,25 +18,29 @@ div.page {
     max-width:40rem;        
 }
 
-@media screen and (max-width:359px) {
+/* @media screen and (max-width:359px) {
     :root {font-size: 16px;}
     div.page {width:100%;}
-}
+} */
 
 /* width: 360px --> 767px */
-@media screen and (min-width:360px) {
+/* @media screen and (min-width:360px) {
     :root {font-size: calc(16px + 2 * ((100vw - 360px) / 408));}
     
-}
+} */
 
 /* width: 768px --> 1366px */
-@media screen and (min-width:768px) {
+/* @media screen and (min-width:768px) {
     :root {font-size: calc(18px + 2 * ((100vw - 768px) / 598));}
-}
+} */
 
 /* width: >= 1366px desktop */
-@media screen and (min-width:1366px) {
+/* @media screen and (min-width:1366px) {
     :root {font-size:20px;}
+} */
+
+.chimuc {
+    font-weight: 500;
 }
 
 #header1 {

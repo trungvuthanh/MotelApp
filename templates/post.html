@@ -24,13 +24,13 @@
             <!-- hàng 1: Tiêu đề và loại phòng -->
             <div class="form-row">
                 <div class="col-md-8 mb-3">
-                    <label for="tieudebaiviet">Tiêu đề</label>
+                    <label class="chimuc" for="tieudebaiviet">Tiêu đề</label>
                     <input type="text" class="form-control" id="tieudebaiviet" placeholder="vd: Nhà trọ sinh viên" required>
                     <div class="invalid-feedback">Nhập tiêu đề bài viết.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label for="loaiphong">Loại</label>
+                    <label class="chimuc" for="loaiphong">Loại</label>
                     <select class="custom-select">                        
                         <option selected>Phòng trọ</option>
                         <option>Nhà nguyên căn</option>
@@ -42,7 +42,7 @@
 
 
             <!-- Hàng 2: Địa chỉ -->
-            <div class="form-row"> <div class="col-md-8"><label for="">Địa chỉ</label></div></div>      
+            <div class="form-row"> <div class="col-md-8"><label class="chimuc" for="">Địa chỉ</label></div></div>      
             <div class="form-row">
                 
                 <div class="col-md-4 mb-3">                    
@@ -86,7 +86,7 @@
             <!-- Hàng 3: Địa điểm lân cận -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <label for="">Địa điểm lân cận</label>
+                    <label class="chimuc" for="">Địa điểm lân cận</label>
                     <textarea class="form-control" id="" rows="3" placeholder="- Đại học Quốc gia Hà Nội&#10;- Bộ Công an&#10;- ..."></textarea>   
                 </div>
             </div>
@@ -95,17 +95,17 @@
             <!-- Hàng 4: Diện tích, số phòng, giá phòng -->
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label for="">Diện tích</label>
+                    <label class="chimuc" for="">Diện tích</label>
                     <input type="number" class="form-control" id="" placeholder="đơn vị: m2" required>
                     <div class="invalid-feedback">Nhập diện tích là số thực dương.</div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="">Số phòng</label>
+                    <label class="chimuc" for="">Số phòng</label>
                     <input type="number" class="form-control" id="" placeholder="vd: 1" required>
                     <div class="invalid-feedback">Nhập số phòng.</div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="">Giá</label>
+                    <label class="chimuc" for="">Giá</label>
                     <input type="number" class="form-control" id="" placeholder="đơn vị: triệu" required>
                     <div class="invalid-feedback">Nhập giá là số thực dương.</div>
                 </div>
@@ -115,10 +115,10 @@
             <!-- Hàng 5: Loại phòng & Phòng tắm -->
             <div class="form-row">
                 <div class="col-md-4">
-                    <label for="">Loại phòng</label>
+                    <label class="chimuc" for="">Loại phòng</label>
                 </div>
                 <div class="col-md-8">
-                    <label for="">Phòng tắm</label>
+                    <label class="chimuc" for="">Phòng tắm</label>
                 </div>
             </div>
             <div class="form-row">
@@ -146,7 +146,7 @@
             <!-- Hàng 6: Phòng bếp, điện, nước -->
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label for="">Phòng bếp</label>
+                    <label class="chimuc" for="">Phòng bếp</label>
                     <select class="custom-select">                        
                         <option selected>Không nấu ăn</option>
                         <option>Khu bếp riêng</option>
@@ -155,12 +155,12 @@
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="">Điện</label>
+                    <label class="chimuc" for="">Điện</label>
                     <input type="text" class="form-control" id="" placeholder="vd: 1.6 k/số hoặc giá dân" required>
                     <div class="invalid-feedback">Nhập giá điện.</div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="">Nước</label>
+                    <label class="chimuc" for="">Nước</label>
                     <input type="text" class="form-control" id="" placeholder="vd: 50k/người" required>
                     <div class="invalid-feedback">Nhập giá nước.</div>
                 </div>
@@ -169,7 +169,7 @@
             <!-- Hàng 7: Phòng tắm -->
             <div class="form-row">
                 <div class="col-md-12">
-                    <label for="">Tiện ích khác</label>
+                    <label class="chimuc" for="">Tiện ích khác</label>
                 </div>
             </div>
             <div class="form-row tienich">
@@ -197,7 +197,7 @@
 
             <!-- Hàng 8: Hình ảnh -->
             <div class="form-group">
-                <label for="">Hình ảnh</label>
+                <label class="chimuc" for="">Hình ảnh</label>
                 <input type="file" class="form-control-file" multiple = "multiple" accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
                 <div class="invalid-feedback">Tải lên tối thiểu 3 ảnh.</div>
                 <div id = "preview"></div>
@@ -208,7 +208,7 @@
             <div class="form-row">
                 <div class="col-md-12" id="rowPostDes">
                     <div class="previewBtn" onclick="hienThiThemThongTin(this)"> Gợi ý <i class="fa fa-caret-down"></i></div>
-                    <label for="">Nội dung thêm</label>  
+                    <label class="chimuc" for="">Nội dung thêm</label>  
                 </div>
             </div>
             <div class="form-row">
@@ -251,7 +251,7 @@
             <!-- Hàng 10: Liên lạc -->
             <div class="form-row">
                 <div class="col-md-12">
-                    <label for="">Thông tin liên hệ</label>
+                    <label class="chimuc" for="">Thông tin liên hệ</label>
                 </div>
             </div>
             <div class="form-row">
@@ -273,7 +273,7 @@
             <!-- Hàng 11: Thời gian và tiền -->
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="">Thời gian đăng</label>
+                    <label class="chimuc" for="">Thời gian đăng</label>
 
                     <select class="custom-select">
                         <option selected>1 tuần</option>
