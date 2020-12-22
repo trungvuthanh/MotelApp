@@ -9,7 +9,6 @@
     padding: 15px 100px;
     z-index: 9999;
     font-family: 'Varta', sans-serif;
-    /* font-size: 20px; */
 }
 #head-menu.sticky {
     padding: 5px 100px;
@@ -29,7 +28,6 @@
 
 #head-menu ul {
     position: relative;
-    display: flex;
     justify-content: center;
     align-items: center;
 }

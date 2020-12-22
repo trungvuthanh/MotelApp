@@ -7,6 +7,7 @@
 body {
     font-family: Arial !important;
     color: rgba(0, 0, 0, .8) !important;
+    min-width: 750px;
 }
 
 #menu {
@@ -56,6 +57,27 @@ body {
 }
 .w-100 {
     width: 100% !important;
+}
+
+.manage,
+.notification {
+    margin-left: 15px;
+}
+.notification {
+    padding-right: 15px;
+}
+
+/* .manage {
+    min-width: 715px;
+}
+.notification {
+    min-width: 340px;
+} */
+
+@media (max-width: 1199px) {
+    .main-content.container > div {
+        flex-direction: column !important;
+    }
 }
 
 /* Cột trái */

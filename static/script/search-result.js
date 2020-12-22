@@ -38,3 +38,15 @@ function filter() {
 function search() {
 
 }
+
+var searchInput = document.getElementsByClassName('search-input')[0].parentElement;
+function changeWidth(x) {
+    if (x.matches) {
+        searchInput.className = 'col-md-12 p-1 flex-column';
+    } else {
+        searchInput.className = 'col-md-10 p-1 flex-column';
+    }
+}
+var x = window.matchMedia("(max-width: 992px)");
+changeWidth(x);
+x.addListener(changeWidth);

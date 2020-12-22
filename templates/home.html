@@ -24,21 +24,20 @@
             <div class="search-box flex-column">
                 <h5 class="search-box-title mb-2 text-white">Tìm kiếm</h3>
                 <div class="search-input">
-                    <input id="searchInput" autocomplete="off" placeholder="Cầu Giấy, Dịch Vọng..." required>
+                    <input id="searchInput" autocomplete="off" placeholder="Cầu Giấy, Dịch Vọng...">
                     <div class="autocom-box"></div>                    
-                    <div class="icon" id="searchBtn" onclick="search()"><i class="fas fa-search"></i></div>
+                    <div class="icon" id="searchBtn" onclick="searchRaw()"><i class="fas fa-search"></i></div>
                 </div>
                 <div class="search-filter">
                     <div class="filter-item">
                         <h5 class="search-item-title">Loại phòng</h5>
                         <select class="form-control" id="itemType">
-                            <option value="">Tất cả</option>
-                            <option value="">Phòng trọ</option>
-                            <option value="">Nhà nguyên căn</option>
-                            <option value="">Chung cư mini</option>
-                            <option value="">Chung cư nguyên căn</option>
-                        </select>
-                    </div>
+                            <option value="bai-dang">Tất cả</option>
+                            <option value="phong-tro">Phòng trọ</option>
+                            <option value="nha-nguyen-can">Nhà nguyên căn</option>
+                            <option value="chung-cu-mini">Chung cư mini</option>
+                            <option value="chung-cu-nguyen-can">Chung cư nguyên căn</option>
+                        </select></div>
                     <div class="filter-item">
                         <div class="box">
                             <h5 class="search-item-title">Khoảng giá</h5>
@@ -46,18 +45,16 @@
                             <div id="price_range"></div>
                             <input type="hidden" id="min_price">
                             <input type="hidden" id="max_price">
-                        </div>
-                    </div>
+                        </div></div>
                     <div class="filter-item">
                         <h5 class="search-item-title">Diện tích</h5>
                         <select class="form-control" id="area_range">
-                            <option value="">Không giới hạn</option>
-                            <option value="">Trên 30 m2</option>
-                            <option value="">Trên 60 m2</option>
-                            <option value="">Trên 100 m2</option>
-                            <option value="">Trên 125 m2</option>
-                        </select>
-                    </div>
+                            <option value="0">Không giới hạn</option>
+                            <option value="30">Trên 30 m2</option>
+                            <option value="60">Trên 60 m2</option>
+                            <option value="100">Trên 100 m2</option>
+                            <option value="125">Trên 125 m2</option>
+                        </select></div>
                 </div>
             </div>
         </section>
@@ -66,7 +63,7 @@
                 <div class="city-box">
                     <h2 class="content-title">Địa điểm nổi bật</h2>
                     <p class="content-description">Khám phá trải nghiệm mới khắp mọi miền đất nước</p>
-                    <div class="city-list row m-0">
+                    <div class="city-list flex-row">
                         <a href="/ket-qua"><div class="city-item" data-aos="zoom-in" data-aos-duration="700">
                             <img src="../static/image/hanoi.png">
                             <h5 class="city-name">Hà Nội</h5>

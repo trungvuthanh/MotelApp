@@ -145,7 +145,8 @@ $("select[name='district']").click(function() {
 });
 
 // Mở rộng thêm thông tin
-$('.read-more').click(function() {
+$('.read-more').parent().css('cursor', 'pointer');
+$('.read-more').parent().click(function() {
     fetch('/', {
 
     })
@@ -161,13 +162,13 @@ $('.read-more').click(function() {
             }
         }
     )
-    $(this).parent().parent().next().next().slideToggle(500);
-    if ($(this).children().hasClass('fas fa-caret-down')) {
-        $(this).children().removeClass('fas fa-caret-down');
-        $(this).children().addClass('fas fa-caret-up');
+    $(this).parent().next().next().slideToggle(500);
+    if ($(this).children().last().children().hasClass('fas fa-caret-down')) {
+        $(this).children().last().children().removeClass('fas fa-caret-down');
+        $(this).children().last().children().addClass('fas fa-caret-up');
     } else {
-        $(this).children().removeClass('fas fa-caret-up');
-        $(this).children().addClass('fas fa-caret-down');
+        $(this).children().last().children().removeClass('fas fa-caret-up');
+        $(this).children().last().children().addClass('fas fa-caret-down');
     }
 });
 

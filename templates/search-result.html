@@ -24,27 +24,47 @@
             <div>
                 <h1 class="result-title title">Kết quả tìm kiếm <span>"cầu giấy dịch vọng"</span></h1>
                 <p>Có 69 kết quả được tìm thấy</p>
-                <div class="row">
-                    <div class="title mt-auto mr-auto text-center align-items-center justify-content-center"><span>Nhập từ khóa</span></div>
-                    <div class="search-input">
-                        <input id="searchInput" autocomplete="off" type="text" class="form-control" placeholder="Ví dụ: cầu giấy hà nội">
-                        <div class="autocom-box"></div> 
+                <div class="flex-row mb-0">
+                    <div class="col-md-7 p-0">
+                        <div class="flex-row mb-0">
+                            <div class="title col-md-2 p-1 flex-column justify-content-center">
+                                Tìm kiếm
+                            </div>
+                            <div class="col-md-10 p-1 flex-column">
+                                <div class="search-input">
+                                    <input id="searchInput" autocomplete="off" type="text" class="form-control" placeholder="Nhập địa điểm cần tìm">
+                                    <!-- <div class="autocom-box">
+                                        <li>Cầu Giấy, Hà Nội</li>
+                                    </div>  -->
+                                </div>
+                            </div>
+                            <!-- <div class="title mt-auto">Nhập từ khóa</div> -->
+                            
+                        </div>
                     </div>
-                    <select class="form-control head-select" name="order" id="order">
-                        <option value="">Sắp xếp theo</option>
-                        <option value="">Giá tăng dần</option>
-                        <option value="">Giá giảm dần</option>
-                        <option value="">Diện tích tăng dần</option>
-                        <option value="">Diện tích giảm dần</option>
-                    </select>
-                    <button class="form-control btn btn-success" type="button" name="button" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></button>
+                    <div class="col-md-5 p-0">
+                        <div class="flex-row mb-0">
+                            <div class="col-md-7 p-1">
+                                <select class="form-control" name="order" id="order">
+                                    <option value="">Sắp xếp theo</option>
+                                    <option value="">Giá tăng dần</option>
+                                    <option value="">Giá giảm dần</option>
+                                    <option value="">Diện tích tăng dần</option>
+                                    <option value="">Diện tích giảm dần</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 p-1">
+                                <button class="form-control btn btn-success" type="button" name="button" onclick="search()">Tìm kiếm <span class="fa fa-search"></span></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
             <div class="container w90">
-                <div class="row">
+                <div class="flex-row">
 
                     <!-- Bộ lọc bên trái -->
                     <div class="left-filter col-lg-3">
