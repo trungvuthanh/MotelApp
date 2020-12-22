@@ -5,6 +5,7 @@ import json
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
 from models.post import Post
+from models.otherEvent import OtherEvent
 
 # cấu hình đường dẫn và idSession
 TEMPLATE_DIR = os.path.abspath('./templates')
@@ -31,6 +32,17 @@ def home():
 def managerPost():
     urlController = UrlController()
     return urlController.managerPost()
+
+
+
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API recommend search-----------------------------------
+# -----------------------------------------------------------------------------------
+@app.route("/recommendSearch/<stringSearch>", methods=["GET"])
+def recommendSearch(stringSearch):
+    return app.response_class(json.dumps(OtherEvent().fuzzywuzzySearch(stringSearch, 5)), mimetype='application/json')    
+
 
 
 
@@ -176,7 +188,7 @@ def getImagePost(idPost, limit):
 # ----------------------------API favorite post--------------------------------------
 # -----------------------------------------------------------------------------------
 @app.route("/updateFavoritePost", methods=["POST"])
-def getImagePost(idPost, limit):
+def updateFavoritePost(idPost, limit):
     # limit: "one" or "all"
     # eventFavoritePost(self, idPost, usernameRenter, status="add"):
     # chưa xong

@@ -482,7 +482,10 @@ class OtherEvent:
         #         data.append({"address": row.address, "score": score})
         connectDatabase.close()
         if data != []:
-            data.sort(reverse=True, key=lambda row: (row["score"], len(row["address"])))
+            if limit == 1:
+                data.sort(reverse=True, key=lambda row: (row["score"], len(row["address"])))
+            else:
+                data.sort(reverse=True, key=lambda row: (row["score"]))
         if len(data) > limit:
             data = data[:limit]
         return data
