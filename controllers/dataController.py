@@ -109,7 +109,7 @@ class DataController():
         # Bước 4: Kết nối với model
         user = User(username, password)
         messageLogin = user.checkLogin()
-        if messageLogin == "ACTIVE":
+        if messageLogin == "active" or messageLogin == "handling":
             # lưu 1 số thông tin vào session
             session['username'] = username
             session['password'] = password
