@@ -5,6 +5,7 @@ import json
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
 from models.post import Post
+from models.address import Address
 from models.otherEvent import OtherEvent
 
 # cấu hình đường dẫn và idSession
@@ -71,6 +72,23 @@ def submitLogin():
     message = DataController().loginController()
     return app.response_class(json.dumps({"message": message}), mimetype='application/json')
 
+
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API địa chỉ--------------------------------------------
+# -----------------------------------------------------------------------------------
+@app.route("/getProvinces", methods=["GET"])
+def getProvinces():
+    return app.response_class(json.dumps({"provinces": Address.getProvince()}), mimetype='application/json')
+
+@app.route("/getDistricts/<province>", methods=["GET"]) 
+def getDistricts(province):
+    return app.response_class(json.dumps({"districts": Address.getDistrict(province)}), mimetype='application/json')
+
+
+@app.route("/getWards/<province>/<district>", methods=["GET"])
+def getWards(province, district):
+    return app.response_class(json.dumps({"wards": Address.getWard(province, district)}), mimetype='application/json')
 
 
 # -----------------------------------------------------------------------------------
@@ -187,12 +205,22 @@ def getImagePost(idPost, limit):
 # -----------------------------------------------------------------------------------
 # ----------------------------API favorite post--------------------------------------
 # -----------------------------------------------------------------------------------
-@app.route("/updateFavoritePost", methods=["POST"])
-def updateFavoritePost(idPost, limit):
-    # limit: "one" or "all"
-    # eventFavoritePost(self, idPost, usernameRenter, status="add"):
-    # chưa xong
-    return app.response_class(json.dumps(Post().getImagePost(idPost, limit)), mimetype='application/json')    
+@app.route("/isFavoritePost/<int:idPost>", methods=["GET"])
+def isFavoritePost(idPost):
+    return app.response_class(json.dumps(OtherEvent().isFavoritePost(session["username"], idPost)), mimetype='application/json')
+    
+@app.route("/updateFavoritePost/<int:idPost>/<status>", methods=["GET"])
+def updateFavoritePost(idPost, status):
+    # status in ["add", "remove"]
+    try:
+        if status == "add":
+            OtherEvent().eventFavoritePost(idPost, session["username"], "add")
+        elif status == "remove":
+            OtherEvent().unFavoritePost(session["username"], idPost)
+        return app.response_class(json.dumps({"result": "success"}), mimetype='application/json')  
+    except:  
+        1
+    return app.response_class(json.dumps({"result": "fail"}), mimetype='application/json')    
 
 
 
@@ -203,18 +231,25 @@ def updateFavoritePost(idPost, limit):
 def getPost(baidangidpost):
     # baidangidpost: "nha-chung-cu-nguyen-can-gia-re-1"
     # partern: tieu-de-bai-dang-idPost
+    titlePost = " ".join(baidangidpost.split("-")[:-1])
     idPost = int(baidangidpost.split("-")[-1])
-    return UrlController().detailPost(idPost)
+    return UrlController().detailPost(idPost, titlePost)
 
 @app.route("/thong-tin-bai-dang/<baidangidpost>", methods=["POST"])
 def getInformationPost(baidangidpost):
     # baidangidpost: "nha-chung-cu-nguyen-can-gia-re-1"
     # partern: tieu-de-bai-dang-idPost
+    titlePost = " ".join(baidangidpost.split("-")[:-1])
     idPost = int(baidangidpost.split("-")[-1])
-    return DataController().detailPost(idPost)
+    return DataController().detailPost(idPost, titlePost)
     
-
-
+@app.route("/report/<int:idPost>", methods=["GET"])
+def sendReport(idPost):
+    
+    if session["type_account"] == "renter":
+        OtherEvent().renterSendReport(idPost, session["username"], fakeInfo, fakePrice, content="")
+    return
+    
 
 # print(request.args.get("province"))
 
@@ -299,3 +334,4 @@ def menu():
 if __name__ == "__main__":
     app.run(debug=True)
     # socketio.run(app)
+    

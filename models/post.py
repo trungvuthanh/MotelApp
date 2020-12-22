@@ -3,6 +3,7 @@ from models.notification import Notification
 from models.otherEvent import OtherEvent
 from datetime import datetime, timedelta
 from calendar import monthrange
+import unidecode
 
 class Post:
     def __init__(self):
@@ -20,10 +21,10 @@ class Post:
         connectDatabase.close()
         return {"idPost": idPost, "images": [image.image for image in images]}
 
-    def checkIdPost(self, idPost):
+    def checkPost(self, idPost, titlePost):
         connectDatabase = ConnectDatabase()
-        query_str = "SELECT COUNT(*) FROM post WHERE idPost = ?"
-        return connectDatabase.cursor.execute(query_str, idPost).fetchval() == 1
+        query_str = "SELECT titlePost FROM post WHERE idPost = ?"
+        return unidecode.unidecode(connectDatabase.cursor.execute(query_str, idPost).fetchval()).lower() == titlePost
     
     def create(self, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, usernameAuthorPost, typeAccountAuthor, postDuration, listImages):
         # typeAccountAuthor in ["owner", "admin"]

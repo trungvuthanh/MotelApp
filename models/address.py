@@ -33,7 +33,7 @@ class Address:
         query_str = "SELECT COUNT(*) FROM address WHERE province = ? AND district = ? AND ward = ?"
         connectDatabase = ConnectDatabase()
         count = connectDatabase.cursor.execute(query_str, province, district, ward).fetchval()
-        return True if count == 1 else 0
+        return True if count == 1 else False
     
     @staticmethod
     def getProvince():

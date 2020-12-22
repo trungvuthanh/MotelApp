@@ -37,8 +37,8 @@ class UrlController:
             # type_account is "admin"
             return render_template('post-manager-admin.html')
     
-    def detailPost(self, idPost):
-        if Post().checkIdPost(idPost):
+    def detailPost(self, idPost, titlePost):
+        if Post().checkPost(idPost, titlePost):
             return render_template('detail-post.html')
         return
     

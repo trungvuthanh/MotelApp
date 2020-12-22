@@ -3,7 +3,10 @@ from models.user import User
 from models.post import Post
 from models.address import Address
 from models.checkValidation import CheckValidation
+from models.renter import Renter
+from models.owner import Owner
 import time
+
 
 class DataController():
     """
@@ -17,8 +20,8 @@ class DataController():
         
     """
     
-    def detailPost(self, idPost):
-        if Post().checkIdPost(idPost):
+    def detailPost(self, idPost, titlePost):
+        if Post().checkPost(idPost, titlePost):
             return Post().getAllInfomationPost(idPost)
         return
     
@@ -238,6 +241,8 @@ class DataController():
         addressProvince = str(addressProvince)
         addressDistrict = str(addressDistrict)
         addressWard = str(addressWard)
+        if not Address.checkAddress(addressProvince, addressDistrict, addressWard):
+            return "fail"
         addressDetail = str(addressDetail)
         typeAvt = int(typeAvt)
         
@@ -251,4 +256,12 @@ class DataController():
         if user.checkUsername(username) == "exist":
             time.sleep(10)
             return "fail"
-        # user =    
+        try:
+            if typeAccount == "renter":
+                Renter().signup(username, password, fullname, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt)
+            else:
+                Owner().signup(username, password, fullname, phoneNumber, email, birthday, ID, imageID, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt)
+            return "success"
+        except:
+            return "error"
+            
