@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/style/chat.css">
+    <link rel="stylesheet" href="../static/style/searchOwner.css">
     <link rel="shortcut icon" href="../static/image/icon.png"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet" />
     
@@ -25,12 +26,56 @@
             <div class="col-md-4 mt-4 mb-4 border content-left">
                 <!-- Thanh search -->
                 <div class="col-sm-12 searchOwner border-bottom">
-                    <div id="searchOwner" class="row mt-3 mb-3"></div>
+                    <div id="searchOwner" class="row mt-3 mb-3">
+                        <form>
+                            <input id="search-owner" type="search" placeholder="Search">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Kết quả tìm kiếm -->
+                <div class="message-left search-result">
+                    <div class="col-sm-12 m-1 border-bottom ">
+                        <div class="row">
+                            <!-- Avatar -->
+                            <div class="col-sm-2 pl-0 pt-2">
+                                <img class="avatarOwner" src="../static/image/1.png">
+                            </div>
+                            <div class="col-sm-10 name p-1">
+                                <b>Nguyễn Hùng Duy</b>
+                            </div>                       
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-sm-12 m-1 border-bottom">
+                        <div class="row">
+                            <!-- Avatar -->
+                            <div class="col-sm-2 pl-0 pt-2">
+                                <img class="avatarOwner" src="../static/image/2.png">
+                            </div>
+                            <div class="col-sm-10 name p-1">
+                                <b>Nguyễn Hùng Duy</b>
+                            </div>                       
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 m-1">
+                        <div class="row">
+                            <!-- Avatar -->
+                            <div class="col-sm-2 pl-0 pt-2">
+                                <img class="avatarOwner" src="../static/image/6.png">
+                            </div>
+                            <div class="col-sm-10 name p-1">
+                                <b>Nguyễn Hùng Duy</b>
+                            </div>                       
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Các tin nhắn gần nhất -->
-                <div class="message-left">
-                    <div class="col-sm-12 m-1 border-bottom">
+                <div class="message-left history-chat">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history active">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -51,7 +96,7 @@
                         
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history unread">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -71,7 +116,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history unread">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -91,7 +136,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -111,7 +156,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -131,7 +176,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -151,7 +196,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -171,7 +216,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -191,7 +236,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -211,7 +256,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -231,7 +276,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -251,7 +296,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -271,7 +316,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1 border-bottom">
+                    <div class="col-sm-12 m-1 border-bottom each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -291,7 +336,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 m-1">
+                    <div class="col-sm-12 m-1 each-message-history">
                         <div class="row">
                             <!-- Avatar -->
                             <div class="col-sm-2 pl-0 pt-2">
@@ -430,7 +475,6 @@
                     <div class="col-sm-1 mt-2 mb-2 pr-1 send-message">
                         <img class="send-mesage" src="../static/image/send1.png">
                     </div>
-                    
                 </div>
             </div>
         </div>
