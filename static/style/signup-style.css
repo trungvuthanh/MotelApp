@@ -169,3 +169,6 @@ abbr[title] {
     margin-bottom: 15px;
 }
 
+.form-row .btn-primary {
+    float: right;
+}

@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 // Query input
 const searchWrapper = document.querySelector('.search-input');
-const inputBox = searchWrapper.querySelector('input');
+    const inputBox = searchWrapper.querySelector('input');
 const suggBox = searchWrapper.querySelector('.autocom-box');
 suggestions = []
 
@@ -111,7 +111,7 @@ inputBox.onkeyup = (e) => {
             searchWrapper.classList.remove('active');
         }
     } else {
-        if (e.keyCode == '40') {
+        if (e.keyCode == 40) {
             if (document.querySelector('.pointed') == null) {
                 suggBox.firstElementChild.classList.add('pointed');
                 document.querySelector('.autocom-box').scrollIntoView(false);
@@ -130,7 +130,7 @@ inputBox.onkeyup = (e) => {
                     }
                 }
             }
-        } else if (e.keyCode == '38') {
+        } else if (e.keyCode == 38) {
             if (document.querySelector('.pointed') == null) {
                 suggBox.lastElementChild.classList.add('pointed');
                 document.querySelector('.pointed').scrollIntoView(false);
@@ -149,7 +149,7 @@ inputBox.onkeyup = (e) => {
                     }
                 }
             }
-        } else if (e.keyCode == '13') {
+        } else if (e.keyCode == 13) {
             searchRaw();
         }
     } 
@@ -167,7 +167,19 @@ function showSuggestions(list) {
     suggBox.innerHTML = listData;
 }
 function searchSelect(elmt) {
-    
+    keyword = elmt.textContent;
+    text_create = keyword.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a").replace(/đ/g, "d").replace(/đ/g, "d").replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y").replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u").replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ.+/g,"o").replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ.+/g, "e").replace(/ì|í|ị|ỉ|ĩ/g,"i");
+    text_create = text_create.toLowerCase().split(', ');
+    if (text_create.length == 1) {
+        text_create = text_create[0].replace(' ', '-') + '/1';
+    } else {
+        text_create = text_create[1].replace(' ', '-') + '/' + text_create[0].replace(' ', '-')
+    }
+    room_type = document.getElementById('itemType').value;
+    min_price = document.getElementById('min_price').value;
+    max_price = document.getElementById('max_price').value;
+    area_range = document.getElementById('area_range').value;
+    location.href = '../' + room_type + '/dia-chi/' + text_create + '/gia/' + min_price + '/' + max_price + '/dien-tich-tu/' + area_range;
 }
 
 // Chuyển giữa các tab gợi ý

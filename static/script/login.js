@@ -1,7 +1,6 @@
 function submitLogin() {
-    username = document.querySelector("#form11").value
-    password = document.querySelector("#form12").value
-    // alert(username + " 12 " + password)
+    username = document.querySelector("#form11").value;
+    password = md5(document.querySelector("#form12").value);
     fetch("../submit-dang-nhap", {
         method: "POST",
         credentials: "include",
@@ -17,19 +16,13 @@ function submitLogin() {
                 resp.json()
                 .then(
                     data => {
-                        if (data.result == "Thành công") {
-                            // alert("...")
-                            if (data.type_account == "auctioneer") {
-                                location.href = '/ben-a';
-                            } else if (data.type_account == "admin") {
-                                location.href = '/ben-c';
-                            } else {
-                                location.href = '/';
-                            }
-                        } else {
-                            alert(data.result)
+                        if (data.message == 'active' || data.message == 'handling') {
+                            location.href = '/';
+                        } else if (data.message == 'block') {
+                            document.getElementById('alert').innerHTML = 'Tài khoản đã bị block!';
+                        } else if (data.message == 'null') {
+                            document.getElementById('alert').innerHTML = 'Username hoặc mật khẩu sai';
                         }
-
                     }
                 )
             }
