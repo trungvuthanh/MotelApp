@@ -5,13 +5,33 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import time
 import unidecode
+from models.address import Address
 
 
-start = datetime.date(datetime.strptime("2020-12-01", "%Y-%m-%d"))
-end = datetime.date(datetime.now())
+# print(Address.normalizeDistrict("Hà Nội", "cau-giay"))
+
+# def a(g, h):
+#     return g + h[1]
+
+# print(a(7, (8, 9)))
+
+query_str = """
+    SELECT idPost, titlePost, priceItem, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) AS "address", area, numOfRoom, priceWater, priceElectric
+    FROM post
+    WHERE priceItem >= 1.8 AND priceItem <= 20
+        AND area >= 0
+        AND statusPost = "active" AND
+    addressDistrict = "Cầu Giấy" and addressProvince = "Hà Nội"  LIMIT 10 OFFSET 0
+    """
+connectDatabase = ConnectDatabase()
+for row in connectDatabase.cursor.execute(query_str).fetchall():
+    print(row)
+
+# start = datetime.date(datetime.strptime("2020-12-01", "%Y-%m-%d"))
+# end = datetime.date(datetime.now())
 
 
-date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days + 1)]
+# date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days + 1)]
 
 
 

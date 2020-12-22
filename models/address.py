@@ -1,4 +1,5 @@
 from models.connectDatabase import ConnectDatabase
+import unidecode
 class Address:
     """
     Class địa chỉ (dùng cho các bộ selection và check validation)
@@ -81,3 +82,16 @@ class Address:
         connectDatabase.close()
         return result
     
+    @staticmethod
+    def normalizeProvince(province):
+        for p in Address.getProvince():
+            if "-".join(unidecode.unidecode(p).lower().split(" ")) == province:
+                return p
+        return None
+    
+    @staticmethod
+    def normalizeDistrict(provinceNormal, district):
+        for d in Address.getDistrict(provinceNormal):
+            if "-".join(unidecode.unidecode(d).lower().split(" ")) == district:
+                return d
+        return None

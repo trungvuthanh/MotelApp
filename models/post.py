@@ -8,6 +8,23 @@ class Post:
     def __init__(self):
         pass
     
+    def getImagePost(self, idPost, limit = "all"):
+        connectDatabase = ConnectDatabase()
+        if limit == "one":
+            query_str = "SELECT image FROM image_post WHERE idPost = ? LIMIT 1"
+            image = connectDatabase.cursor.execute(query_str, idPost).fetchval()
+            connectDatabase.close()
+            return {"idPost": idPost, "image": image}
+        query_str = "SELECT image FROM image_post WHERE idPost = ?"
+        images = connectDatabase.cursor.execute(query_str, idPost).fetchall()
+        connectDatabase.close()
+        return {"idPost": idPost, "images": [image.image for image in images]}
+
+    def checkIdPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = "SELECT COUNT(*) FROM post WHERE idPost = ?"
+        return connectDatabase.cursor.execute(query_str, idPost).fetchval() == 1
+    
     def create(self, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, usernameAuthorPost, typeAccountAuthor, postDuration, listImages):
         # typeAccountAuthor in ["owner", "admin"]
         connectDatabase = ConnectDatabase()
@@ -358,6 +375,7 @@ class Post:
             filterAddress = " addressProvince = ? "
         else: 
             filterAddress = " addressDistrict = ? and addressProvince = ? "
+
         connectDatabase = ConnectDatabase() 
         query_str = """
             SELECT idPost, titlePost, priceItem, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) AS "address", area, numOfRoom, priceWater, priceElectric
@@ -379,7 +397,6 @@ class Post:
             rows = connectDatabase.cursor.execute(query_str, priceItemMin, priceItemMax, area, "active", address[0], (numPage - 1)*10).fetchall()
         else:
             rows = connectDatabase.cursor.execute(query_str, priceItemMin, priceItemMax, area, "active", address[0], address[1], (numPage - 1)*10).fetchall()
-        
         query_str = """
             SELECT COUNT(*)
             FROM post 
@@ -405,6 +422,7 @@ class Post:
         else:
             maxPage = ((count - 1)//10*10 + 10)//10
             hasNext = True if numPage < maxPage else False 
+        
         return {"hasPrev": hasPrev, "hasNext": hasNext, "listPost": [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "address": row.address, "area": row.area, "numOfRoom": row.numOfRoom, "priceWater": row.priceWater, "priceElectric": row.priceElectric} for row in rows]}
     
     

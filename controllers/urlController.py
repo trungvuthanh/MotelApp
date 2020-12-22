@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, escape
+from models.post import Post
 import time
 
 class UrlController:
@@ -23,18 +24,24 @@ class UrlController:
         
         Parameters
         ----------
-        None
+        None    
         """
         # có 4 loại tài khoản, trang home của 4 loại tài khoản này cũng khác nhau
         if 'type_account' not in session:
             return render_template('home.html')
         elif session['type_account'] == "owner":
-            return render_template('home-owner.html')
+            return render_template('post-manager-owner.html')
         elif session['type_account'] == "renter":
             return render_template('home.html')
         else:
-            return render_template('home-admin.html')
-        
+            # type_account is "admin"
+            return render_template('post-manager-admin.html')
+    
+    def detailPost(self, idPost):
+        if Post().checkIdPost(idPost):
+            return render_template('detail-post.html')
+        return
+    
     def loginController(self):
         """
         Chuyển hướng trang đăng nhập của tất cả các loại tài khoản
@@ -48,7 +55,7 @@ class UrlController:
         if 'type_account' not in session:
             return render_template('login.html')
         else:
-            return redirect(url_for('/'))
+            return redirect('/')
     
     def logoutController(self):
         """
@@ -62,11 +69,10 @@ class UrlController:
             # dấu hiệu có sự phá hoại
             time.sleep(10) 
         else:
-            # trường hợp bình thường
-            # xóa toàn bộ session
+            # trường hợp bình thường: xóa toàn bộ session
             session.clear()
-        # chuyển hướng sang trang đăng nhập
-        return redirect(url_for('/dang-nhap'))
+            # chuyển hướng sang trang đăng nhập
+            return redirect('/dang-nhap')
     
     def signupController(self):
         """
@@ -77,7 +83,19 @@ class UrlController:
         None
         """
         if 'type_account' in session:
-            # dấu hiệu có sự phá hoại
+            # bất thường
             session.clear()
         # chuyển hướng sang trang đăng ký
         return render_template('signup.html')
+    
+    def managerPost(self):
+        if 'type_account' not in session:
+            return redirect('/dang-nhap') 
+        elif session['type_account'] == "owner":
+            return render_template('post-manager-owner.html')
+        elif session['type_account'] == "renter":
+            return redirect('/')
+        else:
+            # type_account is "admin"
+            return render_template('post-manager-admin.html')
+    

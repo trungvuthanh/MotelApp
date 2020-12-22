@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, escape
 from models.user import User
+from models.post import Post
 from models.address import Address
 from models.checkValidation import CheckValidation
 import time
@@ -15,6 +16,60 @@ class DataController():
     loginController(): Kiểm tra dữ liệu đăng nhập
         
     """
+    
+    def detailPost(self, idPost):
+        if Post().checkIdPost(idPost):
+            return Post().getAllInfomationPost(idPost)
+        return
+    
+    def normalizeInputDataSearchPost(self, loaibaiviet, minPrice, maxPrice):
+        Post().updateExpiredPost()
+        try:
+            pageNumber = request.form["pageNumber"]
+            statusItem = request.form["statusItem"]
+            sort = request.form["sort"]
+        except:
+            try:
+                pageNumber = request.get_json()["pageNumber"]
+                statusItem = request.get_json()["statusItem"]
+                sort = request.get_json()["sort"]
+            except:
+                pageNumber = None
+                statusItem = None
+                sort = None                
+        itemType = {"bai-dang": "", "phong-tro": "phongtro", "nha-nguyen-can": "nhanguyencan", "chung-cu-mini": "chungcumini", "chung-cu-nguyen-can": "chungcunguyencan"}[loaibaiviet]
+        minPrice = float(minPrice)
+        maxPrice = float(maxPrice)
+        pageNumber = 1 if pageNumber is None else int(pageNumber)
+        if pageNumber <= 0:
+            time.sleep(10)
+            return
+        statusItem = 0 if statusItem is None else {1: "chungchu", 2:"khongchungchu"}[int(statusItem)]
+        sort = "" if sort is None else sort
+        usernameRenter = "" if 'type_account' not in session else session['username']
+        return {"pageNumber": pageNumber, "statusItem": statusItem, "sort": sort, "itemType": itemType, "minPrice": minPrice, "maxPrice": maxPrice, "usernameRenter": usernameRenter}    
+        
+    
+    def getPostButNoRecommend(self, loaibaiviet, stringSeachNoRecommend, minPrice, maxPrice, minArea):
+        data = self.normalizeInputDataSearchPost(loaibaiviet, minPrice, maxPrice)
+        return Post().search(stringSeachNoRecommend, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 0, data["usernameRenter"], data["pageNumber"]) 
+    
+    def getPostFromProvince(self, loaibaiviet, tinh, minPrice, maxPrice, minArea):
+        data = self.normalizeInputDataSearchPost(loaibaiviet, minPrice, maxPrice)
+        tinh = Address.normalizeProvince(tinh)
+        if tinh is None:
+            return
+        return Post().search(tinh, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 1, data["usernameRenter"], data["pageNumber"]) 
+    
+    def getPostFromDistrict(self, loaibaiviet, tinh, huyen, minPrice, maxPrice, minArea):
+        data = self.normalizeInputDataSearchPost(loaibaiviet, minPrice, maxPrice)
+        tinh = Address.normalizeProvince(tinh)
+        if tinh is None:
+            return
+        huyen = Address.normalizeDistrict(tinh, huyen)
+        if huyen is None:
+            return
+        return Post().search(huyen + ", " + tinh, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 1, data["usernameRenter"], data["pageNumber"]) 
     
     def loginController(self):
         """
@@ -46,7 +101,7 @@ class DataController():
         
         # Bước 3: Chuẩn hóa dữ liệu
         username = str(username)
-        password = str(password)
+        password = str(password) 
         
         # Bước 4: Kết nối với model
         user = User(username, password)
