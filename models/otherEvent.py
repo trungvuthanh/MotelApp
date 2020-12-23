@@ -184,7 +184,7 @@ class OtherEvent:
             """
         val = connectDatabase.cursor.execute(query_str, usernameRenter, idPost, "yes").fetchval()
         connectDatabase.close()
-        return {"isFavorite": val!=0}
+        return {"isFavorite": val!=0, "idPost": idPost}
     
     def unFavoritePost(self, usernameRenter, idPost):
         query_str = """
