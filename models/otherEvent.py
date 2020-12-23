@@ -178,14 +178,7 @@ class OtherEvent:
         return [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
     def isFavoritePost(self, usernameRenter, idPost):
-        query_str = """
-            UPDATE favorite_post 
-            SET status = ? 
-            WHERE usernameRenter = ? AND idPost = ? AND NOW() >= time AND status = ?
-            """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, "no", usernameRenter, idPost, "yes")
-        connectDatabase.connection.commit()
         query_str = """
             SELECT COUNT(*) FROM favorite_post WHERE usernameRenter = ? AND idPost = ? AND NOW() > time AND status = ?
             """

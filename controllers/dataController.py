@@ -5,7 +5,9 @@ from models.address import Address
 from models.checkValidation import CheckValidation
 from models.renter import Renter
 from models.owner import Owner
+from models.otherEvent import OtherEvent
 import time
+import json
 
 
 class DataController():
@@ -19,6 +21,22 @@ class DataController():
     loginController(): Kiểm tra dữ liệu đăng nhập
         
     """
+    def renterSendReport(self, idPost, fakeInfo, fakePrice):
+        try:
+            content = request.form["content"]
+        except:
+            try:
+                content = request.get_json()["content"]
+            except:
+                content = ""            
+        if (fakeInfo != 1 and fakeInfo != 0) or (fakePrice != 1 and fakePrice != 0) or ('type_account' not in session or session['type_account'] != "renter"):
+            time.sleep(10)
+            return "fail"
+        OtherEvent().renterSendReport(idPost, session["username"], fakeInfo, fakePrice, content)
+        return "success"
+
+
+            
     
     def detailPost(self, idPost, titlePost):
         if Post().checkPost(idPost, titlePost):

@@ -243,12 +243,11 @@ def getInformationPost(baidangidpost):
     idPost = int(baidangidpost.split("-")[-1])
     return DataController().detailPost(idPost, titlePost)
     
-@app.route("/report/<int:idPost>", methods=["GET"])
-def sendReport(idPost):
-    
-    if session["type_account"] == "renter":
-        OtherEvent().renterSendReport(idPost, session["username"], fakeInfo, fakePrice, content="")
-    return
+@app.route("/report/<int:idPost>/<int:fakeInfo>/<int:fakePrice>", methods=["POST"])
+def sendReport(idPost, fakeInfo, fakePrice):
+    dataController = DataController()
+    return app.response_class(json.dumps({"message": DataController().renterSendReport(idPost, fakeInfo, fakePrice)}), mimetype='application/json')
+ 
     
 
 # print(request.args.get("province"))
