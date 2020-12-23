@@ -89,6 +89,7 @@ class OtherEvent:
             """
         connectDatabase = ConnectDatabase()
         connectDatabase.cursor.execute(query_str, idPost, usernameRenter, fakeInfo, fakePrice, content)
+        connectDatabase.connection.commit()
         connectDatabase.close()
     
     def adminGetAllReport(self, status):

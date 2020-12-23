@@ -8,6 +8,20 @@ import unidecode
 from models.address import Address
 
 
+fetch("url")
+.then(
+    resp => {
+        if (resp.status == 200) {
+            resp.json()
+            .then(
+                data => {
+                    # data.key ....
+                }
+            )
+        }
+    }
+)
+
 # print(Address.normalizeDistrict("Hà Nội", "cau-giay"))
 
 # def a(g, h):

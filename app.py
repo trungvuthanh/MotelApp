@@ -7,6 +7,7 @@ from controllers.dataController import DataController
 from models.post import Post
 from models.address import Address
 from models.otherEvent import OtherEvent
+import time
 
 # cấu hình đường dẫn và idSession
 TEMPLATE_DIR = os.path.abspath('./templates')
@@ -146,13 +147,13 @@ def logout():
 
 
 # -----------------------------------------------------------------------------------
-# ----------------------------API typeAccount, typeAvt-------------------------------
+# ----------------------------API get Information account----------------------------
 # -----------------------------------------------------------------------------------
-@app.route("/type-account", methods=["GET"])
-def typeAccount():
+@app.route("/information-account", methods=["GET"]) # update từ type-account
+def informationAccount():
     if 'type_account' not in session:
         return app.response_class(json.dumps({"typeAccount": "guest"}), mimetype='application/json')
-    return app.response_class(json.dumps({"typeAccount": session['type_account'], "typeAvt": session['type_avatar']}), mimetype='application/json')    
+    return app.response_class(json.dumps({"typeAccount": session['type_account'], "typeAvt": session['type_avatar'], "username": session['username'], "fullname": session['fullname']}), mimetype='application/json')    
 
 
 
@@ -248,8 +249,27 @@ def sendReport(idPost, fakeInfo, fakePrice):
     dataController = DataController()
     return app.response_class(json.dumps({"message": DataController().renterSendReport(idPost, fakeInfo, fakePrice)}), mimetype='application/json')
  
-    
 
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API trang historyB-------------------------------------
+# -----------------------------------------------------------------------------------   
+@app.route("/lich-su-yeu-thich-va-lich-su-xem", methods=["GET"])
+def historyB():
+    if "type_account" not in session or session["type_account"] != "renter":
+        time.sleep(10) 
+        return
+    return render_template("historyB.html")
+
+@app.route("/getHistoryView", methods=["GET"])
+def getHistoryView():
+    if "type_account" not in session or session["type_account"] != "renter":
+        time.sleep(10) 
+        return
+    dataController = DataController()
+    return render_template("historyB.html")
+    time.sleep(10) 
+    return 
 # print(request.args.get("province"))
 
 

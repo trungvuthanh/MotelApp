@@ -207,7 +207,7 @@ class DataController():
                 phoneNumber = request.get_json()["phoneNumber"]
                 email = request.get_json()["email"]
                 birthday = request.get_json()["birthday"]
-                ID = request.form["ID"]
+                ID = request.get_json()["ID"]
                 imageID = request.get_json()["imageID"]
                 addressProvince = request.get_json()["addressProvince"]
                 addressDistrict = request.get_json()["addressDistrict"]
