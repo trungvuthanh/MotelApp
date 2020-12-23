@@ -44,7 +44,7 @@ class OtherEvent:
         query_str = """
             UPDATE favorite_post 
             SET status = ? 
-            WHERE idPost = ? AND usernameRenter = ? AND NOW() >= favorite_post.time)
+            WHERE idPost = ? AND usernameRenter = ? AND NOW() >= favorite_post.time
             """   
         connectDatabase.cursor.execute(query_str, "no", idPost, usernameRenter)
         connectDatabase.connection.commit()
@@ -64,7 +64,7 @@ class OtherEvent:
             ) WHERE idPost = ?
             """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, idPost, "yes")
+        connectDatabase.cursor.execute(query_str, idPost, "yes", idPost)
         connectDatabase.connection.commit()
         connectDatabase.close()       
         
@@ -181,10 +181,10 @@ class OtherEvent:
         query_str = """
             UPDATE favorite_post 
             SET status = ? 
-            WHERE usernameRenter = ? AND idPost = ? AND NOW() >= time AND time < (SELECT MAX(time) FROM favorite_post WHERE usernameRenter = ? AND idPost = ? AND status = ? AND NOW() >= time)
+            WHERE usernameRenter = ? AND idPost = ? AND NOW() >= time AND status = ?
             """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, usernameRenter, "no", usernameRenter, idPost, usernameRenter, idPost, "yes")
+        connectDatabase.cursor.execute(query_str, "no", usernameRenter, idPost, "yes")
         connectDatabase.connection.commit()
         query_str = """
             SELECT COUNT(*) FROM favorite_post WHERE usernameRenter = ? AND idPost = ? AND NOW() > time AND status = ?
@@ -197,10 +197,10 @@ class OtherEvent:
         query_str = """
             UPDATE favorite_post 
             SET status = ? 
-            WHERE usernameRenter = ? AND idPost = ? AND NOW() >= time AND time < (SELECT MAX(time) FROM favorite_post WHERE usernameRenter = ? AND idPost = ? AND status = ? AND NOW() >= time)
+            WHERE usernameRenter = ? AND idPost = ? AND NOW() >= time AND status = ? 
             """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, usernameRenter, "no", usernameRenter, idPost, usernameRenter, idPost, "yes")
+        connectDatabase.cursor.execute(query_str, "no", usernameRenter, idPost, "yes")
         connectDatabase.connection.commit()
         connectDatabase.close()
         
