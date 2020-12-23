@@ -1,0 +1,12 @@
+:root {
+    font-family: "Nunito", "Varta", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.view-count {
+    background-color: #ededed;
+    border-radius: 5px;
+}
+
+.avatar-img {
+    height: 80px;
+}

@@ -59,6 +59,7 @@ function autoScroll() {
 }
 autoScroll()
 
+
 function sendMessage() {
     typeAvt = document.getElementById("avtOwner").src.replace (/[^\d.]/g,''); 
     text = document.getElementById("input-message").value
@@ -66,12 +67,15 @@ function sendMessage() {
     sender = "me"
     typeRead = "loading-message"
     console.log(renderMessageToHTML(sender, text, typeRead, typeAvt) )
-    document.getElementById("message-right").innerHTML += renderMessageToHTML(sender, text, typeRead, typeAvt) 
-    autoScroll()
-    document.getElementById("input-message").focus()
+    if (text.trim() != "") {
+        document.getElementById("message-right").innerHTML += renderMessageToHTML(sender, text, typeRead, typeAvt) 
+        autoScroll()
+        document.getElementById("input-message").focus()
+    }
     // Sau này call API
 
 }
+
 
 document.getElementById("send-message").onclick = ()=> {
     sendMessage()

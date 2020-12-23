@@ -36,7 +36,7 @@
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label for="" class="chimuc">Tên đăng nhập</label>
-                    <input type="text" class="form-control" id="username" pattern="[a-z0-9]{5,15}" placeholder="Username" required>
+                    <input type="text" class="form-control" id="username" onblur="checkUsername()" pattern="[a-z0-9]{5,15}" placeholder="Username" required>
                     <div class="invalid-feedback">Nhập tên đăng nhập.</div>
                 </div>  
             </div>
@@ -171,7 +171,7 @@
             </div>
 
             <!-- Hàng 9: CMND/CCCD -->
-            <div class="form-row">
+            <div class="form-row" id="row-cmnd">
                 
                 <div class="col-md-6 mb-3">                   
                     <label for="" class="chimuc">CMND/CCCD</label> 
@@ -182,14 +182,15 @@
                     <div class="note"><i>CMND/CCCD phải gồm 9-12 chữ số</i></div>
                 </div>
                 <div class="col-md-6 mb-3">     
-                    <label for="">Hình ảnh</label>               
+                                   
                     <div class="form-group">
-                        <div id="inputFileCMND">
-                            <input type="file" class="form-control-file" multiple = "multiple" accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
-                        </div>
+                        <label for="">Hình ảnh</label>
+                        <!-- <div id="inputFileCMND"> -->
+                            <input type="file" class="form-control-file"  accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
+                        <!-- </div> -->
                         <div class="invalid-feedback">Tải lên 1 ảnh.</div>
                         <div id = "preview"></div>
-                    </div>
+                    </div>                   
                 </div>
             </div>
 
@@ -204,7 +205,7 @@
                 <div class="col-md-4 mb-3">                    
                     <select class="custom-select" id="province" required>                        
                         <option value="">Tỉnh/thành phố</option>
-                        <option value="59cdc41a9d2a1700271c2b09">TP Hà Nội</option>
+                        <!-- <option value="59cdc41a9d2a1700271c2b09">TP Hà Nội</option>
                         <option value="59cdc41a9d2a1700271c2b0a">TP Hồ Chí Minh</option>
                         <option value="59cdc41a9d2a1700271c2b0b">An Giang</option>
                         <option value="59cdc41a9d2a1700271c2b0c">Bà Rịa - Vũng Tàu</option>
@@ -222,15 +223,15 @@
                         <option value="59cdc41b9d2a1700271c2b18">Cao Bằng</option>
                         <option value="59cdc41b9d2a1700271c2b19">TP Đà Nẵng</option>
                         <option value="59cdc41b9d2a1700271c2b1a">Đắk Lắk</option>
-                        <option value="59cdc41b9d2a1700271c2b1b">Điện Biên</option>
+                        <option value="59cdc41b9d2a1700271c2b1b">Điện Biên</option> -->
                     </select>
                     <div class="invalid-feedback">Chọn tỉnh thành.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select" required>                        
+                    <select class="custom-select" id="district"  required>                        
                         <option value="">Quận/huyện</option>
-                        <option>Ba Đình</option>
+                        <!-- <option>Ba Đình</option>
                         <option>Ba Vì</option>
                         <option>Bắc Từ Liêm</option>
                         <option>Cầu Giấy</option>
@@ -259,23 +260,23 @@
                         <option>Thanh Trì</option>
                         <option>Thanh Xuân</option>
                         <option>Thường Tín</option>
-                        <option>Ứng Hòa</option>
+                        <option>Ứng Hòa</option> -->
                     </select>
                     <div class="invalid-feedback">Chọn quận huyện.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select" required>                        
+                    <select class="custom-select" id="ward" required>                        
                         <option value="">Phường/xã</option>
-                        <option>Cống Vị</option>
-                        <option>Mỹ Đình 1</option>
+                        <!-- <option>Cống Vị</option>
+                        <option>Mỹ Đình 1</option> -->
                     </select>
                     <div class="invalid-feedback">Chọn phường xã.</div>
                 </div>
             </div>
             <div class="form-row"> 
                 <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="" placeholder="Địa chỉ chi tiết: 1 Hoàng Diệu" required>
+                    <input type="text" class="form-control" id="detailLocation" placeholder="Địa chỉ chi tiết: 1 Hoàng Diệu" required>
                     <div class="invalid-feedback">Nhập địa chỉ chi tiết</div>
                 </div>
             </div>     
@@ -290,6 +291,7 @@
     </div>
     <div id="footer"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/md5.min.js"></script>
     <script src="../static/script/signup.js"></script>
 </body>
 </html>

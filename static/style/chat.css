@@ -23,6 +23,8 @@
   .avatarOwner {
     display: none;
   }
+}
+@media screen and (max-width:990px) {
   .send-message {
     display: none;
   }
