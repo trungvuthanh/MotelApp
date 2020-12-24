@@ -2,11 +2,23 @@ from models.connectDatabase import ConnectDatabase
 from fuzzywuzzy import fuzz
 from datetime import datetime, timedelta
 from calendar import monthrange
-from models.post import Post
+
 
 class OtherEvent:
     def __init__(self):
         pass
+    
+    def getImagePost(self, idPost, limit = "all"):
+        connectDatabase = ConnectDatabase()
+        if limit == "one":
+            query_str = "SELECT image FROM image_post WHERE idPost = ? LIMIT 1"
+            image = connectDatabase.cursor.execute(query_str, idPost).fetchval()
+            connectDatabase.close()
+            return {"idPost": idPost, "image": image}
+        query_str = "SELECT image FROM image_post WHERE idPost = ?"
+        images = connectDatabase.cursor.execute(query_str, idPost).fetchall()
+        connectDatabase.close()
+        return {"idPost": idPost, "images": [image.image for image in images]}
     
     def eventViewPost(self, idPost, usernameRenter=""):
         # lưu lịch sử 
@@ -140,7 +152,7 @@ class OtherEvent:
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, usernameRenter, "yes").fetchall()
         connectDatabase.close()
-        return [{"idPost": row.idPost, "image": Post().getImagePost(row.idPost, "one")["image"], "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
+        return [{"idPost": row.idPost, "image": self.getImagePost(row.idPost, "one")["image"], "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
     def deleteHistoryPost(self, usernameRenter, idPost):
         query_str = """
@@ -177,7 +189,7 @@ class OtherEvent:
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, usernameRenter, "yes").fetchall()
         connectDatabase.close()
-        return [{"idPost": row.idPost, "image": Post().getImagePost(row.idPost, "one")["image"], "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
+        return [{"idPost": row.idPost, "image": self.getImagePost(row.idPost, "one")["image"], "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
     def isFavoritePost(self, usernameRenter, idPost):
         connectDatabase = ConnectDatabase()
