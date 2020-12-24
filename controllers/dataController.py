@@ -5,6 +5,7 @@ from models.address import Address
 from models.checkValidation import CheckValidation
 from models.renter import Renter
 from models.owner import Owner
+from models.user import User
 from models.otherEvent import OtherEvent
 import time
 import json
@@ -21,6 +22,55 @@ class DataController():
     loginController(): Kiểm tra dữ liệu đăng nhập
         
     """
+    def createPost(self):
+        titlePost = str(request.get_json()["titlePost"])
+        contentPost = str(request.get_json()["contentPost"])
+        addressProvince = str(request.get_json()["addressProvince"])
+        addressDistrict = str(request.get_json()["addressDistrict"])
+        addressWard = str(request.get_json()["addressWard"])
+        addressDetail = str(request.get_json()["addressDetail"])
+        if not Address.checkAddress(addressProvince, addressDistrict, addressWard):
+            time.sleep(10)
+            return 
+        locationRelate = str(request.get_json()["locationRelate"])
+        itemType = str(request.get_json()["itemType"])
+        if itemType not in ["phongtro", "nhanguyencan", "chungcumini", "chungcunguyencan"]:
+            time.sleep(10)
+            return 
+        numOfRoom = int(request.get_json()["numOfRoom"])
+        priceItem = float(request.get_json()["priceItem"])
+        area = float(request.get_json()["area"])
+        statusItem = str(request.get_json()["statusItem"])
+        if statusItem not in ["chungchu", "khongchungchu"]:
+            time.sleep(10)
+            return
+        bathroom = str(request.get_json()["bathroom"])
+        temp = bathroom.split(" ")
+        if len(temp) != 2 or temp[0] not in ["khepkin", "khongkhepkin"] or temp[1] not in ["nonglanh", "khongnonglanh"]:
+            time.sleep(10)
+            return
+        kitchen = str(request.get_json()["kitchen"])
+        if kitchen not in ["khubepchung", "khubeprieng", "khongnauan"]:
+            time.sleep(10)
+            return
+        aircondition = int(request.get_json()["aircondition"])
+        if aircondition != 0 and aircondition != 1:
+            time.sleep(10)
+            return
+        balcony = int(request.get_json()["balcony"])
+        if balcony != 0 and balcony != 1:
+            time.sleep(10)
+            return
+        priceElectric = str(request.get_json()["priceElectric"])
+        priceWater = str(request.get_json()["priceWater"])
+        otherUtility = str(request.get_json()["otherUtility"])
+        postDuration = int(request.get_json()["postDuration"])
+        listImages = request.get_json()["listImages"]
+        Post().create(titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, session["username"], session["type_account"], postDuration, listImages)
+    
+    def infoAccount(self, username, typeAccount):
+        return User.infoAccount(username, typeAccount)
+    
     def deleteAllHistoryView(self, usernameRenter):
         OtherEvent().deleteAllHistoryPost(usernameRenter)
         return {"message": "ok"}

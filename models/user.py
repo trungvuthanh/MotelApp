@@ -28,7 +28,20 @@ class User:
         self.username = username
         self.password = password
         
-        
+    def infoAccount(self, username, typeAccount):
+        if typeAccount == "owner":
+            query_str = """
+            SELECT fullName, CONCAT(addressWard, ", ", addressDistrict, ", ", addressProvince) address, phoneNumber
+            FROM owner
+            WHERE username = ?
+            """
+            connectDatabase = ConnectDatabase()
+            row = connectDatabase.cursor.execute(query_str, username, password).fetchone()
+            return {"name": row.fullName, "address": row.address, "phoneNumber": row.phoneNumber}
+        else:
+            return {"name": "Quản trị viên", "address": "Xuân Thủy, Cầu Giấy, Hà Nội", "phoneNumber": "0989898766"}
+    
+      
     def checkLogin(self):
         """
         Kiểm tra thông tin đăng nhập, lưu lại tên, loại tài khoản, avatar (nếu có)

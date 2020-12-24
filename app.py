@@ -297,6 +297,35 @@ def deleteAllHistoryView():
 
 
 
+# -----------------------------------------------------------------------------------
+# ----------------------------API đăng bài-------------------------------------------
+# -----------------------------------------------------------------------------------   
+@app.route("/dang-bai", methods=["GET"])
+def post():
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10) 
+        return
+    return render_template("post.html")
+
+@app.route("/thong-tin-lien-he", methods=["GET"])
+def infoAccount():
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10) 
+        return
+    dataController = DataController()
+    return app.response_class(json.dumps(dataController.infoAccount(session["username"], session["type_account"])), mimetype='application/json')
+
+@app.route("/createPost", methods=["POST"])
+def createPost():
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10) 
+        return
+    dataController = DataController()
+    dataController.createPost()
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+
+
 # print(request.args.get("province"))
 
 
