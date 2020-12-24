@@ -21,6 +21,20 @@ class DataController():
     loginController(): Kiểm tra dữ liệu đăng nhập
         
     """
+    def deleteAllHistoryView(self, usernameRenter):
+        OtherEvent().deleteAllHistoryPost(usernameRenter)
+        return {"message": "ok"}
+    
+    def deleteHistoryView(self, usernameRenter, idPost):
+        OtherEvent().deleteHistoryPost(usernameRenter, idPost)
+        return {"message": "ok"}
+    
+    def getHistoryFavorite(self, usernameRenter):
+        return OtherEvent().getFavoritePost(usernameRenter)
+    
+    def getHistoryView(self, usernameRenter):
+        return OtherEvent().getHistoryPost(usernameRenter)
+    
     def renterSendReport(self, idPost, fakeInfo, fakePrice):
         try:
             content = request.form["content"]

@@ -267,9 +267,36 @@ def getHistoryView():
         time.sleep(10) 
         return
     dataController = DataController()
-    return render_template("historyB.html")
-    time.sleep(10) 
-    return 
+    return app.response_class(json.dumps(dataController.getHistoryView(session["username"])), mimetype='application/json')
+
+@app.route("/getHistoryFavorite", methods=["GET"])
+def getHistoryFavorite():
+    if "type_account" not in session or session["type_account"] != "renter":
+        time.sleep(10) 
+        return
+    dataController = DataController()
+    return app.response_class(json.dumps(dataController.getHistoryFavorite(session["username"])), mimetype='application/json')
+
+# unFavorite ở phía trên
+
+@app.route("/deleteHistoryView/<int:idPost>", methods=["GET"])
+def deleteHistoryView(idPost):
+    if "type_account" not in session or session["type_account"] != "renter":
+        time.sleep(10) 
+        return
+    dataController = DataController()
+    return app.response_class(json.dumps(dataController.deleteHistoryView(session["username"], idPost)), mimetype='application/json')
+
+@app.route("/deleteAllHistoryView", methods=["GET"])
+def deleteAllHistoryView():
+    if "type_account" not in session or session["type_account"] != "renter":
+        time.sleep(10) 
+        return
+    dataController = DataController()
+    return app.response_class(json.dumps(dataController.deleteAllHistoryView(session["username"])), mimetype='application/json')
+
+
+
 # print(request.args.get("province"))
 
 

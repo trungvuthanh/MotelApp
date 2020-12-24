@@ -129,7 +129,7 @@ class OtherEvent:
     
     def getHistoryPost(self, usernameRenter):
         query_str = """
-            SELECT id, DISTINCT(post.idPost), post.titlePost, post.priceItem, post.addressDetail, post.addressWard, post.addressDistrict, post.addressProvince
+            SELECT DISTINCT(post.idPost) idPost, post.titlePost, post.priceItem, post.addressDetail, post.addressWard, post.addressDistrict, post.addressProvince
             FROM history_view
             JOIN post ON history_view.idPost = post.idPost
             WHERE usernameRenter = ? AND history_view.status = ?
@@ -139,7 +139,7 @@ class OtherEvent:
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, usernameRenter, "yes").fetchall()
         connectDatabase.close()
-        return [{"id": row.id, "idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
+        return [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
     def deleteHistoryPost(self, usernameRenter, idPost):
         query_str = """
@@ -170,7 +170,7 @@ class OtherEvent:
             WHERE idPost IN (
                 SELECT DISTINCT(idPost)
                 FROM favorite_post
-                WHERE usernameRenter = ? AND AND status = ? AND NOW() >= time 
+                WHERE usernameRenter = ? AND status = ? AND NOW() >= time 
             )
             """
         connectDatabase = ConnectDatabase()
