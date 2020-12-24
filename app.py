@@ -177,17 +177,19 @@ def getPostButNoRecommend(loaibaiviet, stringSeachNoRecommend, minPrice, maxPric
     # body có thể có: pageNumber (start: 1), statusItem (1: "chungchu", 2:"khongchungchu"), sort("price DESC", "price", "area DESC", "area")
     # tham số nào không có thì "không" để default value (statusItem, sort)
     dataController = DataController()
-    return dataController.getPostButNoRecommend(loaibaiviet, stringSeachNoRecommend, minPrice, maxPrice, minArea)
+    return app.response_class(json.dumps(dataController.getPostButNoRecommend(loaibaiviet, stringSeachNoRecommend, minPrice, maxPrice, minArea)), mimetype='application/json')   
+
 
 @app.route("/<loaibaiviet>/dia-chi/<tinh>/1/gia/<minPrice>/<maxPrice>/dien-tich-tu/<int:minArea>", methods=["POST"])
 def getPostFromProvince(loaibaiviet, tinh, minPrice, maxPrice, minArea):
     dataController = DataController()
-    return dataController.getPostFromProvince(loaibaiviet, tinh, minPrice, maxPrice, minArea)
+    return app.response_class(json.dumps(dataController.getPostFromProvince(loaibaiviet, tinh, minPrice, maxPrice, minArea)), mimetype='application/json')
 
 @app.route("/<loaibaiviet>/dia-chi/<tinh>/<huyen>/gia/<minPrice>/<maxPrice>/dien-tich-tu/<int:minArea>", methods=["POST"])
 def getPostFromDistrict(loaibaiviet, tinh, huyen, minPrice, maxPrice, minArea):
     dataController = DataController()
-    return dataController.getPostFromDistrict(loaibaiviet, tinh, huyen, minPrice, maxPrice, minArea)
+    return app.response_class(json.dumps(dataController.getPostFromDistrict(loaibaiviet, tinh, huyen, minPrice, maxPrice, minArea)), mimetype='application/json')
+
 
 
 # -----------------------------------------------------------------------------------
