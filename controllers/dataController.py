@@ -402,6 +402,12 @@ class DataController():
                 Renter().signup(username, password, fullname, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt)
             else:
                 Owner().signup(username, password, fullname, phoneNumber, email, birthday, ID, imageID, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt)
+            session['username'] = username
+            session['password'] = password
+            session['type_account'] = typeAccount
+            session['type_avatar'] = typeAvt
+            session['fullname'] = fullname
+            session['status'] = "active" if typeAccount == "renter" else "handling"
             return "success"
         except:
             return "error"
