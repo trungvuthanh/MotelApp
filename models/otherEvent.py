@@ -2,6 +2,7 @@ from models.connectDatabase import ConnectDatabase
 from fuzzywuzzy import fuzz
 from datetime import datetime, timedelta
 from calendar import monthrange
+from models.post import Post
 
 class OtherEvent:
     def __init__(self):
@@ -139,7 +140,7 @@ class OtherEvent:
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, usernameRenter, "yes").fetchall()
         connectDatabase.close()
-        return [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
+        return [{"idPost": row.idPost, "image": Post().getImagePost(row.idPost, "one")["image"], "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
     def deleteHistoryPost(self, usernameRenter, idPost):
         query_str = """
@@ -176,7 +177,7 @@ class OtherEvent:
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, usernameRenter, "yes").fetchall()
         connectDatabase.close()
-        return [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
+        return [{"idPost": row.idPost, "image": Post().getImagePost(row.idPost, "one")["image"], "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
     def isFavoritePost(self, usernameRenter, idPost):
         connectDatabase = ConnectDatabase()

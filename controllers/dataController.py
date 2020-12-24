@@ -6,6 +6,7 @@ from models.checkValidation import CheckValidation
 from models.renter import Renter
 from models.owner import Owner
 from models.user import User
+from models.post import Post
 from models.otherEvent import OtherEvent
 import time
 import json
@@ -22,6 +23,63 @@ class DataController():
     loginController(): Kiểm tra dữ liệu đăng nhập
         
     """
+    def editPost(self, idPost):
+        titlePost = str(request.get_json()["titlePost"])
+        contentPost = str(request.get_json()["contentPost"])
+        addressProvince = str(request.get_json()["addressProvince"])
+        addressDistrict = str(request.get_json()["addressDistrict"])
+        addressWard = str(request.get_json()["addressWard"])
+        addressDetail = str(request.get_json()["addressDetail"])
+        if not Address.checkAddress(addressProvince, addressDistrict, addressWard):
+            return 
+        locationRelate = str(request.get_json()["locationRelate"])
+        itemType = str(request.get_json()["itemType"])
+        if itemType not in ["phongtro", "nhanguyencan", "chungcumini", "chungcunguyencan"]:
+            return
+        numOfRoom = int(request.get_json()["numOfRoom"])
+        priceItem = float(request.get_json()["priceItem"])
+        area = float(request.get_json()["area"])
+        statusItem = float(request.get_json()["statusItem"])
+        if statusItem not in ["chungchu", "khongchungchu"]:
+            return
+        bathroom = str(request.get_json()["bathroom"])
+        temp = bathroom.split(" ")
+        if len(temp) != 2 or temp[0] not in ["khepkin", "khongkhepkin"] or temp[1] not in ["nonglanh", "khongnonglanh"]:
+            time.sleep(10)
+            return
+        kitchen = str(request.get_json()["kitchen"])
+        if kitchen not in ["khubepchung", "khubeprieng", "khongnauan"]:
+            time.sleep(10)
+            return
+        aircondition = int(request.get_json()["aircondition"])
+        if aircondition != 0 and aircondition != 1:
+            time.sleep(10)
+            return
+        balcony = int(request.get_json()["balcony"])
+        if balcony != 0 and balcony != 1:
+            time.sleep(10)
+            return
+        priceElectric = str(request.get_json()["priceElectric"])
+        priceWater = str(request.get_json()["priceWater"])
+        otherUtility = str(request.get_json()["otherUtility"])
+        postDuration = int(request.get_json()["postDuration"])
+        listImages = request.get_json()["listImages"]
+        Post().editPost(idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, session["username"])
+    
+    def managePost(self, username, typeAccount):
+        statusPost = str(request.get_json()["statusPost"])
+        sortDate = str(request.get_json()["sortDate"])
+        access = str(request.get_json()["access"])
+        if statusPost not in ["handling", "expired", "active", "extend", "block", "postOfAdmin"] or sortDate not in ["createDateASC", "createDateDESC", "acceptDateASC", "acceptDateDESC", "expireDateASC", "expireDateDESC", "acceptDateASC", "acceptDateDESC"] or access not in ["viewASC", "viewDESC", "favoriteASC", "favoriteDESC", "ratingASC", "ratingDESC"]:
+            return
+        if typeAccount == "owner":        
+            return Post().getAllPost(typeAccount, username, statusPost, sortDate, access)
+        elif typeAccount == "admin":
+            province = str(request.get_json()["province"])
+            district = str(request.get_json()["district"]) # ""
+            ward = str(request.get_json()["ward"]) # ""
+            return Post().getAllPost(typeAccount, username, statusPost, sortDate, access, province, district, ward)
+    
     def createPost(self):
         titlePost = str(request.get_json()["titlePost"])
         contentPost = str(request.get_json()["contentPost"])
@@ -198,6 +256,7 @@ class DataController():
             session['type_account'] = user.type_account
             session['type_avatar'] = user.type_avatar
             session['fullname'] = user.fullname
+            session['status'] = messageLogin
         return messageLogin
         
     def checkUsernameController(self):

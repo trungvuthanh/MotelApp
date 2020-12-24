@@ -35,8 +35,79 @@ def managerPost():
     urlController = UrlController()
     return urlController.managerPost()
 
+@app.route("/managePost", methods=["POST"])
+def managePost():
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    dataController = DataController()
+    return app.response_class(json.dumps(dataController.managePost(session["username"], session["type_account"])), mimetype='application/json')
 
+@app.route("/getMoreInfo/<int:idPost>", methods=["POST"])
+def getMoreInfo(idPost):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    return app.response_class(json.dumps(Post().getMoreInformationPost(idPost)), mimetype='application/json')
 
+@app.route("/gia-han-bai-dang/<int:idPost>/<int:postDuation>", methods=["GET"])
+def extendPost(idPost, postDuration):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    Post().extendPost(idPost, postDuration, session["type_account"], session["username"])
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/blockPost/<int:idPost>", methods=["GET"])
+def blockPost(idPost):
+    if "type_account" not in session or session["type_account"] != "admin":
+        time.sleep(10)
+        return
+    Post().blockPost(idPost)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/unblockPost/<int:idPost>", methods=["GET"])
+def unblockPost(idPost):
+    if "type_account" not in session or session["type_account"] != "admin":
+        time.sleep(10)
+        return
+    Post().unblockPost(idPost)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/notification", methods=["GET"])
+def notification(idPost):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    Post().unblockPost(idPost)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API chỉnh sửa thông tin--------------------------------
+# -----------------------------------------------------------------------------------
+@app.route("/chinh-sua-bai-dang/<int:idPost>", methods=["POST"])
+def getPageEditPost(idPost):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    if Post().checkEditPost(idPost, session["username"]):
+        return render_template("editPost.html")
+
+@app.route("/editPost/<int:idPost>", methods=["POST"])
+def editPost(idPost):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    DataController().editPost(idPost)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/updateStatusHired/<int:idPost>", methods=["POST"])
+def updateStatusHired(idPost):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    Post().updateStatusHired(idPost, session["username"], session["statusHired"])
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 # -----------------------------------------------------------------------------------
 # ----------------------------API recommend search-----------------------------------

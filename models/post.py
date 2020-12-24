@@ -91,14 +91,10 @@ class Post:
         content = "Bài đăng " + str(idPost) + " bị từ chối do thông tin không hợp lý hoặc chưa thanh toán phí. Thử với bài đăng khác hoặc liên hệ lại với quản trị viên"    
         Notification().create(titleNotification, usernameOwner, icon, content)
     
-    def ownerCheckEditPost(self, idPost):
+    def checkEditPost(self, idPost, username):
         connectDatabase = ConnectDatabase()
-        query_str = "SELECT statusPost FROM post WHERE idPost = ?"
-        statusPost = connectDatabase.cursor.execute(query_str, idPost).fetchval()
-        if statusPost == "handling":
-            return True
-        else: 
-            return False
+        query_str = "SELECT COUNT(*) FROM post WHERE idPost = ? AND statusPost = ? AND usernameAuthorPost = ?"
+        return connectDatabase.cursor.execute(query_str, idPost, "handling", username).fetchval() == 1
     
     def editPost(self, idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, usernameOwner):
         # sử dụng khi owner muốn chỉnh sửa bài đăng mà admin chưa phê duyệt
@@ -249,7 +245,7 @@ class Post:
         elif access == "ratingDESC":
             query_str += "avgRating DESC "
         
-        query_str += " LIMIT 50 "
+        query_str += " LIMIT 10 "
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str).fetchall()
         connectDatabase.close()
