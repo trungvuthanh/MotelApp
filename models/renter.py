@@ -21,7 +21,7 @@ class Renter(User):
         """
         query_str = """
             INSERT INTO renter(username, password, fullname, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt, status, createDate)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """
         connectDatabase = ConnectDatabase()
         connectDatabase.cursor.execute(query_str, username, password, fullname, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt, "active", datetime.date(datetime.now()))
