@@ -4,7 +4,96 @@
 
 .view-count {
     background-color: #ededed;
+    font-weight: 500;
+    text-align: center;
     border-radius: 5px;
+}
+.love-count {
+    background-color: #ededed;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 5px;
+}
+.review-count {
+    background-color: #ededed;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 5px;
+}
+.report-count {
+    background-color: #ededed;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 5px;
+}
+.chimuc {
+    font-weight: 500;
+}
+.info-signup {
+    background-color: #ededed;
+    border-radius: 5px;
+}
+.tieude h2 {
+    font-size: 1.25rem;
+}
+.left {
+    background-color: #ededed;
+    border-radius: 5px;
+}
+.right {
+    background-color: #ededed;
+    border-radius: 5px;
+}
+.view {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.love {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+/* Style scrollbar */
+.view::-webkit-scrollbar {
+    width: 10px; 
+  }
+  .view::-webkit-scrollbar-track {
+    background: #ffffff; 
+    border-radius: 3px;
+  }
+  .view::-webkit-scrollbar-thumb {
+    background: #ffffff; 
+    border-radius: 3px;
+  }
+  .view::-webkit-scrollbar-thumb:hover {
+    width: 10px;
+    background: #d4d4d4; 
+  }
+.love::-webkit-scrollbar {
+    width: 10px; 
+  }
+  .love::-webkit-scrollbar-track {
+    background: #ffffff; 
+    border-radius: 3px;
+  }
+  .love::-webkit-scrollbar-thumb {
+    background: #ffffff; 
+    border-radius: 3px;
+  }
+  .love::-webkit-scrollbar-thumb:hover {
+    width: 10px;
+    background: #d4d4d4; 
+  }
+.id-post {
+    color: #a1a1a1;
+    font-weight: 300;
+}
+.title-post {
+    font-weight: 500;
+}
+.post-pic {
+    height: 80px;
 }
 
 .avatar-img {
