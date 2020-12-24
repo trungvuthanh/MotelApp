@@ -29,3 +29,12 @@ function submitLogin() {
         }
     )
 }
+
+document.querySelector("#form11").onkeyup = (e) => {
+    if (e.keyCode == 13) {
+        document.querySelector("#form12").focus();
+    }
+}
+document.querySelector("#form12").onkeyup = (e) => {
+    if (e.keyCode == 13) submitLogin();
+}

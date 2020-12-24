@@ -37,7 +37,7 @@
                     </div> -->
                 </li>
                 <li class="account-menu">
-                    <a class="btn ml-md-2" href="/dang-nhap" id="nameAccount">Nguyễn Hùng Duy</a>
+                    <a class="btn ml-md-2" id="nameAccount"></a>
                     <div class="dropdownMenu">
                         <a class="nav-link menu-item edit-account" href="/chinh-sua-thong-tin">Chỉnh sửa thông tin</a>
                         <a class="nav-link menu-item logout" href="/dang-xuat"> Đăng xuất</a>
@@ -63,6 +63,19 @@
             $('.dropdown_statistic_menu').slideToggle(100);
             $('.dropdown_statistic_menu').show();
         });
+        fetch('/information-account')
+        .then(
+            resp => {
+                if (resp.status == 200) {
+                    resp.json()
+                    .then(
+                        data => {
+                            $('#nameAccount').html(data.fullname);
+                        }
+                    )
+                }
+            }
+        )
     </script>
 </body>
 </html>

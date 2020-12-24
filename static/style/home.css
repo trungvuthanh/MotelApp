@@ -97,6 +97,7 @@ html {
 }
 .autocom-box div:hover {
     background-color: #efefef;
+    cursor: pointer;
 }
 .autocom-box div.pointed {
     background-color: #efefef;

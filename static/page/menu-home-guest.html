@@ -27,23 +27,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $('.account-menu').hover(function() {
-            $('.dropdownMenu').slideToggle(100);
-            $('.dropdownMenu').show();
-        });
-
         window.addEventListener('scroll', function() {
             var header = document.querySelector('#head-menu');
             header.classList.toggle('sticky', window.scrollY > 0);
         });
-
-        $('#accountName').click(function() {
-            $('.account-drop').slideToggle(100);
-        });
-
         $('button.navbar-toggler').css('background-color', '#ffffff');
-
         $('.navbar-nav').css('flex-direction', 'row');
+
+        // $('.account-menu').hover(function() {
+        //     $('.dropdownMenu').slideToggle(100);
+        //     $('.dropdownMenu').show();
+        // });
+
+        // $('#accountName').click(function() {
+        //     $('.account-drop').slideToggle(100);
+        // });
+        
     </script>
 </body>
 </html>

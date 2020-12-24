@@ -1,14 +1,20 @@
-$('#menu').load('../static/page/menu-home.html');
-$('#footer').load('../static/page/footer.html');
-
-// Menu
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 0) {
-        document.getElementById('head-menu').className = "navbar navbar-expand-md navbar-light sticky";
-    } else {
-        document.getElementById('head-menu').className = "navbar navbar-expand-md navbar-light";
+// Load menu, footer
+var typeAcc;
+fetch('/information-account')
+.then(
+    resp => {
+        if (resp.status == 200) {
+            resp.json()
+            .then(
+                data => {
+                    typeAcc = data.typeAccount;
+                    $('#menu').load('/static/page/menu-home-' + data.typeAccount + '.html');
+                }
+            )
+        }
     }
-});
+)
+$('#footer').load('../static/page/footer.html');
 
 // Thanh trượt khoảng giá
 $(document).ready(function() {
@@ -32,14 +38,14 @@ $(document).ready(function() {
 
 // Query input
 const searchWrapper = document.querySelector('.search-input');
-    const inputBox = searchWrapper.querySelector('input');
+const inputBox = searchWrapper.querySelector('input');
 const suggBox = searchWrapper.querySelector('.autocom-box');
 suggestions = []
 
 // Tìm kiếm
-console.log($('#min_price').val());
 function searchRaw() {
     keyword = document.getElementById('searchInput').value;
+    sessionStorage.setItem('keyword', keyword); // Lưu từ khóa vào session
     room_type = document.getElementById('itemType').value;
     min_price = document.getElementById('min_price').value;
     max_price = document.getElementById('max_price').value;
@@ -167,13 +173,13 @@ function showSuggestions(list) {
     suggBox.innerHTML = listData;
 }
 function searchSelect(elmt) {
-    keyword = elmt.textContent;
-    text_create = keyword.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a").replace(/đ/g, "d").replace(/đ/g, "d").replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y").replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u").replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ.+/g,"o").replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ.+/g, "e").replace(/ì|í|ị|ỉ|ĩ/g,"i");
+    keyword = elmt.textContent.toLowerCase();
+    text_create = keyword.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a").replace(/đ/g, "d").replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y").replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u").replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ.+/g,"o").replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ.+/g, "e").replace(/ì|í|ị|ỉ|ĩ/g,"i");
     text_create = text_create.toLowerCase().split(', ');
     if (text_create.length == 1) {
-        text_create = text_create[0].replace(' ', '-') + '/1';
+        text_create = text_create[0].replaceAll(' ', '-') + '/1';
     } else {
-        text_create = text_create[1].replace(' ', '-') + '/' + text_create[0].replace(' ', '-')
+        text_create = text_create[1].replaceAll(' ', '-') + '/' + text_create[0].replaceAll(' ', '-')
     }
     room_type = document.getElementById('itemType').value;
     min_price = document.getElementById('min_price').value;
@@ -181,6 +187,15 @@ function searchSelect(elmt) {
     area_range = document.getElementById('area_range').value;
     location.href = '../' + room_type + '/dia-chi/' + text_create + '/gia/' + min_price + '/' + max_price + '/dien-tich-tu/' + area_range;
 }
+
+// $(inputBox).focus(function() {
+//     $(suggBox).css('opacity', 1);
+//     $(suggBox).css('pointer-events', 'auto');
+// });
+// inputBox.onblur = function() {
+//     suggBox.style.opacity = 0;
+//     $(suggBox).css('pointer-events', 'none');
+// }
 
 // Chuyển giữa các tab gợi ý
 let tabHeader = document.getElementsByClassName("tab-header")[0];

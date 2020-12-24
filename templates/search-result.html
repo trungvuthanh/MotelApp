@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <link rel="stylesheet" href="../static/style/common.css">
-    <link rel="stylesheet" href="../static/style/search-result.css">
-    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <link rel="stylesheet" href="/static/style/common.css">
+    <link rel="stylesheet" href="/static/style/search-result.css">
+    <link rel="shortcut icon" href="/static/image/icon.png"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
 </head>
@@ -22,20 +22,19 @@
         <!-- Bộ lọc phía trên -->
         <div class="head-filter container w90">
             <div>
-                <h1 class="result-title title">Kết quả tìm kiếm <span>"cầu giấy dịch vọng"</span></h1>
-                <p>Có 69 kết quả được tìm thấy</p>
+                <h1 class="result-title title">Kết quả tìm kiếm <span id="keyword"></span></h1>
                 <div class="flex-row mb-0">
                     <div class="col-md-7 p-0">
                         <div class="flex-row mb-0">
-                            <div class="title col-md-2 p-1 flex-column justify-content-center">
-                                Tìm kiếm
-                            </div>
-                            <div class="col-md-10 p-1 flex-column">
+                            <div class="title col-md-2 p-1 flex-column justify-content-center">Tìm kiếm</div>
+                            <div class="col-md-9 p-1 flex-column">
                                 <div class="search-input">
                                     <input id="searchInput" autocomplete="off" type="text" class="form-control" placeholder="Nhập địa điểm cần tìm">
-                                    <!-- <div class="autocom-box">
-                                        <li>Cầu Giấy, Hà Nội</li>
-                                    </div>  -->
+                                    <div class="autocom-box">
+                                        <div>Cầu Giấy, Hà Nội</div>
+                                        <div>Cà Mau</div>
+                                        <div>Cà Mau, Cà Mau</div>
+                                    </div> 
                                 </div>
                             </div>
                             <!-- <div class="title mt-auto">Nhập từ khóa</div> -->
@@ -47,10 +46,10 @@
                             <div class="col-md-7 p-1">
                                 <select class="form-control" name="order" id="order">
                                     <option value="">Sắp xếp theo</option>
-                                    <option value="">Giá tăng dần</option>
-                                    <option value="">Giá giảm dần</option>
-                                    <option value="">Diện tích tăng dần</option>
-                                    <option value="">Diện tích giảm dần</option>
+                                    <option value="price">Giá tăng dần</option>
+                                    <option value="price DESC">Giá giảm dần</option>
+                                    <option value="area">Diện tích tăng dần</option>
+                                    <option value="area DESC">Diện tích giảm dần</option>
                                 </select>
                             </div>
                             <div class="col-md-5 p-1">
@@ -88,12 +87,12 @@
                                 <p class="title">Diện tích</p>
                             </div>
                             <div class="col-sm-auto">
-                                <select class="form-control" onchange="filter()">
-                                    <option value="">Không giới hạn</option>
-                                    <option value="">Trên 30 m2</option>
-                                    <option value="">Trên 60 m2</option>
-                                    <option value="">Trên 100 m2</option>
-                                    <option value="">Trên 125 m2</option>
+                                <select class="form-control" id="area_range">
+                                    <option value="0">Không giới hạn</option>
+                                    <option value="30">Trên 30 m2</option>
+                                    <option value="60">Trên 60 m2</option>
+                                    <option value="100">Trên 100 m2</option>
+                                    <option value="125">Trên 125 m2</option>
                                 </select>
                             </div>
                         </div>
@@ -104,12 +103,12 @@
                                 <p class="title">Loại phòng</p>
                             </div>
                             <div class="col-sm-auto">
-                                <select class="form-control" onchange="filter()">
-                                    <option value="">Tất cả</option>
-                                    <option value="">Phòng trọ</option>
-                                    <option value="">Nhà nguyên căn</option>
-                                    <option value="">Chung cư mini</option>
-                                    <option value="">Chung cư nguyên căn</option>
+                                <select class="form-control" id="itemType">
+                                    <option value="bai-dang">Tất cả</option>
+                                    <option value="phong-tro">Phòng trọ</option>
+                                    <option value="nha-nguyen-can">Nhà nguyên căn</option>
+                                    <option value="chung-cu-mini">Chung cư mini</option>
+                                    <option value="chung-cu-nguyen-can">Chung cư nguyên căn</option>
                                 </select>
                             </div>
                         </div>
@@ -121,9 +120,9 @@
                             </div>
                             <div class="col-sm-auto">
                                 <div>
-                                    <input type="checkbox" name="hinhThucO" id="chungChu" value="1" onclick="filter()">
+                                    <input type="checkbox" name="hinhThucO" id="chungChu" value="1" onclick="updateStatusItem()">
                                     <label for="chungChu">Chung chủ</label> <br>
-                                    <input type="checkbox" name="hinhThucO" id="khongChungChu" value="2" onclick="filter()">
+                                    <input type="checkbox" name="hinhThucO" id="khongChungChu" value="2" onclick="updateStatusItem()">
                                     <label for="khongChungChu" class="m-0">Không chung chủ</label>
                                 </div>
                             </div>
@@ -132,9 +131,10 @@
 
                     <!-- Các dòng kết quả -->
                     <div class="result-rows col-lg-7">
-                        <div class="item-result border">
+                        <div></div>
+                        <!-- <div class="item-result border">
                             <div class="item-img">
-                                <img src="../static/image/loading.gif">
+                                <img src="/static/image/loading.gif">
                                 <div class="item-favourite">
                                     <i class="fas fa-heart" onclick="saveFavourite(this)"></i>
                                 </div>
@@ -142,12 +142,6 @@
                             <a href="/detail-post"><div class="item-info">
                                 <div>
                                     <h6><b>Chung cư nguyên căn sinh viên</b></h6>
-                                    <div class="item-star">
-                                        <div class="avg-rating text-center text-white rounded">
-                                            <span>4.0</span>
-                                        </div>
-                                        <p>50 đánh giá</p>
-                                    </div>
                                 </div>
 
                                 <p class="item-price">Giá phòng: 2.500.000 đ/tháng</p>
@@ -156,10 +150,10 @@
                                 <p>Giá nước: 60.000 đ/người - Giá điện: 4000 đ/số</p>
                                 <p></p>
                             </div></a>
-                        </div>
-                        <div class="item-result border">
+                        </div> -->
+                        <!-- <div class="item-result border">
                             <div class="item-img">
-                                <img src="../static/image/no_image_available.jpeg">
+                                <img src="/static/image/no_image_available.jpeg">
                                 <div class="item-favourite">
                                     <i class="fas fa-heart red" onclick="saveFavourite(this)"></i>
                                 </div>
@@ -186,18 +180,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="w3-center">
                             <div class="w3-section">
-                                <button class="w3-button w3-light-grey" onclick="plusDivs(-1)">❮ Trang trước</button>
-                                <button class="w3-button w3-light-grey" onclick="plusDivs(1)">Trang sau ❯</button>
+                                <button class="w3-button w3-light-grey" id="btnPrev" onclick="plusDivs(-1)">❮ Trang trước</button>
+                                <button class="w3-button w3-light-grey" id="btnNext" onclick="plusDivs(1)">Trang sau ❯</button>
                             </div>
                         </div>
                     </div>
                     <div class="right-advertising col-lg-2">
-                        <img src="../static/image/advertising-banner1.jpg" alt="ads">
-                        <img src="../static/image/advertising-banner2.png" alt="ads">
+                        <img src="/static/image/advertising-banner1.jpg" alt="ads">
+                        <img src="/static/image/advertising-banner2.png" alt="ads">
                     </div>
                 </div>
             </div>
@@ -213,7 +207,7 @@
 
     <!-- JQuery lib -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/script/search-result.js"></script>
+    <script src="/static/script/search-result.js"></script>
 
     <!-- Slider css, js lib -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

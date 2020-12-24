@@ -45,6 +45,52 @@ input[type="radio"]:hover {
     }
 }
 
+.search-input {
+    position: relative;
+    align-items: center;
+    background-color: #ffffff;
+    /* overflow: hidden; */
+}
+#searchInput {
+    z-index: 4;
+}
+#searchInput:focus {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+}
+.search-input .autocom-box {
+    position: absolute;
+    max-height: 216px;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.search-input.active .autocom-box {
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+}
+.autocom-box div {
+    list-style: none;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+    display: none;
+}
+.search-input.active .autocom-box div {
+    display: block;
+}
+.autocom-box div:hover {
+    background-color: #efefef;
+    cursor: pointer;
+}
+.autocom-box div.pointed {
+    background-color: #efefef;
+}
+
 /* Màn hình chính */
 .main-content {
     padding-top: 15px;
@@ -194,10 +240,6 @@ input[type="radio"]:hover {
     margin-top: 16px;
     margin-bottom: 16px;
 }
-.w3-button:hover{
-    color:#000!important;
-    background-color:#ccc!important;
-}
 .w3-button {
     border:none;
     display:inline-block;
@@ -217,7 +259,19 @@ input[type="radio"]:hover {
 }
 .w3-light-grey {
     color: #000;
-    background-color: #f1f1f1!important;
+    background-color: #f1f1f1;
+}
+.result-rows .w3-button:hover{
+    color:#000000;
+    background-color:#ccc;
+}
+.w3-button:disabled {
+    cursor: default;
+    color: #b5b5b5;
+}
+.result-rows .w3-button:disabled:hover {
+    color: #b5b5b5;
+    background-color: #f1f1f1;
 }
 
 /* Thống kê bên phải */
