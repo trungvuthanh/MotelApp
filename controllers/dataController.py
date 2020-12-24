@@ -137,14 +137,14 @@ class DataController():
     
     def getPostButNoRecommend(self, loaibaiviet, stringSeachNoRecommend, minPrice, maxPrice, minArea):
         data = self.normalizeInputDataSearchPost(loaibaiviet, minPrice, maxPrice)
-        return Post().search(stringSeachNoRecommend, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 0, data["usernameRenter"], data["pageNumber"]) 
+        return [Post().search(stringSeachNoRecommend, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 0, data["usernameRenter"], data["pageNumber"]), {"stringSearch": stringSeachNoRecommend}]
     
     def getPostFromProvince(self, loaibaiviet, tinh, minPrice, maxPrice, minArea):
         data = self.normalizeInputDataSearchPost(loaibaiviet, minPrice, maxPrice)
         tinh = Address.normalizeProvince(tinh)
         if tinh is None:
             return
-        return Post().search(tinh, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 1, data["usernameRenter"], data["pageNumber"]) 
+        return [Post().search(tinh, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 1, data["usernameRenter"], data["pageNumber"]), {"stringSearch": tinh}]
     
     def getPostFromDistrict(self, loaibaiviet, tinh, huyen, minPrice, maxPrice, minArea):
         data = self.normalizeInputDataSearchPost(loaibaiviet, minPrice, maxPrice)
@@ -154,7 +154,7 @@ class DataController():
         huyen = Address.normalizeDistrict(tinh, huyen)
         if huyen is None:
             return
-        return Post().search(huyen + ", " + tinh, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 1, data["usernameRenter"], data["pageNumber"]) 
+        return [Post().search(huyen + ", " + tinh, data["itemType"], data["minPrice"], data["maxPrice"], minArea, data["sort"], data["statusItem"], 1, data["usernameRenter"], data["pageNumber"]), {"stringSearch": huyen + ", " + tinh}]
     
     def loginController(self):
         """
