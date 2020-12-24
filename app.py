@@ -389,9 +389,7 @@ def test():
     #     print(rw)
     # return render_template('test.html')
 
-@app.route("/post", methods=["GET"])
-def post():
-    return render_template('post.html')
+
 
 @app.route("/post", methods=["POST"])
 def postm():
