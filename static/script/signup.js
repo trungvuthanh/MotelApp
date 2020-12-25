@@ -197,6 +197,8 @@ document.getElementById("province").onchange = function() {
                 .then(
                     data => {
                         districts = data.districts
+                        document.getElementById("district").innerHTML = '<option value="">Quận/huyện</option>'
+                        document.getElementById("ward").innerHTML = '<option value="">Phường/xã</option>'
                         for (var i = 0; i < districts.length; i ++) {
                             document.getElementById("district").innerHTML += 
                             '<option value="' + districts[i] + '">' + districts[i] + '</option>'                       
@@ -219,6 +221,7 @@ document.getElementById("district").onchange = function() {
                 .then(
                     data => {
                         wards = data.wards
+                        document.getElementById("ward").innerHTML = '<option value="">Phường/xã</option>'
                         for (var i = 0; i < wards.length; i ++) {
                             document.getElementById("ward").innerHTML += 
                             '<option value="' + wards[i] + '">' + wards[i] + '</option>'                       

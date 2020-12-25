@@ -28,58 +28,58 @@
                         <!-- Bộ lọc phía trên -->
                         <div class="filter">
                             <div><label class="filter-title" for="status">Loại bài đăng</label>
-                                <select class="form-control" name="status" onchange="statusChange()">
+                                <select class="form-control" name="status" id="statusPost">
                                     <option value="handling">Bài chờ duyệt</option>
                                     <option value="active">Bài đã đăng</option>
                                     <option value="expired">Bài hết hạn</option>
                                     <option value="extend">Bài gia hạn</option>
-                                    <option value="refuse">Bài đã từ chối</option>
-                                    <option value="admin">Bài của Quản trị viên</option>
+                                    <option value="block">Bài bị chặn</option>
+                                    <option value="postOfAdmin">Bài của Quản trị viên</option>
                                 </select></div>
                             <div><label class="filter-title" for="sortDate">Sắp xếp theo</label>
-                                <select class="form-control" name="sortDate">
-                                    <option value="createDateASC">Ngày tạo mới nhất</option>
-                                    <option value="createDateDESC">Ngày tạo cũ nhất</option>
-                                    <option value="acceptDateASC">Ngày đăng mới nhất</option>
-                                    <option value="acceptDateDESC">Ngày đăng cũ nhất</option>
-                                    <option value="expireDateASC">Ngày hạn tăng dần</option>
-                                    <option value="expireDateDESC">Ngày hạn giảm dần</option>
+                                <select class="form-control" name="sortDate" id = "sortDate">
+                                    <option value="createDateASC">Ngày tạo cũ nhất</option>
+                                    <option value="createDateDESC">Ngày tạo mới nhất</option>
+                                    <option value="acceptDateASC">Ngày đăng cũ nhất</option>
+                                    <option value="acceptDateDESC">Ngày đăng mới nhất</option>
+                                    <option value="expireDateASC">Thời hạn giảm dần</option>
+                                    <option value="expireDateDESC">Thời hạn tăng dần</option>
                                 </select></div>
                             <div><label class="filter-title" for="statistic">Chỉ số bài đăng</label>
-                                <select class="form-control" name="statistic">
-                                    <option value="viewASC">Lượt xem nhiều nhất</option>
-                                    <option value="viewDESC">Lượt xem ít nhất</option>
-                                    <option value="favoriteASC">Lượt yêu thích nhiều nhất</option>
-                                    <option value="favoriteDESC">Lượt yêu thích ít nhất</option>
+                                <select class="form-control" name="statistic" id="access">
+                                    <option value="viewASC">Lượt xem tăng dần</option>
+                                    <option value="viewDESC">Lượt xem giảm dần</option>
+                                    <option value="favoriteASC">Lượt yêu thích tăng dần</option>
+                                    <option value="favoriteDESC">Lượt yêu thích giảm dần</option>
                                     <option value="ratingASC">Đánh giá nhiều nhất</option>
                                     <option value="ratingDESC">Đánh giá ít nhất</option>
                                 </select></div>
                             <div><label class="filter-title" for="city">Tỉnh, thành phố</label>
-                                <select class="form-control" name="city" id="">
+                                <select class="form-control" name="city" id="tinhthanh">
                                     <option value="allcity">Tất cả tỉnh, thành phố</option>
-                                    <option value="hanoi">Hà Nội</option>
-                                    <option value="hochiminh">Hồ Chí Minh</option>
+                                    <!-- <option value="hanoi">Hà Nội</option> -->
+                                    <!-- <option value="hochiminh">Hồ Chí Minh</option>
                                     <option value="">Đà Nẵng</option>
-                                    <option value="">Nha Trang</option>
+                                    <option value="">Nha Trang</option> -->
                                 </select></div>
                             <div><label class="filter-title" for="district">Quận, huyện</label>
-                                <select class="form-control" name="district" id="">
+                                <select class="form-control" name="district" id="quanhuyen">
                                     <option value="alldistrict">Tất cả quận, huyện</option>
-                                    <option value="">Ba Đình</option>
+                                    <!-- <option value="">Ba Đình</option>
                                     <option value="">Cầu Giấy</option>
-                                    <option value="">Thanh Xuân</option>
+                                    <option value="">Thanh Xuân</option> -->
                                 </select></div>
                             <div><label class="filter-title" for="ward">Xã, phường</label>
-                                <select class="form-control" name="ward" id="">
+                                <select class="form-control" name="ward" id="xaphuong">
                                     <option value="allward">Tất cả xã, phường</option>
-                                    <option value="">Dịch Vọng</option>
+                                    <!-- <option value="">Dịch Vọng</option>
                                     <option value="">Nhân Chính</option>
-                                    <option value="">Ngọc Khánh</option>
+                                    <option value="">Ngọc Khánh</option> -->
                                 </select></div>
                         </div>
 
                         <!-- Các hàng kết quả -->
-                        <div class="filter-result">
+                        <div class="filter-result" id = "ketqua">
                             <!-- Bài đang chờ duyệt -->
                             <div class="post-item border">
                                 <div class="basic-info">
@@ -183,12 +183,13 @@
                                         <div class="content">
                                             <div class="form-title">
                                                 <div class="title">Nội dung:</div>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
+                                                <p>Lorem ipsum dolor sit Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, tenetur non recusandae maiores atque minima vitae velit temporibus porro molestiae quae quis et necessitatibus! Dolor, sed placeat. A, vero corporis.amet consectetur adipisicing elit. Itaque accusantium suscipit soluta in quod magnam enim amet voluptas maiores tenetur vitae nostrum officia ipsa est debitis explicabo, rem id ipsum.</p>
                                             </div>
                                         </div>
 
                                         <!-- Ảnh bài đăng -->
                                         <img src="../static/image/item-demo1.png">
+                    
                                     </div>
                                 </div>
                                 <div class="author space-between px-15">
@@ -933,12 +934,13 @@
                                 <abbr title="Đọc tất cả"><i class="fas fa-envelope-open"></i></abbr>
                             </div>
                         </div>
-                        <div class="main-notification">
+                        <div class="main-notification" id="thongbao">
                             <div class="noti-item-test"></div>
-                            <div class="noti-item unread" onclick="read(this)">
+                            <!-- <div class="noti-item unread" onclick="read(this)">
                                 <img class="noti-img" src="../static/image/icon-account.png">
                                 <div class="noti-content">
                                     <h3 class="noti-title">Đăng ký tài khoản chủ trọ</h3>
+                                    <div>ID: #123</div>
                                     <div>Họ tên: Vũ Thành Trung</div>
                                     <h4 class="noti-time">08/12/2020</h4>
                                 </div>
@@ -974,7 +976,7 @@
                                     <div>Họ tên: Vũ Thành Trung</div>
                                     <h4 class="noti-time">08/12/2020</h4>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

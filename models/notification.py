@@ -17,12 +17,19 @@ class Notification:
         connectDatabase.connection.commit()
         connectDatabase.close()
     
-    def readNotification(self, idNotification):
+    def readNotification(self, idNotification, usernameReceiver):
         connectDatabase = ConnectDatabase()
-        query_str = "UPDATE notification SET status = ? WHERE id = ?"
-        connectDatabase.cursor.execute(query_str, "read", idNotification)
+        query_str = "UPDATE notification SET status = ? WHERE id = ? AND usernameReceiver = ?"
+        connectDatabase.cursor.execute(query_str, "read", idNotification, usernameReceiver)
         connectDatabase.connection.commit()
-        connectDatabase.close()        
+        connectDatabase.close()     
+        
+    def unreadNotification(self, idNotification, usernameReceiver):
+        connectDatabase = ConnectDatabase()
+        query_str = "UPDATE notification SET status = ? WHERE id = ? AND usernameReceiver = ?"
+        connectDatabase.cursor.execute(query_str, "unread", idNotification, usernameReceiver)
+        connectDatabase.connection.commit()
+        connectDatabase.close()    
         
     def readAllNotifications(self, username):
         connectDatabase = ConnectDatabase()
@@ -42,6 +49,6 @@ class Notification:
             """
         rows = connectDatabase.cursor.execute(query_str, username).fetchall()
         connectDatabase.close()
-        return [{"id": row.id, "titleNotification": row.titleNotification, "icon": row.icon, "content": row.content, "time": row.time, "status": row.status} for row in rows]
+        return [{"id": row.id, "titleNotification": row.titleNotification, "icon": row.icon, "content": row.content, "time": str(row.time), "status": row.status} for row in rows]
     
     

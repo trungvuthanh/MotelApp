@@ -74,8 +74,8 @@ class Post:
         connectDatabase.close()
         # thêm thông báo
         icon = "icon-post.png"
-        titleNotification = "Đăng bài mới"
-        content = "Bài đăng " + str(idPost) + " đã được duyệt. Ngày hết hạn: " + '/'.join(str(datetime.date(datetime.now() + timedelta(days=postDuration))).split('-')[::-1])      
+        titleNotification = "Đăng bài"
+        content = "Bài đăng " + str(idPost) + " đã được đăng. Ngày hết hạn: " + '/'.join(str(datetime.date(datetime.now() + timedelta(days=postDuration))).split('-')[::-1])      
         Notification().create(titleNotification, usernameOwner, icon, content)
     
     def adminDenyRequestPost(self, idPost, usernameOwner):
@@ -135,7 +135,41 @@ class Post:
             connectDatabase.connection.commit()
             connectDatabase.close()
     
+    def getMoreInformationPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = """
+            SELECT idPost, contentPost, locationRelate, numOfRoom, area, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, usernameAuthorPost, typeAccountAuthor, postDuration
+            FROM post 
+            WHERE idPost = ?
+            """
+        row = connectDatabase.cursor.execute(query_str, idPost).fetchone()
+        if row.typeAccountAuthor == "admin":
+            name = "Quản trị viên"
+            query_str = """
+                SELECT phoneNumber, address
+                FROM admin 
+                LIMIT 1
+                """
+            adminInfo = connectDatabase.cursor.execute(query_str).fetchone()
+            phoneNumber = adminInfo.phoneNumber
+            address = adminInfo.address
+        else:
+            query_str = """
+                SELECT fullname, phoneNumber, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) as "address"
+                FROM owner WHERE username = ?
+                """
+            ownerInfo = connectDatabase.cursor.execute(query_str, row.usernameAuthorPost).fetchone()
+            name = ownerInfo.fullname
+            phoneNumber = ownerInfo.phoneNumber
+            address = ownerInfo.address
+        query_str = "SELECT image FROM image_post WHERE idPost = ? LIMIT 1"
+        image = connectDatabase.cursor.execute(query_str, row.idPost).fetchval()
+        connectDatabase.close()
+        return {"idPost": row.idPost, "contentPost": row.contentPost, "locationRelate": row.locationRelate, "numOfRoom": row.numOfRoom, "area": row.area, "bathroom": row.bathroom, "kitchen": row.kitchen, "aircondition": row.aircondition, "balcony": row.balcony, "priceElectric": row.priceElectric, "priceWater": row.priceWater, "otherUtility": row.otherUtility, "usernameAuthorPost": row.usernameAuthorPost, "typeAccountAuthor": row.typeAccountAuthor, "postDuration": row.postDuration, "name": name, "phoneNumber": phoneNumber, "address": address, "image": image}
+    
+    
     def getAllPost(self, typeAccount, username, statusPost, sortDate, access, province = "", district = "", ward = ""):
+        
         """ 
         Xử lý trang quản lý "của" bên A: chủ trọ và bên C: quản trị viên
                     
@@ -176,7 +210,7 @@ class Post:
                                                     "ratingDESC" (rating giảm dần)                             
         """
         query_str = """
-            SELECT idPost, titlePost, addressProvince, addressDistrict, addressWard, addressDetail, itemType, priceItem, statusItem, createDate, acceptDate, expireDate, statusPost, statusHired, totalView, totalFavorite, avgRating 
+            SELECT idPost, titlePost, addressProvince, addressDistrict, addressWard, addressDetail, itemType, priceItem, statusItem, createDate, acceptDate, expireDate, statusPost, statusHired, totalView, totalFavorite, avgRating , postDuration
             FROM post 
             WHERE 
         """
@@ -249,26 +283,8 @@ class Post:
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str).fetchall()
         connectDatabase.close()
-        return [{"idPost": row.idPost, "titlePost": row.titlePost, "addressProvince": row.addressProvince, "addressDistrict": row.addressDistrict, "addressWard": row.addressWard, "addressDetail": row.addressDetail, "itemType": row.itemType, "priceItem": row.priceItem, "statusItem": row.statusItem, "createDate": str(row.createDate), "acceptDate": str(row.acceptDate), "expireDate": str(row.expireDate), "statusPost": row.statusPost, "statusHired": row.statusHired, "totalView": row.totalView, "totalFavorite": row.totalFavorite, "avgRating": row.avgRating} for row in rows]
+        return [{"idPost": row.idPost, "postDuration": row.postDuration, "titlePost": row.titlePost, "addressProvince": row.addressProvince, "addressDistrict": row.addressDistrict, "addressWard": row.addressWard, "addressDetail": row.addressDetail, "itemType": row.itemType, "priceItem": row.priceItem, "statusItem": row.statusItem, "createDate": str(row.createDate), "acceptDate": str(row.acceptDate), "expireDate": str(row.expireDate), "statusPost": row.statusPost, "statusHired": row.statusHired, "totalView": row.totalView, "totalFavorite": row.totalFavorite, "avgRating": row.avgRating, "moreInfo": self.getMoreInformationPost(row.idPost)} for row in rows]
     
-    def getMoreInformationPost(self, idPost):
-        connectDatabase = ConnectDatabase()
-        query_str = """
-            SELECT idPost, contentPost, locationRelate, numOfRoom, area, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, usernameAuthorPost, typeAccountAuthor, postDuration
-            FROM post 
-            WHERE idPost = ?
-            """
-        row = connectDatabase.cursor.execute(query_str, idPost).fetchone()
-        if row.typeAccountAuthor == "admin":
-            name = "Quản trị viên"
-        else:
-            query_str = "SELECT fullname FROM owner WHERE username = ?"
-            name = connectDatabase.cursor.execute(query_str, row.usernameAuthorPost).fetchval()
-        query_str = "SELECT image FROM image_post WHERE idPost = ?"
-        rows = connectDatabase.cursor.execute(query_str, row.idPost).fetchall()
-        images = [row.image for row in rows]
-        connectDatabase.close()
-        return {"idPost": row.idPost, "contentPost": row.contentPost, "locationRelate": row.locationRelate, "numOfRoom": row.numOfRoom, "area": row.area, "bathroom": row.bathroom, "kitchen": row.kitchen, "aircondition": row.aircondition, "balcony": row.balcony, "priceElectric": row.priceElectric, "priceWater": row.priceWater, "otherUtility": row.otherUtility, "usernameAuthorPost": row.usernameAuthorPost, "typeAccountAuthor": row.typeAccountAuthor, "postDuration": row.postDuration, "name": name, "images": images}
     
     def getAllInfomationPost(self, idPost):
         connectDatabase = ConnectDatabase()
@@ -285,7 +301,7 @@ class Post:
                 FROM admin 
                 LIMIT 1
                 """
-            adminInfo = connectDatabase.cursor.execute(query_str, idPost).fetchone()
+            adminInfo = connectDatabase.cursor.execute(query_str).fetchone()
             phoneNumber = adminInfo.phoneNumber
             address = adminInfo.address
         else:
@@ -324,11 +340,19 @@ class Post:
         if row.statusPost != "block":
             connectDatabase.close()
         else:
-            status = "active" if row.time >= 0 else "expire"
-            query_str = "UPDATE post SET status = ? WHERE idPost = ?" 
+            status = "active" if row.time <= 0 else "expired"
+            query_str = "UPDATE post SET statusPost = ? WHERE idPost = ?" 
             connectDatabase.cursor.execute(query_str, status, idPost)
             connectDatabase.connection.commit()                  
             connectDatabase.close()
+    
+    def getUsernameAuthorPost(self, idPost):
+        connectDatabase = ConnectDatabase()
+        query_str = "SELECT usernameAuthorPost FROM post WHERE idPost = ?"
+        res = connectDatabase.cursor.execute(query_str, idPost).fetchval()
+        connectDatabase.close()
+        return res
+    
     
     def checkAuthorPost(self, idPost, username):
         connectDatabase = ConnectDatabase()

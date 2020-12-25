@@ -78,6 +78,7 @@ class DataController():
             province = str(request.get_json()["province"])
             district = str(request.get_json()["district"]) # ""
             ward = str(request.get_json()["ward"]) # ""
+            print(typeAccount, username, statusPost, sortDate, access, province, district, ward)
             return Post().getAllPost(typeAccount, username, statusPost, sortDate, access, province, district, ward)
     
     def createPost(self):

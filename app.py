@@ -7,6 +7,7 @@ from controllers.dataController import DataController
 from models.post import Post
 from models.address import Address
 from models.otherEvent import OtherEvent
+from models.notification import Notification
 import time
 
 # cấu hình đường dẫn và idSession
@@ -55,7 +56,23 @@ def extendPost(idPost, postDuration):
     if "type_account" not in session or session["type_account"] == "renter":
         time.sleep(10)
         return
-    Post().extendPost(idPost, postDuration, session["type_account"], session["username"])
+    Post().extendPost(idPost, idPost, postDuration, session["type_account"], session["username"])
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/active/<int:idPost>/<int:postDuration>", methods=["GET"])
+def activePost(idPost, postDuration):
+    if "type_account" not in session or session["type_account"] != "admin":
+        time.sleep(10)
+        return
+    Post().adminActiveRequestPost(idPost, Post().getUsernameAuthorPost(idPost), postDuration)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/deny/<int:idPost>", methods=["GET"])
+def denyPost(idPost):
+    if "type_account" not in session or session["type_account"] != "admin":
+        time.sleep(10)
+        return
+    Post().adminDenyRequestPost(idPost, Post().getUsernameAuthorPost(idPost))
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 @app.route("/blockPost/<int:idPost>", methods=["GET"])
@@ -75,12 +92,44 @@ def unblockPost(idPost):
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 @app.route("/notification", methods=["GET"])
-def notification(idPost):
+def notification():
     if "type_account" not in session or session["type_account"] == "renter":
         time.sleep(10)
         return
-    Post().unblockPost(idPost)
+    return app.response_class(json.dumps(Notification().getAllNotifications(session["username"])), mimetype='application/json')
+
+@app.route("/readnotification/<int:idNotification>", methods=["GET"])
+def readNotification(idNotification):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    Notification().readNotification(idNotification, session["username"])
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/unreadnotification/<int:idNotification>", methods=["GET"])
+def unreadNotification(idNotification):
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    Notification().unreadNotification(idNotification, session["username"])
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/readallnotification", methods=["GET"])
+def readAllNotification():
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10)
+        return
+    Notification().readAllNotifications(session["username"])
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/updateStatusHired/<int:idPost>/<statusHired>", methods=["GET"])
+def updateStatusHired(idPost, statusHired):
+    if "type_account" not in session or session["type_account"] == "renter" or statusHired not in ["ready", "hired"]:
+        time.sleep(10)
+        return
+    Post().updateStatusHired(idPost, session["username"], statusHired)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
 
 # -----------------------------------------------------------------------------------
 # ----------------------------API chỉnh sửa thông tin--------------------------------
@@ -99,14 +148,6 @@ def editPost(idPost):
         time.sleep(10)
         return
     DataController().editPost(idPost)
-    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
-
-@app.route("/updateStatusHired/<int:idPost>", methods=["POST"])
-def updateStatusHired(idPost):
-    if "type_account" not in session or session["type_account"] == "renter":
-        time.sleep(10)
-        return
-    Post().updateStatusHired(idPost, session["username"], session["statusHired"])
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 # -----------------------------------------------------------------------------------
@@ -411,7 +452,7 @@ def result():
     ----------
     None
     """
-    return render_template('post-manager-admin.html') 
+    return render_template('post.html') 
 
 
 
