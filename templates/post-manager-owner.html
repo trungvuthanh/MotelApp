@@ -31,31 +31,32 @@
                         <div class="filter">
                             <div>
                                 <label class="filter-title" for="status">Loại bài đăng</label>
-                                <select class="form-control" name="status">
+                                <select class="form-control" name="status" id="statusPost">
                                     <option value="handling">Bài chờ duyệt</option>
                                     <option value="active">Bài còn hạn</option>
                                     <option value="expired">Bài hết hạn</option>
-                                    <option value="reported">Bài bị report</option>
+                                    <option value="extend">Bài chờ gia hạn</option>
+                                    <option value="block">Bài bị chặn</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="filter-title" for="sortDate">Sắp xếp theo</label>
-                                <select class="form-control" name="sortDate">
-                                    <option value="createDateASC">Ngày tạo mới nhất</option>
-                                    <option value="createDateDESC">Ngày tạo cũ nhất</option>
-                                    <option value="acceptDateASC">Ngày đăng mới nhất</option>
-                                    <option value="acceptDateDESC">Ngày đăng cũ nhất</option>
-                                    <option value="expireDateASC">Ngày hạn tăng dần</option>
-                                    <option value="expireDateDESC">Ngày hạn giảm dần</option>
+                                <select class="form-control" name="sortDate" id = "sortDate">
+                                    <option value="createDateASC">Ngày tạo cũ nhất</option>
+                                    <option value="createDateDESC">Ngày tạo mới nhất</option>
+                                    <option value="acceptDateASC">Ngày đăng cũ nhất</option>
+                                    <option value="acceptDateDESC">Ngày đăng mới nhất</option>
+                                    <option value="expireDateASC">Thời hạn giảm dần</option>
+                                    <option value="expireDateDESC">Thời hạn tăng dần</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="filter-title" for="statistic">Chỉ số bài đăng</label>
-                                <select class="form-control" name="statistic">
-                                    <option value="viewASC">Lượt xem nhiều nhất</option>
-                                    <option value="viewDESC">Lượt xem ít nhất</option>
-                                    <option value="favoriteASC">Lượt yêu thích nhiều nhất</option>
-                                    <option value="favoriteDESC">Lượt yêu thích ít nhất</option>
+                                <select class="form-control" name="statistic" id="access">
+                                    <option value="viewASC">Lượt xem tăng dần</option>
+                                    <option value="viewDESC">Lượt xem giảm dần</option>
+                                    <option value="favoriteASC">Lượt yêu thích tăng dần</option>
+                                    <option value="favoriteDESC">Lượt yêu thích giảm dần</option>
                                     <option value="ratingASC">Đánh giá nhiều nhất</option>
                                     <option value="ratingDESC">Đánh giá ít nhất</option>
                                 </select>
@@ -63,7 +64,7 @@
                         </div>
 
                         <!-- Các hàng kết quả -->
-                        <div class="filter-result">
+                        <div class="filter-result" id="ketqua">
 
                             <!-- Bài đang chờ duyệt -->
                             <div class="post-item border">
@@ -625,9 +626,9 @@
                                 <abbr title="Đọc tất cả"><i class="fas fa-envelope-open"></i></abbr>
                             </div>
                         </div>
-                        <div class="main-notification">
+                        <div class="main-notification" id="thongbao">
                             <div class="noti-item-test"></div>
-                            <div class="noti-item unread" onclick="read(this)">
+                            <!-- <div class="noti-item unread" onclick="read(this)">
                                 <img class="noti-img" src="../static/image/icon-account.png">
                                 <div class="noti-content">
                                     <h3 class="noti-title">Đăng ký tài khoản chủ trọ</h3>
@@ -666,7 +667,7 @@
                                     <div>Họ tên: Vũ Thành Trung</div>
                                     <h4 class="noti-time">08/12/2020</h4>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 

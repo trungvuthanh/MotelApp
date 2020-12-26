@@ -51,12 +51,12 @@ def getMoreInfo(idPost):
         return
     return app.response_class(json.dumps(Post().getMoreInformationPost(idPost)), mimetype='application/json')
 
-@app.route("/gia-han-bai-dang/<int:idPost>/<int:postDuation>", methods=["GET"])
+@app.route("/gia-han-bai-dang/<int:idPost>/<int:postDuration>", methods=["GET"])
 def extendPost(idPost, postDuration):
     if "type_account" not in session or session["type_account"] == "renter":
         time.sleep(10)
         return
-    Post().extendPost(idPost, idPost, postDuration, session["type_account"], session["username"])
+    Post().extendPost(idPost, postDuration, session["type_account"], session["username"])
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 @app.route("/active/<int:idPost>/<int:postDuration>", methods=["GET"])
@@ -134,7 +134,7 @@ def updateStatusHired(idPost, statusHired):
 # -----------------------------------------------------------------------------------
 # ----------------------------API chỉnh sửa thông tin--------------------------------
 # -----------------------------------------------------------------------------------
-@app.route("/chinh-sua-bai-dang/<int:idPost>", methods=["POST"])
+@app.route("/chinh-sua-bai-dang/<int:idPost>", methods=["GET"])
 def getPageEditPost(idPost):
     if "type_account" not in session or session["type_account"] == "renter":
         time.sleep(10)
