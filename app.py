@@ -144,11 +144,16 @@ def getPageEditPost(idPost):
 
 @app.route("/editPost/<int:idPost>", methods=["POST"])
 def editPost(idPost):
-    if "type_account" not in session or session["type_account"] == "renter":
+    if "type_account" not in session or session["type_account"] == "renter" or not Post().checkEditPost(idPost, session["username"]):
         time.sleep(10)
         return
     DataController().editPost(idPost)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/chinh-sua-thong-tin", methods=["POST"])
+def editInfoAccount():
+    if session["type_account"] == "renter":
+        return render_template("infoB.html")
 
 # -----------------------------------------------------------------------------------
 # ----------------------------API recommend search-----------------------------------

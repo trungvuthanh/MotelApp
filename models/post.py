@@ -281,7 +281,6 @@ class Post:
         
         query_str += " LIMIT 10 "
         connectDatabase = ConnectDatabase()
-        print(query_str)
         rows = connectDatabase.cursor.execute(query_str).fetchall()
         connectDatabase.close()
         return [{"idPost": row.idPost, "postDuration": row.postDuration, "titlePost": row.titlePost, "addressProvince": row.addressProvince, "addressDistrict": row.addressDistrict, "addressWard": row.addressWard, "addressDetail": row.addressDetail, "itemType": row.itemType, "priceItem": row.priceItem, "statusItem": row.statusItem, "createDate": str(row.createDate), "acceptDate": str(row.acceptDate), "expireDate": str(row.expireDate), "statusPost": row.statusPost, "statusHired": row.statusHired, "totalView": row.totalView, "totalFavorite": row.totalFavorite, "avgRating": row.avgRating, "moreInfo": self.getMoreInformationPost(row.idPost)} for row in rows]
