@@ -69,9 +69,20 @@ body {
     display: flex;
     flex-direction: column;
 }
+.align-self-center {
+    align-self: center;
+}
 .space-between {
     display: flex;
     justify-content: space-between;
+}
+.space-around {
+    display: flex;
+    justify-content: space-around;
+}
+.space-evenly {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 /* Footer */
@@ -96,8 +107,8 @@ footer .container .row ul li {
 }
 
 .p-15 { padding: 15px; }
-.px-15 { padding: 0 15px; }
-.py-15 { padding: 15px 0; }
+.px-15 { padding-left: 15px; padding-right: 15px }
+.py-15 { padding-top: 15px; padding-bottom: 15px }
 .pt-15 { padding-top: 15px; }
 .pr-15 { padding-right: 15px; }
 .pb-15 { padding-bottom: 15px; }

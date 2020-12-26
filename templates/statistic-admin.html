@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="/static/style/common.css">
+    <link rel="stylesheet" href="/static/style/statistic-admin.css">
+    <link rel="shortcut icon" href="/static/image/icon.png"/>
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    <div class="main">
+        <!-- Menu -->
+        <div id="menu"></div>
+
+        <div class="body">
+            <div class="main-content w90 mx-auto px-15">
+                <div class="header"><h1 class="heading">Top 3 bài đăng</h1></div>
+                <div class="top-box justify-content-center">
+
+                    <!-- Bài top 1 -->
+                    <div class="top-first flex-row">
+                        <!-- Tên, ảnh bài đăng top 1 -->
+                        <div class="flex-column">
+                            <div class="shine-name flex-row align-self-center align-items-center">
+                                <img id="imgGold" src="/static/image/gold-medal.png">
+                                <div id="nameGold">
+                                    <span>Chung cư nguyên căn bình dân</span>
+                                    <div class="shine"></div>
+                                    <div class="light"></div>
+                                </div>
+                            </div>
+
+                            <section id="slider">
+                                <input type="radio" name="slider" id="s1">
+                                <input type="radio" name="slider" id="s2">
+                                <input type="radio" name="slider" id="s3" checked>
+                                <input type="radio" name="slider" id="s4">
+                                <input type="radio" name="slider" id="s5">                        
+
+                                <label for="s1" id="slide1"><img src="/static/image/item-demo1.png" width="100%" height="100%"></label>
+                                <label for="s2" id="slide2"><img src="/static/image/item-demo3.jpg" width="100%" height="100%"></label>
+                                <label for="s3" id="slide3"><img src="/static/image/item-demo4.png" width="100%" height="100%"></label>
+                                <label for="s4" id="slide4"><img src="/static/image/item-demo5.jpg" width="100%" height="100%"></label>
+                                <label for="s5" id="slide5"><img src="/static/image/item-demo6.jpg" width="100%" height="100%"></label>
+                            </section>
+                        </div>
+                        <!-- Địa chỉ, số views, likes bài đăng top 1 -->
+                        <div class="top-info flex-column">
+                            <div class="flex-row">
+                                <i class="fas fa-map-marker-alt mr-3"></i><div class="title">Dịch Vọng, Cầu Giấy, Hà Nội</div>
+                            </div>
+                            <div class="flex-row space-between">
+                                <div>100 Lượt xem <i class="fas fa-eye"></i></div>
+                                <div>99 Yêu thích <i class="fas fa-heart"></i></div>
+                            </div>
+                            <a href="/detail-post">Xem chi tiết</a>
+                        </div>
+                    </div>
+
+                    <!-- Bài top 2, 3 -->
+                    <div class="top-second-third flex-row">
+                        <div class="flex-column align-items-center">
+                            <div class="shine-name flex-row align-self-center align-items-center">
+                                <img id="imgSilver" src="/static/image/silver-medal.png">
+                                <div id="nameSilver">
+                                    <span>Nhà nguyên căn đẹp</span>
+                                    <div class="shine2"></div>
+                                </div>
+                            </div>
+                            <img src="/static/image/item-demo2.png" alt="">
+                            <a href="/detail-post">Xem chi tiết</a>
+                        </div>
+                        <div class="flex-column align-items-center">
+                            <div class="shine-name flex-row align-self-center align-items-center">
+                                <img id="imgBronze" src="/static/image/bronze-medal.png">
+                                <div id="nameBronze">
+                                    <span>Nhà nguyên căn cao cấp</span>
+                                    <div class="shine2"></div>
+                                </div>
+                            </div>
+                            <img src="/static/image/item-demo5.jpg" alt="">
+                            <a href="/detail-post">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top từ khóa tìm nhiều nhất, khoảng giá quan tâm -->
+                <div class="flex-row keyword-price">
+                    <div class="keyword-box">
+                        <div class="header"><h1 class="heading">Từ khóa tìm kiếm nhiều nhất</h1></div>
+                        <div class="chart-box">
+                            <canvas id="chart1" width="350" height="350"></canvas>
+                        </div>
+                    </div>
+                    <div class="price-box">
+                        <div class="header"><h1 class="heading">Mức giá được quan tâm nhất</h1></div>
+                        <div class="chart-box">
+                            <canvas id="chart2" width="350" height="350"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thống kê lượt xem theo thời gian tự chọn -->
+                <div class="header"><h1 class="heading">Thống kê lượt xem</h1></div>
+                <div class="flex-row view-statistic">
+                    <div class="col-lg-6 align-items-center">
+                        <div class="flex-row space-between">
+                            <div>
+                                <label for="sortBy">Lọc theo</label>
+                                <select class="form-control w-auto" name="sortBy" id="sortBy">
+                                    <option value="day">Ngày</option>
+                                    <option value="week">Tuần</option>
+                                    <option value="month">Tháng</option>
+                                    <option value="daytoday">Day to day</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="startDay">Ngày bắt đầu</label>
+                                <input class="form-control w-auto" type="date" name="startDay" id="startDay">
+                                <div>
+                                    <label for="month">Tháng, năm</label>
+                                    <input class="form-control" type="month" name="month" id="month">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="endDay">Ngày kết thúc</label>
+                                <input class="form-control w-auto" type="date" name="endDay" id="endDay">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="flex-row justify-content-center">
+                            <div class="chart-box">
+                                <canvas id="chart3" width="350" height="350"></canvas>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/script/statistic-admin.js"></script>
+
+    
+</body>
+</html>

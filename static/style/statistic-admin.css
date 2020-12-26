@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+
+.form-title {
+    display: flex;
+    height: calc(1.5em + .75rem + 2px);
+    flex-wrap: wrap;
+    width: auto;
+    padding: .375rem 0;
+    border: 1px solid #ffffff;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+}
+.title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 24px;
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.body {
+    background-color: #212529;
+	color: #ffffff;
+	padding-bottom: 30px;
+}
+
+.header {
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+.heading {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+.top-first {
+	justify-content: space-evenly;
+}
+.top-first a,
+.top-first a:hover,
+.top-first a:focus {
+	text-decoration: none;
+}
+#imgGold {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    left: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 16px 5px #C0FFE4;
+    z-index: 1;
+    animation: orb 1.8s infinite;
+}
+#nameGold {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-family: 'Yeseva One', cursive;
+    text-transform: uppercase;
+    font-size: 24px;
+    padding: 6px 18px 6px 24px;
+    background-color: #ffd700;
+    color: #212529;
+    border: 3px solid #ffa500;
+    border-radius: 5px;
+    /* box-shadow: 0 0 16px 5px #C0FFE4; */
+    animation: orb 1.8s infinite;
+}
+.shine-name {
+	position: relative;
+	right: 10px;
+}
+.shine {
+	position: absolute;
+	top: -9px;
+	left: -52px;
+	width: 1px;
+	height: 16px;
+	background: #fff;
+	transform: rotate(15deg);
+	box-shadow: 0 0 8px rgba(255,255,255,0.75);
+	animation: shine 8s infinite;
+}
+.shine:before, .shine:after {
+	content:'';
+	display: block;
+	position: absolute;
+}
+.shine:before {
+	top: 2px;
+	left: -2px;
+	width: 1px;
+	height: 16px;
+	background: #fff;
+	transform: rotate(-90deg);
+	box-shadow: 0 0 8px rgba(255,255,255,0.75);
+}
+.shine:after {
+	top: 6px;
+	left: -2px;
+	width: 5px;
+	height: 5px;
+	background: #fff;
+	transform: rotate(45deg);
+	box-shadow: 0 0 8px 5px rgba(255,255,255,0.75);
+}
+.light {
+	position: absolute;
+	width: 447.33px;
+	height: 54px;
+	border-radius: 100%;
+	overflow: hidden;
+}
+.light:before {
+	content:'';
+	display: block;
+	position: absolute;
+	width: 2px;
+	height: 80px;
+	top: -30%;
+	left: 0;
+	transform: rotate(45deg);
+	background: rgba(255,255,255,0.5);
+	animation: sheen2 7s infinite;
+}
+@keyframes orb {
+	0%,100% {
+		box-shadow: 0 0 5px 2px #ffd700;
+	}
+	50% {
+		box-shadow: 0 0 10px 4px #ffd700;
+	}
+}
+@keyframes shine {
+	0% {
+		opacity: 0;
+	}
+	34% {
+		opacity: 0;
+		transform: rotate(15deg);
+	}
+	40% {
+		opacity: 0.6;
+		transform: rotate(620deg);
+	}
+	48%,100% {
+		opacity: 0;
+		transform: rotate(635deg);
+	}
+}
+@keyframes sheen2 {
+	0%,100% {
+		top: -75%;
+		left: 15%;
+		opacity: 0;
+		width: 2px;
+	}
+	1% {
+		opacity: 1;
+	}
+	10% {
+		width: 24px;
+	}
+	11%,18% {
+		top: 75%;
+		left: 50%;
+		width: 2px;
+		opacity: 0;
+	}
+	20% {
+		top: -75%;
+		left: 15%;
+		opacity: 0;
+		width: 1px;
+	}
+	21% {
+		opacity: 0.75;
+	}
+	30% {
+		width: 6px;
+	}
+	31%,98% {
+		top: 75%;
+		left: 50%;
+		width: 2px;
+		opacity: 0;
+	}
+}
+
+input[type=radio] {
+	display: none;
+}
+#slider {
+	height: 35vh;
+	position: relative;
+	margin: 40px 0;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+	user-select: none;
+}
+#slider label {
+	margin: auto;
+	width: 70%;
+	height: auto;
+	border-radius: 4px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	cursor: pointer;
+	transition: transform 0.4s ease;
+}
+#s1:checked ~ #slide4, #s2:checked ~ #slide5,
+#s3:checked ~ #slide1, #s4:checked ~ #slide2,
+#s5:checked ~ #slide3 {
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37);
+	transform: translate3d(-30%, 0, -200px);
+}
+#s1:checked ~ #slide5, #s2:checked ~ #slide1,
+#s3:checked ~ #slide2, #s4:checked ~ #slide3,
+#s5:checked ~ #slide4 {
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .3), 0 2px 2px 0 rgba(0, 0, 0, .2);
+	transform: translate3d(-15%, 0, -100px);
+}
+#s1:checked ~ #slide1, #s2:checked ~ #slide2,
+#s3:checked ~ #slide3, #s4:checked ~ #slide4,
+#s5:checked ~ #slide5 {
+	box-shadow: 0 13px 25px 0 rgba(0, 0, 0, .3), 0 11px 7px 0 rgba(0, 0, 0, .19);
+	transform: translate3d(0, 0, 0);
+}
+#s1:checked ~ #slide2, #s2:checked ~ #slide3,
+#s3:checked ~ #slide4, #s4:checked ~ #slide5,
+#s5:checked ~ #slide1 {
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .3), 0 2px 2px 0 rgba(0, 0, 0, .2);
+	transform: translate3d(15%, 0, -100px);
+}
+#s1:checked ~ #slide3, #s2:checked ~ #slide4,
+#s3:checked ~ #slide5, #s4:checked ~ #slide1,
+#s5:checked ~ #slide2 {
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37);
+	transform: translate3d(30%, 0, -200px);
+}
+
+.top-info {
+	position: relative;
+	justify-content: center;
+	font-family: Arial, Helvetica, sans-serif;
+	/* background: #060c21; */
+	padding: 15px;
+}
+.top-info i {
+	font-size: 30px;
+}
+.top-info .space-between i {
+	font-size: 17px;
+}
+
+.top-second-third {
+	justify-content: space-evenly;
+}
+.top-second-third a,
+.top-second-third a:hover,
+.top-second-third a:focus {
+	margin-top: 15px;
+	text-decoration: none;
+}
+.top-second-third img {
+	width: 240px;
+	height: 170px;
+	box-shadow: 0 13px 25px 0 rgba(0, 0, 0, .3), 0 11px 7px 0 rgba(0, 0, 0, .19);
+}
+
+#imgSilver {
+    position: relative;
+    width: 50px;
+	height: 50px;
+    left: 15px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 16px 5px #C0FFE4;
+    z-index: 1;
+}
+#nameSilver {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-family: 'Yeseva One', cursive;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 6px 18px 6px 24px;
+    background-color: #d3d3d3;
+    color: #212529;
+    border: 3px solid #c0c0c0;
+    border-radius: 5px;
+}
+
+.shine2 {
+	position: absolute;
+	top: -9px;
+	left: -33px;
+	width: 1px;
+	height: 16px;
+	background: #fff;
+	transform: rotate(15deg);
+	box-shadow: 0 0 8px rgba(255,255,255,0.75);
+	animation: shine 8s infinite;
+}
+.shine2:before, .shine2:after {
+	content:'';
+	display: block;
+	position: absolute;
+}
+.shine2:before {
+	top: 2px;
+	left: -2px;
+	width: 1px;
+	height: 16px;
+	background: #fff;
+	transform: rotate(-90deg);
+	box-shadow: 0 0 8px rgba(255,255,255,0.75);
+}
+.shine2:after {
+	top: 6px;
+	left: -2px;
+	width: 5px;
+	height: 5px;
+	background: #fff;
+	transform: rotate(45deg);
+	box-shadow: 0 0 8px 5px rgba(255,255,255,0.75);
+}
+
+#imgBronze {
+    position: relative;
+    width: 50px;
+	height: 50px;
+    left: 15px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 16px 5px #cd7f32;
+    z-index: 1;
+}
+#nameBronze {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-family: 'Yeseva One', cursive;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 6px 18px 6px 24px;
+    background-color: #cd7f32;
+    color: #212529;
+    border: 3px solid #b9722d;
+    border-radius: 5px;
+}
+
+.keyword-price {
+	justify-content: space-around;
+}

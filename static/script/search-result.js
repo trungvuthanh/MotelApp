@@ -84,7 +84,6 @@ var pageNumber = 1
 statusItem = 0
 
 function bodyLoadData(statusItem, sort) {
-    alert(statusItem)
     if (statusItem == 0) {
         if (sort == "") {
             return {pageNumber: pageNumber}
