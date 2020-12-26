@@ -107,16 +107,17 @@ class OtherEvent:
     
     def adminGetAllReport(self, status):
         query_str = """
-            SELECT id, report_post.idPost, fakeInfo, fakePrice, fullname, content, time, titlePost, typeAvt
+            SELECT id, report_post.idPost, fakeInfo, fakePrice, fullname, content, DATE(time) time, titlePost, typeAvt, report_post.status status
             FROM report_post 
             JOIN renter ON renter.username = usernameRenter 
             JOIN post ON post.idPost = report_post.idPost
             WHERE report_post.status = ? AND NOW() >= time
+            ORDER BY time
             """
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, status).fetchall()
         connectDatabase.close()
-        return [{"id": row.id, "idPost": row.idPost, "fakeInfo": row.fakeInfo, "fakePrice": row.fakePrice, "fullname": row.fullname, "content": row.content, "time": str(row.time), "titlePost": row.titlePost, "typeAvt": row.typeAvt} for row in rows]
+        return [{"id": row.id, "status": row.status, "idPost": row.idPost, "fakeInfo": row.fakeInfo, "fakePrice": row.fakePrice, "fullname": row.fullname, "content": row.content, "time": str(row.time), "titlePost": row.titlePost, "typeAvt": row.typeAvt} for row in rows]
     
     def ownerGetAllReport(self, usernameRenter):
         query_str = """
@@ -131,14 +132,21 @@ class OtherEvent:
         connectDatabase.close()
         return [{"id": row.id, "idPost": row.idPost, "fakeInfo": row.fakeInfo, "fakePrice": row.fakePrice, "fullname": row.fullname, "content": row.content, "time": str(row.time), "titlePost": row.titlePost, "status": row.status, "typeAvt": row.typeAvt} for row in rows]
     
-    def changeStatusReport(self, idPost, status):
+    def changeStatusReport(self, id, status):
         query_str = """
-            UPDATE report_post SET status = ? WHERE idPost = ?
+            UPDATE report_post SET status = ? WHERE id = ?
             """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, idPost, status)
+        connectDatabase.cursor.execute(query_str, status, id)
         connectDatabase.connection.commit()
         connectDatabase.close()        
+    
+    def getIdPostFromReport(self, id):
+        query_str = """
+            SELECT idPost FROM report_post WHERE id = ?
+            """
+        connectDatabase = ConnectDatabase()
+        return connectDatabase.cursor.execute(query_str, id).fetchval()
     
     def getHistoryPost(self, usernameRenter):
         query_str = """
@@ -404,16 +412,17 @@ class OtherEvent:
 
     def adminGetReview(self, status):
         query_str = """
-            SELECT id, review.idPost, stars, fullname, content, time, titlePost, typeAvt
+            SELECT id, review.idPost, stars, fullname, content, DATE(time) time, titlePost, typeAvt, review.status
             FROM review 
             JOIN renter ON renter.username = usernameRenter 
             JOIN post ON post.idPost = review.idPost
             WHERE review.status = ? AND NOW() >= time
+            ORDER BY time
             """
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, status).fetchall()
         connectDatabase.close()
-        return [{"id": row.id, "idPost": row.idPost, "stars": row.stars, "fullname": row.fullname, "content": row.content, "time": str(row.time), "titlePost": row.titlePost, "typeAvt": row.typeAvt} for row in rows]
+        return [{"id": row.id, "status": row.status, "idPost": row.idPost, "stars": row.stars, "fullname": row.fullname, "content": row.content, "time": str(row.time), "titlePost": row.titlePost, "typeAvt": row.typeAvt} for row in rows]
     
     def ownerGetReview(self, usernameRenter):
         query_str = """
@@ -447,7 +456,7 @@ class OtherEvent:
             connectDatabase.cursor.execute(query_str, status)
         else:
             query_str = "UPDATE review SET status = ?, stars = ?, content = ? WHERE id = ?"
-            connectDatabase.cursor.execute(query_str, status, stars, content)
+            connectDatabase.cursor.execute(query_str, status, stars, content, id)
         connectDatabase.connection.commit()    
         connectDatabase.close()
         

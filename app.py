@@ -357,13 +357,51 @@ def getInformationPost(baidangidpost):
     titlePost = " ".join(baidangidpost.split("-")[:-1])
     idPost = int(baidangidpost.split("-")[-1])
     return DataController().detailPost(idPost, titlePost)
-    
-@app.route("/report/<int:idPost>/<int:fakeInfo>/<int:fakePrice>", methods=["POST"])
+
+
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API review, report----------------------------------
+# -----------------------------------------------------------------------------------
+@app.route("/sendreport/<int:idPost>/<int:fakeInfo>/<int:fakePrice>", methods=["POST"])
 def sendReport(idPost, fakeInfo, fakePrice):
+    # body có biến content (default: "")
     dataController = DataController()
     return app.response_class(json.dumps({"message": DataController().renterSendReport(idPost, fakeInfo, fakePrice)}), mimetype='application/json')
- 
 
+@app.route("/review-report", methods=["GET"])
+def routeReviewReport():
+    if session["type_account"] == "admin":
+        return render_template("review-report.html")
+    
+@app.route("/adminGetReviews/<status>", methods=["GET"])
+def adminGetReviews(status):
+    if session["type_account"] == "admin":
+        return app.response_class(json.dumps(OtherEvent().adminGetReview(status)), mimetype='application/json')
+
+@app.route("/updateReview/<status>/<int:id>/<int:star>/<content>", methods=["GET"])
+def updateReview(status, id, star, content):
+    if status not in ["accept", "deny", "handling"]:
+        return
+    if session["type_account"] == "admin":
+        OtherEvent().updateReview(id, status, star, content)
+        return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/adminGetReports/<status>", methods=["GET"])
+def adminGetReports(status):
+    if session["type_account"] == "admin":
+        return app.response_class(json.dumps(OtherEvent().adminGetAllReport(status)), mimetype='application/json')
+    
+@app.route("/updateReport/<status>/<int:id>", methods=["GET"])
+def updateReport(status, id):
+    if status not in ["accept", "deny", "handling"]:
+        return
+    if session["type_account"] == "admin":
+        OtherEvent().changeStatusReport(id, status)
+        if status == "accept":
+            idPost = OtherEvent().getIdPostFromReport(id)
+            Post().blockPost(idPost)    
+        return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 # -----------------------------------------------------------------------------------
 # ----------------------------API trang historyB-------------------------------------

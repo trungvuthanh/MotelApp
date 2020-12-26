@@ -332,7 +332,13 @@ class Post:
         query_str = "UPDATE post SET statusPost = ? WHERE idPost = ?"
         connectDatabase.cursor.execute(query_str, "block", idPost)
         connectDatabase.connection.commit()
+        query_str = "SELECT usernameAuthorPost FROM post WHERE idPost = ?"
+        usernameAuthorPost = connectDatabase.cursor.execute(query_str, idPost).fetchval()
         connectDatabase.close()
+        icon = "icon-post.png"
+        titleNotification = "Bài đăng bị chặn"
+        content = "Bài đăng " + str(idPost) + " bị chặn do bị report. Mọi thắc mắc xin liên hệ lại với quản trị viên."
+        Notification().create(titleNotification, usernameAuthorPost, icon, content)
         
     def unblockPost(self, idPost):
         connectDatabase = ConnectDatabase()
