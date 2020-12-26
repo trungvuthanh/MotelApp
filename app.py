@@ -439,6 +439,42 @@ def createPost():
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 
+# -----------------------------------------------------------------------------------
+# ----------------------------API thống kê-------------------------------------------
+# ----------------------------------------------------------------------------------- 
+@app.route("/thong-ke", methods=["GET"])
+def statistical():
+    if "type_account" not in session or session["type_account"] == "renter":
+        time.sleep(10) 
+        return
+    if session["type_account"] == "admin":
+        return render_template("statistic-admin.html")
+    else:
+        return render_template("statistic-owner.html")
+
+@app.route("/adminGetTop3Post", methods=["GET"])
+def adminGetTop3Post():
+    if session["type_account"] == "admin":
+        return app.response_class(json.dumps(OtherEvent().adminGetTop3Post()), mimetype='application/json')
+
+@app.route("/thongKeCoCauTrangThaiBaiDang", methods=["GET"]) #admin vaf owner
+def thongKeCoCauTrangThaiBaiDang():
+    return app.response_class(json.dumps(OtherEvent().statisticalPost(session["username"])), mimetype='application/json')
+
+@app.route("/adminThongKeTuKhoaVaThongKeViewNhanh", methods=["GET"]) #admin và owner
+def adminThongKeTuKhoaVaThongKeViewNhanh():
+    if session["type_account"] == "admin":
+        return app.response_class(json.dumps(OtherEvent().statisticalDateHighestView()), mimetype='application/json')
+
+@app.route("/adminThongKeView/<groupTime>/<arg1>/<arg2>", methods=["GET"]) #admin và owner
+def adminThongKeView(groupTime, arg1, arg2):
+    # groupTime = "inDay"    => arg1 = yyyy-mm-dd, arg2 = cái gì cũng được
+    # groupTime = "inMonth"  => arg1 = yyyy, arg2 = mm
+    # groupTime = "inWeek"   => arg1, arg2 = cái gì cũng được
+    # groupTime = "dayToDay" => arg1 = yyyy-mm-dd(start), arg2 = yyyy-mm-dd(end)
+    if session["type_account"] == "admin":
+        return app.response_class(json.dumps(OtherEvent().statisticalView(username = "admin", groupTime = groupTime, arg1 = arg1, arg2 = arg2)), mimetype='application/json')
+
 
 # print(request.args.get("province"))
 

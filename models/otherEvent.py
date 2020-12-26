@@ -268,39 +268,53 @@ class OtherEvent:
                 GROUP BY DATE(time)
                 """
             row = connectDatabase.cursor.execute(query_str, username).fetchone() 
-            return {"day": row.day, "maxView": row.maxView}
+            return {"day": str(row.day), "maxView": row.maxView}
         else:
             query_str = """
-                SELECT DATE(time) day, MAX(COUNT(*)) maxView FROM history_view WHERE time <= NOW()
-                GROUP BY DATE(time)
+                SELECT DATE(time) day, COUNT(*) maxView FROM history_view 
+                WHERE time <= NOW() 
+                GROUP BY DATE(time) 
+                ORDER BY maxView DESC 
+                LIMIT 1
                 """
             row = connectDatabase.cursor.execute(query_str).fetchone() 
             query_str = """
-                SELECT MAX(COUNT(*)) maxView FROM history_view WHERE time <= NOW()
+                SELECT COUNT(*) maxView, HOUR(time) hour FROM history_view WHERE time <= NOW()
                 GROUP BY HOUR(time)
+                ORDER BY maxView DESC 
+                LIMIT 1
                 """
-            hour = connectDatabase.cursor.execute(query_str).fetchval() 
-            views = {"day": row.day, "maxView": row.maxView, "hour": hour}
+            hour = connectDatabase.cursor.execute(query_str).fetchone() 
+            views = {"day": str(row.day), "maxView": row.maxView, "hour": hour.hour, "countInHour": hour.maxView}
             query_str = """
                 SELECT addressSearch, COUNT(*) count FROM history_search WHERE time <= NOW()
                 GROUP BY addressSearch
                 ORDER BY count DESC
                 LIMIT 3
                 """
-            rows = connectDatabase.cursor.execute(query_str).fetchone()
+            rows = connectDatabase.cursor.execute(query_str).fetchall()
             searchs = [{"addressSeach": row.addressSearch, "count": row.count} for row in rows]
-            query_str = """
-                SELECT idPost, titlePost, SUM(totalView) totalView FROM post ORDERBY totalView DESC LIMIT 5
-                """
-            rows = connectDatabase.cursor.execute(query_str).fetchone()
-            top5TotalView = [{"idPost": row.idPost, "titlePost": row.titlePost, "totalView": row.totalView} for row in rows]
-            query_str = """
-                SELECT idPost, titlePost, SUM(totalFavorite) totalFavorite FROM post ORDERBY totalFavorite DESC LIMIT 5
-                """
-            rows = connectDatabase.cursor.execute(query_str).fetchone()
-            top5TotalFavorite = [{"idPost": row.idPost, "titlePost": row.titlePost, "totalFavorite": row.totalFavorite} for row in rows]
-            return {"views": views, "searchs": searchs, "top5TotalView": top5TotalView, "top5TotalFavorite": top5TotalFavorite}
+            return {"views": views, "searchs": searchs}
 
+    def adminGetTop3Post(self):
+        connectDatabase = ConnectDatabase()
+        query_str = """
+            SELECT idPost, titlePost, CONCAT(addressWard, ", ", addressDistrict, ", ", addressProvince) address, totalView, totalFavorite, totalView+2*totalFavorite score
+            FROM post
+            ORDER BY score DESC
+            LIMIT 3
+            """
+        rows = connectDatabase.cursor.execute(query_str).fetchall()
+        i = 0
+        data = []
+        for row in rows:
+            i += 1
+            if i == 1:
+                data.append({"idPost": row.idPost, "titlePost": row.titlePost, "address": row.address, "totalView": row.totalView, "totalFavorite": row.totalFavorite, "score": row.score, "images": self.getImagePost(row.idPost, "all")})
+            else:
+                data.append({"idPost": row.idPost, "titlePost": row.titlePost, "address": row.address, "totalView": row.totalView, "totalFavorite": row.totalFavorite, "score": row.score, "image": self.getImagePost(row.idPost, "one")})
+        return data
+    
     def statisticalPost(self, username="admin"):
         connectDatabase = ConnectDatabase()
         if username != "admin":
@@ -324,6 +338,8 @@ class OtherEvent:
             report_post = connectDatabase.cursor.execute(query_str).fetchval()
             query_str = "SELECT COUNT(*) FROM review"
             review = connectDatabase.cursor.execute(query_str).fetchval()
+            arr1.append({"report_post": report_post, "review": review})
+            return arr1
 
     def statisticalView(self, username = "admin", groupTime = "", arg1 = "", arg2 = ""):
         # groupTime in ["inDay yyyy-mm-dd", "inWeek", "inMonth yyyy mm", "dayToDay yyyy-mm-dd yyyy-mm-dd"]
