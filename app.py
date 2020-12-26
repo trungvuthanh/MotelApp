@@ -457,16 +457,16 @@ def adminGetTop3Post():
     if session["type_account"] == "admin":
         return app.response_class(json.dumps(OtherEvent().adminGetTop3Post()), mimetype='application/json')
 
-@app.route("/thongKeCoCauTrangThaiBaiDang", methods=["GET"]) #admin vaf owner
+@app.route("/adminThongKeCoCauTrangThaiBaiDang", methods=["GET"]) 
 def thongKeCoCauTrangThaiBaiDang():
     return app.response_class(json.dumps(OtherEvent().statisticalPost(session["username"])), mimetype='application/json')
 
-@app.route("/adminThongKeTuKhoaVaThongKeViewNhanh", methods=["GET"]) #admin và owner
+@app.route("/adminThongKeTuKhoaVaThongKeViewNhanh", methods=["GET"]) 
 def adminThongKeTuKhoaVaThongKeViewNhanh():
     if session["type_account"] == "admin":
         return app.response_class(json.dumps(OtherEvent().statisticalDateHighestView()), mimetype='application/json')
 
-@app.route("/adminThongKeView/<groupTime>/<arg1>/<arg2>", methods=["GET"]) #admin và owner
+@app.route("/adminThongKeView/<groupTime>/<arg1>/<arg2>", methods=["GET"]) 
 def adminThongKeView(groupTime, arg1, arg2):
     # groupTime = "inDay"    => arg1 = yyyy-mm-dd, arg2 = cái gì cũng được
     # groupTime = "inMonth"  => arg1 = yyyy, arg2 = mm
@@ -475,6 +475,20 @@ def adminThongKeView(groupTime, arg1, arg2):
     if session["type_account"] == "admin":
         return app.response_class(json.dumps(OtherEvent().statisticalView(username = "admin", groupTime = groupTime, arg1 = arg1, arg2 = arg2)), mimetype='application/json')
 
+@app.route("/ownerThongKeViewInWeek", methods=["GET"]) 
+def ownerThongKeView():
+    if session["type_account"] == "owner":
+        return app.response_class(json.dumps(OtherEvent().statisticalView(session["username"])), mimetype='application/json')
+
+@app.route("/ownerThongKeNhanhView", methods=["GET"]) 
+def ownerThongKeNhanhView():
+    if session["type_account"] == "owner":
+        return app.response_class(json.dumps(OtherEvent().statisticalDateHighestView(session["username"])), mimetype='application/json')@app.route("/ownerThongKeNhanhView", methods=["GET"])
+
+@app.route("/ownerThongKeCoCauPost", methods=["GET"])  
+def ownerThongKeCoCauPost():
+    if session["type_account"] == "owner":
+        return app.response_class(json.dumps(OtherEvent().statisticalOwner(session["username"])), mimetype='application/json')
 
 # print(request.args.get("province"))
 

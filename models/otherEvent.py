@@ -232,9 +232,9 @@ class OtherEvent:
         connectDatabase.close()
         return [{"idPost": row.idPost, "titlePost": row.titlePost, "priceItem": row.priceItem, "addressDetail": row.addressDetail, "addressWard": row.addressWard, "addressDistrict": row.addressDistrict, "addressProvince": row.addressProvince} for row in rows]
     
-    def statisticalOwner(self, usernameOwner, groupTime):
+    def statisticalOwner(self, usernameOwner):
         query_str = """
-            SELECT COUNT(*) FROM post WHERE usernameAuthorPost = ? AND status = ?
+            SELECT COUNT(*) FROM post WHERE usernameAuthorPost = ? AND statusPost = ?
             """
         connectDatabase = ConnectDatabase()
         actives = connectDatabase.cursor.execute(query_str, usernameOwner, "active").fetchval()
@@ -253,7 +253,7 @@ class OtherEvent:
             """
         row = connectDatabase.cursor.execute(query_str, usernameOwner).fetchone()      
         connectDatabase.close()
-        return {"actives": actives, "handlings": handlings, "reports": reports, "blocks": blocks, "posts": row.posts, "totalViews": row.totalViews, "totalFavorites": row.totalFavorites}
+        return {"actives": actives, "handlings": handlings, "reports": reports, "blocks": blocks, "posts": row.posts, "totalViews": int(row.totalViews), "totalFavorites": int(row.totalFavorites)}
     
     def allDays(self, y, m):
         return ['{:04d}-{:02d}-{:02d}'.format(y, m, d) for d in range(1, monthrange(y, m)[1] + 1)]
@@ -262,10 +262,12 @@ class OtherEvent:
         connectDatabase = ConnectDatabase()
         if username != "admin":
             query_str = """
-                SELECT DATE(time) day, MAX(COUNT(*)) maxView FROM history_view WHERE idPost IN (
+                SELECT DATE(time) day, COUNT(*) maxView FROM history_view WHERE idPost IN (
                     SELECT idPost FROM post WHERE usernameAuthorPost = ?
                 ) AND time <= NOW()
                 GROUP BY DATE(time)
+                ORDER BY maxView DESC 
+                LIMIT 1
                 """
             row = connectDatabase.cursor.execute(query_str, username).fetchone() 
             return {"day": str(row.day), "maxView": row.maxView}
