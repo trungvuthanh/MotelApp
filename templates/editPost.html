@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../static/image/icon.png"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/post-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Thêm bài đăng</title>
+</head>
+<body>
+    <div class="page">
+        <div id="header1">
+            <h2>CHỈNH SỬA BÀI ĐĂNG</h2>
+        </div>
+        <form class="needs-validation" novalidate>
+            <!-- hàng 1: Tiêu đề và loại phòng -->
+            <div class="form-row">
+                <div class="col-md-8 mb-3">
+                    <label class="chimuc" for="tieudebaiviet">Tiêu đề</label>
+                    <input type="text" class="form-control" id="tieudebaiviet" placeholder="vd: Nhà trọ sinh viên" required>
+                    <div class="invalid-feedback">Nhập tiêu đề bài viết.</div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="loaiphong">Loại</label>
+                    <select class="custom-select">                        
+                        <option selected>Phòng trọ</option>
+                        <option>Nhà nguyên căn</option>
+                        <option>Chung cư mini</option>
+                        <option>Chung cư nguyên căn</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!-- Hàng 2: Địa chỉ -->
+            <div class="form-row"> <div class="col-md-8"><label class="chimuc" for="">Địa chỉ</label></div></div>      
+            <div class="form-row">
+                
+                <div class="col-md-4 mb-3">                    
+                    <select class="custom-select" id="province" required>                        
+                        <option value="">Tỉnh/thành phố</option>
+                        <option value="nguyễn đức tới">Nhà nguyên căn</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="1">Chung cư nguyên căn</option>
+                    </select>
+                    <div class="invalid-feedback">Chọn tỉnh thành.</div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select" required>                        
+                        <option value="">Quận/huyện</option>
+                        <option value="1">Nhà nguyên căn</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="3">Chung cư nguyên căn</option>
+                    </select>
+                    <div class="invalid-feedback">Chọn quận huyện.</div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select" required>                        
+                        <option value="">Phường/xã</option>
+                        <option value="1">Nhà nguyên căn</option>
+                        <option value="2">Chung cư mini</option>
+                        <option value="3">Chung cư nguyên căn</option>
+                    </select>
+                    <div class="invalid-feedback">Chọn phường xã.</div>
+                </div>
+            </div>
+            <div class="form-row"> 
+                <div class="col-md-12 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Địa chỉ chi tiết: Số nhà A, Đường B..." required>
+                    <div class="invalid-feedback">Nhập tiêu đề bài viết.</div>
+                </div>
+            </div>      
+
+            
+            <!-- Hàng 3: Địa điểm lân cận -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label class="chimuc" for="">Địa điểm lân cận</label>
+                    <textarea class="form-control" id="" rows="3" placeholder="- Đại học Quốc gia Hà Nội&#10;- Bộ Công an&#10;- ..."></textarea>   
+                </div>
+            </div>
+
+
+            <!-- Hàng 4: Diện tích, số phòng, giá phòng -->
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="">Diện tích</label>
+                    <input type="number" class="form-control" id="" placeholder="đơn vị: m2" required>
+                    <div class="invalid-feedback">Nhập diện tích là số thực dương.</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="">Số phòng</label>
+                    <input type="number" class="form-control" id="" placeholder="vd: 1" required>
+                    <div class="invalid-feedback">Nhập số phòng.</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="">Giá</label>
+                    <input type="number" class="form-control" id="" placeholder="đơn vị: triệu" required>
+                    <div class="invalid-feedback">Nhập giá là số thực dương.</div>
+                </div>
+            </div>
+
+
+            <!-- Hàng 5: Loại phòng & Phòng tắm -->
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label class="chimuc" for="">Loại phòng</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="chimuc" for="">Phòng tắm</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select">                        
+                        <option selected>Không chung chủ</option>
+                        <option>Chung chủ</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select">                        
+                        <option selected>Không khép kín</option>
+                        <option>Khép kín</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <select class="custom-select">                        
+                        <option selected>Không nóng lạnh</option>
+                        <option>Có nóng lạnh</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!-- Hàng 6: Phòng bếp, điện, nước -->
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="">Phòng bếp</label>
+                    <select class="custom-select">                        
+                        <option selected>Không nấu ăn</option>
+                        <option>Khu bếp riêng</option>
+                        <option>Khu bếp chung</option>
+                        
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="">Điện</label>
+                    <input type="text" class="form-control" id="" placeholder="vd: 1.6 k/số hoặc giá dân" required>
+                    <div class="invalid-feedback">Nhập giá điện.</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="chimuc" for="">Nước</label>
+                    <input type="text" class="form-control" id="" placeholder="vd: 50k/người" required>
+                    <div class="invalid-feedback">Nhập giá nước.</div>
+                </div>
+            </div>
+
+            <!-- Hàng 7: Phòng tắm -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label class="chimuc" for="">Tiện ích khác</label>
+                </div>
+            </div>
+            <div class="form-row tienich">
+                
+                <div class="col-md-2 mb-3">
+                    <abbr title="Điều hòa"><img src="../static/image/air-conditioner-icon.png"> </abbr>                  
+                </div>
+                <div class="col-md-2 mb-3">
+                    <abbr title="Ban công"><img src="../static/image/balcony-icon.png"> </abbr> 
+                </div>
+                <div class="col-md-2 mb-3">
+                    <abbr title="Máy giặt"><img src="../static/image/washing-machine-icon.png"> </abbr>               
+                </div>
+                <div class="col-md-2 mb-3">
+                    <abbr title="Tủ quần áo"><img src="../static/image/wardrobe-icon.png"> </abbr>              
+                </div>
+                <div class="col-md-2 mb-3">
+                    <abbr title="Tivi"><img src="../static/image/television-icon.png"> </abbr>                   
+                </div>
+                <div class="col-md-2 mb-3">
+                    <abbr title="Wifi"><img src="../static/image/free-wifi-icon.png"> </abbr> 
+                </div>
+            </div>
+
+
+            <!-- Hàng 8: Hình ảnh -->
+            <div class="form-group">
+                <label class="chimuc" for="">Hình ảnh</label>
+                <input type="file" class="form-control-file" multiple = "multiple" accept="image/*" required onchange = "previewFile(this);"  id="btnHinhAnh">
+                <div class="invalid-feedback">Tải lên tối thiểu 3 ảnh.</div>
+                <div id = "preview"></div>
+            </div>
+
+
+            <!-- Hàng 9: Nội dung bài viết -->
+            <div class="form-row">
+                <div class="col-md-12" id="rowPostDes">
+                    <div class="previewBtn" onclick="hienThiThemThongTin(this)"> Gợi ý <i class="fa fa-caret-down"></i></div>
+                    <label class="chimuc" for="">Nội dung thêm</label>  
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <textarea class="form-control" id="noidungbaiviet" rows="5" placeholder="- Chủ trọ dễ tính, nhiệt tình&#10;- An ninh tốt&#10;- Khóa cổng trước 11h&#10;- ..."></textarea>
+                </div>
+                <div class="col-md-6 mb-3" id="contentHTML"></div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-12 mb-3" id="huongDan">
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">Định dạng hỗ trợ</div>
+                        <div class="col-md-4">Nội dung mong muốn</div>
+                        <div class="col-md-5">Nội dung gõ</div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">1. In đậm:</div>
+                        <div class="col-md-4"><b>Nhà trọ giá rẻ</b></div>
+                        <div class="col-md-5 mahoa">**Nhà trọ giá rẻ**</div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">2. In nghiêng:</div>
+                        <div class="col-md-4"><i>Nhà trọ giá rẻ</i></div>
+                        <div class="col-md-5 mahoa">//Nhà trọ giá rẻ//</div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">3. Đoạn văn:</div>
+                        <div class="col-md-4"><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.Nhà trọ sinh viên, khép kín, không chung chủ.</div>                            </div>
+                        <div class="col-md-5 mahoa"><div class="mb-2">Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div><div>Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ. Nhà trọ sinh viên, khép kín, không chung chủ.</div></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3">4. Danh sách:</div>
+                        <div class="col-md-4"><ul><li>Nội dung 1</li><li>Nội dung 2</li><li>Nội dung 3</li></ul></div>
+                        <div class="col-md-5 mahoa"><div>-- Nội dung 1</div><div>-- Nội dung 2</div><div>-- Nội dung 3</div></div>
+                    </div>
+                </div>   
+            </div>
+
+
+            <!-- Hàng 10: Liên lạc -->
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label class="chimuc" for="">Thông tin liên hệ</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Họ tên" value="Nguyễn Đức Tới" disabled required >
+                    <div class="invalid-feedback">Nhập họ tên.</div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Số điện thoại" value="0999999999" disabled required>
+                    <div class="invalid-feedback">Nhập SĐT.</div>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <input type="text" class="form-control" id="" placeholder="Địa chỉ" value="Hà Nội, Hà Nội, Hà Nội" disabled required>
+                    <div class="invalid-feedback">Nhập địa chỉ.</div>
+                </div>
+            </div>
+
+
+            <!-- Hàng 11: Thời gian và tiền -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label class="chimuc" for="">Thời gian đăng</label>
+
+                    <select class="custom-select">
+                        <option selected>1 tuần</option>
+                        <option>1 tháng</option>
+                        <option>3 tháng</option>
+                        <option>6 tháng</option>
+                        <option>1 năm</option>
+                    </select>                    
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div style="margin: 45px 0px 0px 10px">Phí: 300,000 VNĐ</div>
+                </div>
+            </div>
+
+
+            <!-- Hàng 12: Button -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <button class="btn btn-primary mb-3" style="float: right" type="submit">Lưu bài viết</button>
+                </div>
+            </div>        
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script/post.js"></script>
+</body>
