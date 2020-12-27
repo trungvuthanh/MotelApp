@@ -45,44 +45,16 @@ suggestions = []
 // Tìm kiếm
 function searchRaw() {
     keyword = document.getElementById('searchInput').value;
-    sessionStorage.setItem('keyword', keyword); // Lưu từ khóa vào session
     room_type = document.getElementById('itemType').value;
     min_price = document.getElementById('min_price').value;
     max_price = document.getElementById('max_price').value;
     area_range = document.getElementById('area_range').value;
     location.href = '../' + room_type + '/dia-chi/' + keyword + '/0/gia/' + min_price + '/' + max_price + '/dien-tich-tu/' + area_range;
-    
-    // fetch('/tim-kiem', {
-    //     method: "POST",
-    //     credentials: "include",
-    //     body: JSON.stringify({keyword: keyword, room_type: room_type, min_price: min_price, max_price: max_price, area_range: area_range}),
-    //     cache: "no-cache",
-    //     headers: new Headers({
-    //         "content-type": "application/json"
-    //     })
-    // })
-    // .then(
-    //     resp => {
-    //         if (resp.status == 200) {
-    //             resp.json()
-    //             .then(
-    //                 data => {
-    //                     if (data.result == "success") {
-                            
-    //                     } else {
-
-    //                     }
-    //                 }
-    //             )
-    //         }
-    //     }
-    // )
 }
 
 inputBox.onkeyup = (e) => {
     if (e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40 && e.keyCode != 13) {
         let userData = e.target.value;
-        // console.log(userData);
         let emptyArray = [];
         
         if (userData) {
@@ -101,7 +73,6 @@ inputBox.onkeyup = (e) => {
                                 emptyArray = emptyArray.map((data) => {
                                     return data = '<div>'+ data +'</div>';
                                 });
-                                // console.log(emptyArray);
                                 searchWrapper.classList.add('active');
                                 showSuggestions(emptyArray);
                                 let allList = suggBox.querySelectorAll('div');
@@ -163,12 +134,6 @@ inputBox.onkeyup = (e) => {
 
 function showSuggestions(list) {
     let listData;
-    // if (!list.length) {
-    //     userValue = inputBox.value;
-    //     listData = '<div>'+ userValue +'</div>';
-    // } else {
-    //     listData = list.join('');
-    // }
     listData = list.join('');
     suggBox.innerHTML = listData;
 }
@@ -187,15 +152,6 @@ function searchSelect(elmt) {
     area_range = document.getElementById('area_range').value;
     location.href = '../' + room_type + '/dia-chi/' + text_create + '/gia/' + min_price + '/' + max_price + '/dien-tich-tu/' + area_range;
 }
-
-// $(inputBox).focus(function() {
-//     $(suggBox).css('opacity', 1);
-//     $(suggBox).css('pointer-events', 'auto');
-// });
-// inputBox.onblur = function() {
-//     suggBox.style.opacity = 0;
-//     $(suggBox).css('pointer-events', 'none');
-// }
 
 // Chuyển giữa các tab gợi ý
 let tabHeader = document.getElementsByClassName("tab-header")[0];

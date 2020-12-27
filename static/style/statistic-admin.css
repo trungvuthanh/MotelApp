@@ -33,6 +33,10 @@
     font-size: 32px;
     text-transform: uppercase;
 }
+.sub-heading {
+	font-family: 'Fira Sans', sans-serif;
+    font-size: 20px;
+}
 
 .top-first {
 	justify-content: space-evenly;

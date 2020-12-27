@@ -61,24 +61,18 @@ fetch('/information-account')
 $('#footer').load('/static/page/footer.html');
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-// Lấy từ khóa từ session
-document.getElementById('keyword').innerHTML = '"' + sessionStorage.getItem('keyword') + '"';
-
-function formatMoney(amount, decimalCount = 0, decimal = ".", thousands = ",") {
+function formatMoney(amount) {
     try {
-        decimalCount = Math.abs(decimalCount);
-        decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
-    
-        const negativeSign = amount < 0 ? "-" : "";
-    
-        let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
-        let j = (i.length > 3) ? i.length % 3 : 0;
-    
-        return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+        result = amount.toString().split('.');
+        if (result.length == 1) {
+            return result + '.000.000'
+        } else {
+            return result[0] + '.' + result[1].padEnd(3, '0') + '.000'
+        }
     } catch (e) {
         console.log(e)
     }
-};
+}
 
 var pageNumber = 1
 statusItem = 0
@@ -160,9 +154,9 @@ function loadData() {
                                             '<div>' +
                                                 '<h6><b>' + data.listPost[i].titlePost +'</b></h6>' +
                                             '</div>' +
-                                            '<p class="item-price">Giá phòng: ' + data.listPost[i].priceItem + ' đ/tháng</p>' +
+                                            '<p class="item-price">Giá phòng: ' + formatMoney(data.listPost[i].priceItem) + ' đ/tháng</p>' +
                                             '<p>Địa chỉ: ' + data.listPost[i].address + '</p>' +
-                                            '<p>Diện tích: ' + data.listPost[i].area + ' m2 - ' + data.listPost[i].numOfRoom + ' Phòng ngủ</p>' +
+                                            '<p>Diện tích: ' + data.listPost[i].area + ' m<sup>2</sup> - ' + data.listPost[i].numOfRoom + ' Phòng ngủ</p>' +
                                             '<p>Giá nước: ' + data.listPost[i].priceWater + ' - Giá điện: ' + data.listPost[i].priceElectric + '</p>' +
                                             '<p></p>' +
                                         '</div></a>' +
@@ -243,6 +237,10 @@ function updateStatusItem() {
     loadData();
 }
 
+document.getElementById('order').onchange = function() {
+    loadData();
+}
+
 // Thanh trượt khoảng giá
 $(document).ready(function() {
     // $('#min_price').val(1.8);
@@ -306,6 +304,8 @@ function saveFavourite(elmt) {
                 }
             }
         )
+    } else {
+        alert("Bạn cần đăng nhập để thực hiện điều này")
     }
 }
 
@@ -330,7 +330,6 @@ suggestions = []
 // Tìm kiếm
 function searchRaw() {
     keyword = document.getElementById('searchInput').value;
-    sessionStorage.setItem('keyword', keyword); // Lưu từ khóa vào session
     room_type = document.getElementById('itemType').value;
     min_price = document.getElementById('min_price').value;
     max_price = document.getElementById('max_price').value;

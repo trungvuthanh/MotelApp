@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Easy Accomod</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="/static/style/common.css">
+    <link rel="stylesheet" href="/static/style/statistic-admin.css">
+    <link rel="shortcut icon" href="/static/image/icon.png"/>
+    <script src="https://kit.fontawesome.com/43ada5badf.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    <div class="main">
+        <!-- Menu -->
+        <div id="menu"></div>
+
+        <div class="body">
+            <div class="main-content w90 mx-auto px-15">
+
+                <!-- Cơ cấu bài đăng, tổng lượt xem và yêu thích, ngày có lượt xem cao nhất -->
+                <div class="flex-row keyword-price">
+                    <div>
+                        <div class="header"><h1 class="heading text-center">Cơ cấu bài đăng</h1></div>
+                        <div class="chart-box">
+                            <canvas id="chart1" width="400" height="400"></canvas>
+                        </div></div>
+                    <div>
+                        <div class="header"><h1 class="heading text-center">Tổng lượt xem, yêu thích</h1></div>
+                        <div class="top-day-view flex-column justify-content-center align-items-center mt-3">
+                            <div class="title"> lượt xem</div>
+                            <div class="title"> yêu thích</div>
+                            <div class="sub-heading mt-3">Ngày có lượt xem cao nhất: </div>
+                            <div class="sub-heading">với  lượt xem</div>
+                        </div></div>
+                </div>
+
+                <!-- Lượt xem trong tuần -->
+                <div class="header"><h1 class="heading">Lượt xem trong tuần</h1></div>
+                <div class="chart-box">
+                    <canvas id="chart2" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/script/statistic-owner.js"></script>
+
+    
+</body>
+</html>

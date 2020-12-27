@@ -31,7 +31,7 @@
                             <div class="shine-name flex-row align-self-center align-items-center">
                                 <img id="imgGold" src="/static/image/gold-medal.png">
                                 <div id="nameGold">
-                                    <span>Chung cư nguyên căn bình dân</span>
+                                    <span></span>
                                     <div class="shine"></div>
                                     <div class="light"></div>
                                 </div>
@@ -44,17 +44,17 @@
                                 <input type="radio" name="slider" id="s4">
                                 <input type="radio" name="slider" id="s5">                        
 
-                                <label for="s1" id="slide1"><img src="/static/image/item-demo1.png" width="100%" height="100%"></label>
-                                <label for="s2" id="slide2"><img src="/static/image/item-demo3.jpg" width="100%" height="100%"></label>
-                                <label for="s3" id="slide3"><img src="/static/image/item-demo4.png" width="100%" height="100%"></label>
-                                <label for="s4" id="slide4"><img src="/static/image/item-demo5.jpg" width="100%" height="100%"></label>
-                                <label for="s5" id="slide5"><img src="/static/image/item-demo6.jpg" width="100%" height="100%"></label>
+                                <label for="s1" id="slide1"><img src="" width="100%" height="100%"></label>
+                                <label for="s2" id="slide2"><img src="" width="100%" height="100%"></label>
+                                <label for="s3" id="slide3"><img src="" width="100%" height="100%"></label>
+                                <label for="s4" id="slide4"><img src="" width="100%" height="100%"></label>
+                                <label for="s5" id="slide5"><img src="" width="100%" height="100%"></label>
                             </section>
                         </div>
                         <!-- Địa chỉ, số views, likes bài đăng top 1 -->
                         <div class="top-info flex-column">
                             <div class="flex-row">
-                                <i class="fas fa-map-marker-alt mr-3"></i><div class="title">Dịch Vọng, Cầu Giấy, Hà Nội</div>
+                                <i class="fas fa-map-marker-alt mr-3"></i><div class="title"></div>
                             </div>
                             <div class="flex-row space-between">
                                 <div>100 Lượt xem <i class="fas fa-eye"></i></div>
@@ -94,15 +94,15 @@
                 <!-- Top từ khóa tìm nhiều nhất, khoảng giá quan tâm -->
                 <div class="flex-row keyword-price">
                     <div class="keyword-box">
-                        <div class="header"><h1 class="heading">Từ khóa tìm kiếm nhiều nhất</h1></div>
+                        <div class="header"><h1 class="heading text-center">Từ khóa tìm kiếm nhiều nhất</h1></div>
                         <div class="chart-box">
-                            <canvas id="chart1" width="350" height="350"></canvas>
+                            <canvas id="chart1" width="400" height="400"></canvas>
                         </div>
                     </div>
                     <div class="price-box">
-                        <div class="header"><h1 class="heading">Mức giá được quan tâm nhất</h1></div>
+                        <div class="header"><h1 class="heading text-center">Cơ cấu bài đăng</h1></div>
                         <div class="chart-box">
-                            <canvas id="chart2" width="350" height="350"></canvas>
+                            <canvas id="chart2" width="450" height="450"></canvas>
                         </div>
                     </div>
                 </div>
@@ -110,40 +110,30 @@
                 <!-- Thống kê lượt xem theo thời gian tự chọn -->
                 <div class="header"><h1 class="heading">Thống kê lượt xem</h1></div>
                 <div class="flex-row view-statistic">
-                    <div class="col-lg-6 align-items-center">
-                        <div class="flex-row space-between">
-                            <div>
-                                <label for="sortBy">Lọc theo</label>
-                                <select class="form-control w-auto" name="sortBy" id="sortBy">
-                                    <option value="day">Ngày</option>
-                                    <option value="week">Tuần</option>
-                                    <option value="month">Tháng</option>
-                                    <option value="daytoday">Day to day</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="startDay">Ngày bắt đầu</label>
-                                <input class="form-control w-auto" type="date" name="startDay" id="startDay">
-                                <div>
-                                    <label for="month">Tháng, năm</label>
-                                    <input class="form-control" type="month" name="month" id="month">
-                                </div>
-                            </div>
-                            <div>
-                                <label for="endDay">Ngày kết thúc</label>
-                                <input class="form-control w-auto" type="date" name="endDay" id="endDay">
-                            </div>
-                        </div>
-                        
+                    <div class="m-3">
+                        <label for="sortBy">Lọc theo</label>
+                        <select class="form-control w-auto" name="sortBy" id="sortBy" onchange="view()">
+                            <option value="inDay">Ngày</option>
+                            <option value="inWeek">Tuần</option>
+                            <option value="inMonth">Tháng</option>
+                            <option value="dayToDay">Day to day</option>
+                        </select>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="flex-row justify-content-center">
-                            <div class="chart-box">
-                                <canvas id="chart3" width="350" height="350"></canvas>
-                            </div>
-                        </div>
-                        
+                    <div class="m-3" id="startDay">
+                        <label for="startDay">Chọn ngày</label>
+                        <input class="form-control w-auto" type="date" name="startDay">
                     </div>
+                    <div class="m-3" id="endDay">
+                        <label for="endDay">Ngày kết thúc</label>
+                        <input class="form-control w-auto" type="date" name="endDay">
+                    </div>
+                    <div class="m-3" id="month">
+                        <label for="month">Tháng, năm</label>
+                        <input class="form-control" type="month" name="month">
+                    </div>
+                </div>
+                <div class="chart-box">
+                    <canvas id="chart3" height="100"></canvas>
                 </div>
             </div>
         </div>
