@@ -5,9 +5,13 @@ import json
 from controllers.urlController import UrlController
 from controllers.dataController import DataController
 from models.post import Post
+from models.renter import Renter
+from models.owner import Owner
+from models.admin import Admin
 from models.address import Address
 from models.otherEvent import OtherEvent
 from models.notification import Notification
+from models.checkValidation import CheckValidation
 import time
 
 # cấu hình đường dẫn và idSession
@@ -150,10 +154,92 @@ def editPost(idPost):
     DataController().editPost(idPost)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
-@app.route("/chinh-sua-thong-tin", methods=["POST"])
+@app.route("/chinh-sua-thong-tin", methods=["GET"])
 def editInfoAccount():
     if session["type_account"] == "renter":
-        return render_template("infoB.html")
+        return render_template("edit-infoB.html")
+    elif session["type_account"] == "owner":
+        if Admin().checkOwnerEditAccount(session["username"]):
+            return render_template("edit-detail-infoA.html")
+    
+@app.route("/doi-mat-khau-va-avatar", methods=["GET"])
+def changePasswordAndAvatar():
+    if session["type_account"] == "renter":
+        return render_template("edit-infoB.html")
+    elif session["type_account"] == "owner":
+        return render_template("edit-infoA.html")
+    
+@app.route("/checkEnableEditAccountOwner", methods=["GET"])
+def checkEnableEditAccountOwner():
+    if session["type_account"] == "owner":
+        return app.response_class(json.dumps({"message": Admin().checkOwnerEditAccount(session["username"])}), mimetype='application/json')
+
+@app.route("/getInfoDefaultB", methods=["GET"]) # sử dụng để set default value khi chỉnh sửa trang tài khoản bên B
+def getInfoDefaultB():
+    if session["type_account"] != "renter":
+        return
+    return app.response_class(json.dumps(Renter().getInformation(session["username"])), mimetype='application/json')
+
+# getDefault avt đã có, tự tìm
+
+@app.route("/getInfoDefaultA", methods=["GET"])
+def getInfoDefaultA():
+    if session["type_account"] != "owner":
+        return
+    return app.response_class(json.dumps(Owner().getInformation(session["username"])), mimetype='application/json')
+
+@app.route("/luuChinhSuaThongTinB", methods=["POST"])
+def luuChinhSuaThongTinB():
+    if session["type_account"] != "renter":
+        return
+    password = str(request.get_json()["password"])
+    repassword = str(request.get_json()["repassword"])
+    fullname = str(request.get_json()["fullname"])
+    phoneNumber = str(request.get_json()["phoneNumber"])
+    email = str(request.get_json()["email"])
+    birthday = str(request.get_json()["birthday"])
+    addressProvince = str(request.get_json()["addressProvince"])
+    addressDistrict = str(request.get_json()["addressDistrict"])
+    addressWard = str(request.get_json()["addressWard"])
+    addressDetail = str(request.get_json()["addressDetail"])
+    typeAvt = int(request.get_json()["typeAvt"])
+    typeAccount = session["type_account"]
+    if password != repassword or not Address.checkAddress(addressProvince, addressDistrict, addressWard) or not CheckValidation.isFullname(fullname) or not CheckValidation.isPhoneNumber(phoneNumber) or not CheckValidation.isEmail(email):
+        return
+    Renter().editAccount(session["username"], password, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+app.route("/luuChinhSuaMatKhauVaAvatarA", methods=["POST"])
+def luuChinhSuaMatKhauVaAvatarA():
+    if session["type_account"] != "owner":
+        return
+    password = str(request.get_json()["password"])
+    repassword = str(request.get_json()["repassword"])
+    typeAvt = int(request.get_json()["typeAvt"])
+    typeAccount = session["type_account"]
+    if password != repassword:
+        return
+    Owner().changePasswordAndAvatar(session["username"], password, typeAvt)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/luuChinhSuaThongTinA", methods=["POST"])
+def luuChinhSuaThongTinA():
+    if session["type_account"] != "renter":
+        return
+    fullname = str(request.get_json()["fullname"])
+    phoneNumber = str(request.get_json()["phoneNumber"])
+    email = str(request.get_json()["email"])
+    birthday = str(request.get_json()["birthday"])
+    addressProvince = str(request.get_json()["addressProvince"])
+    addressDistrict = str(request.get_json()["addressDistrict"])
+    addressWard = str(request.get_json()["addressWard"])
+    addressDetail = str(request.get_json()["addressDetail"])
+    typeAvt = int(request.get_json()["typeAvt"])
+    typeAccount = session["type_account"]
+    if not Address.checkAddress(addressProvince, addressDistrict, addressWard) or not CheckValidation.isFullname(fullname) or not CheckValidation.isPhoneNumber(phoneNumber) or not CheckValidation.isEmail(email):
+        return
+    Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, fullname)
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 # -----------------------------------------------------------------------------------
 # ----------------------------API recommend search-----------------------------------

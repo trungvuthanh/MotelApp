@@ -157,9 +157,6 @@ class DataController():
             return "fail"
         OtherEvent().renterSendReport(idPost, session["username"], fakeInfo, fakePrice, content)
         return "success"
-
-
-            
     
     def detailPost(self, idPost, titlePost):
         if Post().checkPost(idPost, titlePost):

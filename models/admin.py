@@ -162,6 +162,13 @@ class Admin(User):
         connectDatabase.connection.commit()
         connectDatabase.close()
         
+    def checkOwnerEditAccount(self, username):
+        query_str = """
+            SELECT COUNT(*) FROM owner_profile_scratch WHERE username = ? AND status = ?
+            """
+        connectDatabase = ConnectDatabase()
+        return connectDatabase.cursor.execute(query_str, username, "enable").fetchval() > 0
+    
     def lockAccount(self, username, status, typeAccount):
         # status = "block" or status = "active"
         if typeAccount == "owner":

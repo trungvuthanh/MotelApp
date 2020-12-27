@@ -39,7 +39,8 @@
                 <li class="account-menu">
                     <a class="btn ml-md-2" id="nameAccount"></a>
                     <div class="dropdownMenu">
-                        <a class="nav-link menu-item edit-account" href="/chinh-sua-thong-tin">Chỉnh sửa thông tin</a>
+                        <a class="nav-link menu-item edit-account" href="/doi-mat-khau-va-avatar">Đổi mật khẩu, avatar</a>
+                        <a class="nav-link menu-item edit-account" id="chinhsua" href="/chinh-sua-thong-tin">Chỉnh sửa thông tin</a>
                         <a class="nav-link menu-item logout" href="/dang-xuat"> Đăng xuất</a>
                     </div>
                 </li>
@@ -71,6 +72,22 @@
                     .then(
                         data => {
                             $('#nameAccount').html(data.fullname);
+                        }
+                    )
+                }
+            }
+        )
+        fetch('/checkEnableEditAccountOwner')
+        .then(
+            resp => {
+                if (resp.status == 200) {
+                    resp.json()
+                    .then(
+                        data => {
+                            if (data.message != true) {
+                                document.getElementById('chinhsua').style.display = "none"
+                            }
+                            
                         }
                     )
                 }
