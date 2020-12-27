@@ -128,7 +128,7 @@ class DataController():
         Post().create(titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, session["username"], session["type_account"], postDuration, listImages)
     
     def infoAccount(self, username, typeAccount):
-        return User.infoAccount(username, typeAccount)
+        return User().infoAccount(username, typeAccount)
     
     def deleteAllHistoryView(self, usernameRenter):
         OtherEvent().deleteAllHistoryPost(usernameRenter)

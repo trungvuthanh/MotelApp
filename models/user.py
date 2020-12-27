@@ -36,7 +36,7 @@ class User:
             WHERE username = ?
             """
             connectDatabase = ConnectDatabase()
-            row = connectDatabase.cursor.execute(query_str, username, password).fetchone()
+            row = connectDatabase.cursor.execute(query_str, username).fetchone()
             return {"name": row.fullName, "address": row.address, "phoneNumber": row.phoneNumber}
         else:
             return {"name": "Quản trị viên", "address": "Xuân Thủy, Cầu Giấy, Hà Nội", "phoneNumber": "0989898766"}
