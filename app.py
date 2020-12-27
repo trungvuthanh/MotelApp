@@ -616,12 +616,37 @@ def ownerThongKeView():
 @app.route("/ownerThongKeNhanhView", methods=["GET"]) 
 def ownerThongKeNhanhView():
     if session["type_account"] == "owner":
-        return app.response_class(json.dumps(OtherEvent().statisticalDateHighestView(session["username"])), mimetype='application/json')@app.route("/ownerThongKeNhanhView", methods=["GET"])
+        return app.response_class(json.dumps(OtherEvent().statisticalDateHighestView(session["username"])), mimetype='application/json')
 
 @app.route("/ownerThongKeCoCauPost", methods=["GET"])  
 def ownerThongKeCoCauPost():
     if session["type_account"] == "owner":
         return app.response_class(json.dumps(OtherEvent().statisticalOwner(session["username"])), mimetype='application/json')
+
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API quản lý tài khoản----------------------------------
+# -----------------------------------------------------------------------------------
+@app.route("/quan-ly-tai-khoan", methods=["GET"])
+def managerAccount():
+    if "type_account" not in session:
+        return redirect("/")
+    if session["type_account"] == "admin":
+        return render_template("account-manager.html")
+
+@app.route("/getAccount/<typeAccount>/<status>/<int:numPage>", methods=["GET"])
+def getAccount(typeAccount, status, numPage):
+    if session["type_account"] == "admin":
+        if typeAccount not in ["owner", "renter"] or status not in ["handling", "edit", "active", "block"]:
+            return
+        if typeAccount == "renter":
+            (result, hasPrev, hasNext) = Admin().getAllAccountRenter(status, numPage)
+        elif typeAccount == "owner":
+            if status == "edit":
+                (result, hasPrev, hasNext) = Admin().getAllRequestEditInfoOwner(numPage)
+            else:
+                (result, hasPrev, hasNext) = Admin().getAllAccountOwner(status, numPage)
+        return app.response_class(json.dumps({"typeAccount": typeAccount, "status": status, "result": result, "hasPrev": hasPrev, "hasNext": hasNext}), mimetype='application/json')
 
 # print(request.args.get("province"))
 
