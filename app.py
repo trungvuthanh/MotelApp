@@ -460,6 +460,10 @@ def sendReport(idPost, fakeInfo, fakePrice):
     dataController = DataController()
     return app.response_class(json.dumps({"message": DataController().renterSendReport(idPost, fakeInfo, fakePrice)}), mimetype='application/json')
 
+@app.route("/guestOrRenterGetReView/<int:idPost>", methods=["GET"]) # trang detail-post
+def getReport(idPost):
+    return app.response_class(json.dumps(OtherEvent().renterOrGuestGetReview(idPost)), mimetype='application/json')
+
 @app.route("/review-report", methods=["GET"])
 def routeReviewReport():
     if session["type_account"] == "admin":
