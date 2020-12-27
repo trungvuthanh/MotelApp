@@ -648,6 +648,46 @@ def getAccount(typeAccount, status, numPage):
                 (result, hasPrev, hasNext) = Admin().getAllAccountOwner(status, numPage)
         return app.response_class(json.dumps({"typeAccount": typeAccount, "status": status, "result": result, "hasPrev": hasPrev, "hasNext": hasNext}), mimetype='application/json')
 
+@app.route("/lockAccount/<type>/<username>", methods=["GET"])
+def blockAccount(type, username):
+    if session["type_account"] != "admin" or type not in ["block", "active", "deny"]:
+        return
+    Admin().lockAccount(username, type, "owner")
+    Admin().lockAccount(username, type, "renter")
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+@app.route("/chinhsua/<type>/<username>", methods=["GET"])
+def editAccount(type, username):
+    if session["type_account"] != "admin" or type not in ["enable", "unenable", "accept", "deny"]:
+        return
+    if type == "enable": 
+        Admin().setEnableEditAccountOwner(username)
+    elif type == "unenable":
+        Admin().setUnEnableEditAccountOwner(username)
+    else:
+        Admin().handlingEditAccount(username, type) # accept/deny
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+     
+@app.route("/checkEdit/<username>", methods=["GET"])
+def checkEdit(username):
+    if session["type_account"] != "admin":
+        return
+    return app.response_class(json.dumps({"message": Admin().checkOwnerEditAccount(username)}), mimetype='application/json')
+
+@app.route("/search/<typeAccount>/<stringSearch>", methods=["GET"])
+def searchAccount(typeAccount, stringSearch):
+    if session["type_account"] != "admin" or typeAccount not in ["owner", "renter"]:
+        return
+    stringSearch = stringSearch.title()
+    if typeAccount == "owner":
+        return app.response_class(json.dumps(Admin().searchAccountOwner(stringSearch)), mimetype='application/json')
+    else:
+        return app.response_class(json.dumps(Admin().searchAccountRenter(stringSearch)), mimetype='application/json')
+    
+
+
+        
+
 # print(request.args.get("province"))
 
 

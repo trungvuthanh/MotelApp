@@ -9,13 +9,23 @@ class Admin(User):
     def __init__(self):
         pass
     
+    def checkOwnerEditAccount(self, username):
+        query_str = """
+            SELECT COUNT(*) FROM owner_profile_scratch WHERE username = ? AND status = ?
+            """
+        connectDatabase = ConnectDatabase()
+        return connectDatabase.cursor.execute(query_str, username, "enable").fetchval() > 0
     
     def getAllAccountOwner(self, status, numPage = 1):
         # status = "active" or "handling" or "block"
-        query_str = "SELECT * FROM owner WHERE status = ? LIMIT 10 OFFSET ?"
+        query_str = """
+            SELECT status, "owner" as typeAccount, fullname, birthday, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) address, ID, imageID , email, username, phoneNumber, DATE(createDate) createDate
+            FROM owner 
+            WHERE status = ?
+            LIMIT 10 OFFSET ?"""
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, status, (numPage - 1)*10)
-        result = [[str(x) for x in row] for row in rows]
+        result = [{"status": row.status, "typeAccount": row.typeAccount, "fullname": row.fullname, "birthday": str(row.birthday), "address": row.address, "ID": row.ID, "imageID": row.imageID , "email": row.email, "username": row.username, "phoneNumber": row.phoneNumber, "createDate": str(row.createDate), "enableEdit": self.checkOwnerEditAccount(row.username)} for row in rows]
         
         query_str = "SELECT COUNT(*) FROM owner WHERE status = ?"
         numberAccount = connectDatabase.cursor.execute(query_str, status).fetchval()
@@ -31,10 +41,11 @@ class Admin(User):
         return (result, hasPrev, hasNext)
     
     def getAllRequestEditInfoOwner(self, numPage = 1):
-        query_str = "SELECT * FROM owner_profile_scratch WHERE status = ? LIMIT 10 OFFSET ?"
+        query_str = """
+            SELECT "edit" as status, "owner" as typeAccount, fullname, birthday, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) address, "" as ID, "null" as imageID , email, username, phoneNumber, DATE(time) createDate FROM owner_profile_scratch WHERE status = ? LIMIT 10 OFFSET ?"""
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, "handling", (numPage - 1)*10)
-        result = [[str(x) for x in row] for row in rows]
+        result = [{"status": row.status, "typeAccount": row.typeAccount, "fullname": row.fullname, "birthday": str(row.birthday), "address": row.address, "ID": row.ID, "imageID": row.imageID , "email": row.email, "username": row.username, "phoneNumber": row.phoneNumber, "createDate": str(row.createDate)} for row in rows]
         
         query_str = "SELECT COUNT(*) FROM owner_profile_scratch WHERE status = ?"
         numberAccount = connectDatabase.cursor.execute(query_str, "handling").fetchval()
@@ -51,10 +62,15 @@ class Admin(User):
     
     def getAllAccountRenter(self, status, numPage = 1):
         # status = "active" or "block"
-        query_str = "SELECT * FROM owner WHERE status = ? LIMIT 10 OFFSET ?"
+        query_str = """
+            SELECT status, "renter" as typeAccount, fullname, birthday, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) address, "" as ID, "null" as imageID , email, username, phoneNumber, DATE(createDate) createDate 
+            FROM renter 
+            WHERE status = ? 
+            LIMIT 10 
+            OFFSET ?"""
         connectDatabase = ConnectDatabase()
         rows = connectDatabase.cursor.execute(query_str, status, (numPage - 1)*10)
-        result = [[str(x) for x in row] for row in rows]
+        result = [{"status": row.status, "typeAccount": row.typeAccount, "fullname": row.fullname, "birthday": str(row.birthday), "address": row.address, "ID": row.ID, "imageID": row.imageID , "email": row.email, "username": row.username, "phoneNumber": row.phoneNumber, "createDate": str(row.createDate)} for row in rows]
         
         query_str = "SELECT COUNT(*) FROM owner WHERE status = ?"
         numberAccount = connectDatabase.cursor.execute(query_str, status).fetchval()
@@ -79,26 +95,29 @@ class Admin(User):
     def searchAccountOwner(self, stringSearch):
         query_str = """
             WITH user AS (
-                SELECT username, 1 AS type, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM owner 
-                UNION SELECT username, 2 AS type, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM owner_profile_scratch 
+                SELECT status, "owner" as typeAccount, fullname, birthday, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) address, ID, imageID , email, username, phoneNumber, DATE(createDate) createDate, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM owner 
+                UNION 
+                SELECT "edit" as status, "owner" as typeAccount, fullname, birthday, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) address, "" as ID, "null" as imageID , email, username, phoneNumber, DATE(time) createDate, MATCH(fullname, phoneNumber) AGAINST (?) as score
+                FROM owner_profile_scratch 
             ) 
-            SELECT username, type FROM user
+            SELECT status, typeAccount, fullname, birthday, address, ID, imageID , email, username, phoneNumber, createDate 
+            FROM user
             ORDER BY score DESC LIMIT 5
             """
         connectDatabase = ConnectDatabase()
-        rows = connectDatabase.cursor.execute(query_str, stringSearch, stringSearch)
-        accounts = [[row.username, row.type] for row in rows]
-        result = [[str(x) for x in connectDatabase.cursor.execute(self.stringQuerySearchAccountOwner(account[1]), account[0])] for account in accounts]
+        rows = connectDatabase.cursor.execute(query_str, stringSearch, stringSearch).fetchall()
         connectDatabase.close()
-        return result
+        return [{"status": row.status, "typeAccount": row.typeAccount, "fullname": row.fullname, "birthday": str(row.birthday), "address": row.address, "ID": row.ID, "imageID": row.imageID , "email": row.email, "username": row.username, "phoneNumber": row.phoneNumber, "createDate": str(row.createDate)} for row in rows]
     
     def searchAccountRenter(self, stringSearch):
-        query_str = "SELECT *, MATCH(fullname, phoneNumber) AGAINST (?) as score FROM renter ORDER BY score DESC LIMIT 5"
+        query_str = """
+            SELECT status, "renter" as typeAccount, fullname, birthday, concat(addressWard, ", ", addressDistrict, ", ", addressProvince) address, "" as ID, "null" as imageID , email, username, phoneNumber, DATE(createDate) createDate, MATCH(fullname, phoneNumber) AGAINST (?) as score 
+            FROM renter 
+            ORDER BY score DESC LIMIT 5"""
         connectDatabase = ConnectDatabase()
-        rows = connectDatabase.cursor.execute(query_str, stringSearch)
-        result = [[str(x) for x in row] for row in rows]
+        rows = connectDatabase.cursor.execute(query_str, stringSearch).fetchall()
         connectDatabase.close()
-        return result
+        return [{"status": row.status, "typeAccount": row.typeAccount, "fullname": row.fullname, "birthday": str(row.birthday), "address": row.address, "ID": row.ID, "imageID": row.imageID , "email": row.email, "username": row.username, "phoneNumber": row.phoneNumber, "createDate": str(row.createDate)} for row in rows]
     
     def setUnEnableEditAccountOwner(self, username):
         query_str = "DELETE FROM owner_profile_scratch WHERE username = ? AND status = ?"
@@ -107,16 +126,16 @@ class Admin(User):
         connectDatabase.connection.commit()
         connectDatabase.close()
     
-    def setEnableEditAccountOwner(self, username, fullname):
+    def setEnableEditAccountOwner(self, username):
         query_str = "DELETE FROM owner_profile_scratch WHERE username = ? AND status = ?"
         connectDatabase = ConnectDatabase()
         connectDatabase.cursor.execute(query_str, username, "enable")
         connectDatabase.connection.commit()
         query_str = """
-            INSERT INTO owner_profile_scratch(status, username, fullname) 
-            VALUES (?, ?, ?)
+            INSERT INTO owner_profile_scratch(status, username) 
+            VALUES (?, ?)
             """
-        connectDatabase.cursor.execute(query_str, "enable", username, fullname)
+        connectDatabase.cursor.execute(query_str, "enable", username)
         connectDatabase.connection.commit()
         connectDatabase.close()
         # thêm thông báo
@@ -161,13 +180,6 @@ class Admin(User):
         connectDatabase.cursor.execute(query_str, status, datetime.date(datetime.now()), username, "handling")
         connectDatabase.connection.commit()
         connectDatabase.close()
-        
-    def checkOwnerEditAccount(self, username):
-        query_str = """
-            SELECT COUNT(*) FROM owner_profile_scratch WHERE username = ? AND status = ?
-            """
-        connectDatabase = ConnectDatabase()
-        return connectDatabase.cursor.execute(query_str, username, "enable").fetchval() > 0
     
     def lockAccount(self, username, status, typeAccount):
         # status = "block" or status = "active"

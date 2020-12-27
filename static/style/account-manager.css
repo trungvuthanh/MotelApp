@@ -110,7 +110,7 @@ body {
 }
 .tabs .tab-header > div.tab-active-head {
     color: #1877f2;
-    background-color: #fafafa;
+    background-color: #ebebeb;
 }
 
 /* Thanh trượt */
@@ -135,7 +135,38 @@ body {
 .tab-content.tab-active-body {
     display: flex;
     flex-direction: column;
-    background-color: #fafafa;
+    background-color: #ebebeb;
+}
+.numpage { 
+    display: inline-block;
+    width: 50%;
+    text-align: center
+}
+
+.relative {
+    position: relative
+}
+.sotrang {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    background-color: white;
+    height: 48px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.hasResults {
+    background-color: rgb(5, 58, 172);
+    color: white;
+    cursor: pointer
+}
+
+.hasnotResults {
+    background-color: rgb(173, 173, 173);
+    color: white;
+    cursor: not-allowed
 }
 
 /* Thanh tìm kiếm trạng thái, tên tài khoản */
