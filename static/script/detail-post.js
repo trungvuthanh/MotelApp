@@ -80,6 +80,7 @@ fetch('/thong-tin-bai-dang/' + location.pathname.split('/')[2])
                         document.getElementById('gif').remove();
                         document.getElementById('fullname').innerHTML = data.nameAuthor;
                         document.getElementById('phoneNumber').innerHTML = data.phoneNumberAuthor;
+                        document.getElementById('addressAuthor').innerHTML = data.addressAuthor
                         document.getElementById('createDate').innerHTML = data.createDate.split('-').reverse().join('-');
                         document.getElementById('expireDate').innerHTML = data.expireDate.split('-').reverse().join('-');
                         if (typeAcc == 'renter') {
@@ -103,7 +104,7 @@ fetch('/thong-tin-bai-dang/' + location.pathname.split('/')[2])
                         }
                         document.getElementById('titlePost').innerHTML = data.titlePost;
                         document.getElementById('addressDetail').innerHTML = data.addressDetail;
-                        document.getElementById('address').innerHTML = data.addressAuthor;
+                        document.getElementById('address').innerHTML = data.addressWard + ', ' + data.addressDistrict + ', ' + data.addressProvince;
                         document.getElementById('statusHired').innerHTML = (data.statusHired == 'ready') ? 'Chưa thuê' : 'Đã thuê';
                         document.getElementById('views').innerHTML = data.totalView;
                         document.getElementById('likes').innerHTML = data.totalFavorite;
