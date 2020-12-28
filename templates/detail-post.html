@@ -18,14 +18,14 @@
 
     <!-- Nội dung chính -->
     <div class="container main" id="blur">
-        <div class="row">
+        <div class="row px-15">
 
             <!-- Cột bên trái -->
             <div class="col-lg-5 my-5">
                 <!-- Ảnh chính -->
                 <div class="main-img">
                     <!-- <img class="mySlides" src="../static/image/no_image_available.jpeg"> -->
-                    <img class="mySlides loading-gif" src="../static/image/loading.gif">
+                    <img class="mySlides" id="gif" src="../static/image/loading.gif">
                 </div>
                 <div class="w3-center">
                     <div class="w3-section">
@@ -36,23 +36,14 @@
 
                 <!-- Thông tin người đăng -->
                 <div class="author-info border">
-                    <h5 class="page-title"><b>Thông tin người đăng</b></h5>
+                    <h5 class="page-title text-center"><b>Thông tin người đăng</b></h5>
                     <address>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div><b>Họ tên: </b></div>
-                                <div><b>Liên hệ: </b></div>
-                                <div><b>Email: </b></div>
-                                <div><b>Ngày đăng: </b></div>
-                                <div><b>Ngày hết hạn: </b></div>
-                            </div>
-                            <div class="col-sm-8 pl-0">
-                                <div id="fullname">Vũ Thành Trung</div>
-                                <div id="phoneNumber">123456789</div>
-                                <div id="email">abc@gmail.com</div>
-                                <div id="acceptDate">20/11/2020</div>
-                                <div id="expireDate">20/12/2020</div>
-                            </div>
+                        <div class="flex-column pl-15">
+                            <span><b>Họ tên: </b><span id="fullname"></span></span>
+                            <span><b>Liên hệ: </b><span id="phoneNumber"></span></span>
+                            <span><b>Địa chỉ: </b><span id="addressAuthor"></span></span>
+                            <span><b>Ngày đăng: </b><span id="createDate"></span></span>
+                            <span><b>Ngày hết hạn: </b><span id="expireDate"></span></span>
                         </div>
                     </address>
                 </div>
@@ -68,65 +59,58 @@
             <!-- Cột bên phải -->
             <div class="col-lg-7 my-5">
                 <!-- Tên bài đăng -->
-                <h2 class="mb-3" id="titlePost">Phòng trọ Hanoi Home</h2>
+                <h2 class="mb-3" id="titlePost"></h2>
 
                 <div class="row">
                     <!-- Địa chỉ -->
-                    <div class="col-md-9">
-                        <h5 id="addressDetail">144, Xuân Thủy, Cầu Giấy</h5>
+                    <div class="col-sm-9">
+                        <h5 id="addressDetail"></h5>
                     </div>
 
                     <!-- Trạng thái phòng trọ -->
-                    <div class="room-status col-md-3">
-                        <h5 id="statusHired">Chưa thuê</h5>
+                    <div class="room-status col-sm-3">
+                        <h5 id="statusHired"></h5>
                     </div>
                 </div>
-                <h5 id="address">Bình Chánh, Bình Chánh, Hồ Chí Minh</h5>
+                <h5 id="address"></h5>
                 <!-- Lượt xem, like -->
-                <div class="view-like-section row py-2">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-3 text-center">
-                        <span class="fa fa-eye"></span>
-                        <p id="views">35</p> <p> lượt xem </p>
+                <div class="view-like-section py-2">
+                    <div class="mr-3">
+                        <span class="fas fa-eye"></span>
+                        <p id="views"></p> <p> lượt xem </p>
                     </div>
-                    <div class="col-md-3 text-center">
-                        <span class="fa fa-heart"></span>
-                        <p id="likes">20</p> <p>lượt thích</p>
+                    <div>
+                        <span class="fas fa-heart"></span>
+                        <p id="likes"></p> <p>lượt thích</p>
                     </div>
                 </div>
 
                 <!-- Loại phòng - Chung/Không chung chủ -->
-                <h5 class="page-title"><b> <b id="itemType">Phòng trọ</b> - <b id="statusItem">Không chung chủ</b> </b></h5>
+                <h5 class="page-title"><b> <b id="itemType"></b> - <b id="statusItem"></b> </b></h5>
 
                 <!-- Giá điện, số nước, diện tích, giá phòng -->
                 <div class="row price-water-elec mx-0">
-                    <div class="col-md-3 label-price">
-                        <h5>Giá nước:</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 id="priceWater">60.000₫/người</h5>
-                    </div>
-                    <div class="col-md-3 label-price">
-                        <h5>Giá điện:</h5>
-                    </div>
-                    <div class="col-md-3 pr-0">
-                        <h5 id="priceElectric">4.000₫/số</h5>
-                    </div>
-                </div>
-                <div class="row price-room-area mx-0">
-                    <div class="col-md-3 label-price">
-                        <h5>Diện tích:</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <h5> <span id="area">22</span> m<sup>2</sup> </h5>
-                    </div>
-                    <div class="col-md-3 label-price">
-                        <h5>Giá phòng:</h5>
-                    </div>
-                    <div class="col-md-3 pr-0">
-                        <h5><b><span id="priceItem">2.5</span> triệu/tháng</b></h5>
-                    </div>
-                </div>
+                    <div class="col-sm-6 p-0">
+                        <div class="flex-row m-0">
+                            <div class="col-sm-6 p-0">
+                                <div class="label-price px-15">
+                                    <h5>Giá nước:</h5></div></div>
+                            <div class="col-sm-6 p-0">
+                                <div class="px-15">
+                                    <h5 id="priceWater"></h5></div></div></div></div>
+                    <div class="col-sm-6 p-0">
+                        <div class="row mx-0">
+                            <div class="col-sm-6 p-0">
+                                <div class="label-price px-15">
+                                    <h5>Giá điện:</h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 p-0">
+                                <div class="pl-15">
+                                    <h5 id="priceElectric"></h5></div></div></div></div></div>
+                <div class="price-room-area mx-0">
+                    <h5>Diện tích: <span id="area"></span> m<sup>2</sup></h5>
+                    <h5>Giá phòng: <span id="priceItem"></span> đồng/tháng</h5></div>
 
                 <!-- Cơ sở vật chất -->
                 <h5 class="page-title"><b>Cơ sở vật chất</b></h5>
@@ -134,13 +118,13 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <img src="../static/image/bed-icon.png"/>
-                            <h5> <span id="numOfRoom">2</span> phòng ngủ</h5>
+                            <h5> <span id="numOfRoom"></span> phòng ngủ</h5>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="row">
                             <img src="../static/image/gas-stove-icon.png"/>
-                            <h5 id="kitchen">Khu bếp riêng</h5>
+                            <h5 id="kitchen"></h5>
                         </div>
                     </div>
                 </div>
@@ -148,13 +132,13 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <img src="../static/image/toilet-icon.png"/>
-                            <h5 id="bathroomType">WC khép kín</h5>
+                            <h5 id="bathroomType"></h5>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="row">
                             <img src="../static/image/water-heater-icon.png"/>
-                            <h5 id="bathroomWater">Nóng lạnh</h5>
+                            <h5 id="bathroomWater"></h5>
                         </div>
                     </div>
                 </div>
@@ -162,13 +146,13 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <img src="../static/image/air-conditioner-icon.png"/>
-                            <h5 id="aircondition">Điều hòa</h5>
+                            <h5 id="aircondition"></h5>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="row">
                             <img src="../static/image/balcony-icon.png"/>
-                            <h5 id="balcony">Ban công</h5>
+                            <h5 id="balcony"></h5>
                         </div>
                     </div>
                 </div>
@@ -186,97 +170,38 @@
                 <!-- Nội dung bài đăng -->
                 <h5 class="page-title"><b>Thông tin mô tả</b></h5>
                 <article>
-                    <p id="contentPost">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p id="contentPost"></p>
                 </article>
 
                 <!-- Review, comment -->
                 <h5 class="page-title"><b>Đánh giá</b></h5>
 
-                <div class="review-comment row border">
+                <div class="review-comment border">
                     <!-- Rating -->
-                    <div class="col-md-12">
-                        <div class="row p-0">
-                            <div class="col-md-3 rating py-2" id="rate">
-                                <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s1" src="../static/image/star-unfill.png">
-                                <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s2" src="../static/image/star-unfill.png">
-                                <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s3" src="../static/image/star-unfill.png">
-                                <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s4" src="../static/image/star-unfill.png">
-                                <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s5" src="../static/image/star-unfill.png">
-                            </div>
-                            <div class="col-md-9"><div class="rate-status row">Cảm ơn bạn đã đánh giá!</div></div>
-                        </div>
+                    <div class="flex-row rating" id="rate">
+                        <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s1" src="/static/image/star-unfill.png">
+                        <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s2" src="/static/image/star-unfill.png">
+                        <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s3" src="/static/image/star-unfill.png">
+                        <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s4" src="/static/image/star-unfill.png">
+                        <img onmouseover="ratedhover(this)" onclick="rated(this)" onmouseout="unrate(this)" id="s5" src="/static/image/star-unfill.png">
+                        <div class="rate-status ml-3">Cảm ơn bạn đã đánh giá!</div>
                     </div>
 
                     <!-- Comment -->
-                    <div class="comment-section col-sm-12">
-                        <div class="col-md-12 guest-comment px-0">
-                            <div class="row">
-                                <div class="col-sm-1">
-                                    <img id="sessionRenterImageID" src="../static/image/1.png">
+                    <div class="comment-section px-15">
+                        <div class="flex-column guest-comment">
+                            <div class="flex-row">
+                                <div class="col-sm-1 p-0">
+                                    <img id="sessionRenterImageID" src="">
                                 </div>
-                                <div class="col-sm-11">
-                                    <div class="form-group mb-1">
-                                        <input class="form-control" id="commentText" type="text" placeholder="Nhập bình luận">
-                                    </div>
-                                    <div class="btn btn-primary pt-1" onclick="binhLuan()">Bình luận</div>
+                                <div class="col-sm-11 p-0">
+                                    <input class="form-control" id="commentText" type="text" placeholder="Nhập bình luận">
+                                    <div class="btn btn-primary my-2" onclick="review()">Bình luận</div>
                                 </div>
                             </div>
-                            <div class="each-comment row pt-3">
-                                <div class="col-sm-1">
-                                    <img class="renterImageID" src="../static/image/5.png">
-                                </div>
-                                <div class="col-sm-11">
-                                    <div class="row info-guest">
-                                        <div class="col-sm-6 pt-2 pl-0">
-                                            <p><b>Vũ Thành Trung</b></p>
-                                            <p>21/11/2010</p>
-                                            <div class="hidden-stars bg-success text-white text-center rounded mr-3">
-                                                <span>4</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 rating-history py-2">
-                                            <div class="stars">
-                                                <img src="../static/image/star-fill.png">
-                                                <img src="../static/image/star-unfill.png">
-                                                <img src="../static/image/star-unfill.png">
-                                                <img src="../static/image/star-unfill.png">
-                                                <img src="../static/image/star-unfill.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Nhà trọ chất lượng cao! Xứng đáng 10/10</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="each-comment row pt-3">
-                                <div class="col-sm-1">
-                                    <img class="renterImageID" src="../static/image/7.png">
-                                </div>
-                                <div class="col-sm-11">
-                                    <div class="row info-guest">
-                                        <div class="col-sm-6 pt-2 pl-0">
-                                            <p><b>Nguyễn Đức Tới</b></p>
-                                            <p>21/11/2010</p>
-                                            <div class="hidden-stars bg-success text-white text-center rounded mr-3">
-                                                <span>5</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 rating-history py-2">
-                                            <div class="stars">
-                                                <img src="../static/image/star-fill.png">
-                                                <img src="../static/image/star-fill.png">
-                                                <img src="../static/image/star-fill.png">
-                                                <img src="../static/image/star-fill.png">
-                                                <img src="../static/image/star-unfill.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!Nhà trọ xịn quá!</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="border"></div>
+
+                            <!-- Comment đã hiển thị -->
                         </div>
                     </div>
                 </div>
