@@ -117,6 +117,7 @@ class Post:
             """
         for image in listImages:
             connectDatabase.cursor.execute(query_str, idPost, image)
+        connectDatabase.connection.commit()
         connectDatabase.close()
         # thêm thông báo
         icon = "icon-post.png"
