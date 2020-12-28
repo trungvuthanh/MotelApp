@@ -275,16 +275,16 @@
                 <div class="col-md-6 mb-3">
                     <label class="chimuc" for="">Thời gian đăng</label>
 
-                    <select class="custom-select">
-                        <option selected>1 tuần</option>
-                        <option>1 tháng</option>
-                        <option>3 tháng</option>
-                        <option>6 tháng</option>
-                        <option>1 năm</option>
+                    <select class="custom-select" id="duration">
+                        <option value="7" selected>1 tuần</option>
+                        <option value="30">1 tháng</option>
+                        <option value="90">3 tháng</option>
+                        <option value="180">6 tháng</option>
+                        <option value="365">1 năm</option>
                     </select>                    
                 </div>
                 <div class="col-md-6 mb-3">
-                    <div style="margin: 45px 0px 0px 10px">Phí: 300,000 VNĐ</div>
+                    <div style="margin: 45px 0px 0px 10px">Phí: <span id="cost"></span></div>
                 </div>
             </div>
 
