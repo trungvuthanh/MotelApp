@@ -87,7 +87,7 @@ function loadCacTinNhanGanNhat() {
                             }
                             p = renderEachElementOfListChat(data[i].isMe, classElement, data[i].typeAvt, data[i].fullname, data[i].content, (i != data.length - 1), data[i].usernameOwner, data[i].time)
                             document.getElementById("listmessages").innerHTML += p
-                            console.log(p)
+                            // console.log(p)
                         }
                         firstOwner = document.querySelector(".each-message-history").id.substring(4)
                     }
@@ -120,7 +120,7 @@ function renderMessageToHTML(sender, text, typeRead, typeAvt) {
                         '<div class="col-sm-8 mt-0 pl-0">' +                     
                             '<div class="chatFromYou">'+ text +'</div>' + 
                         '</div>' + 
-                        '<div class="col-sm-3 each-message">' + renderImageRead(typeRead, typeAvt) + '</div>' +
+                        // '<div class="col-sm-3 each-message">' + renderImageRead(typeRead, typeAvt) + '</div>' +
                     '</div>' +
                 '</div>'
     } else if (sender == "me") {
@@ -129,7 +129,7 @@ function renderMessageToHTML(sender, text, typeRead, typeAvt) {
                         '<div class="col-sm-4 pl-0"></div>' +
                         '<div class="col-sm-8 pl-2 pr-2 pt-1">' +
                             '<span class="chatFromMe ">' + text + '</span>' +                          
-                            renderImageRead(typeRead, typeAvt) +               
+                            // renderImageRead(typeRead, typeAvt) +               
                         '</div>' + 
                     '</div>' +
                 '</div>' 
@@ -214,12 +214,13 @@ loadCacTinNhanGanNhat()
 loadTinNhanCu(firstOwner)
 function selectedOwner(elmt) {
     // console.log()
+    socket.emit("leave", {"data": "data"});
     loadTinNhanCu(elmt.id.substring(4))
 }
 
 socket.on('roomMessage', function(data) {
     // {"id": row.id, "time": str(row.time), "content": row.content, "status": row.status, "ownerSend": row.ownerSend, "typeAvt": row.typeAvt, "usernameOwner": row.usernameOwner} 
-    console.log(data)
+    // console.log(data)
     if (data.ownerSend == "true") {
         sender = "you"
     } else {
@@ -229,6 +230,7 @@ socket.on('roomMessage', function(data) {
         document.getElementById("message-right").innerHTML += renderMessageToHTML(sender, data.content, data.status, data.typeAvt) 
         autoScroll()
         document.getElementById("input-message").focus()
+        loadCacTinNhanGanNhat()
     } else {
         // update bên trái
         loadCacTinNhanGanNhat()

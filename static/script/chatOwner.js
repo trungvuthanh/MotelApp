@@ -76,7 +76,7 @@ function renderMessageToHTML(sender, text, typeRead, typeAvt) {
                         '<div class="col-sm-8 mt-0 pl-0">' +                     
                             '<div class="chatFromYou">'+ text +'</div>' + 
                         '</div>' + 
-                        '<div class="col-sm-3 each-message">' + renderImageRead(typeRead, typeAvt) + '</div>' +
+                        // '<div class="col-sm-3 each-message">' + renderImageRead(typeRead, typeAvt) + '</div>' +
                     '</div>' +
                 '</div>'
     } else if (sender == "me") {
@@ -85,7 +85,7 @@ function renderMessageToHTML(sender, text, typeRead, typeAvt) {
                         '<div class="col-sm-4 pl-0"></div>' +
                         '<div class="col-sm-8 pl-2 pr-2 pt-1">' +
                             '<span class="chatFromMe ">' + text + '</span>' +                          
-                            renderImageRead(typeRead, typeAvt) +               
+                            // renderImageRead(typeRead, typeAvt) +               
                         '</div>' + 
                     '</div>' +
                 '</div>' 

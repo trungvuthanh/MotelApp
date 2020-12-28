@@ -25,8 +25,15 @@
   }
 }
 @media screen and (max-width:990px) {
-  .send-message {
+  .content-left {
     display: none;
+    /* width:100% */
+  }
+  .content-right {
+    /* display: none; */
+    /* width:100% */
+    /* width: 710px; */
+    /* margin-left: 250px !important; */
   }
 }
 

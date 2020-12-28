@@ -86,4 +86,5 @@ class Chat:
         rows = connectDatabase.cursor.execute(query_str).fetchall()
         connectDatabase.close()
         return [{"usernameOwner": row.usernameOwner, "typeAvt": row.typeAvt, "isMe": (row.ownerSend == "false"), "time": str(row.time), "content": row.content, "status": row.status, "fullname": row.fullname} for row in rows]
+        
     
