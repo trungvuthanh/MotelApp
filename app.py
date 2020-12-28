@@ -441,7 +441,7 @@ def getPost(baidangidpost):
     idPost = int(baidangidpost.split("-")[-1])
     return UrlController().detailPost(idPost, titlePost)
 
-@app.route("/thong-tin-bai-dang/<baidangidpost>", methods=["POST"])
+@app.route("/thong-tin-bai-dang/<baidangidpost>", methods=["GET"])
 def getInformationPost(baidangidpost):
     # baidangidpost: "nha-chung-cu-nguyen-can-gia-re-1"
     # partern: tieu-de-bai-dang-idPost
