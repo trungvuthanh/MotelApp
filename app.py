@@ -468,7 +468,7 @@ def getReport(idPost):
     return app.response_class(json.dumps(OtherEvent().renterOrGuestGetReview(idPost)), mimetype='application/json')
 
 @app.route("/sendReview/<int:idPost>/<int:star>/<content>", methods=["POST"]) 
-def getReport(idPost, star, content):
+def sendReview(idPost, star, content):
     if session["type_account"] == "renter":
         OtherEvent().createReview(session["username"], star, content, idPost, session['type_avatar'])
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
