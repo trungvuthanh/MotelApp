@@ -41,10 +41,10 @@ class Renter(User):
         
         """
         query_str = """
-            UPDATE renter SET password = ?, typeAvt = ?, phoneNumber = ?, email = ?, birthday = ?, addressProvince = ?, addressDistrict = ?, addressWard = ?, addressDetail = ?, time = ? WHERE username = ?
+            UPDATE renter SET password = ?, typeAvt = ?, phoneNumber = ?, email = ?, birthday = ?, addressProvince = ?, addressDistrict = ?, addressWard = ?, addressDetail = ? WHERE username = ?
             """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, password, typeAvt, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, datetime.now(), username)
+        connectDatabase.cursor.execute(query_str, password, typeAvt, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, username)
         connectDatabase.connection.commit()
         connectDatabase.close()
         
