@@ -225,7 +225,7 @@ def luuChinhSuaMatKhauVaAvatarA():
 
 @app.route("/luuChinhSuaThongTinA", methods=["POST"])
 def luuChinhSuaThongTinA():
-    if session["type_account"] != "renter":
+    if session["type_account"] != "owner":
         return
     fullname = str(request.get_json()["fullname"])
     phoneNumber = str(request.get_json()["phoneNumber"])
@@ -239,7 +239,7 @@ def luuChinhSuaThongTinA():
     typeAccount = session["type_account"]
     if not Address.checkAddress(addressProvince, addressDistrict, addressWard) or not CheckValidation.isPhoneNumber(phoneNumber) or not CheckValidation.isEmail(email):
         return app.response_class(json.dumps({"message": "error"}), mimetype='application/json')
-    Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail)
+    Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, fullname)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 # -----------------------------------------------------------------------------------
