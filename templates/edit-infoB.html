@@ -16,6 +16,7 @@
     <title>Chỉnh sửa</title>
 </head>
 <body>
+    <div id="menu"></div>
     <div class="page">
         <div id="header1">
             <h2>Chỉnh sửa thông tin</h2>
@@ -119,7 +120,7 @@
                 
                 <div class="col-md-12 mb-3">                    
                     <input type="text" class="form-control" id="name" placeholder="Nguyễn Hùng Duy" required>
-                    <!-- <div class="invalid-feedback">Nhập họ tên</div> -->
+                    <div class="invalid-feedback">Nhập họ tên</div>
                 </div>
             </div>
 
@@ -178,78 +179,27 @@
                 <div class="col-md-4 mb-3">                    
                     <select class="custom-select" id="province" required>                        
                         <option value="">Tỉnh/thành phố</option>
-                        <option value="59cdc41a9d2a1700271c2b09">TP Hà Nội</option>
-                        <option value="59cdc41a9d2a1700271c2b0a">TP Hồ Chí Minh</option>
-                        <option value="59cdc41a9d2a1700271c2b0b">An Giang</option>
-                        <option value="59cdc41a9d2a1700271c2b0c">Bà Rịa - Vũng Tàu</option>
-                        <option value="59cdc41a9d2a1700271c2b0d">Bắc Kạn</option>
-                        <option value="59cdc41a9d2a1700271c2b0e">Bắc Giang</option>
-                        <option value="59cdc41a9d2a1700271c2b0f">Bạc Liêu</option>
-                        <option value="59cdc41a9d2a1700271c2b10">Bắc Ninh</option>
-                        <option value="59cdc41a9d2a1700271c2b11">Bến Tre</option>
-                        <option value="59cdc41a9d2a1700271c2b12">Bình Định</option>
-                        <option value="59cdc41a9d2a1700271c2b13">Bình Dương</option>
-                        <option value="59cdc41a9d2a1700271c2b14">Bình Phước</option>
-                        <option value="59cdc41b9d2a1700271c2b15">Bình Thuận</option>
-                        <option value="59cdc41b9d2a1700271c2b16">Cà Mau</option>
-                        <option value="59cdc41b9d2a1700271c2b17">TP Cần Thơ</option>
-                        <option value="59cdc41b9d2a1700271c2b18">Cao Bằng</option>
-                        <option value="59cdc41b9d2a1700271c2b19">TP Đà Nẵng</option>
-                        <option value="59cdc41b9d2a1700271c2b1a">Đắk Lắk</option>
-                        <option value="59cdc41b9d2a1700271c2b1b">Điện Biên</option>
                     </select>
                     <div class="invalid-feedback">Chọn tỉnh thành.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select" required>                        
+                    <select class="custom-select" id="district" required>                        
                         <option value="">Quận/huyện</option>
-                        <option>Ba Đình</option>
-                        <option>Ba Vì</option>
-                        <option>Bắc Từ Liêm</option>
-                        <option>Cầu Giấy</option>
-                        <option>Chương Mỹ</option>
-                        <option>Đan Phượng</option>
-                        <option>Đông Anh</option>
-                        <option>Đống Đa</option>
-                        <option>Gia Lâm</option>
-                        <option>Hà Đông</option>
-                        <option>Hai Bà Trưng</option>
-                        <option>Hoài Đức</option>
-                        <option>Hoàn Kiếm</option>
-                        <option>Hoàng Mai</option>
-                        <option>Long Biên</option>
-                        <option>Mê Linh</option>
-                        <option>Mỹ Đức</option>
-                        <option>Nam Từ Liêm</option>
-                        <option>Phú Xuyên</option>
-                        <option>Phúc Thọ</option>
-                        <option>Quốc Oai</option>
-                        <option>Sóc Sơn</option>
-                        <option>Sơn Tây</option>
-                        <option>Tây Hồ</option>
-                        <option>Thạch Thất</option>
-                        <option>Thanh Oai</option>
-                        <option>Thanh Trì</option>
-                        <option>Thanh Xuân</option>
-                        <option>Thường Tín</option>
-                        <option>Ứng Hòa</option>
                     </select>
                     <div class="invalid-feedback">Chọn quận huyện.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select" required>                        
+                    <select class="custom-select" id="ward" required>                        
                         <option value="">Phường/xã</option>
-                        <option>Cống Vị</option>
-                        <option>Mỹ Đình 1</option>
                     </select>
                     <div class="invalid-feedback">Chọn phường xã.</div>
                 </div>
             </div>
             <div class="form-row"> 
                 <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="" placeholder="Địa chỉ chi tiết: 1 Hoàng Diệu" required>
+                    <input type="text" class="form-control" id="addressDetail" placeholder="Địa chỉ chi tiết: 1 Hoàng Diệu" required>
                     <div class="invalid-feedback">Nhập địa chỉ chi tiết</div>
                 </div>
             </div>     
@@ -263,7 +213,19 @@
         </form>
     </div>
     <div id="footer"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/script/signup.js"></script>
+
+    <!-- Slider css, js lib -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="../static/script/md5.min.js"></script>
+    <script src="../static/script/edit-infoB.js"></script>
 </body>
 </html>

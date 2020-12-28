@@ -1,3 +1,10 @@
+var provinces = document.getElementById("province") 
+var districts = document.getElementById("district")
+var wards = document.getElementById("ward") 
+var pr;
+var di;
+var wa;
+
 var typeAcc;
 // Load menu, footer
 fetch('/information-account')
@@ -130,9 +137,104 @@ contentPost.onkeyup = function() {
     document.getElementById("contentHTML").innerHTML = convertToHTML(contentPost.value)
 }
 
-var provinces = document.getElementById("province") 
-var districts = document.getElementById("district")
-var wards = document.getElementById("ward")  
+// str= window.location.href;
+// temp = str.split("/");
+// var idPost = temp[temp.length];
+// console.log(idPost)
+function getIdPost(index){
+    var str = window.location.href
+    return str.split("/")[index];
+}
+idPost = getIdPost(4)
+console.log(idPost)
+
+function getDefaultInfoPost() {
+    fetch("/thong-tin-bai-dang/" + idPost)
+    .then(
+        resp => {
+            if (resp.status == 200) {
+                resp.json()
+                .then(
+                    data => {
+                        titlePost = data.titlePost
+                        itemType = data.itemType
+                        pr = data.addressProvince
+                        di = data.addressDistrict
+                        wa = data.addressWard
+                        addressDetail = data.addressDetail
+                        area = data.area
+                        numOfRoom = data.numOfRoom
+                        priceItem = data.priceItem
+                        statusItem = data.statusItem
+                        bathroom = data.bathroom
+                        function getValueAtIndex(index){
+                            var str = bathroom
+                            return str.split(" ")[index];
+                        }
+                        bathroom1 = getValueAtIndex(0)
+                        bathroom2 = getValueAtIndex(1)
+                        kitchen = data.kitchen
+                        priceElectric = data.priceElectric
+                        priceWater = data.priceWater
+                        document.getElementById("tieudebaiviet").value = titlePost
+                        document.getElementById("itemType").value = itemType
+                        document.getElementById("province").innerHTML = '<option value="' + pr + '" selected>' + pr +'</option>'
+                        document.getElementById("district").innerHTML = '<option value="' + di + '" selected>' + di +'</option>'
+                        document.getElementById("ward").innerHTML = '<option value="' + wa + '" selected>' + wa +'</option>'
+                        document.getElementById("addressDetail").value = addressDetail
+                        document.getElementById("area").value = area
+                        document.getElementById("numOfRoom").value = numOfRoom
+                        document.getElementById("priceItem").value = priceItem
+                        document.getElementById("statusItem").value = statusItem
+                        document.getElementById("bathroom1").value = bathroom1
+                        document.getElementById("bathroom2").value = bathroom2
+                        document.getElementById("kitchen").value = kitchen
+                        document.getElementById("priceElectric").value = priceElectric
+                        document.getElementById("priceWater").value = priceWater
+                        otherUtility = data.otherUtility
+                        console.log(data.otherUtility)
+                        function getValueTienIch(index){
+                            var str = otherUtility
+                            return str.split(" ")[index];
+                        }
+                        washingMachine = getValueTienIch(1)
+                        wardrobe = getValueTienIch(2)
+                        tv = getValueTienIch(3)
+                        wifi = getValueTienIch(4)
+                        aircondition = data.aircondition
+                        balcony = data.balcony
+                        console.log(washingMachine, wardrobe, tv, wifi, aircondition, balcony)
+                                           
+                        if (aircondition == 1) {
+                            $(listImageUltities[0]).addClass("active-image");
+                        } if (balcony == 1) {
+                            $(listImageUltities[1]).addClass("active-image");
+                        } if (washingMachine == 1) {
+                            $(listImageUltities[2]).addClass("active-image");
+                        } if (wardrobe == 1) {
+                            $(listImageUltities[3]).addClass("active-image");
+                        } if (tv == 1) {
+                            $(listImageUltities[4]).addClass("active-image");
+                        } if (wifi == 1) {
+                            $(listImageUltities[5]).addClass("active-image");
+                        }
+                        for(let i=0;i<data.images.length;i++){
+                            document.getElementById("preview").innerHTML += '<div class = "frame-image"><div class="close" onclick="removeImage(this)">&times;</div><img src="'+ data.images[i] +'"></div>';
+                        }
+                        console.log(data.postDuration)
+                        // if(data.postDuration==7){
+                            document.getElementById("postDuration").value = data.postDuration
+                        // } if(data.postDuration==30){
+                        //     document.getElementById("postDuration").value = data.postDuration
+                        // } 
+                        document.getElementById("contentHTML").innerHTML = data.contentPost
+                    }
+                )
+            }
+        }
+    )
+}
+
 
 fetch("/getProvinces")
 .then(
@@ -143,8 +245,14 @@ fetch("/getProvinces")
                 data => {
                     provinces = data.provinces
                     for (var i = 0; i < provinces.length; i ++) {
-                        document.getElementById("province").innerHTML += 
-                        '<option value="' + provinces[i] + '">' + provinces[i] + '</option>'                       
+                        // if(provinces[i] == pr){
+                        //     document.getElementById("province").innerHTML += 
+                        //     '<option value="' + provinces[i] + '" selected>' + provinces[i] + '</option>'  
+                        // } else {
+                            document.getElementById("province").innerHTML += 
+                        '<option value="' + provinces[i] + '">' + provinces[i] + '</option>'  
+                        // }
+                                             
                     }
                 }
             )
@@ -198,22 +306,9 @@ document.getElementById("district").onchange = function() {
     )
 }
 
-document.getElementById("postDuration").onchange = function() {
-    term = document.getElementById("postDuration").value
-    term2 = document.getElementById("phi") 
-    if (term == 7) {
-        term2.innerHTML = "Phí: 300,000 VNĐ"
-    } else if (term == 30) {
-        term2.innerHTML = "Phí: 500,000 VNĐ"
-    } else if (term == 90) {
-        term2.innerHTML = "Phí: 1,000,000 VNĐ"
-    } else if (term == 180) {
-        term2.innerHTML = "Phí: 1,500,000 VNĐ"
-    } else if (term == 365) {
-        term2.innerHTML = "Phí: 1,800,000 VNĐ"
-    } 
-}
 
+
+console.log(getDefaultInfoPost())
 fetch("/thong-tin-lien-he")
 .then(
     resp => {
@@ -229,7 +324,6 @@ fetch("/thong-tin-lien-he")
         }
     }
 )
-
 
 function renderBodyCreatePost() {
     titlePost = document.getElementById("tieudebaiviet").value
@@ -281,8 +375,6 @@ function renderBodyCreatePost() {
         balcony: balcony, priceElectric: priceElectric, priceWater: priceWater, otherUtility: otherUtility, postDuration: postDuration, listImages: listImages}
 }
 
-
-
 var validation
 function mysleep(milliseconds) {
     const date = Date.now();
@@ -304,7 +396,7 @@ window.addEventListener('load', function() {
             } else {
                 // alert("ok")
                 var abc = renderBodyCreatePost()
-                fetch('/createPost', {
+                fetch('/editPost/' + idPost, {
                     method: "POST",
                     body: JSON.stringify(abc),
                     headers: new Headers({
@@ -320,7 +412,7 @@ window.addEventListener('load', function() {
                                     // alert(data.message)
                                     if (data.message == "ok") {
                                         console.log(data.message)
-                                        alert("Đã tạo thành công bài đăng")
+                                        alert("Chỉnh sửa thành công")
                                         location.href = "/"
                                     } else if (data.message != "ok") {
                                         alert("Hệ thống đang bận, vui lòng thử lại sau")
@@ -338,9 +430,3 @@ window.addEventListener('load', function() {
         }, false);
     });
 }, false);
-// convertToHTML(document.getElementById("noidungbaiviet").value)
-
-// document.getElementById("xemtruocbaiviet").onclick = function() {
-    
-// }
-

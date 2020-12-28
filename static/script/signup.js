@@ -31,7 +31,7 @@ function checkCountFileImage() {
 }
 
 document.getElementById("repassword").onkeyup = function() {
-	if (document.getElementById("password").value != document.getElementById("repassword").value ) {
+	if (document.getElementById("password").value != document.getElementById("repassword").value || document.getElementById("repassword").value == "") {
         document.getElementById("loi_repass").innerHTML = "Mật khẩu không khớp";
         document.getElementById("repassword").className = "form-control is-invalid"
 	}

@@ -16,26 +16,27 @@
     <title>Thêm bài đăng</title>
 </head>
 <body>
+    <div id="menu"></div>
     <div class="page">
         <div id="header1">
             <h2>THÊM BÀI ĐĂNG</h2>
         </div>
         <form class="needs-validation" novalidate>
             <!-- hàng 1: Tiêu đề và loại phòng -->
-            <div class="form-row">
+            <div class="form-row" action="/createPost" method="POST">
                 <div class="col-md-8 mb-3">
                     <label class="chimuc" for="tieudebaiviet">Tiêu đề</label>
-                    <input type="text" class="form-control" id="tieudebaiviet" placeholder="vd: Nhà trọ sinh viên" required>
+                    <input type="text" class="form-control" name="tittlePost" id="tieudebaiviet" placeholder="vd: Nhà trọ sinh viên" required>
                     <div class="invalid-feedback">Nhập tiêu đề bài viết.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="loaiphong">Loại</label>
-                    <select class="custom-select">                        
-                        <option selected>Phòng trọ</option>
-                        <option>Nhà nguyên căn</option>
-                        <option>Chung cư mini</option>
-                        <option>Chung cư nguyên căn</option>
+                    <select class="custom-select" id="itemType" name="itemType">                        
+                        <option selected value="phongtro">Phòng trọ</option>
+                        <option value="nhanguyencan">Nhà nguyên căn</option>
+                        <option value="chungcumini">Chung cư mini</option>
+                        <option value="chungcunguyencan">Chung cư nguyên căn</option>
                     </select>
                 </div>
             </div>
@@ -46,38 +47,38 @@
             <div class="form-row">
                 
                 <div class="col-md-4 mb-3">                    
-                    <select class="custom-select" id="province" required>                        
+                    <select class="custom-select" id="province" name="addressProvince" required>                        
                         <option value="">Tỉnh/thành phố</option>
-                        <option value="nguyễn đức tới">Nhà nguyên căn</option>
+                        <!-- <option value="nguyễn đức tới">Nhà nguyên căn</option>
                         <option value="2">Chung cư mini</option>
-                        <option value="1">Chung cư nguyên căn</option>
+                        <option value="1">Chung cư nguyên căn</option> -->
                     </select>
                     <div class="invalid-feedback">Chọn tỉnh thành.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select" required>                        
+                    <select class="custom-select" id="district" name="addressDistrict" required>                        
                         <option value="">Quận/huyện</option>
-                        <option value="1">Nhà nguyên căn</option>
+                        <!-- <option value="1">Nhà nguyên căn</option>
                         <option value="2">Chung cư mini</option>
-                        <option value="3">Chung cư nguyên căn</option>
+                        <option value="3">Chung cư nguyên căn</option> -->
                     </select>
                     <div class="invalid-feedback">Chọn quận huyện.</div>
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select" required>                        
+                    <select class="custom-select" id="ward" name="addressWard" required>                        
                         <option value="">Phường/xã</option>
-                        <option value="1">Nhà nguyên căn</option>
+                        <!-- <option value="1">Nhà nguyên căn</option>
                         <option value="2">Chung cư mini</option>
-                        <option value="3">Chung cư nguyên căn</option>
+                        <option value="3">Chung cư nguyên căn</option> -->
                     </select>
                     <div class="invalid-feedback">Chọn phường xã.</div>
                 </div>
             </div>
             <div class="form-row"> 
                 <div class="col-md-12 mb-3">
-                    <input type="text" class="form-control" id="" placeholder="Địa chỉ chi tiết: Số nhà A, Đường B..." required>
+                    <input type="text" class="form-control" id="addressDetail" name="addressDetail" placeholder="Địa chỉ chi tiết: Số nhà A, Đường B..." required>
                     <div class="invalid-feedback">Nhập tiêu đề bài viết.</div>
                 </div>
             </div>      
@@ -87,7 +88,7 @@
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label class="chimuc" for="">Địa điểm lân cận</label>
-                    <textarea class="form-control" id="" rows="3" placeholder="- Đại học Quốc gia Hà Nội&#10;- Bộ Công an&#10;- ..."></textarea>   
+                    <textarea class="form-control" name="locationRelate" id="locationRelate" rows="3" placeholder="- Đại học Quốc gia Hà Nội&#10;- Bộ Công an&#10;- ..."></textarea>   
                 </div>
             </div>
 
@@ -96,17 +97,17 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="">Diện tích</label>
-                    <input type="number" class="form-control" id="" placeholder="đơn vị: m2" required>
+                    <input type="number" step= 0.1 class="form-control" id="area" name="area" placeholder="đơn vị: m2" required>
                     <div class="invalid-feedback">Nhập diện tích là số thực dương.</div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="">Số phòng</label>
-                    <input type="number" class="form-control" id="" placeholder="vd: 1" required>
+                    <input type="number" class="form-control" id="numOfRoom" name="numOfRoom" placeholder="vd: 1" required>
                     <div class="invalid-feedback">Nhập số phòng.</div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="">Giá</label>
-                    <input type="number" class="form-control" id="" placeholder="đơn vị: triệu" required>
+                    <input type="number" step= 0.1 class="form-control" id="priceItem" name="priceItem" placeholder="đơn vị: triệu" required>
                     <div class="invalid-feedback">Nhập giá là số thực dương.</div>
                 </div>
             </div>
@@ -123,21 +124,21 @@
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select">                        
-                        <option selected>Không chung chủ</option>
-                        <option>Chung chủ</option>
+                    <select class="custom-select" id="statusItem" name="statusItem">                        
+                        <option selected value="khongchungchu">Không chung chủ</option>
+                        <option value="chungchu">Chung chủ</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select">                        
-                        <option selected>Không khép kín</option>
-                        <option>Khép kín</option>
+                    <select class="custom-select" id="bathroom1" name="bathroom">                        
+                        <option selected value="khongkhepkin">Không khép kín</option>
+                        <option value="khepkin">Khép kín</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <select class="custom-select">                        
-                        <option selected>Không nóng lạnh</option>
-                        <option>Có nóng lạnh</option>
+                    <select class="custom-select" id="bathroom2">                        
+                        <option selected value="khongnonglanh">Không nóng lạnh</option>
+                        <option value="nonglanh">Có nóng lạnh</option>
                     </select>
                 </div>
             </div>
@@ -147,21 +148,20 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="">Phòng bếp</label>
-                    <select class="custom-select">                        
-                        <option selected>Không nấu ăn</option>
-                        <option>Khu bếp riêng</option>
-                        <option>Khu bếp chung</option>
-                        
+                    <select class="custom-select" id="kitchen" name="kitchen">                        
+                        <option selected value="khongnauan">Không nấu ăn</option>
+                        <option value="khubeprieng">Khu bếp riêng</option>
+                        <option value="khubepchung">Khu bếp chung</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="">Điện</label>
-                    <input type="text" class="form-control" id="" placeholder="vd: 1.6 k/số hoặc giá dân" required>
+                    <input type="text" class="form-control" id="priceElectric" name="priceElectric" placeholder="vd: 1.6 k/số hoặc giá dân" required>
                     <div class="invalid-feedback">Nhập giá điện.</div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="chimuc" for="">Nước</label>
-                    <input type="text" class="form-control" id="" placeholder="vd: 50k/người" required>
+                    <input type="text" class="form-control" id="priceWater" name="priceWater" placeholder="vd: 50k/người" required>
                     <div class="invalid-feedback">Nhập giá nước.</div>
                 </div>
             </div>
@@ -175,22 +175,22 @@
             <div class="form-row tienich">
                 
                 <div class="col-md-2 mb-3">
-                    <abbr title="Điều hòa"><img src="../static/image/air-conditioner-icon.png"> </abbr>                  
+                    <abbr title="Điều hòa" id="aircondition" name="aircondition"><img src="../static/image/air-conditioner-icon.png"> </abbr>                  
                 </div>
                 <div class="col-md-2 mb-3">
-                    <abbr title="Ban công"><img src="../static/image/balcony-icon.png"> </abbr> 
+                    <abbr title="Ban công" id="balcony" name="balcony"><img src="../static/image/balcony-icon.png"> </abbr> 
                 </div>
                 <div class="col-md-2 mb-3">
-                    <abbr title="Máy giặt"><img src="../static/image/washing-machine-icon.png"> </abbr>               
+                    <abbr title="Máy giặt" id="washing-machine" name="otherUtility"><img src="../static/image/washing-machine-icon.png"> </abbr>               
                 </div>
                 <div class="col-md-2 mb-3">
-                    <abbr title="Tủ quần áo"><img src="../static/image/wardrobe-icon.png"> </abbr>              
+                    <abbr title="Tủ quần áo" id="wardrobe"><img src="../static/image/wardrobe-icon.png"> </abbr>              
                 </div>
                 <div class="col-md-2 mb-3">
-                    <abbr title="Tivi"><img src="../static/image/television-icon.png"> </abbr>                   
+                    <abbr title="Tivi" id="tv"><img src="../static/image/television-icon.png"> </abbr>                   
                 </div>
                 <div class="col-md-2 mb-3">
-                    <abbr title="Wifi"><img src="../static/image/free-wifi-icon.png"> </abbr> 
+                    <abbr title="Wifi" id="wifi"><img src="../static/image/free-wifi-icon.png"> </abbr> 
                 </div>
             </div>
 
@@ -256,15 +256,15 @@
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" id="" placeholder="Họ tên" value="Nguyễn Đức Tới" disabled required >
+                    <input type="text" class="form-control" id="fullname" placeholder="Họ tên" value="Nguyễn Đức Tới" disabled required >
                     <div class="invalid-feedback">Nhập họ tên.</div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <input type="text" class="form-control" id="" placeholder="Số điện thoại" value="0999999999" disabled required>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Số điện thoại" value="0999999999" disabled required>
                     <div class="invalid-feedback">Nhập SĐT.</div>
                 </div>
                 <div class="col-md-5 mb-3">
-                    <input type="text" class="form-control" id="" placeholder="Địa chỉ" value="Hà Nội, Hà Nội, Hà Nội" disabled required>
+                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ" value="Hà Nội, Hà Nội, Hà Nội" disabled required>
                     <div class="invalid-feedback">Nhập địa chỉ.</div>
                 </div>
             </div>
@@ -275,8 +275,8 @@
                 <div class="col-md-6 mb-3">
                     <label class="chimuc" for="">Thời gian đăng</label>
 
-                    <select class="custom-select" id="duration">
-                        <option value="7" selected>1 tuần</option>
+                    <select class="custom-select" id="postDuration">
+                        <option selected value="7">1 tuần</option>
                         <option value="30">1 tháng</option>
                         <option value="90">3 tháng</option>
                         <option value="180">6 tháng</option>
@@ -284,7 +284,7 @@
                     </select>                    
                 </div>
                 <div class="col-md-6 mb-3">
-                    <div style="margin: 45px 0px 0px 10px">Phí: <span id="cost"></span></div>
+                    <div style="margin: 45px 0px 0px 10px" id="phi">Phí: 300,000 VNĐ</div>
                 </div>
             </div>
 
@@ -297,6 +297,19 @@
             </div>        
         </form>
     </div>
+    <div id="footer"></div>
+    <!-- Bootstrap lib -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery lib -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Slider css, js lib -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <script src="../static/script/post.js"></script>
 </body>
