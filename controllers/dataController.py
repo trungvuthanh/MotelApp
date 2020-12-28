@@ -39,7 +39,7 @@ class DataController():
         numOfRoom = int(request.get_json()["numOfRoom"])
         priceItem = float(request.get_json()["priceItem"])
         area = float(request.get_json()["area"])
-        statusItem = float(request.get_json()["statusItem"])
+        statusItem = (request.get_json()["statusItem"])
         if statusItem not in ["chungchu", "khongchungchu"]:
             return
         bathroom = str(request.get_json()["bathroom"])
