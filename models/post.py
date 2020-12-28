@@ -101,7 +101,7 @@ class Post:
         connectDatabase = ConnectDatabase()
         statusPost = "handling"
         query_str = """
-            UPDATE post SET titlePost = ?, contentPost = ?, addressProvince = ?, addressDistrict = ?, addressWard = ?, addressDetail = ?, locationRelate = ?, itemType = ?, numOfRoom = ?, priceItem = ?, area = ?, statusItem = ?, bathroom = ?, kitchen = ?, aircondition = ?, balcony = ?, priceElectric = ?, priceWater = ?, otherUtility = ?, postDuration = ?, statusPost = ?)
+            UPDATE post SET titlePost = ?, contentPost = ?, addressProvince = ?, addressDistrict = ?, addressWard = ?, addressDetail = ?, locationRelate = ?, itemType = ?, numOfRoom = ?, priceItem = ?, area = ?, statusItem = ?, bathroom = ?, kitchen = ?, aircondition = ?, balcony = ?, priceElectric = ?, priceWater = ?, otherUtility = ?, postDuration = ?, statusPost = ?
             WHERE idPost = ?
             """
         connectDatabase.cursor.execute(query_str, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, statusPost, idPost)
