@@ -326,19 +326,6 @@ for (let i=0; i<tabsPane.length; i++){
 	});
 }
 
-// document.querySelectorAll("option")
-
-
-// Hover đổi màu button
-$('.button .btn-action').hover(function() {
-	$(this).prev().css('color', '#ffffff');
-	$(this).prev().css('background-color', '#212529');
-});
-$('.button .btn-action').mouseout(function() {
-	$(this).prev().css('color', '#212529');
-	$(this).prev().css('background-color', '#ffffff');
-});
-
 document.querySelectorAll(".numpage").forEach(e => {
 	e.onclick = function() {
 		if (e.classList.contains("hasResults")) {

@@ -135,3 +135,22 @@ contentPost.onkeyup = function() {
 // document.getElementById("xemtruocbaiviet").onclick = function() {
     
 // }
+
+function handleThoiGianDang(postDuation) {
+    if (postDuation == 7) {
+        return ["1 tuần", "300,000 VNĐ"]
+    } else if (postDuation == 30) {
+        return ["1 tháng", "500,000 VNĐ"]
+    } else if (postDuation == 90) {
+        return ["3 tháng", "700,000 VNĐ"]
+    }else if (postDuation == 180) {
+        return ["6 tháng", "1,000,000 VNĐ"]
+    } else {
+        return ["1 năm", "1,500,000 VNĐ"]
+    }
+}
+
+document.getElementById('cost').innerHTML = handleThoiGianDang(document.getElementById('duration').value)[1]
+document.getElementById('duration').onchange = function() {
+    document.getElementById('cost').innerHTML = handleThoiGianDang(this.value)[1]
+}

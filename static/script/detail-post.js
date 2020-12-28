@@ -39,6 +39,27 @@ function formatMoney(amount) {
     }
 }
 
+function handleTypeRoom(status) {
+    if (status == "phongtro") {
+        return "Phòng trọ"
+    } else if (status == "chungcunguyencan") {
+        return "Chung cư nguyên căn"
+    } else if (status == "chungcumini") {
+        return "Chung cư mini"
+    } else {
+        return "Nhà nguyên căn"
+    }
+}
+function handleBep(status) {
+    if (status == "khubeprieng") {
+        return "Khu bếp riêng"
+    } else if (status == "khubepchung") {
+        return "Khu bếp chung"
+    } else {
+        return "Không nấu ăn"
+    }
+}
+
 function imgLoad(url) {
     return new Promise(function(fulfill, reject) {
         let image = new Image()
@@ -81,8 +102,8 @@ fetch('/thong-tin-bai-dang/' + location.pathname.split('/')[2])
                         document.getElementById('fullname').innerHTML = data.nameAuthor;
                         document.getElementById('phoneNumber').innerHTML = data.phoneNumberAuthor;
                         document.getElementById('addressAuthor').innerHTML = data.addressAuthor
-                        document.getElementById('createDate').innerHTML = data.createDate.split('-').reverse().join('-');
-                        document.getElementById('expireDate').innerHTML = data.expireDate.split('-').reverse().join('-');
+                        document.getElementById('createDate').innerHTML = data.createDate.split('-').reverse().join('/');
+                        document.getElementById('expireDate').innerHTML = data.expireDate.split('-').reverse().join('/');
                         if (typeAcc == 'renter') {
                             fetch('/isFavoritePost/' + idPost)
                             .then(
@@ -108,28 +129,14 @@ fetch('/thong-tin-bai-dang/' + location.pathname.split('/')[2])
                         document.getElementById('statusHired').innerHTML = (data.statusHired == 'ready') ? 'Chưa thuê' : 'Đã thuê';
                         document.getElementById('views').innerHTML = data.totalView;
                         document.getElementById('likes').innerHTML = data.totalFavorite;
-                        if (data.itemType == 'phongtro') {
-                            document.getElementById('itemType').innerHTML = 'Phòng trọ';
-                        } else if (data.itemType == 'nhanguyencan') {
-                            document.getElementById('itemType').innerHTML = 'Nhà nguyên căn';
-                        } else if (data.itemType == 'chungcumini') {
-                            document.getElementById('itemType').innerHTML = 'Chung cư mini';
-                        } else { // data.itemType == 'chungcunguyencan'
-                            document.getElementById('itemType').innerHTML = 'Chung cư nguyên căn';
-                        }
+                        document.getElementById('itemType').innerHTML = handleTypeRoom(data.itemType);
                         document.getElementById('statusItem').innerHTML = (data.statusItem == 'chungchu') ? 'Chung chủ' : 'Không chung chủ';
                         document.getElementById('priceWater').innerHTML = data.priceWater;
                         document.getElementById('priceElectric').innerHTML = data.priceElectric;
                         document.getElementById('area').innerHTML = data.area;
                         document.getElementById('priceItem').innerHTML = formatMoney(data.priceItem);
                         document.getElementById('numOfRoom').innerHTML = data.numOfRoom;
-                        if (data.kitchen == 'khubeprieng') {
-                            document.getElementById('kitchen').innerHTML = 'Khu bếp riêng';
-                        } else if (data.kitchen == 'khubepchung') {
-                            document.getElementById('kitchen').innerHTML = 'Khu bếp chung';
-                        } else { // khong nau an
-                            document.getElementById('kitchen').innerHTML = 'Không nấu ăn';
-                        }
+                        document.getElementById('kitchen').innerHTML = handleBep(data.kitchen);
                         document.getElementById('bathroomType').innerHTML = (data.bathroom.split(' ')[0] == 'khepkin') ? 'WC Khép kín' : 'WC Không khép kín';
                         document.getElementById('bathroomWater').innerHTML = (data.bathroom.split(' ')[1] == 'nonglanh') ? 'Nóng lạnh' : 'Không nóng lạnh';
                         document.getElementById('aircondition').innerHTML = (data.aircondition == 1) ? 'Điều hòa' : 'Không điều hòa';

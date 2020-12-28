@@ -18,6 +18,19 @@ fetch('/information-account')
 $('#footer').load('/static/page/footer.html');
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+function hasLinkPost(idPost, titlePost) {
+    text_create = titlePost.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+                            .replace(/đ/g, "d")
+                            .replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y")
+                            .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u")
+                            .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ.+/g,"o")
+                            .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ.+/g, "e")
+                            .replace(/ì|í|ị|ỉ|ĩ/g,"i")
+                            .replaceAll(' ', '-');
+    text_create = text_create.toLowerCase() + '-' + idPost;
+    return '/bai-dang/' + text_create; 
+}
+
 fetch('/adminGetTop3Post')
 .then(
     resp => {
@@ -35,14 +48,17 @@ fetch('/adminGetTop3Post')
                     document.getElementById('slide3').children[0].src = data[0].images.images[2];
                     document.getElementById('slide4').children[0].src = data[0].images.images[3];
                     document.getElementById('slide5').children[0].src = data[0].images.images[4];
+                    document.getElementById('post1').setAttribute('href', hasLinkPost(data[0].idPost, data[0].titlePost));
 
                     // Top 2
                     document.getElementById('nameSilver').firstElementChild.innerHTML = data[1].titlePost;
                     document.getElementById('nameSilver').parentElement.nextElementSibling.src = data[1].image.image;
+                    document.getElementById('post2').setAttribute('href', hasLinkPost(data[1].idPost, data[1].titlePost));
 
                     // Top 3
                     document.getElementById('nameBronze').firstElementChild.innerHTML = data[2].titlePost;
                     document.getElementById('nameBronze').parentElement.nextElementSibling.src = data[2].image.image;
+                    document.getElementById('post3').setAttribute('href', hasLinkPost(data[2].idPost, data[2].titlePost));
                 }
             )
         }
