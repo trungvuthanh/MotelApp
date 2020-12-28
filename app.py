@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, escape
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send, emit, join_room, leave_room
 import os
 import json
 from controllers.urlController import UrlController
@@ -8,6 +8,7 @@ from models.post import Post
 from models.renter import Renter
 from models.owner import Owner
 from models.admin import Admin
+from models.chat import Chat
 from models.address import Address
 from models.otherEvent import OtherEvent
 from models.notification import Notification
@@ -449,7 +450,9 @@ def getInformationPost(baidangidpost):
     idPost = int(baidangidpost.split("-")[-1])
     return DataController().detailPost(idPost, titlePost)
 
-
+@app.route("/thong-tin-bai-dang/<int:idPost>", methods=["GET"])
+def getInformationPostID(idPost):
+    return DataController().detailPostID(idPost)
 
 # -----------------------------------------------------------------------------------
 # ----------------------------API review, report----------------------------------
@@ -683,87 +686,51 @@ def searchAccount(typeAccount, stringSearch):
         return app.response_class(json.dumps(Admin().searchAccountOwner(stringSearch)), mimetype='application/json')
     else:
         return app.response_class(json.dumps(Admin().searchAccountRenter(stringSearch)), mimetype='application/json')
+
+@app.route("/getMessages", methods=["GET"])
+def getMessages():
+    if "type_account" not in session or session["type_account"] == "renter":
+        return
+    if session["type_account"] == "owner":
+        return Chat().getMessages("admin", session["username"], numberPage=1)
     
+@socketio.on("connect")
+def connect():
+    print("client wants to connect")
+    emit("consoleLog", { "data": "Connect success!" })
 
+@socketio.on("join")
+def on_join(data):
+    if session["type_account"] == "owner":
+        room = session["username"]
+        join_room(room)
+    elif session["type_account"] == "admin":
+        room = session["usernameOwnerChating"]
+        join_room(room)
 
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    send(username + ' has left the room.', room=room)
+     
+@socketio.on("sendMessage")
+def sendMessage(data):
+    # data: {"message": "xxxx"}
+    # room lưu ở session
+    if session["type_account"] == "owner":
+        room = session["username"]
+        Chat().sendMessage(data["message"], session["username"], True)
+        emit("roomMessage", ["me", data["message"]], room=room)
+    elif session["type_account"] == "admin":
+        room = session["usernameOwnerChating"]
+        Chat().sendMessage(data["message"], session["username"], True)
+        emit("roomMessage", ["you", data["message"]], room=room)
         
 
-# print(request.args.get("province"))
-
-
-### Test trang kết quả
-@app.route("/ket-qua", methods=["GET"])
-def result():
-    """Routing trang kết quả tìm kiếm
     
-    Parameters
-    ----------
-    None
-    """
-    return render_template('post.html') 
-
-
-
-
-
-# get: find
-# post: create
-# put: update
-# delete: xóa
-
-
-
-
-
-
-# các API request, response data
-
-
-
-
-
-
-@app.route("/json", methods=["POST"])
-def test():
-    username = request.form["username"]
-    password = request.form["password"]
-    return app.response_class(json.dumps({"username": password, "password": username}), mimetype='application/json')
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @app.route("/", methods=["GET"])
-# def home():
-    # tt = time.time()
-    # query_str = "SELECT * FROM renter WHERE username = 'renter1';"
-    # rows  = connectDatabase.cursor.execute(query_str)
-    # print(time.time() - tt)
-    # for rw in rows:
-    #     print(rw)
-    # return render_template('test.html')
-
-
-
-@app.route("/post", methods=["POST"])
-def postm():
-    return render_template('test.html')
-
-@app.route("/detail-post", methods=["GET"])
-def detailPost():
-    return render_template('detail-post.html')
-
-@app.route("/menu-renter", methods=["GET"])
-def menu():
-    return render_template('../static/page/menu-renter.html') 
+    
 
 
 if __name__ == "__main__":

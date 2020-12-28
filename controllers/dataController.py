@@ -163,6 +163,9 @@ class DataController():
             return Post().getAllInfomationPost(idPost)
         return
     
+    def detailPostID(self, idPost):
+        return Post().getAllInfomationPost(idPost)
+    
     def normalizeInputDataSearchPost(self, loaibaiviet, minPrice, maxPrice):
         Post().updateExpiredPost()
         try:
