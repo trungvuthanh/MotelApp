@@ -228,7 +228,7 @@ input[type="radio"]:hover {
     cursor: pointer;
 }
 .item-favourite i.red {
-    color: #f50057;
+    color: #f10909;
     opacity: 1;
 }
 
