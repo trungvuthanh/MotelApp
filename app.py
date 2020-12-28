@@ -467,6 +467,13 @@ def sendReport(idPost, fakeInfo, fakePrice):
 def getReport(idPost):
     return app.response_class(json.dumps(OtherEvent().renterOrGuestGetReview(idPost)), mimetype='application/json')
 
+@app.route("/sendReview/<int:idPost>/<int:star>/<content>", methods=["POST"]) 
+def getReport(idPost, star, content):
+    if session["type_account"] == "renter":
+        OtherEvent().createReview(session["username"], star, content, idPost, session['type_avatar'])
+    return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
+
+
 @app.route("/review-report", methods=["GET"])
 def routeReviewReport():
     if session["type_account"] == "admin":
@@ -687,13 +694,44 @@ def searchAccount(typeAccount, stringSearch):
     else:
         return app.response_class(json.dumps(Admin().searchAccountRenter(stringSearch)), mimetype='application/json')
 
-@app.route("/getMessages", methods=["GET"])
-def getMessages():
+
+# -----------------------------------------------------------------------------------
+# ----------------------------API chat-----------------------------------------------
+# -----------------------------------------------------------------------------------
+@app.route("/chat", methods=["GET"])
+def chat():
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
+    elif session["type_account"] == "renter":
+        return redirect("/")
+    if session["type_account"] == "owner":
+        return render_template("chat-owner.html")
+    elif session["type_account"] == "admin":
+        return render_template("chat.html")
+    
+@app.route("/getMessages/<usernameChatTo>/<int:numPage>", methods=["GET"])
+def getMessages(usernameChatTo, numPage):
     if "type_account" not in session or session["type_account"] == "renter":
         return
     if session["type_account"] == "owner":
-        return Chat().getMessages("admin", session["username"], numberPage=1)
-    
+        return app.response_class(json.dumps(Chat().getMessages("admin", session["username"], numPage)), mimetype='application/json')
+    elif session["type_account"] == "admin":
+        session["usernameOwnerChating"] = usernameChatTo
+        return app.response_class(json.dumps(Chat().getMessages(usernameChatTo, "admin", numPage)), mimetype='application/json')    
+
+@app.route("/getListChatRecentsOfAdmin", methods=["GET"])
+def getListChatRecentsOfAdmin():
+    if session["type_account"] == "admin":
+        return app.response_class(json.dumps(Chat().getListChatRecentsOfAdmin()), mimetype='application/json')       
+
+@app.route("/confirmReadMessage/<usernameChatTo>", methods=["GET"])
+def confirmReadMessage(usernameChatTo):
+    if session["type_account"] == "owner":
+        Chat().confirmReadMessage(session["username"], "false")
+    elif session["type_account"] == "admin":
+        Chat().confirmReadMessage(usernameChatTo, "true")
+    return {"message": "ok"}
+ 
 @socketio.on("connect")
 def connect():
     print("client wants to connect")
@@ -710,10 +748,12 @@ def on_join(data):
 
 @socketio.on('leave')
 def on_leave(data):
-    username = data['username']
-    room = data['room']
-    leave_room(room)
-    send(username + ' has left the room.', room=room)
+    if session["type_account"] == "owner":
+        room = session["username"]
+        leave_room(room)
+    elif session["type_account"] == "admin":
+        room = session["usernameOwnerChating"]
+        leave_room(room)
      
 @socketio.on("sendMessage")
 def sendMessage(data):
@@ -721,17 +761,10 @@ def sendMessage(data):
     # room lưu ở session
     if session["type_account"] == "owner":
         room = session["username"]
-        Chat().sendMessage(data["message"], session["username"], True)
-        emit("roomMessage", ["me", data["message"]], room=room)
+        emit("roomMessage", Chat().sendMessage(data["message"], session["username"], "true"), room=room)
     elif session["type_account"] == "admin":
-        room = session["usernameOwnerChating"]
-        Chat().sendMessage(data["message"], session["username"], True)
-        emit("roomMessage", ["you", data["message"]], room=room)
-        
-
-    
-    
-
+        room = session["usernameOwnerChating"]  
+        emit("roomMessage", Chat().sendMessage(data["message"], session["usernameOwnerChating"], "false"), room=room)
 
 if __name__ == "__main__":
     app.run(debug=True)
