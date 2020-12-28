@@ -64,7 +64,7 @@ class DataController():
         otherUtility = str(request.get_json()["otherUtility"])
         postDuration = int(request.get_json()["postDuration"])
         listImages = request.get_json()["listImages"]
-        Post().editPost(idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, session["username"])
+        Post().editPost(idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, session["username"], listImages)
     
     def managePost(self, username, typeAccount):
         statusPost = str(request.get_json()["statusPost"])

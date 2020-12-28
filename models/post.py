@@ -96,7 +96,7 @@ class Post:
         query_str = "SELECT COUNT(*) FROM post WHERE idPost = ? AND statusPost = ? AND usernameAuthorPost = ?"
         return connectDatabase.cursor.execute(query_str, idPost, "handling", username).fetchval() == 1
     
-    def editPost(self, idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, usernameOwner):
+    def editPost(self, idPost, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, usernameOwner, listImages):
         # sử dụng khi owner muốn chỉnh sửa bài đăng mà admin chưa phê duyệt
         connectDatabase = ConnectDatabase()
         statusPost = "handling"
@@ -106,6 +106,17 @@ class Post:
             """
         connectDatabase.cursor.execute(query_str, titlePost, contentPost, addressProvince, addressDistrict, addressWard, addressDetail, locationRelate, itemType, numOfRoom, priceItem, area, statusItem, bathroom, kitchen, aircondition, balcony, priceElectric, priceWater, otherUtility, postDuration, statusPost, idPost)
         connectDatabase.connection.commit()
+        query_str = """
+            DELETE FROM image_post WHERE idPost = ?
+            """
+        connectDatabase.cursor.execute(query_str, idPost)
+        connectDatabase.connection.commit()
+        query_str = """
+            INSERT INTO image_post(idPost, image)
+            VALUES (?, ?)
+            """
+        for image in listImages:
+            connectDatabase.cursor.execute(query_str, idPost, image)
         connectDatabase.close()
         # thêm thông báo
         icon = "icon-post.png"
