@@ -235,11 +235,11 @@ def luuChinhSuaThongTinA():
     addressDistrict = str(request.get_json()["addressDistrict"])
     addressWard = str(request.get_json()["addressWard"])
     addressDetail = str(request.get_json()["addressDetail"])
-    typeAvt = int(request.get_json()["typeAvt"])
+    # typeAvt = int(request.get_json()["typeAvt"])
     typeAccount = session["type_account"]
     if not Address.checkAddress(addressProvince, addressDistrict, addressWard) or not CheckValidation.isFullname(fullname) or not CheckValidation.isPhoneNumber(phoneNumber) or not CheckValidation.isEmail(email):
         return
-    Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, fullname)
+    Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
 # -----------------------------------------------------------------------------------
@@ -717,8 +717,6 @@ def getMessages(usernameChatTo, numPage):
         return app.response_class(json.dumps(Chat().getMessages("admin", session["username"], numPage)), mimetype='application/json')
     elif session["type_account"] == "admin":
         session["usernameOwnerChating"] = usernameChatTo  
-        print(session["usernameOwnerChating"])  
-        print(12)    
         return app.response_class(json.dumps(Chat().getMessages(usernameChatTo, "admin", numPage)), mimetype='application/json')    
 
 @app.route("/getListChatRecentsOfAdmin", methods=["GET"])
@@ -738,19 +736,37 @@ def confirmReadMessage(usernameChatTo):
 def connect():
     print("client wants to connect")
     emit("consoleLog", { "data": "Connect success!" })
-    
+
+@socketio.on("join")
+def on_join(data):
+    if session["type_account"] == "owner":
+        room = session["username"]
+        join_room(room)
+    elif session["type_account"] == "admin":
+        room = session["usernameOwnerChating"]
+        join_room(room)
+
+@socketio.on('leave')
+def on_leave(data):
+    if session["type_account"] == "owner":
+        room = session["username"]
+        leave_room(room)
+    elif session["type_account"] == "admin":
+        room = session["usernameOwnerChating"]
+        leave_room(room)
+        
 @socketio.on("sendMessage")
 def sendMessage(data):
     # data: {"message": "xxxx"}
     # room lưu ở session
     if session["type_account"] == "owner":
         room = session["username"]
-        emit("roomMessage", Chat().sendMessage(data["message"], session["username"], "true"))
+        emit("roomMessage", Chat().sendMessage(data["message"], session["username"], "true"), room=room)
     elif session["type_account"] == "admin":
         room = session["usernameOwnerChating"]  
-        emit("roomMessage", Chat().sendMessage(data["message"], session["usernameOwnerChating"], "false"))
+        emit("roomMessage", Chat().sendMessage(data["message"], session["usernameOwnerChating"], "false"), room=room)
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    # socketio.run(app)
+    # app.run(debug=True)
+    socketio.run(app)
     

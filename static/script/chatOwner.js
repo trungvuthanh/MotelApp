@@ -1,34 +1,16 @@
 // Load menu
-$('#menu').load('../static/page/menu-admin.html');
+$('#menu').load('../static/page/menu-owner.html');
 
 // 
 // $('#searchOwner').load('../static/page/searchOwner.html');
 
-function renderEachResultSearch(typeAvt, fullName, username, hasBorderBottom) {
-    temp = ""
-    if (hasBorderBottom) {
-        temp = " border-bottom"
-    }
-    return '<div class="col-sm-12 m-1'+ temp +'" id="res'+username+'">' +
-                '<div class="row">' +
-                    '<div class="col-sm-2 pl-0 pt-1">'+
-                        '<img class="avatarOwner" src="../static/image/'+typeAvt+'.png">'+
-                    '</div>'+
-                    '<div class="col-sm-10 name p-1">'+
-                        '<b>'+fullName+'</b>'+
-                    '</div>'+
-                '</div>'+
-            '</div>'
-}
 
 function handleDate(stringDate) {
     stringDate = stringDate.split("-")
     return stringDate[2] + "/" + stringDate[1] + "/" + stringDate[0]
 }
 
-
-
-function renderEachElementOfListChat(isMe, classElement, typeAvt, fullName, message, hasBorderBottom, username, time) {
+function renderEachElementOfListChat(isMe, classElement, fullName, message, hasBorderBottom, username, time) {
     // classElement in ["", "active-chat", "unread"]
     temp = ""
     if (hasBorderBottom) {
@@ -42,7 +24,7 @@ function renderEachElementOfListChat(isMe, classElement, typeAvt, fullName, mess
     return '<div class="col-sm-12 m-1 '+temp +'each-message-history '+classElement+'" id="mess'+username+'" onclick="selectedOwner(this)">'+
                 '<div class="row">'+
                     '<div class="col-sm-2 pl-1 pt-1">'+
-                        '<img class="avatarOwner" src="../static/image/'+typeAvt+'.png">'+
+                        '<img class="avatarOwner" src="../static/image/0.png">'+
                     '</div>'+
                     '<div class="col-sm-10 name p-1">'+
                         '<b>'+fullName+'</b>'+
@@ -69,40 +51,12 @@ $("#search-owner").blur(function() {
     $(".search-result").css("display", "none");
     $(".history-chat").css("display", "block"); 
 });
-firstOwner = "owner"
-function loadCacTinNhanGanNhat() {
-    fetch('/getListChatRecentsOfAdmin')
-    .then(
-        resp => {
-            if (resp.status == 200) {
-                resp.json()
-                .then(
-                    data => {
-                        document.getElementById("listmessages").innerHTML = ""
-                        for (var i = 0; i < data.length; i++) {
-                            // classElement in ["", "active-chat", "unread"]
-                            classElement = ""
-                            if (data[i].status == "unread") {
-                                classElement = "unread"
-                            }
-                            p = renderEachElementOfListChat(data[i].isMe, classElement, data[i].typeAvt, data[i].fullname, data[i].content, (i != data.length - 1), data[i].usernameOwner, data[i].time)
-                            document.getElementById("listmessages").innerHTML += p
-                            console.log(p)
-                        }
-                        firstOwner = document.querySelector(".each-message-history").id.substring(4)
-                    }
-                )
-            }
-        }
-    )
-}
-
 
 function renderImageRead (typeRead, typeAvt) {
     if (typeRead == "read") {
         return "" 
     } else if (typeRead =="read-recent") {
-        return '<img class="status-message-read-recent" src="../static/image/' + typeAvt + '.png">'
+        return '<img class="status-message-read-recent" src="./static/image/' + typeAvt + '.png">'
     } else if (typeRead == "unread") {
         return '<img class="status-message" src="../static/image/unread.png">'
     } else if (typeRead == "loading-message") {
@@ -110,12 +64,14 @@ function renderImageRead (typeRead, typeAvt) {
     }
 }
 
+
 function renderMessageToHTML(sender, text, typeRead, typeAvt) {
+    typeAvt = 0
     if (sender == "you") {
         return '<div class="col-sm-12 mt-1">' +
                     '<div class="row">' +
                         '<div class="col-sm-1 pl-0 pr-0">' +
-                            '<img class="avatarOwner" src="../static/image/' + typeAvt + '.png">' +
+                            '<img class="avatarOwner" src="./static/image/' + typeAvt + '.png">' +
                         '</div>' +
                         '<div class="col-sm-8 mt-0 pl-0">' +                     
                             '<div class="chatFromYou">'+ text +'</div>' + 
@@ -142,7 +98,6 @@ function autoScroll() {
     }, 100);
 }
 autoScroll()
-
 var socket = io.connect('http://127.0.0.1:5000');
 //var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
@@ -157,15 +112,7 @@ socket.on('consoleLog', function(msg) {
 
 
 
-// $('#sendbutton').on('click', function() {
-//     socket.send($('#myMessage').val());
-//     $('#myMessage').val('');
-// });
-
-
-
-
-document.getElementById("send-message").onclick = ()=> {
+document.getElementById("send-message").onclick = () => {
     sendMessage()
 }
 
@@ -174,16 +121,12 @@ $(document.getElementById("input-message")).keypress((e) => {
         sendMessage()
     }
 });
-document.getElementsByClassName("send-message").onclick = renderMessageToHTML()
+// document.getElementsByClassName("send-message").onclick = sendMessage()
 
 
-// Load footer
-$('#footer').load('../static/page/footer.html');
-
-
-function loadTinNhanCu(usernameOwner) {
+function loadTinNhanCu() {
     socket.emit("join", {"data": "data"});
-    fetch('/getMessages/'+usernameOwner+'/1')
+    fetch('/getMessages/admin/1')
     .then(
         resp => {
             if (resp.status == 200) {
@@ -200,8 +143,6 @@ function loadTinNhanCu(usernameOwner) {
                             // typeRead in ["read", "read-recent", "unread", "loading-message"]
                             p = renderMessageToHTML(sender, data[i].content, data[i].status, data[i].typeAvt)
                             document.getElementById("message-right").innerHTML += p
-                            document.getElementById("avtOwner").src = "../static/image/"+data[i].typeAvt+".png"
-                            document.getElementById("nameChatTo").innerHTML = data[i].fullname
                         }
                         
                     }
@@ -210,43 +151,31 @@ function loadTinNhanCu(usernameOwner) {
         }
     )
 }
-loadCacTinNhanGanNhat()
-loadTinNhanCu(firstOwner)
-function selectedOwner(elmt) {
-    // console.log()
-    loadTinNhanCu(elmt.id.substring(4))
-}
+loadTinNhanCu()
 
 socket.on('roomMessage', function(data) {
     // {"id": row.id, "time": str(row.time), "content": row.content, "status": row.status, "ownerSend": row.ownerSend, "typeAvt": row.typeAvt, "usernameOwner": row.usernameOwner} 
-    console.log(data)
     if (data.ownerSend == "true") {
-        sender = "you"
-    } else {
         sender = "me"
-    }
-    if (document.getElementById("usernameChating").innerHTML == data.usernameOwner) {
-        document.getElementById("message-right").innerHTML += renderMessageToHTML(sender, data.content, data.status, data.typeAvt) 
-        autoScroll()
-        document.getElementById("input-message").focus()
     } else {
-        // update bên trái
-        loadCacTinNhanGanNhat()
+        sender = "you"
     }
+    document.getElementById("message-right").innerHTML += renderMessageToHTML(sender, data.content, data.status, data.typeAvt) 
+    autoScroll()
+    document.getElementById("input-message").focus()
     
 });
-
+// Load footer
+$('#footer').load('../static/page/footer.html');
 function sendMessage() {
-    typeAvt = document.getElementById("avtOwner").src.replace (/[^\d.]/g,''); 
+    //typeAvt = document.getElementById("avtOwner").src.replace (/[^\d.]/g,''); 
     text = document.getElementById("input-message").value
     document.getElementById("input-message").value = ""
     sender = "me"
     typeRead = "loading-message"
+    // console.log(renderMessageToHTML(sender, text, typeRead, typeAvt) )
     if (text.trim() != "") {
         socket.emit("sendMessage", {"message": text.trim()});
-        // document.getElementById("message-right").innerHTML += renderMessageToHTML(sender, text, typeRead, typeAvt) 
-        // autoScroll()
-        // document.getElementById("input-message").focus()
     }
     // Sau này call API
 
