@@ -210,7 +210,7 @@ def luuChinhSuaThongTinB():
     Renter().editAccount(session["username"], password, phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, typeAvt)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
-app.route("/luuChinhSuaMatKhauVaAvatarA", methods=["POST"])
+@app.route("/luuChinhSuaMatKhauVaAvatarA", methods=["POST"])
 def luuChinhSuaMatKhauVaAvatarA():
     if session["type_account"] != "owner":
         return
@@ -716,7 +716,9 @@ def getMessages(usernameChatTo, numPage):
     if session["type_account"] == "owner":
         return app.response_class(json.dumps(Chat().getMessages("admin", session["username"], numPage)), mimetype='application/json')
     elif session["type_account"] == "admin":
-        session["usernameOwnerChating"] = usernameChatTo
+        session["usernameOwnerChating"] = usernameChatTo  
+        print(session["usernameOwnerChating"])  
+        print(12)    
         return app.response_class(json.dumps(Chat().getMessages(usernameChatTo, "admin", numPage)), mimetype='application/json')    
 
 @app.route("/getListChatRecentsOfAdmin", methods=["GET"])
@@ -736,35 +738,17 @@ def confirmReadMessage(usernameChatTo):
 def connect():
     print("client wants to connect")
     emit("consoleLog", { "data": "Connect success!" })
-
-@socketio.on("join")
-def on_join(data):
-    if session["type_account"] == "owner":
-        room = session["username"]
-        join_room(room)
-    elif session["type_account"] == "admin":
-        room = session["usernameOwnerChating"]
-        join_room(room)
-
-@socketio.on('leave')
-def on_leave(data):
-    if session["type_account"] == "owner":
-        room = session["username"]
-        leave_room(room)
-    elif session["type_account"] == "admin":
-        room = session["usernameOwnerChating"]
-        leave_room(room)
-     
+    
 @socketio.on("sendMessage")
 def sendMessage(data):
     # data: {"message": "xxxx"}
     # room lưu ở session
     if session["type_account"] == "owner":
         room = session["username"]
-        emit("roomMessage", Chat().sendMessage(data["message"], session["username"], "true"), room=room)
+        emit("roomMessage", Chat().sendMessage(data["message"], session["username"], "true"))
     elif session["type_account"] == "admin":
         room = session["usernameOwnerChating"]  
-        emit("roomMessage", Chat().sendMessage(data["message"], session["usernameOwnerChating"], "false"), room=room)
+        emit("roomMessage", Chat().sendMessage(data["message"], session["usernameOwnerChating"], "false"))
 
 if __name__ == "__main__":
     app.run(debug=True)
