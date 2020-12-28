@@ -20,7 +20,7 @@
     font-weight: 700;
     color: #ffffff;
     text-decoration: none;
-    font-size: 35px;
+    /* font-size: 35px; */
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.6s;
@@ -129,4 +129,42 @@ Hover tên tài khoản hiện    Chỉnh sửa thông tin
 
 .menu-item {
     text-align: center;
+}
+
+@media screen and (max-width:359px) {
+    #logo {
+        font-size: 20px;
+    }
+    #head-menu {
+        padding: 12px 30px 12px 30px;
+    }
+}
+
+/* width: 360px --> 767px */
+@media screen and (min-width:360px) {
+    #logo {
+        font-size: 25px;
+    }
+    #head-menu {
+        padding: 12px 15px 12px 60px;
+    }
+
+}
+
+/* width: 768px --> 1366px */
+@media screen and (min-width:768px) {
+    #logo {
+        font-size: 30px;
+    }
+    #head-menu {
+        padding: 12px 100px 12px 100px;
+    }
+}
+@media screen and (min-width:1366px) {
+    #logo {
+        font-size: 35px;
+    }
+    #head-menu {
+        padding: 12px 100px 12px 100px;
+    }
 }
