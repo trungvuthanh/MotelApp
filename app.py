@@ -237,8 +237,8 @@ def luuChinhSuaThongTinA():
     addressDetail = str(request.get_json()["addressDetail"])
     # typeAvt = int(request.get_json()["typeAvt"])
     typeAccount = session["type_account"]
-    if not Address.checkAddress(addressProvince, addressDistrict, addressWard) or not CheckValidation.isFullname(fullname) or not CheckValidation.isPhoneNumber(phoneNumber) or not CheckValidation.isEmail(email):
-        return
+    if not Address.checkAddress(addressProvince, addressDistrict, addressWard) or not CheckValidation.isPhoneNumber(phoneNumber) or not CheckValidation.isEmail(email):
+        return app.response_class(json.dumps({"message": "error"}), mimetype='application/json')
     Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
