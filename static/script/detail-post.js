@@ -262,44 +262,49 @@ document.getElementById('lyDo2').onclick = function() {
         fakePrice = 0;
         this.classList.remove('btnChecked');
     } else {
-        fakePrice= 1;
+        fakePrice = 1;
         this.classList.add('btnChecked');
     }
 }
 
 // Gửi báo cáo
+var content = document.getElementById('otherReason').value;
 function sendRp() {
     if (typeAcc == 'renter') {
-        var content = document.getElementById('otherReason').value;
-        fetch('/sendreport/' + idPost + '/' + fakeInfo + '/' + fakePrice , {
-            method: "POST",
-            credentials: "include",
-            body: JSON.stringify({content: content}),
-            cache: "no-cache",
-            headers: new Headers({
-                "content-type": "application/json"
+        if (fakeInfo == 0 && fakePrice == 0 && content == '') {
+            alert('Vui lòng cho biết lý do');
+        } else {
+            fetch('/sendreport/' + idPost + '/' + fakeInfo + '/' + fakePrice , {
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify({content: content}),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
             })
-        })
-        .then(
-            resp => {
-                if (resp.status == 200) {
-                    resp.json()
-                    .then(
-                        data => {
-                            if (data.message == "success") {
-                                alert("Gửi báo cáo thành công!");
-                            } else {
-                                alert("Gửi báo cáo thất bại!");
+            .then(
+                resp => {
+                    if (resp.status == 200) {
+                        resp.json()
+                        .then(
+                            data => {
+                                if (data.message == "success") {
+                                    alert("Gửi báo cáo thành công!");
+                                } else {
+                                    alert("Gửi báo cáo thất bại!");
+                                }
                             }
-                        }
-                    )
-                } else alert("Gửi báo cáo thất bại.")
-            }
-        )
-    } else {
+                        )
+                    } else alert("Gửi báo cáo thất bại.")
+                }
+            );
+        }
+    } else if (typeAcc == 'guest') {
         alert("Bạn cần đăng nhập để thực hiện điều này");
+    } else {
+        alert("Chỉ người thuê trọ mới có quyền thực hiện việc này");
     }
-    
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -345,8 +350,10 @@ function saveFavourite() {
                 }
             }
         );
-    } else {
+    } else if (typeAcc == 'guest') {
         alert("Bạn cần đăng nhập để thực hiện điều này");
+    } else {
+        alert("Chỉ người thuê trọ mới có quyền thực hiện việc này");
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -366,21 +373,27 @@ function ratedhover(elmt) {
 }
 
 function rated(elmt) {
-    if (status == 1) {
-        for (var j = 1; j <= 5; j++) {
-            document.getElementById('s' + j).src = "../static/image/star-unfill.png";
-        }
-        status = 0;
+    if (typeAcc == 'renter') {
+        if (status == 1) {
+            for (var j = 1; j <= 5; j++) {
+                document.getElementById('s' + j).src = "../static/image/star-unfill.png";
+            }
+            status = 0;
+        } else {
+            status = 1;
+            for (var j = 1; j <= 5; j++) {
+                document.getElementById('s' + j).src = "../static/image/star-unfill.png";
+            }
+            var id = parseInt(elmt.id[1]);
+            for (var i = 1; i <= id; i++) {
+                document.getElementById('s' + i).src = "../static/image/star-fill.png";
+            }
+            index = id;
+        }    
+    } else if (typeAcc == 'guest') {
+        alert("Bạn cần đăng nhập để thực hiện điều này");
     } else {
-        status = 1;
-        for (var j = 1; j <= 5; j++) {
-            document.getElementById('s' + j).src = "../static/image/star-unfill.png";
-        }
-        var id = parseInt(elmt.id[1]);
-        for (var i = 1; i <= id; i++) {
-            document.getElementById('s' + i).src = "../static/image/star-fill.png";
-        }
-        index = id;
+        alert("Chỉ người thuê trọ mới có quyền thực hiện việc này");
     }
 }
 
@@ -397,49 +410,53 @@ function unrate(elmt) {
     }
 }
 
-
-
 // Gửi bình luận
 function review() {
-    stars = 0;
-    rating = document.querySelector('#rate');
-    starCheck = rating.querySelectorAll('img');
-    for (var i = 0; i < 5; i++) {
-        if (starCheck[i].src.includes('star-fill.png')) stars++;
-    }
-    content = document.getElementById('commentText').value;
-    if ((stars > 0 && stars <= 5) && content != '') {
-        fetch('/sendReview/' + idPost + '/' + stars + '/' + content, {
-            method: "POST",
-            credentials: "include",
-            cache: "no-cache",
-            headers: new Headers({
-                "content-type": "application/json"
+    if (typeAcc == 'renter') {
+        stars = 0;
+        rating = document.querySelector('#rate');
+        starCheck = rating.querySelectorAll('img');
+        for (var i = 0; i < 5; i++) {
+            if (starCheck[i].src.includes('star-fill.png')) stars++;
+        }
+        content = document.getElementById('commentText').value;
+        if ((stars > 0 && stars <= 5) && content != '') {
+            fetch('/sendReview/' + idPost + '/' + stars + '/' + content, {
+                method: "POST",
+                credentials: "include",
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
             })
-        })
-        .then(
-            resp => {
-                if (resp.status == 200) {
-                    resp.json()
-                    .then(
-                        data => {
-                            if (data.message == "ok") {
-                                alert("Thành công!");
-                                $('.rate-status').show();
-                            } else {
+            .then(
+                resp => {
+                    if (resp.status == 200) {
+                        resp.json()
+                        .then(
+                            data => {
+                                if (data.message == "ok") {
+                                    alert("Thành công!");
+                                    $('.rate-status').show();
+                                } else {
 
+                                }
                             }
-                        }
-                    )
+                        )
+                    }
                 }
-            }
-        )
-    } else if (stars > 0 && content == '') {
-        alert('Vui lòng nhập bình luận để đánh giá');
-    } else if (stars == 0 && content != '') {
-        alert('Vui lòng xếp hạng sao để đánh giá');
-    } else { // stars == 0 && content == ''
-        alert('Vui lòng xếp hạng sao và nhập bình luận để đánh giá');
-    }
+            )
+        } else if (stars > 0 && content == '') {
+            alert('Vui lòng nhập bình luận để đánh giá');
+        } else if (stars == 0 && content != '') {
+            alert('Vui lòng xếp hạng sao để đánh giá');
+        } else { // stars == 0 && content == ''
+            alert('Vui lòng xếp hạng sao và nhập bình luận để đánh giá');
+        }    
+    } else if (typeAcc == 'guest') {
+        alert("Bạn cần đăng nhập để thực hiện điều này");
+    } else {
+        alert("Chỉ người thuê trọ mới có quyền thực hiện việc này");
+    }  
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////

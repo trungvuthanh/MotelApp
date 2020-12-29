@@ -1,3 +1,5 @@
+document.querySelector("#form11").focus();
+
 function submitLogin() {
     username = document.querySelector("#form11").value;
     password = md5(document.querySelector("#form12").value);

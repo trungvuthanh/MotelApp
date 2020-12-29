@@ -29,6 +29,10 @@
   :root {font-size:20px;}
 } */
 
+.content-homepage {
+  min-height: 548px;
+}
+
 .tieude {
   font-weight: 600;
   font-size: 1.75rem;
@@ -103,7 +107,7 @@
         .product .card .card-body .price ins {
           text-decoration: none; }
           .product .card .card-body .price ins span {
-            color: #CCCCCC;
+            color: #000000;
             text-align: center;
             font-size: 0.75rem;
             font-weight: 300; }
@@ -212,7 +216,7 @@
     margin-bottom: 40px !important; } }
 
 .card-body .gia {
-  color: #C9C9C9;
+  color: #000000;
   font-size: 0.75rem;
   font-weight: 300;
   margin-bottom: 0px;
@@ -272,12 +276,12 @@
   }
   .info .diachi {
     /* font-family: 'Raleway', sans-serif; */
-    color: #c9c9c9;
+    color: #000000;
     font-size: 0.75rem;
     font-weight: 300; 
   }
   .info .gia {
-    color: #C9C9C9;
+    color: #000000;
     font-size: 0.75rem;
     font-weight: 300;
     margin-bottom: 0px;

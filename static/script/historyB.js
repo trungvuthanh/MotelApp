@@ -57,8 +57,6 @@ function removeImage(elmt) {
     elmt.parentNode.remove();
 }
 
-
-
 fetch("/getHistoryView")
     .then(
         resp => {
@@ -69,7 +67,7 @@ fetch("/getHistoryView")
                             for (var i = 0; i < data.length; i++) {
                                 
                                 document.getElementById("list-view").innerHTML +=
-                                    '<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 frame-image">' +
+                                    '<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 frame-image mb-3">' +
                                         '<div class="close" onclick="removeImage(this)">&times;</div>' +
                                         '<img class="image-view" src="' + data[i].image + '" alt="product">' +
 
@@ -101,15 +99,15 @@ fetch("/getHistoryFavorite")
                     data => {
                         for (var i = 0; i < data.length; i++) {
                             document.getElementById("list-favorite").innerHTML += 
-                            '<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">' +
+                            '<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">' +
                                 '<div class="card">' +
                                     '<div class="card-img-top">' +
-                                        '<a class="wp-post-image">' +
+                                        '<div class="wp-post-image">' +
                                             '<img class="image-cover" src="'+ data[i].image +'" alt="product">' +
                                             '<div class="item-favourite">' +
                                                 '<i class="fas fa-heart red" onclick="saveFavourite(this)"></i>' + 
                                             '</div>' +
-                                        '</a>' +
+                                        '</div>' +
                                     '</div>' +
                                     '<div class="card-body">' +
                                         '<p class="card-title"><a href="' + hasLinkPost(data[i].idPost, data[i].titlePost) +'">#' + data[i].idPost + '</a></p>' +
