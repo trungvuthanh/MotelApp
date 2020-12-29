@@ -1,3 +1,5 @@
+$('#menu').load('../static/page/menu-guest.html');
+
 function createImage(base64) {
     return '<div class = "frame-image"><div class="close" onclick="removeImage(this)">&times;</div><img src="'+ base64 +'"></div>';
 }
@@ -136,32 +138,34 @@ function ChuanhoaTen(ten) {
 
 function checkUsername() {
     username = document.getElementById('username').value;
-    fetch('/kiem-tra-username', {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({username: username}),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
-        })      
-    })
-    .then(
-        resp => {
-            if (resp.status == 200) {
-                resp.json()
-                .then(
-                    data => {
-                        if (data.message == 'exist') {
-                            alert('Tài khoản đã tồn tại');
-                            document.getElementById('username').value = '';
-                            document.getElementById("username").classList.remove("is-valid");
-                        } else if (data.message == 'not_exist') {document.getElementById("username").classList.add("is-valid");
+    if (username != "") {
+        fetch('/kiem-tra-username', {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({username: username}),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })      
+        })
+        .then(
+            resp => {
+                if (resp.status == 200) {
+                    resp.json()
+                    .then(
+                        data => {
+                            if (data.message == 'exist') {
+                                alert('Tài khoản đã tồn tại');
+                                document.getElementById('username').value = '';
+                                document.getElementById("username").classList.remove("is-valid");
+                            } else if (data.message == 'not_exist') {document.getElementById("username").classList.add("is-valid");
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
-        }
-    )
+        )
+    }
 }
 
 
