@@ -143,13 +143,14 @@ function unblock(elmt) {
 
 function acceptEditAccountOwner(elmt) {
 	username = elmt.parentNode.parentNode.parentNode.children[1].children[0].children[1].innerText
-	fetch("/chinhsua/active/" + username)
+	fetch("/chinhsua/accept/" + username)
     .then(
         resp => {
             if (resp.status == 200) {
                 resp.json()
                 .then(
                     data => { 
+
                     }
                 )
             }

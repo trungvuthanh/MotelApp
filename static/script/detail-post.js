@@ -268,12 +268,12 @@ document.getElementById('lyDo2').onclick = function() {
 }
 
 // Gửi báo cáo
-var content = document.getElementById('otherReason').value;
 function sendRp() {
     if (typeAcc == 'renter') {
         if (fakeInfo == 0 && fakePrice == 0 && content == '') {
             alert('Vui lòng cho biết lý do');
         } else {
+            var content = document.getElementById('otherReason').value;
             fetch('/sendreport/' + idPost + '/' + fakeInfo + '/' + fakePrice , {
                 method: "POST",
                 credentials: "include",

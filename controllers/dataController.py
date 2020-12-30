@@ -155,11 +155,14 @@ class DataController():
         if (fakeInfo != 1 and fakeInfo != 0) or (fakePrice != 1 and fakePrice != 0) or ('type_account' not in session or session['type_account'] != "renter"):
             time.sleep(10)
             return "fail"
+        # print(content)
         OtherEvent().renterSendReport(idPost, session["username"], fakeInfo, fakePrice, content)
         return "success"
     
     def detailPost(self, idPost, titlePost):
         if Post().checkPost(idPost, titlePost):
+            OtherEvent().updateTotalViewDefault()
+            OtherEvent().updateTotalFavoriteDefaultupdateTotalFavoriteDefault()
             return Post().getAllInfomationPost(idPost)
         return
     

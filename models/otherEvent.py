@@ -20,6 +20,7 @@ class OtherEvent:
         connectDatabase.close()
         return {"idPost": idPost, "images": [image.image for image in images]}
     
+    
     def eventViewPost(self, idPost, usernameRenter=""):
         # lưu lịch sử 
         query_str = """
@@ -35,7 +36,7 @@ class OtherEvent:
             ) WHERE idPost = ?
             """
         connectDatabase = ConnectDatabase()
-        connectDatabase.cursor.execute(query_str, idPost)
+        connectDatabase.cursor.execute(query_str, idPost, idPost)
         connectDatabase.connection.commit()
         connectDatabase.close()       
         
@@ -47,7 +48,7 @@ class OtherEvent:
             ) WHERE idPost = ?
             """
         connectDatabase = ConnectDatabase()
-        for i in range(1, 801):
+        for i in range(1, 1000):
             connectDatabase.cursor.execute(query_str, i, i)
             connectDatabase.connection.commit()
         connectDatabase.close()
@@ -81,7 +82,7 @@ class OtherEvent:
         connectDatabase.connection.commit()
         connectDatabase.close()       
         
-    def updateTotalFavoriteDefault(self):    
+    def updateTotalFavoriteDefaultupdateTotalFavoriteDefault(self):    
         # update totalView()
         query_str = """
             UPDATE post SET totalFavorite = (
@@ -91,7 +92,7 @@ class OtherEvent:
             ) WHERE idPost = ?
             """
         connectDatabase = ConnectDatabase()
-        for i in range(1, 801):
+        for i in range(1, 1000):
             connectDatabase.cursor.execute(query_str, i, i, "yes")
             connectDatabase.connection.commit()
         connectDatabase.close()

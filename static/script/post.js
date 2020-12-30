@@ -343,4 +343,3 @@ window.addEventListener('load', function() {
 // document.getElementById("xemtruocbaiviet").onclick = function() {
     
 // }
-

@@ -157,6 +157,8 @@ def editPost(idPost):
 
 @app.route("/chinh-sua-thong-tin", methods=["GET"])
 def editInfoAccount():
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
     if session["type_account"] == "renter":
         return render_template("edit-infoB.html")
     elif session["type_account"] == "owner":
@@ -165,6 +167,8 @@ def editInfoAccount():
     
 @app.route("/doi-mat-khau-va-avatar", methods=["GET"])
 def changePasswordAndAvatar():
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
     if session["type_account"] == "renter":
         return render_template("edit-infoB.html")
     elif session["type_account"] == "owner":
@@ -242,13 +246,14 @@ def luuChinhSuaThongTinA():
     Owner().editAccount(session["username"], phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, fullname)
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
 
+
+
 # -----------------------------------------------------------------------------------
 # ----------------------------API recommend search-----------------------------------
 # -----------------------------------------------------------------------------------
 @app.route("/recommendSearch/<stringSearch>", methods=["GET"])
 def recommendSearch(stringSearch):
     return app.response_class(json.dumps(OtherEvent().fuzzywuzzySearch(stringSearch, 5)), mimetype='application/json')    
-
 
 
 
@@ -469,6 +474,8 @@ def getReport(idPost):
 
 @app.route("/sendReview/<int:idPost>/<int:star>/<content>", methods=["POST"]) 
 def sendReview(idPost, star, content):
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
     if session["type_account"] == "renter":
         OtherEvent().createReview(session["username"], star, content, idPost, session['type_avatar'])
     return app.response_class(json.dumps({"message": "ok"}), mimetype='application/json')
@@ -513,9 +520,10 @@ def updateReport(status, id):
 # -----------------------------------------------------------------------------------   
 @app.route("/lich-su-yeu-thich-va-lich-su-xem", methods=["GET"])
 def historyB():
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
     if "type_account" not in session or session["type_account"] != "renter":
-        time.sleep(10) 
-        return
+        return redirect("/")
     return render_template("historyB.html")
 
 @app.route("/getHistoryView", methods=["GET"])
@@ -559,9 +567,13 @@ def deleteAllHistoryView():
 # -----------------------------------------------------------------------------------   
 @app.route("/dang-bai", methods=["GET"])
 def post():
-    if "type_account" not in session or session["type_account"] == "renter":
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
+    if session["type_account"] == "renter":
         time.sleep(10) 
         return
+    if "status" in session and session["status"] == "handling":
+        return redirect("/")
     return render_template("post.html")
 
 @app.route("/thong-tin-lien-he", methods=["GET"])
@@ -587,7 +599,9 @@ def createPost():
 # ----------------------------------------------------------------------------------- 
 @app.route("/thong-ke", methods=["GET"])
 def statistical():
-    if "type_account" not in session or session["type_account"] == "renter":
+    if "type_account" not in session:
+        return redirect("/dang-nhap")
+    if session["type_account"] == "renter":
         time.sleep(10) 
         return
     if session["type_account"] == "admin":

@@ -30,7 +30,6 @@ class UrlController:
         ----------
         None    
         """
-        self.UPDATE()
         # có 4 loại tài khoản, trang home của 4 loại tài khoản này cũng khác nhau
         if 'type_account' not in session:
             return render_template('home.html')
@@ -43,8 +42,10 @@ class UrlController:
             return render_template('post-manager-admin.html')
     
     def detailPost(self, idPost, titlePost):
-        self.UPDATE()
         if Post().checkPost(idPost, titlePost):
+            OtherEvent().eventViewPost(idPost)
+            OtherEvent().updateTotalViewDefault()
+            OtherEvent().updateTotalFavoriteDefaultupdateTotalFavoriteDefault()
             return render_template('detail-post.html')
         return
     
@@ -58,7 +59,6 @@ class UrlController:
         """
         # user chưa đăng nhập thì chuyển hướng về trang đăng nhập
         # ngược lại, user đã đăng nhập trước đó thì chuyển về trang home
-        self.UPDATE()
         if 'type_account' not in session:
             return render_template('login.html')
         else:
@@ -72,7 +72,6 @@ class UrlController:
         ----------
         None
         """
-        self.UPDATE()
         if 'type_account' not in session:
             # dấu hiệu có sự phá hoại
             time.sleep(10) 
@@ -90,7 +89,6 @@ class UrlController:
         ----------
         None
         """
-        self.UPDATE()
         if 'type_account' in session:
             # bất thường
             session.clear()
@@ -98,14 +96,17 @@ class UrlController:
         return render_template('signup.html')
     
     def managerPost(self):
-        self.UPDATE()
         if 'type_account' not in session:
             return redirect('/dang-nhap') 
         elif session['type_account'] == "owner":
+            OtherEvent().updateTotalViewDefault()
+            OtherEvent().updateTotalViewDefault()
             return render_template('post-manager-owner.html')
         elif session['type_account'] == "renter":
             return redirect('/')
         else:
             # type_account is "admin"
+            OtherEvent().updateTotalViewDefault()
+            OtherEvent().updateTotalViewDefault()
             return render_template('post-manager-admin.html')
     

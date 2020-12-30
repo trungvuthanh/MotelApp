@@ -127,7 +127,10 @@ inputBox.onkeyup = (e) => {
                 }
             }
         } else if (e.keyCode == 13) {
+            if (document.querySelector('.pointed') != null) searchSelect(document.querySelector('.pointed'));
+            else
             searchRaw();
+
         }
     } 
 }

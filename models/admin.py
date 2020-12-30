@@ -155,8 +155,8 @@ class Admin(User):
         connectDatabase.connection.commit()
         if status == "accept":
             query_str = """
-            SELECT phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, fullname 
-            FROM owner 
+            SELECT phoneNumber, email, birthday, addressProvince, addressDistrict, addressWard, addressDetail, fullname
+            FROM owner_profile_scratch 
             WHERE username = ? AND status = ? 
             ORDER BY id DESC
             LIMIT 1

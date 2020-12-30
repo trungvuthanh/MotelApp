@@ -43,7 +43,7 @@ document.getElementById("repassword").onkeyup = function() {
 	}
 }
 document.getElementById("password").onkeyup = function() {
-	if (document.getElementById("password").value != document.getElementById("repassword").value && document.getElementById("repassword") != "" ) {
+	if (document.getElementById("password").value != document.getElementById("repassword").value || document.getElementById("repassword").value == "" ) {
 		document.getElementById("loi_repass").innerHTML = "Mật khẩu không khớp";
 	}
 	else if (document.getElementById("password").value == document.getElementById("repassword").value) {
@@ -334,6 +334,7 @@ window.addEventListener('load', function() {
                                     // alert(data.message)
                                     if (data.message == "success") {
                                         console.log(data.message)
+                                        alert("Đăng ký thành công")
                                         location.href = "/"
                                     } else if (data.message == "error") {
                                         alert("Hệ thống đang bận, vui lòng thử lại sau")
